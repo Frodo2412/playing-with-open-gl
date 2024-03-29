@@ -11,12 +11,18 @@
 
 using namespace std;
 
-void draw_vertex(vector vertex)
+enum Zoom
+{
+    in,
+    out
+};
+
+void draw_vertex(const vector& vertex)
 {
     glVertex3f(vertex.get_x(), vertex.get_y(), vertex.get_z());
 }
 
-void draw_triangle(triangle triangle)
+void draw_triangle(const triangle& triangle)
 {
     glBegin(GL_TRIANGLES);
     glColor3f(1.0, 1.0, 1.0);
@@ -26,6 +32,20 @@ void draw_triangle(triangle triangle)
     glColor3f(0.0, 0.0, 1.0);
     draw_vertex(triangle.get_c());
     glEnd();
+}
+
+void zoom(vector& camera, const Zoom zoom)
+{
+    switch (zoom)
+    {
+    case in:
+        cout << "Zooming in!\n";
+        camera.set_z(camera.get_z() - 0.1f);
+        break;
+    case out:
+        cout << "Zooming out!\n";
+        camera.set_z(camera.get_z() + 0.1f);
+    }
 }
 
 int main(int argc, char* argv[])
@@ -57,7 +77,7 @@ int main(int argc, char* argv[])
 
     SDL_Event evento;
 
-    const auto camera = vector(0, 0, 5);
+    auto camera = vector(0, 0, 5);
     const auto main_triangle = triangle(vector(1, -1, 0), vector(-1, -1, 0), vector(0, 1, 0));
 
     float degrees = 0;
@@ -87,6 +107,16 @@ int main(int argc, char* argv[])
                 break;
             case SDL_MOUSEBUTTONUP:
                 rotate = false;
+                break;
+            case SDL_MOUSEWHEEL:
+                if (evento.wheel.y > 0)
+                {
+                    zoom(camera, in);
+                }
+                else
+                {
+                    zoom(camera, out);
+                }
                 break;
             case SDL_QUIT:
                 fin = true;
