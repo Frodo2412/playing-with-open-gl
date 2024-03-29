@@ -80,12 +80,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="models\Triangle.cpp" />
-    <ClCompile Include="models\vector.cpp" />
+    <ClCompile Include="geometry\Triangle.cpp" />
+    <ClCompile Include="geometry\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="models\Triangle.h" />
-    <ClInclude Include="models\vector.h" />
+    <ClInclude Include="geometry\Triangle.h" />
+    <ClInclude Include="geometry\vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

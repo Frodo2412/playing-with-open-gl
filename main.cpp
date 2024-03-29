@@ -4,8 +4,8 @@
 #include <conio.h>
 #include <GL/glu.h>
 
-#include "OpenGL-basico/models/Triangle.h"
-#include "OpenGL-basico/models//vector.h"
+#include "OpenGL-basico/geometry/Triangle.h"
+#include "OpenGL-basico/geometry//vector.h"
 
 using namespace std;
 
