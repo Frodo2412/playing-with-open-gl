@@ -1,8 +1,6 @@
 #include "SDL.h"
 #include "SDL_opengl.h"
 #include <iostream>
-#include "FreeImage.h"
-#include <stdio.h>
 #include <conio.h>
 #include <GL/glu.h>
 
@@ -53,7 +51,7 @@ int main(int argc, char* argv[])
     //INICIALIZACION
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        cerr << "No se pudo iniciar SDL: " << SDL_GetError() << endl;
+        cerr << "No se pudo iniciar SDL: " << SDL_GetError() << '\n';
         exit(1);
     }
 
@@ -129,7 +127,9 @@ int main(int argc, char* argv[])
                     break;
                 case SDLK_RIGHT:
                     break;
+                default: break;
                 }
+            default: break;
             }
         }
         //FIN MANEJO DE EVENTOS
