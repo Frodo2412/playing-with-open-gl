@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum Zoom
+enum zoom
 {
     in,
     out
@@ -32,7 +32,7 @@ void draw_triangle(const triangle& triangle)
     glEnd();
 }
 
-void zoom(vector& camera, const Zoom zoom)
+void zoom(vector& camera, const zoom zoom)
 {
     switch (zoom)
     {
@@ -76,9 +76,10 @@ int main(int argc, char* argv[])
     SDL_Event evento;
 
     auto camera = vector(0, 0, 5);
-    const auto main_triangle = triangle(vector(1, -1, 0), vector(-1, -1, 0), vector(0, 1, 0));
+    auto main_triangle = triangle(vector(1, -1, 0), vector(-1, -1, 0), vector(0, 1, 0));
 
     float degrees = 0;
+    auto displacement = vector(0, 0, 0);
 
     do
     {
@@ -92,7 +93,10 @@ int main(int argc, char* argv[])
         }
         glRotatef(degrees, 0.0, 1.0, 0.0);
 
+        main_triangle.move(displacement);
         draw_triangle(main_triangle);
+        displacement.set_x(0);
+        displacement.set_y(0);
 
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&evento))
@@ -119,13 +123,32 @@ int main(int argc, char* argv[])
             case SDL_QUIT:
                 fin = true;
                 break;
+            case SDL_KEYDOWN:
+                switch (evento.key.keysym.sym)
+                {
+                case SDLK_a:
+                    cout << "LEFT\n";
+                    displacement.set_x(-0.1f);
+                    break;
+                case SDLK_d:
+                    cout << "RIGHT\n";
+                    displacement.set_x(0.1f);
+                    break;
+                case SDLK_w:
+                    cout << "UP\n";
+                    displacement.set_y(0.1f);
+                    break;
+                case SDLK_s:
+                    cout << "DOWN\n";
+                    displacement.set_y(-0.1f);
+                    break;
+                default: break;
+                }
             case SDL_KEYUP:
                 switch (evento.key.keysym.sym)
                 {
                 case SDLK_ESCAPE:
                     fin = true;
-                    break;
-                case SDLK_RIGHT:
                     break;
                 default: break;
                 }

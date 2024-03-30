@@ -21,4 +21,7 @@ public:
     void set_a(const vector& new_a);
     void set_b(const vector& new_b);
     void set_c(const vector& new_c);
+
+    void move(const vector& other);
+    void move_left(const float distance);
 };
