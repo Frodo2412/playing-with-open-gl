@@ -12,6 +12,13 @@ public:
     {
     }
 
+    explicit triangle(const vector& a)
+    {
+        const auto angle = a.angle_with(vector(1, 0, 0));
+
+        
+    }
+
     // Getter methods for the vertexes
     vector get_a() const;
     vector get_b() const;

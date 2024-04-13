@@ -9,6 +9,8 @@
 
 using namespace std;
 
+const vector rotation_axis = vector(0, 1, 0);
+
 enum zoom
 {
     in,
@@ -22,7 +24,7 @@ void draw_vertex(const vector& vertex)
 
 void draw_triangle(const triangle& triangle)
 {
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_POLYGON);
     glColor3f(1.0, 1.0, 1.0);
     draw_vertex(triangle.get_a());
     glColor3f(1.0, 0.0, 0.0);
@@ -44,6 +46,20 @@ void zoom(vector& camera, const zoom zoom)
         cout << "Zooming out!\n";
         camera.set_z(camera.get_z() + 0.1f);
     }
+}
+
+void draw_pyramid()
+{
+    const auto base = triangle(vector(1, 0, 0), vector(-1, 0, -1), vector(-1, 0, 1));
+    auto apex = vector(0, 2, 0);
+    auto front = triangle(base.get_a(), base.get_b(), apex);
+    auto right = triangle(base.get_b(), base.get_c(), apex);
+    auto back = triangle(base.get_c(), base.get_a(), apex);
+
+    draw_triangle(base);
+    draw_triangle(front);
+    draw_triangle(right);
+    draw_triangle(back);
 }
 
 int main(int argc, char* argv[])
@@ -89,12 +105,13 @@ int main(int argc, char* argv[])
 
         if (rotate)
         {
-            degrees = degrees + 0.1f;
+            degrees = degrees + 0.5f;
         }
         glRotatef(degrees, 0.0, 1.0, 0.0);
 
         main_triangle.move(displacement);
-        draw_triangle(main_triangle);
+        draw_pyramid();
+        // draw_triangle(main_triangle);
         displacement.set_x(0);
         displacement.set_y(0);
 
