@@ -24,6 +24,8 @@ public:
     vector get_b() const;
     vector get_c() const;
 
+    void an_op();
+
     // Setter methods for the coordinates
     void set_a(const vector& new_a);
     void set_b(const vector& new_b);

@@ -1,5 +1,7 @@
 ﻿#include "Triangle.h"
 
+#include <iostream>
+
 vector triangle::get_a() const
 {
     return a_;
@@ -13,6 +15,11 @@ vector triangle::get_b() const
 vector triangle::get_c() const
 {
     return c_;
+}
+
+void triangle::an_op()
+{
+    std::cout << "Hola";
 }
 
 void triangle::set_a(const vector& new_a)
