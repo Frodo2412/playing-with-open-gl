@@ -82,5 +82,6 @@ void renderer::draw(const square& square, const texture& texture)
 
 void renderer::draw(const vector& v)
 {
+    glColor3f(v.get_x(), v.get_y(), v.get_z());
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
