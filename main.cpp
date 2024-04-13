@@ -69,6 +69,9 @@ int main(int argc, char* argv[])
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector(0, 1, 0));
 
+    const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
+    const auto some_block = cube(1, vector(0, 0, 0));
+
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,7 +89,7 @@ int main(int argc, char* argv[])
         displacement.set_y(0);
 
         renderer::draw(floor, grass_texture);
-        renderer::draw(main_triangle);
+        renderer::draw(some_block, bricks_texture);
 
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event))

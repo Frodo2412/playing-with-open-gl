@@ -33,7 +33,7 @@ void renderer::draw(const grid& grid, const texture& texture)
         {
             if (column % 2 == row % 2) glColor3f(0.5f, 0.5f, 0.5f); // Set color to medium gray
             else glColor3f(1.0f, 1.0f, 1.0f); // Reset color to white
-            
+
             glTexCoord2f(0.0, 0.0);
             glVertex3f(left + static_cast<float>(column) * size,
                        -1, top + static_cast<float>(row) * size);
@@ -52,8 +52,35 @@ void renderer::draw(const grid& grid, const texture& texture)
     glDisable(GL_TEXTURE_2D);
 }
 
+void renderer::draw(const cube& block, const texture& texture)
+{
+    const auto faces = block.get_faces();
+
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
+    glBegin(GL_QUADS);
+
+    for (auto& face : faces)
+    {
+        glTexCoord2f(0.0, 0.0);
+        draw(face.get_a());
+        glTexCoord2f(0.0, 1.0);
+        draw(face.get_b());
+        glTexCoord2f(1.0, 1.0);
+        draw(face.get_c());
+        glTexCoord2f(1.0, 0.0);
+        draw(face.get_d());
+    }
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
+void renderer::draw(const square& square, const texture& texture)
+{
+}
+
 void renderer::draw(const vector& v)
 {
-    glColor3f(v.get_x(), v.get_y(), v.get_z());
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }

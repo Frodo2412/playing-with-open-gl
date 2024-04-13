@@ -80,7 +80,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="geometry\cube.cpp" />
     <ClCompile Include="geometry\grid.cpp" />
+    <ClCompile Include="geometry\square.cpp" />
     <ClCompile Include="geometry\Triangle.cpp" />
     <ClCompile Include="geometry\vector.cpp" />
     <ClCompile Include="textures\texture.cpp" />
@@ -165,7 +167,9 @@
     <ClCompile Include="utils\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="geometry\cube.h" />
     <ClInclude Include="geometry\grid.h" />
+    <ClInclude Include="geometry\square.h" />
     <ClInclude Include="geometry\Triangle.h" />
     <ClInclude Include="geometry\vector.h" />
     <ClInclude Include="textures\texture.h" />
