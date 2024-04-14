@@ -5,7 +5,7 @@
 class clock
 {
     double start_time_;
-    bool is_pause = false;
+    bool is_pause_ = false;
     static clock* instance_;
 
     explicit clock(): start_time_(SDL_GetTicks())

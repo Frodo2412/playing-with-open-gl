@@ -9,7 +9,7 @@ void clock::init()
 
 void clock::toggle_pause()
 {
-    instance_->is_pause = !(instance_->is_pause);
+    instance_->is_pause_ = !(instance_->is_pause_);
 }
 
 
@@ -19,7 +19,7 @@ double clock::get_ticks()
     double delta_time = current_time - instance_->start_time_;
     instance_->start_time_ = current_time;
 
-    if (instance_->is_pause)
+    if (instance_->is_pause_)
         delta_time = 0;
     return delta_time;
 }

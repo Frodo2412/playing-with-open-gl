@@ -57,8 +57,7 @@ int main(int argc, char* argv[])
     
     //const auto pause_texture = texture_loader::load_texture("../assets/pausa.png");
     //const auto pantallaPausa = square(vector(-320,-240,1), vector(320,-240,1), vector(320,240,1), vector(-320,240,1));
-    //estoy teniendo problemas con la ubicación de la pantalla de pausa y que quede del tamaño adecuado.
-    // también queda rotada cuando se rota la escena.
+    
     
     do
     {
@@ -77,12 +76,9 @@ int main(int argc, char* argv[])
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
         
-            //renderer::draw(pantallaPausa, pause_texture);
-            // la idea es al pausar que se muestre una imagen con una pantalla de pausa, podría también,
-            // desde la pantalla de pausa hacerse todos los settings
-            // creo que sería más fácil de esta manera para no tener que hacer dos menús distintos.
+        //renderer::draw(pantallaPausa, pause_texture);
 
-        float lapse_time = clock::get_ticks();
+        float elapse_time = static_cast<float>(clock::get_ticks());
         
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event) )
@@ -97,8 +93,8 @@ int main(int argc, char* argv[])
                 break;
             case SDL_MOUSEMOTION:
                 {
-                    float x_offset = static_cast<float>(event.motion.xrel) * lapse_time;
-                    float y_offset = -static_cast<float>(event.motion.yrel) * lapse_time;
+                    float x_offset = static_cast<float>(event.motion.xrel) * elapse_time;
+                    float y_offset = -static_cast<float>(event.motion.yrel) * elapse_time;
                     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
                     camera.rotate(x_offset, y_offset);
                 }
@@ -111,19 +107,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                         std::cout << "LEFT\n";
-                        displacement.set_x(0.1f * lapse_time);
+                        displacement.set_x(0.1f * elapse_time);
                     break;
                 case SDLK_d:
                         std::cout << "RIGHT\n";
-                        displacement.set_x(-0.1f * lapse_time);
+                        displacement.set_x(-0.1f * elapse_time);
                     break;
                 case SDLK_w:
                         std::cout << "UP\n";
-                        displacement.set_z(0.1f * lapse_time);
+                        displacement.set_z(0.1f * elapse_time);
                     break;
                 case SDLK_s:
                         std::cout << "DOWN\n";
-                        displacement.set_z(-0.1f * lapse_time);
+                        displacement.set_z(-0.1f * elapse_time);
                     break;
                 case SDLK_p:
                         std::cout << "PAUSE\n";
