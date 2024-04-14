@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
         
         //renderer::draw(pantallaPausa, pause_texture);
 
-        float elapse_time = static_cast<float>(clock::get_ticks());
+        float elapsed_time = static_cast<float>(clock::get_ticks());
         
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event) )
