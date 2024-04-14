@@ -26,6 +26,7 @@ public:
 
     // Operators
     vector operator+(const vector& other) const;
+    void operator+=(const vector& other);
     vector operator -(const vector& other) const;
     vector operator*(float s) const;
     vector operator*(const vector& other) const;
@@ -37,4 +38,8 @@ public:
 
     vector normalize() const;
     vector symmetrical(const vector& other) const;
+
+    static vector zero();
+    void reset();
+    
 };

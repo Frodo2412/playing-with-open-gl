@@ -4,32 +4,13 @@
 #include <conio.h>
 #include <GL/glu.h>
 
-#include "OpenGL-basico/geometry/Triangle.h"
 #include "OpenGL-basico/geometry//vector.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
+#include "OpenGL-basico/utils/camera.h"
+#include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
-
-enum zoom
-{
-    in,
-    out
-};
-
-void zoom(vector& camera, const zoom zoom)
-{
-    switch (zoom)
-    {
-    case in:
-        std::cout << "Zooming in!\n";
-        camera.set_z(camera.get_z() - 0.1f);
-        break;
-    case out:
-        std::cout << "Zooming out!\n";
-        camera.set_z(camera.get_z() + 0.1f);
-    }
-}
 
 int main(int argc, char* argv[])
 {
@@ -43,7 +24,7 @@ int main(int argc, char* argv[])
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       640, 480, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                       1920, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
     glMatrixMode(GL_PROJECTION);
@@ -56,14 +37,12 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
-    bool rotate = false;
 
+    clock::init();
     SDL_Event event;
 
-    auto camera = vector(0, 0, 5);
-    auto main_triangle = triangle(vector(1, -1, 0), vector(-1, -1, 0), vector(0, 1, 0));
+    auto camera = ::camera(0, 0, 5);
 
-    float degrees = 0;
     auto displacement = vector(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
@@ -76,17 +55,15 @@ int main(int argc, char* argv[])
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
-        gluLookAt(camera.get_x(), camera.get_y(), camera.get_z(), 0, 0, 0, 0, 1, 0);
 
-        if (rotate)
-        {
-            degrees = degrees + 0.5f;
-        }
-        glRotatef(degrees, 0.0, 1.0, 0.0);
-
-        main_triangle.move(displacement);
-        displacement.set_x(0);
-        displacement.set_y(0);
+        camera.move(displacement);
+        const auto camera_position = camera.get_position();
+        const auto camera_direction = camera.get_direction();
+        const auto camera_up = camera.get_up();
+        gluLookAt(camera_position.get_x(), camera_position.get_y(), camera_position.get_z(),
+                  camera_direction.get_x(), camera_direction.get_y(), camera_direction.get_z(),
+                  camera_up.get_x(), camera_up.get_y(), camera_up.get_z());
+        displacement.reset();
 
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
@@ -96,23 +73,18 @@ int main(int argc, char* argv[])
         {
             switch (event.type)
             {
-            case SDL_MOUSEBUTTONDOWN:
-                rotate = true;
-                std::cout << "ROT\n";
-                break;
-            case SDL_MOUSEBUTTONUP:
-                rotate = false;
-                break;
             case SDL_MOUSEWHEEL:
-                if (event.wheel.y > 0)
-                {
-                    zoom(camera, in);
-                }
-                else
-                {
-                    zoom(camera, out);
-                }
+                if (event.wheel.y > 0) camera.zoom_in(0.1f);
+                else camera.zoom_out(0.1f);
                 break;
+            case SDL_MOUSEMOTION:
+                {
+                    float x_offset = static_cast<float>(event.motion.xrel);
+                    float y_offset = -static_cast<float>(event.motion.yrel);
+                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                    camera.rotate(x_offset, y_offset);
+                    break;
+                }
             case SDL_QUIT:
                 fin = true;
                 break;
@@ -129,11 +101,11 @@ int main(int argc, char* argv[])
                     break;
                 case SDLK_w:
                     std::cout << "UP\n";
-                    displacement.set_y(0.1f);
+                    displacement.set_z(-0.1f);
                     break;
                 case SDLK_s:
                     std::cout << "DOWN\n";
-                    displacement.set_y(-0.1f);
+                    displacement.set_z(0.1f);
                     break;
                 default: break;
                 }

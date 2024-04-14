@@ -15,6 +15,12 @@ vector camera::get_up() const
     return up_;
 }
 
+void camera::move(const vector& displacement)
+{
+    position_ += displacement;
+    direction_ += displacement;
+}
+
 void camera::zoom_in(const float amount)
 {
     position_.set_z(position_.get_z() - amount);

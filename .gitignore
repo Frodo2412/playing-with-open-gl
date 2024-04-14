@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+./idea/*
+./Debug/*
+./Release/*
+./OpenGL-basico/Debug/*
+./OpenGL-basico/Release/*
