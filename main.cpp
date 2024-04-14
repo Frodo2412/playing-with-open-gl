@@ -107,19 +107,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                         std::cout << "LEFT\n";
-                        displacement.set_x(0.1f * elapse_time);
+                        displacement.set_x(0.1f * elapsed_time);
                     break;
                 case SDLK_d:
                         std::cout << "RIGHT\n";
-                        displacement.set_x(-0.1f * elapse_time);
+                        displacement.set_x(-0.1f * elapsed_time);
                     break;
                 case SDLK_w:
                         std::cout << "UP\n";
-                        displacement.set_z(0.1f * elapse_time);
+                        displacement.set_z(0.1f * elapsed_time);
                     break;
                 case SDLK_s:
                         std::cout << "DOWN\n";
-                        displacement.set_z(-0.1f * elapse_time);
+                        displacement.set_z(-0.1f * elapsed_time);
                     break;
                 case SDLK_p:
                         std::cout << "PAUSE\n";
