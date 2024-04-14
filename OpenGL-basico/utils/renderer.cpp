@@ -13,6 +13,11 @@ void renderer::draw(const triangle& triangle)
     glEnd();
 }
 
+void renderer::draw(const camera& camera)
+{
+    
+}
+
 void renderer::draw(const grid& grid, const texture& texture)
 {
     const auto d = grid.get_cell_size() / 2;

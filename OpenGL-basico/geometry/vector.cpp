@@ -13,6 +13,13 @@ vector vector::operator+(const vector& other) const
     return vector(x_ + other.get_x(), y_ + other.get_y(), z_ + other.get_z());
 }
 
+void vector::operator+=(const vector& other)
+{
+    x_ += other.get_x();
+    y_ += other.get_y();
+    z_ += other.get_z();
+}
+
 vector vector::operator -(const vector& other) const
 {
     return vector(x_ - other.x_, y_ - other.y_, z_ - other.z_);
@@ -68,4 +75,16 @@ vector vector::symmetrical(const vector& other) const
     const auto normalized_other = other.normalize();
     const auto aux = normalized_other * (2 * normalized_other.dot_product(*this));
     return aux - *this;
+}
+
+vector vector::zero()
+{
+    return vector(0, 0, 0);
+}
+
+void vector::reset()
+{
+    x_ = 0;
+    y_ = 0;
+    z_ = 0;
 }
