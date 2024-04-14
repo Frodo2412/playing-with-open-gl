@@ -93,8 +93,8 @@ int main(int argc, char* argv[])
                 break;
             case SDL_MOUSEMOTION:
                 {
-                    float x_offset = static_cast<float>(event.motion.xrel) * elapse_time;
-                    float y_offset = -static_cast<float>(event.motion.yrel) * elapse_time;
+                    float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
+                    float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
                     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
                     camera.rotate(x_offset, y_offset);
                 }
