@@ -19,6 +19,8 @@ public:
     float get_y() const;
     float get_z() const;
 
+    float magnitude() const;
+
     // Setter methods for the coordinates
     void set_x(float new_x);
     void set_y(float new_y);
@@ -26,6 +28,7 @@ public:
 
     // Operators
     vector operator+(const vector& other) const;
+    void operator+=(const vector& other);
     vector operator -(const vector& other) const;
     vector operator*(float s) const;
     vector operator*(const vector& other) const;
@@ -37,4 +40,8 @@ public:
 
     vector normalize() const;
     vector symmetrical(const vector& other) const;
+
+    static vector zero();
+    void reset();
+    
 };

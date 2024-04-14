@@ -76,10 +76,6 @@ void renderer::draw(const cube& block, const texture& texture)
     glDisable(GL_TEXTURE_2D);
 }
 
-void renderer::draw(const square& square, const texture& texture)
-{
-}
-
 void renderer::draw(const vector& v)
 {
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
