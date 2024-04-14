@@ -163,6 +163,7 @@ int main(int argc, char* argv[])
                         case CameraMode::first:
                             std::cout << "CAMERA CHANGED TO ORIGINAL\n";
                             cam_mode = CameraMode::original;
+                            bomber_man = camera.get_position();
                             break;
                         case CameraMode::original:
                             std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
@@ -171,6 +172,7 @@ int main(int argc, char* argv[])
                         case CameraMode::perspective:
                             std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
                             cam_mode = CameraMode::first;
+                            camera.set_position(bomber_man);
                             break;
                     }
                     break;
