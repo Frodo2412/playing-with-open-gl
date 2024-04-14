@@ -52,3 +52,18 @@ void camera::rotate(const float x_offset, const float y_offset)
     else
         direction_.set_y(direction_.get_y() + y_offset * sensitivity);
 }
+
+void camera::set_position(vector pos)
+{
+    position_ = pos;
+}
+
+void camera::set_direction(vector dir)
+{
+    direction_ = dir;
+}
+
+void camera::set_up(vector up)
+{
+    up_ = up;
+}

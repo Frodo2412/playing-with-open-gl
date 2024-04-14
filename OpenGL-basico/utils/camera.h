@@ -20,13 +20,19 @@ public:
     vector get_direction() const;
     vector get_up() const;
 
+    void set_position(vector pos);
+
+    void set_direction(vector dir);
+
+    void set_up(vector up);
+
     void move(const vector& displacement);
 
     void zoom_in(float amount);
     void zoom_out(float amount);
     
     void rotate(float x_offset, float y_offset);
-
+    
     void refresh() const;
     
 };

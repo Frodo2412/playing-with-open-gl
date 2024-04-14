@@ -15,6 +15,13 @@
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
 
+enum CameraMode
+{
+    first,
+    original,
+    perspective
+};
+
 int main(int argc, char* argv[])
 {
     //INICIALIZACION
@@ -27,7 +34,7 @@ int main(int argc, char* argv[])
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       1920, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                       640, 480, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
     glMatrixMode(GL_PROJECTION);
@@ -44,6 +51,9 @@ int main(int argc, char* argv[])
     clock::init();
     SDL_Event event;
 
+    auto bomber_man = vector(0, 0, 5);
+    CameraMode cam_mode = CameraMode::first;
+    float perspective_zoom = 0;
     auto camera = ::camera(0, 0, 5);
 
     auto displacement = vector(0, 0, 0);
@@ -58,19 +68,45 @@ int main(int argc, char* argv[])
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
-
-        camera.move(displacement);
-        const auto camera_position = camera.get_position();
-        const auto camera_direction = camera.get_direction();
-        const auto camera_up = camera.get_up();
-        gluLookAt(camera_position.get_x(), camera_position.get_y(), camera_position.get_z(),
-                  camera_direction.get_x(), camera_direction.get_y(), camera_direction.get_z(),
-                  camera_up.get_x(), camera_up.get_y(), camera_up.get_z());
-        displacement.reset();
+        
+        switch (cam_mode)
+        {
+            case CameraMode::first:
+                camera.move(displacement);
+                gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
+                      camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                      camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
+                displacement.reset();
+                break;
+            case CameraMode::original:
+                camera.set_position(bomber_man);
+                camera.set_direction(vector (0,0,0));
+                camera.set_up(vector(0,0,1));
+                gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
+                          camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                          camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
+                break;
+            case CameraMode::perspective:
+                camera.set_position(vector (bomber_man.get_x(),bomber_man.get_y()+5,bomber_man.get_x()+5+perspective_zoom));
+                camera.set_direction(vector (bomber_man.get_x(),0,bomber_man.get_x()));
+                camera.set_up(vector(0,1,0));
+                gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
+                          camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                          camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
+                break;
+        }
+        
+        
 
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
 
+        glPointSize(20.0);//BOMBERMAN MOMENTANEO
+        glBegin(GL_POINTS);
+            glColor3f(1,0,0);
+            glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
+        glEnd();
+        
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event))
         {
@@ -78,6 +114,10 @@ int main(int argc, char* argv[])
             {
             case SDL_MOUSEWHEEL:
                 if (event.wheel.y > 0) camera.zoom_in(0.1f);
+                if ((event.wheel.y>0 && perspective_zoom < 5) || (event.wheel.y<0 && perspective_zoom > -5))
+                {
+                    perspective_zoom += event.wheel.y;
+                }
                 else camera.zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
@@ -109,6 +149,23 @@ int main(int argc, char* argv[])
                 case SDLK_s:
                     std::cout << "DOWN\n";
                     displacement.set_z(-0.1f);
+                    break;
+                case SDLK_v:
+                    switch (cam_mode)
+                    {
+                        case CameraMode::first:
+                            std::cout << "CAMERA CHANGED TO ORIGINAL\n";
+                            cam_mode = CameraMode::original;
+                            break;
+                        case CameraMode::original:
+                            std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
+                            cam_mode = CameraMode::perspective;
+                            break;
+                        case CameraMode::perspective:
+                            std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
+                            cam_mode = CameraMode::first;
+                            break;
+                    }
                     break;
                 default: break;
                 }
