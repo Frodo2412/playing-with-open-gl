@@ -24,3 +24,9 @@ void camera::zoom_out(const float amount)
 {
     position_.set_z(position_.get_z() + amount);
 }
+
+void camera::rotate(const float x_offset, const float y_offset)
+{
+    direction_.set_x(direction_.get_x() + x_offset / 10);
+    direction_.set_y(direction_.get_y() + y_offset / 10);
+}

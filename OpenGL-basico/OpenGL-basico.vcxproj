@@ -164,6 +164,7 @@
       </AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="utils\camera.cpp" />
     <ClCompile Include="utils\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,7 @@
     <ClInclude Include="geometry\vector.h" />
     <ClInclude Include="textures\texture.h" />
     <ClInclude Include="textures\texture_loader.h" />
+    <ClInclude Include="utils\camera.h" />
     <ClInclude Include="utils\renderer.h" />
   </ItemGroup>
   <ItemGroup>

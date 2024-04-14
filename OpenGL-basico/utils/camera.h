@@ -22,4 +22,6 @@ public:
 
     void zoom_in(float amount);
     void zoom_out(float amount);
+    
+    void rotate(float x_offset, float y_offset);
 };
