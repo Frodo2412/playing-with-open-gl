@@ -6,10 +6,10 @@
 
 #include "OpenGL-basico/geometry/Triangle.h"
 #include "OpenGL-basico/geometry//vector.h"
-
-using namespace std;
-
-const vector rotation_axis = vector(0, 1, 0);
+#include "OpenGL-basico/geometry/grid.h"
+#include "OpenGL-basico/textures/texture.h"
+#include "OpenGL-basico/textures/texture_loader.h"
+#include "OpenGL-basico/utils/renderer.h"
 
 enum zoom
 {
@@ -17,49 +17,18 @@ enum zoom
     out
 };
 
-void draw_vertex(const vector& vertex)
-{
-    glVertex3f(vertex.get_x(), vertex.get_y(), vertex.get_z());
-}
-
-void draw_triangle(const triangle& triangle)
-{
-    glBegin(GL_POLYGON);
-    glColor3f(1.0, 1.0, 1.0);
-    draw_vertex(triangle.get_a());
-    glColor3f(1.0, 0.0, 0.0);
-    draw_vertex(triangle.get_b());
-    glColor3f(0.0, 0.0, 1.0);
-    draw_vertex(triangle.get_c());
-    glEnd();
-}
-
 void zoom(vector& camera, const zoom zoom)
 {
     switch (zoom)
     {
     case in:
-        cout << "Zooming in!\n";
+        std::cout << "Zooming in!\n";
         camera.set_z(camera.get_z() - 0.1f);
         break;
     case out:
-        cout << "Zooming out!\n";
+        std::cout << "Zooming out!\n";
         camera.set_z(camera.get_z() + 0.1f);
     }
-}
-
-void draw_pyramid()
-{
-    const auto base = triangle(vector(1, 0, 0), vector(-1, 0, -1), vector(-1, 0, 1));
-    auto apex = vector(0, 2, 0);
-    auto front = triangle(base.get_a(), base.get_b(), apex);
-    auto right = triangle(base.get_b(), base.get_c(), apex);
-    auto back = triangle(base.get_c(), base.get_a(), apex);
-
-    draw_triangle(base);
-    draw_triangle(front);
-    draw_triangle(right);
-    draw_triangle(back);
 }
 
 int main(int argc, char* argv[])
@@ -67,7 +36,7 @@ int main(int argc, char* argv[])
     //INICIALIZACION
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        cerr << "No se pudo iniciar SDL: " << SDL_GetError() << '\n';
+        std::cerr << "No se pudo iniciar SDL: " << SDL_GetError() << '\n';
         exit(1);
     }
 
@@ -79,7 +48,7 @@ int main(int argc, char* argv[])
 
     glMatrixMode(GL_PROJECTION);
 
-    float color = 0;
+    constexpr float color = 0;
     glClearColor(color, color, color, 1);
 
     gluPerspective(45, 640 / 480.f, 0.1, 100);
@@ -89,13 +58,16 @@ int main(int argc, char* argv[])
     bool fin = false;
     bool rotate = false;
 
-    SDL_Event evento;
+    SDL_Event event;
 
     auto camera = vector(0, 0, 5);
     auto main_triangle = triangle(vector(1, -1, 0), vector(-1, -1, 0), vector(0, 1, 0));
 
     float degrees = 0;
     auto displacement = vector(0, 0, 0);
+
+    const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
+    const auto floor = grid(10, 10, 1, vector(0, 1, 0));
 
     do
     {
@@ -110,25 +82,26 @@ int main(int argc, char* argv[])
         glRotatef(degrees, 0.0, 1.0, 0.0);
 
         main_triangle.move(displacement);
-        draw_pyramid();
-        // draw_triangle(main_triangle);
         displacement.set_x(0);
         displacement.set_y(0);
 
+        renderer::draw(floor, grass_texture);
+        renderer::draw(main_triangle);
+
         //MANEJO DE EVENTOS
-        while (SDL_PollEvent(&evento))
+        while (SDL_PollEvent(&event))
         {
-            switch (evento.type)
+            switch (event.type)
             {
             case SDL_MOUSEBUTTONDOWN:
                 rotate = true;
-                cout << "ROT\n";
+                std::cout << "ROT\n";
                 break;
             case SDL_MOUSEBUTTONUP:
                 rotate = false;
                 break;
             case SDL_MOUSEWHEEL:
-                if (evento.wheel.y > 0)
+                if (event.wheel.y > 0)
                 {
                     zoom(camera, in);
                 }
@@ -141,28 +114,28 @@ int main(int argc, char* argv[])
                 fin = true;
                 break;
             case SDL_KEYDOWN:
-                switch (evento.key.keysym.sym)
+                switch (event.key.keysym.sym)
                 {
                 case SDLK_a:
-                    cout << "LEFT\n";
+                    std::cout << "LEFT\n";
                     displacement.set_x(-0.1f);
                     break;
                 case SDLK_d:
-                    cout << "RIGHT\n";
+                    std::cout << "RIGHT\n";
                     displacement.set_x(0.1f);
                     break;
                 case SDLK_w:
-                    cout << "UP\n";
+                    std::cout << "UP\n";
                     displacement.set_y(0.1f);
                     break;
                 case SDLK_s:
-                    cout << "DOWN\n";
+                    std::cout << "DOWN\n";
                     displacement.set_y(-0.1f);
                     break;
                 default: break;
                 }
             case SDL_KEYUP:
-                switch (evento.key.keysym.sym)
+                switch (event.key.keysym.sym)
                 {
                 case SDLK_ESCAPE:
                     fin = true;
