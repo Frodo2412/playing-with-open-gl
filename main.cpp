@@ -3,6 +3,9 @@
 #include <iostream>
 #include <conio.h>
 #include <GL/glu.h>
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
 #include "OpenGL-basico/geometry/Triangle.h"
 #include "OpenGL-basico/geometry//vector.h"
