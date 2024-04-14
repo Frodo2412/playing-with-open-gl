@@ -17,8 +17,15 @@ vector camera::get_up() const
 
 void camera::move(const vector& displacement)
 {
-    position_ += displacement;
-    direction_ += displacement;
+    const auto forward = (direction_ - position_).normalize();
+
+    const auto forward_movement = forward * displacement.get_z();
+    const auto side_movement = up_ * forward * displacement.get_x();
+
+    const auto movement = forward_movement + side_movement;
+
+    position_ += movement;
+    direction_ += movement;
 }
 
 void camera::zoom_in(const float amount)
@@ -33,7 +40,7 @@ void camera::zoom_out(const float amount)
 
 void camera::rotate(const float x_offset, const float y_offset)
 {
-    constexpr float sensitivity = 0.001f; // Adjust this value to make the camera rotation more or less sensitive
+    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive
 
     direction_.set_x(direction_.get_x() + x_offset * sensitivity);
 

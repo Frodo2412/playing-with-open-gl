@@ -4,6 +4,11 @@ float vector::get_x() const { return x_; }
 float vector::get_y() const { return y_; }
 float vector::get_z() const { return z_; }
 
+float vector::magnitude() const
+{
+    return magnitude_;
+}
+
 void vector::set_x(const float new_x) { x_ = new_x; }
 void vector::set_y(const float new_y) { y_ = new_y; }
 void vector::set_z(const float new_z) { z_ = new_z; }

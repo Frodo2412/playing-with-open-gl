@@ -19,6 +19,8 @@ public:
     float get_y() const;
     float get_z() const;
 
+    float magnitude() const;
+
     // Setter methods for the coordinates
     void set_x(float new_x);
     void set_y(float new_y);
