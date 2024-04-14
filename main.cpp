@@ -96,19 +96,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                     std::cout << "LEFT\n";
-                    displacement.set_x(-0.1f);
+                    displacement.set_x(0.1f);
                     break;
                 case SDLK_d:
                     std::cout << "RIGHT\n";
-                    displacement.set_x(0.1f);
+                    displacement.set_x(-0.1f);
                     break;
                 case SDLK_w:
                     std::cout << "UP\n";
-                    displacement.set_z(-0.1f);
+                    displacement.set_z(0.1f);
                     break;
                 case SDLK_s:
                     std::cout << "DOWN\n";
-                    displacement.set_z(0.1f);
+                    displacement.set_z(-0.1f);
                     break;
                 default: break;
                 }

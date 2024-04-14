@@ -13,11 +13,6 @@ void renderer::draw(const triangle& triangle)
     glEnd();
 }
 
-void renderer::draw(const camera& camera)
-{
-    
-}
-
 void renderer::draw(const grid& grid, const texture& texture)
 {
     const auto d = grid.get_cell_size() / 2;
@@ -81,12 +76,7 @@ void renderer::draw(const cube& block, const texture& texture)
     glDisable(GL_TEXTURE_2D);
 }
 
-void renderer::draw(const square& square, const texture& texture)
-{
-}
-
 void renderer::draw(const vector& v)
 {
-    glColor3f(v.get_x(), v.get_y(), v.get_z());
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
