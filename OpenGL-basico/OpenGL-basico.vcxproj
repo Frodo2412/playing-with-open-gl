@@ -173,6 +173,8 @@
     <ClInclude Include="utils\renderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\assets\bomberman\source\0d5d63397dc34008a601d00735583069.fbx.fbx" />
+    <Content Include="..\assets\bomberman\textures\internal_ground_ao_texture.jpeg" />
     <Content Include="..\assets\source\bomberman.fbx" />
     <Content Include="..\assets\textures\bomberman.jpeg" />
   </ItemGroup>
