@@ -65,11 +65,13 @@ int main(int argc, char* argv[])
     const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
     const auto some_block = cube(1, vector(0, 0, 0));
 
+    SDL_SetWindowGrab(win, SDL_TRUE);
+    SDL_ShowCursor(SDL_TRUE);//SDL_FALSE PARA OCULTAR MOUSE
+    
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
-        
         switch (cam_mode)
         {
             case CameraMode::first:
@@ -100,7 +102,8 @@ int main(int argc, char* argv[])
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
 
-        glPointSize(20.0);//BOMBERMAN MOMENTANEO
+        //BOMBERMAN MOMENTANEO
+        glPointSize(20);
         glBegin(GL_POINTS);
             glColor3f(1,0,0);
             glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
