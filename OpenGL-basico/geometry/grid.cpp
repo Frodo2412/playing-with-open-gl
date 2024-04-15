@@ -15,7 +15,7 @@ float grid::get_cell_size() const
     return cell_size_;
 }
 
-vector grid::get_normal() const
+vertex grid::get_normal() const
 {
     return normal_;
 }

@@ -1,36 +1,36 @@
 ﻿#pragma once
-#include "vector.h"
+#include "vertex.h"
 
 class triangle
 {
-    vector a_, b_, c_;
+    vertex a_, b_, c_;
 
 public:
     // Constructor
-    explicit triangle(const vector& a = vector(0, 0, 0), const vector& b = vector(0, 0, 0),
-                      const vector& c = vector(0, 0, 0)) : a_(a), b_(b), c_(c)
+    explicit triangle(const vertex& a = vertex(0, 0, 0), const vertex& b = vertex(0, 0, 0),
+                      const vertex& c = vertex(0, 0, 0)) : a_(a), b_(b), c_(c)
     {
     }
 
-    explicit triangle(const vector& a)
+    explicit triangle(const vertex& a)
     {
-        const auto angle = a.angle_with(vector(1, 0, 0));
+        const auto angle = a.angle_with(vertex(1, 0, 0));
 
         
     }
 
     // Getter methods for the vertexes
-    vector get_a() const;
-    vector get_b() const;
-    vector get_c() const;
+    vertex get_a() const;
+    vertex get_b() const;
+    vertex get_c() const;
 
     void an_op();
 
     // Setter methods for the coordinates
-    void set_a(const vector& new_a);
-    void set_b(const vector& new_b);
-    void set_c(const vector& new_c);
+    void set_a(const vertex& new_a);
+    void set_b(const vertex& new_b);
+    void set_c(const vertex& new_c);
 
-    void move(const vector& other);
+    void move(const vertex& other);
     void move_left(const float distance);
 };

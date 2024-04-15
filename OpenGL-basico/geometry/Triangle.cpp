@@ -2,17 +2,17 @@
 
 #include <iostream>
 
-vector triangle::get_a() const
+vertex triangle::get_a() const
 {
     return a_;
 }
 
-vector triangle::get_b() const
+vertex triangle::get_b() const
 {
     return b_;
 }
 
-vector triangle::get_c() const
+vertex triangle::get_c() const
 {
     return c_;
 }
@@ -22,22 +22,22 @@ void triangle::an_op()
     std::cout << "Hola";
 }
 
-void triangle::set_a(const vector& new_a)
+void triangle::set_a(const vertex& new_a)
 {
     a_ = new_a;
 }
 
-void triangle::set_b(const vector& new_b)
+void triangle::set_b(const vertex& new_b)
 {
     b_ = new_b;
 }
 
-void triangle::set_c(const vector& new_c)
+void triangle::set_c(const vertex& new_c)
 {
     c_ = new_c;
 }
 
-void triangle::move(const vector& other)
+void triangle::move(const vertex& other)
 {
     a_ = a_ + other;
     b_ = b_ + other;

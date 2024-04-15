@@ -80,11 +80,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="entities\entity.cpp" />
+    <ClCompile Include="entities\manager.cpp" />
     <ClCompile Include="geometry\cube.cpp" />
     <ClCompile Include="geometry\grid.cpp" />
     <ClCompile Include="geometry\square.cpp" />
     <ClCompile Include="geometry\Triangle.cpp" />
-    <ClCompile Include="geometry\vector.cpp" />
+    <ClCompile Include="geometry\vertex.cpp" />
     <ClCompile Include="textures\texture.cpp" />
     <ClCompile Include="textures\texture_loader.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -169,11 +171,13 @@
     <ClCompile Include="utils\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="entities\entity.h" />
+    <ClInclude Include="entities\manager.h" />
     <ClInclude Include="geometry\cube.h" />
     <ClInclude Include="geometry\grid.h" />
     <ClInclude Include="geometry\square.h" />
     <ClInclude Include="geometry\Triangle.h" />
-    <ClInclude Include="geometry\vector.h" />
+    <ClInclude Include="geometry\vertex.h" />
     <ClInclude Include="textures\texture.h" />
     <ClInclude Include="textures\texture_loader.h" />
     <ClInclude Include="utils\camera.h" />
@@ -181,10 +185,10 @@
     <ClInclude Include="utils\renderer.h" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\assets\bomberman\source\0d5d63397dc34008a601d00735583069.fbx.fbx" />
-    <Content Include="..\assets\bomberman\textures\internal_ground_ao_texture.jpeg" />
     <Content Include="..\assets\source\bomberman.fbx" />
-    <Content Include="..\assets\textures\bomberman.jpeg" />
+    <Content Include="..\assets\textures\bricks_1.jpg" />
+    <Content Include="..\assets\textures\grass_1.jpg" />
+    <Content Include="..\assets\textures\internal_ground_ao_texture.jpeg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
