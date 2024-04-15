@@ -9,11 +9,9 @@
 
 Assimp::Importer model_loader::importer_;
 
-void process_mesh(const aiMesh* mesh, const aiScene* scene, std::vector<vertex> vertices)
+void process_mesh(const aiMesh* mesh, std::vector<vertex>& vertices,
+                  std::vector<unsigned int>& indices)
 {
-    // Vertices
-    std::vector<unsigned int> indices;
-
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         auto position = vector3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
@@ -36,17 +34,18 @@ void process_mesh(const aiMesh* mesh, const aiScene* scene, std::vector<vertex> 
 }
 
 
-void process_node(const aiNode* node, const aiScene* scene, const std::vector<vertex>& vertices)
+void process_node(const aiNode* node, const aiScene* scene, std::vector<vertex>& vertices,
+                  std::vector<unsigned int>& indices)
 {
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
         const aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        process_mesh(mesh, scene, vertices);
+        process_mesh(mesh, vertices, indices);
     }
 
     for (unsigned int i = 0; i < node->mNumChildren; i++)
     {
-        process_node(node->mChildren[i], scene, vertices);
+        process_node(node->mChildren[i], scene, vertices, indices);
     }
 }
 
@@ -65,8 +64,9 @@ std::vector<vertex> model_loader::load_model(const std::string& file_path)
     }
 
     std::vector<vertex> vertices;
+    std::vector<unsigned int> indices;
 
-    process_node(scene->mRootNode, scene, vertices);
+    process_node(scene->mRootNode, scene, vertices, indices);
 
     return vertices;
 }
