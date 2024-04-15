@@ -1,21 +1,21 @@
 #include "camera.h"
 
-vertex camera::get_position() const
+vector3 camera::get_position() const
 {
     return position_;
 }
 
-vertex camera::get_direction() const
+vector3 camera::get_direction() const
 {
     return direction_;
 }
 
-vertex camera::get_up() const
+vector3 camera::get_up() const
 {
     return up_;
 }
 
-void camera::move(const vertex& displacement)
+void camera::move(const vector3& displacement)
 {
     const auto forward = (direction_ - position_).normalize();
 

@@ -1,18 +1,18 @@
 #pragma once
-#include "vertex.h"
+#include "vector3.h"
 
 class square
 {
-    vertex a_, b_, c_, d_;
+    vector3 a_, b_, c_, d_;
 
 public:
-    explicit square(const vertex& a, const vertex& b, const vertex& c, const vertex& d)
+    explicit square(const vector3& a, const vector3& b, const vector3& c, const vector3& d)
         : a_(a), b_(b), c_(c), d_(d)
     {
     }
 
-    const vertex& get_a() const;
-    const vertex& get_b() const;
-    const vertex& get_c() const;
-    const vertex& get_d() const;
+    const vector3& get_a() const;
+    const vector3& get_b() const;
+    const vector3& get_c() const;
+    const vector3& get_d() const;
 };

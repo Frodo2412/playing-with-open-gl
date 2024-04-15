@@ -1,26 +1,26 @@
 #pragma once
-#include "../geometry/vertex.h"
+#include "../geometry/vector3.h"
 
 class camera
 {
-    vertex position_, direction_, up_;
+    vector3 position_, direction_, up_;
 
 public:
-    explicit camera(const vertex& position, const vertex& direction, const vertex& up)
+    explicit camera(const vector3& position, const vector3& direction, const vector3& up)
         : position_(position), direction_(direction), up_(up)
     {
     }
 
     explicit camera(const float x, const float y, const float z)
-        : position_(vertex(x, y, z)), direction_(vertex(0, 0, 0)), up_(vertex(0, 1, 0))
+        : position_(vector3(x, y, z)), direction_(vector3(0, 0, 0)), up_(vector3(0, 1, 0))
     {
     }
 
-    vertex get_position() const;
-    vertex get_direction() const;
-    vertex get_up() const;
+    vector3 get_position() const;
+    vector3 get_direction() const;
+    vector3 get_up() const;
 
-    void move(const vertex& displacement);
+    void move(const vector3& displacement);
 
     void zoom_in(float amount);
     void zoom_out(float amount);
