@@ -191,10 +191,12 @@
     <ClInclude Include="utils\renderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\assets\models\Doodler.obj" />
     <Content Include="..\assets\source\bomberman.fbx" />
     <Content Include="..\assets\textures\bricks_1.jpg" />
+    <Content Include="..\assets\textures\Doodler.png" />
     <Content Include="..\assets\textures\grass_1.jpg" />
-    <Content Include="..\assets\textures\internal_ground_ao_texture.jpeg" />
+    <Content Include="..\assets\textures\bomberman.jpeg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
