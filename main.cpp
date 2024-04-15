@@ -7,7 +7,7 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
-#include "OpenGL-basico/geometry//vector.h"
+#include "OpenGL-basico/geometry//vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
@@ -46,13 +46,13 @@ int main(int argc, char* argv[])
 
     auto camera = ::camera(0, 0, 5);
 
-    auto displacement = vector(0, 0, 0);
+    auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
-    const auto floor = grid(10, 10, 1, vector(0, 1, 0));
+    const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
 
     const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
-    const auto some_block = cube(1, vector(0, 0, 0));
+    const auto some_block = cube(1, vector3(0, 0, 0));
 
     do
     {
