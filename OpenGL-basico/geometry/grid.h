@@ -1,15 +1,15 @@
 #pragma once
-#include "vector3.h"
+#include "vertex.h"
 
 class grid
 {
     int rows_, columns_;
     float cell_size_;
 
-    vector3 normal_;
+    vertex normal_;
 
 public:
-    explicit grid(const int rows, const int columns, const float cell_size, const vector3& normal):
+    explicit grid(const int rows, const int columns, const float cell_size, const vertex& normal):
         rows_(rows), columns_(columns),
         cell_size_(cell_size), normal_(normal)
     {
@@ -20,5 +20,5 @@ public:
 
     float get_cell_size() const;
 
-    vector3 get_normal() const;
+    vertex get_normal() const;
 };

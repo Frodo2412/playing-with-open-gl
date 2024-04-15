@@ -1,36 +1,43 @@
 ﻿#include "Triangle.h"
 
-vector3 triangle::get_a() const
+#include <iostream>
+
+vertex triangle::get_a() const
 {
     return a_;
 }
 
-vector3 triangle::get_b() const
+vertex triangle::get_b() const
 {
     return b_;
 }
 
-vector3 triangle::get_c() const
+vertex triangle::get_c() const
 {
     return c_;
 }
 
-void triangle::set_a(const vector3& new_a)
+void triangle::an_op()
+{
+    std::cout << "Hola";
+}
+
+void triangle::set_a(const vertex& new_a)
 {
     a_ = new_a;
 }
 
-void triangle::set_b(const vector3& new_b)
+void triangle::set_b(const vertex& new_b)
 {
     b_ = new_b;
 }
 
-void triangle::set_c(const vector3& new_c)
+void triangle::set_c(const vertex& new_c)
 {
     c_ = new_c;
 }
 
-void triangle::move(const vector3& other)
+void triangle::move(const vertex& other)
 {
     a_ = a_ + other;
     b_ = b_ + other;
