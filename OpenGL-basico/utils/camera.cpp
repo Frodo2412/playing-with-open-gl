@@ -108,7 +108,7 @@ void camera::refresh(vector3 bomber_man)
         {
             this->set_direction(vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()-5));
         }
-        this->set_position(vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()));
+        this->move(bomber_man);
         break;
     case CameraMode::original:
         this->set_position(vector3 (0,10,0));
