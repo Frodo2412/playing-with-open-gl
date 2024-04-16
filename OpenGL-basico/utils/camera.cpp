@@ -52,7 +52,7 @@ void camera::zoom_out(const float amount)
 
 void camera::rotate(const float x_offset, const float y_offset)
 {
-    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive
+    constexpr float sensitivity = 0.001f; // Adjust this value to make the camera rotation more or less sensitive
 
     direction_.set_x(direction_.get_x() + x_offset * sensitivity);
 
@@ -87,28 +87,4 @@ void camera::toggle_mode()
 void camera::set_perspective_zoom(float perspective_zoom)
 {
     perspective_zoom_ = perspective_zoom;
-}
-
-
-void camera::refresh(vector3 bomber_man)
-{
-    switch (this->get_mode())
-    {
-    case first:
-        this->direction_ = vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z() - 5);
-        this->direction_ = vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
-        this->up_ = vector3(0, 1, 0);
-        break;
-    case camera_mode::original:
-        this->position_ = vector3(0, 10, 0);
-        this->direction_ = vector3(0, 0, 0);
-        this->up_ = vector3(0, 0, -1);
-        break;
-    case camera_mode::perspective:
-        this->position_ = vector3(bomber_man.get_x(), bomber_man.get_y() + 5 + this->get_perspective_zoom(),
-                                  bomber_man.get_z() + 5);
-        this->direction_ = vector3(bomber_man.get_x(), 0, bomber_man.get_z());
-        this->up_ = vector3(0, 1, 0);
-        break;
-    }
 }
