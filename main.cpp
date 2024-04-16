@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       640, 480, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                       1920, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
     glMatrixMode(GL_PROJECTION);
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     const auto some_block = cube(1, vector3(0, 0, 0));
 
     const auto bomberman = player();
-    
+
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -64,8 +64,8 @@ int main(int argc, char* argv[])
 
         camera.refresh(bomber_man);
         gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
-              camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
-              camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
+                  camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                  camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
         renderer::draw(floor, grass_texture);
         // renderer::draw(some_block, bricks_texture);
         renderer::draw(bomberman);
@@ -73,42 +73,29 @@ int main(int argc, char* argv[])
         //BOMBERMAN MOMENTANEO
         glPointSize(20);
         glBegin(GL_POINTS);
-            glColor3f(1,0,0);
-            glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
+        glColor3f(1, 0, 0);
+        glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
         glEnd();
-      
+
         float elapsed_time = static_cast<float>(clock::get_ticks());
-        
+
         //MANEJO DE EVENTOS
-        while (SDL_PollEvent(&event) )
+        while (SDL_PollEvent(&event))
         {
             switch (event.type)
             {
             case SDL_MOUSEWHEEL:
-                if (event.wheel.y > 0) camera.zoom_in(0.1f);
-                if ((event.wheel.y>0 && camera.get_perspective_zoom() < 2) || (event.wheel.y<0 && camera.get_perspective_zoom() > -5))
-                {
-                    camera.set_perspective_zoom(camera.get_perspective_zoom() + event.wheel.y * 0.20f);
-                }
+                if (event.wheel.y > 0)camera.zoom_in(0.1f);
                 else camera.zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
-                if (event.button.button == SDL_BUTTON_LEFT)
                 {
-                    float x_offset = static_cast<float>(event.motion.xrel);
-                    float y_offset = -static_cast<float>(event.motion.yrel);
+                    float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
+                    float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
                     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
                     camera.rotate(x_offset, y_offset);
-                    camera.set_move_camera_first(true);
-                } else
-                {
-                    camera.set_move_camera_first(false);
+                    break;
                 }
-                if (event.wheel.y > 0)
-                    camera.zoom_in(0.1f);
-                else
-                    camera.zoom_out(0.1f);
-                break;
             case SDL_QUIT:
                 fin = true;
                 break;
@@ -132,34 +119,20 @@ int main(int argc, char* argv[])
                     bomber_man.set_z(bomber_man.get_z() + 0.1f);
                     break;
                 case SDLK_v:
-                    switch (camera.get_mode())
-                    {
-                        case CameraMode::first:
-                            std::cout << "CAMERA CHANGED TO ORIGINAL\n";
-                            camera.set_mode(CameraMode::original);
-                            break;
-                        case CameraMode::original:
-                            std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
-                            camera.set_mode(CameraMode::perspective);
-                            break;
-                        case CameraMode::perspective:
-                            std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
-                            camera.set_mode(CameraMode::first);
-                            break;
-                    }
+                    camera.toggle_mode();
                 case SDLK_p:
-                        std::cout << "PAUSE\n";
-                        clock::toggle_pause();
-                        break;
+                    std::cout << "PAUSE\n";
+                    clock::toggle_pause();
+                    break;
                 default: break;
                 }
             case SDL_KEYUP:
                 switch (event.key.keysym.sym)
                 {
-            case SDLK_q:
-                fin = true;
+                case SDLK_q:
+                    fin = true;
                     break;
-            default: break;
+                default: break;
                 }
             default: break;
             }
