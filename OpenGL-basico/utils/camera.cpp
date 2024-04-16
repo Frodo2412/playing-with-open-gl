@@ -1,16 +1,16 @@
 #include "camera.h"
 
-vector camera::get_position() const
+vector3 camera::get_position() const
 {
     return position_;
 }
 
-vector camera::get_direction() const
+vector3 camera::get_direction() const
 {
     return direction_;
 }
 
-vector camera::get_up() const
+vector3 camera::get_up() const
 {
     return up_;
 }
@@ -30,7 +30,7 @@ float camera::get_perspective_zoom()
     return perspective_zoom_;
 }
 
-void camera::move(const vector& displacement)
+void camera::move(const vector3& displacement)
 {
     const auto forward = (direction_ - position_).normalize();
 
@@ -68,17 +68,17 @@ void camera::rotate(const float x_offset, const float y_offset)
         direction_.set_y(direction_.get_y() + y_offset * sensitivity);
 }
 
-void camera::set_position(vector pos)
+void camera::set_position(vector3 pos)
 {
     position_ = pos;
 }
 
-void camera::set_direction(vector dir)
+void camera::set_direction(vector3 dir)
 {
     direction_ = dir;
 }
 
-void camera::set_up(vector up)
+void camera::set_up(vector3 up)
 {
     up_ = up;
 }
@@ -99,26 +99,26 @@ void camera::set_perspective_zoom(float perspective_zoom)
 }
 
 
-void camera::refresh(vector bomber_man)
+void camera::refresh(vector3 bomber_man)
 {
     switch (this->get_mode())
     {
     case CameraMode::first:
         if (!this->get_move_camera_first())
         {
-            this->set_direction(vector(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()-5));
+            this->set_direction(vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()-5));
         }
-        this->set_position(vector(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()));
+        this->set_position(vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()));
         break;
     case CameraMode::original:
-        this->set_position(vector (0,10,0));
-        this->set_direction(vector (0,0,0));
-        this->set_up(vector(0,0,-1));
+        this->set_position(vector3 (0,10,0));
+        this->set_direction(vector3 (0,0,0));
+        this->set_up(vector3(0,0,-1));
         break;
     case CameraMode::perspective:
-        this->set_position(vector (bomber_man.get_x(),bomber_man.get_y()+5+this->get_perspective_zoom(),bomber_man.get_z()+5));
-        this->set_direction(vector (bomber_man.get_x(),0,bomber_man.get_z()));
-        this->set_up(vector(0,1,0));
+        this->set_position(vector3 (bomber_man.get_x(),bomber_man.get_y()+5+this->get_perspective_zoom(),bomber_man.get_z()+5));
+        this->set_direction(vector3 (bomber_man.get_x(),0,bomber_man.get_z()));
+        this->set_up(vector3(0,1,0));
         break;
     }
 }

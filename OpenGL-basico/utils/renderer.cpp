@@ -1,5 +1,6 @@
 #include "renderer.h"
 
+#include <iostream>
 #include <SDL_opengl.h>
 
 #include "../textures/texture.h"
@@ -11,6 +12,22 @@ void renderer::draw(const triangle& triangle)
     draw(triangle.get_b());
     draw(triangle.get_c());
     glEnd();
+}
+
+void renderer::draw(const entity& entity)
+{
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());
+    glBegin(GL_TRIANGLES);
+
+    for (auto& vertex : entity.get_vertices())
+    {
+        glTexCoord2f(vertex.tex_coords.get_x(), vertex.tex_coords.get_y());
+        draw(vertex.position);
+    }
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 
 void renderer::draw(const grid& grid, const texture& texture)
@@ -98,7 +115,14 @@ void renderer::draw(const square& square, const texture& texture)
     glDisable(GL_TEXTURE_2D);
 }
 
-void renderer::draw(const vector& v)
+void renderer::draw(const vertex& v)
+{
+    glTexCoord2f(v.tex_coords.get_x(), v.tex_coords.get_y());
+    glVertex3f(v.position.get_x(), v.position.get_y(), v.position.get_z());
+    glNormal3f(v.normal.get_x(), v.normal.get_y(), v.normal.get_z());
+}
+
+void renderer::draw(const vector3& v)
 {
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }

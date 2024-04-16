@@ -7,9 +7,9 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
-#include "OpenGL-basico/geometry//vector.h"
+#include "OpenGL-basico/entities/player.h"
+#include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
-#include "OpenGL-basico/geometry/square.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/camera.h"
@@ -44,22 +44,18 @@ int main(int argc, char* argv[])
     clock::init();
     SDL_Event event;
 
-    auto bomber_man = vector(0, 0, 5);
+    auto bomber_man = vector3(0, 0, 5);
     auto camera = ::camera(0, 0, 5);
 
-    const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
-    const auto floor = grid(10, 10, 1, vector(0, 1, 0));
+    auto displacement = vector3(0, 0, 0);
 
-    const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
-    const auto some_block = cube(1, vector(0, 0, 0));
+    const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
+    const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
 
-    /*SDL_SetWindowGrab(win, SDL_TRUE);
-    SDL_ShowCursor(SDL_TRUE);//SDL_FALSE PARA OCULTAR MOUSE*/
+    const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
+    const auto some_block = cube(1, vector3(0, 0, 0));
 
-    
-    //const auto pause_texture = texture_loader::load_texture("../assets/pausa.png");
-    //const auto pantallaPausa = square(vector(-320,-240,1), vector(320,-240,1), vector(320,240,1), vector(-320,240,1));
-   
+    const auto bomberman = player();
     
     do
     {
@@ -71,9 +67,8 @@ int main(int argc, char* argv[])
               camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
               camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
         renderer::draw(floor, grass_texture);
-        renderer::draw(some_block, bricks_texture);
-        
-        //renderer::draw(pantallaPausa, pause_texture);
+        // renderer::draw(some_block, bricks_texture);
+        renderer::draw(bomberman);
 
         //BOMBERMAN MOMENTANEO
         glPointSize(20);
