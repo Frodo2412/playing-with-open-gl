@@ -12,10 +12,9 @@ class entity
     texture texture_;
 
 public:
-    explicit entity(const std::string& file_path, const char* texture_path)
+    explicit entity(const std::string& file_path, const char* texture_path):
+        vertices_(model_loader::load_model(file_path)), texture_(texture_loader::load_texture(texture_path))
     {
-        vertices_ = model_loader::load_model(file_path);
-        texture_ = texture_loader::load_texture(texture_path);
     }
 
     std::vector<vertex> get_vertices() const;
