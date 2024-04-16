@@ -56,7 +56,7 @@ public:
     void zoom_out(float amount);
     
     void rotate(float x_offset, float y_offset);
-    
-    void refresh(vector3 bomber_man);
+
+    void toggle_mode();
     
 };

@@ -1,5 +1,7 @@
 #include "camera.h"
 
+#include <iostream>
+
 vector3 camera::get_position() const
 {
     return position_;
@@ -32,15 +34,33 @@ float camera::get_perspective_zoom()
 
 void camera::move(const vector3& displacement)
 {
-    const auto forward = (direction_ - position_).normalize();
+    switch (mode_)
+    {
+    case first:
+        {
+            const auto forward = (direction_ - position_).normalize();
 
-    const auto forward_movement = forward * displacement.get_z();
-    const auto side_movement = up_ * forward * displacement.get_x();
+            const auto forward_movement = forward * displacement.get_z();
+            const auto side_movement = up_ * forward * displacement.get_x();
 
-    const auto movement = forward_movement + side_movement;
+            const auto movement = forward_movement + side_movement;
 
-    position_ += movement;
-    direction_ += movement;
+            position_ += movement;
+            direction_ += movement;
+        }
+        break;
+    case original:
+        this->set_position(vector3(0, 10, 0));
+        this->set_direction(vector3(0, 0, 0));
+        this->set_up(vector3(0, 0, -1));
+        break;
+    case perspective:
+        position_ += vector3(displacement.get_x(), displacement.get_y() + 5 + this->get_perspective_zoom(),
+                             displacement.get_z() + 5);
+        direction_ += vector3(displacement.get_x(), 0, displacement.get_z());
+        direction_ += vector3(0, 1, 0);
+        break;
+    }
 }
 
 void camera::zoom_in(const float amount)
@@ -66,6 +86,25 @@ void camera::rotate(const float x_offset, const float y_offset)
         direction_.set_y(-90.0f);
     else
         direction_.set_y(direction_.get_y() + y_offset * sensitivity);
+}
+
+void camera::toggle_mode()
+{
+    switch (mode_)
+    {
+    case first:
+        std::cout << "CAMERA CHANGED TO ORIGINAL\n";
+        mode_ = original;
+        break;
+    case original:
+        std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
+        mode_ = perspective;
+        break;
+    case perspective:
+        std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
+        mode_ = first;
+        break;
+    }
 }
 
 void camera::set_position(vector3 pos)
@@ -97,29 +136,3 @@ void camera::set_perspective_zoom(float perspective_zoom)
 {
     perspective_zoom_ = perspective_zoom;
 }
-
-
-void camera::refresh(vector3 bomber_man)
-{
-    switch (this->get_mode())
-    {
-    case CameraMode::first:
-        if (!this->get_move_camera_first())
-        {
-            this->set_direction(vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()-5));
-        }
-        this->move(bomber_man);
-        break;
-    case CameraMode::original:
-        this->set_position(vector3 (0,10,0));
-        this->set_direction(vector3 (0,0,0));
-        this->set_up(vector3(0,0,-1));
-        break;
-    case CameraMode::perspective:
-        this->set_position(vector3 (bomber_man.get_x(),bomber_man.get_y()+5+this->get_perspective_zoom(),bomber_man.get_z()+5));
-        this->set_direction(vector3 (bomber_man.get_x(),0,bomber_man.get_z()));
-        this->set_up(vector3(0,1,0));
-        break;
-    }
-}
-

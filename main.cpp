@@ -132,21 +132,8 @@ int main(int argc, char* argv[])
                     displacement.set_z(-0.1f * elapsed_time);
                     break;
                 case SDLK_v:
-                    switch (camera.get_mode())
-                    {
-                    case CameraMode::first:
-                        std::cout << "CAMERA CHANGED TO ORIGINAL\n";
-                        camera.set_mode(CameraMode::original);
-                        break;
-                    case CameraMode::original:
-                        std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
-                        camera.set_mode(CameraMode::perspective);
-                        break;
-                    case CameraMode::perspective:
-                        std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
-                        camera.set_mode(CameraMode::first);
-                        break;
-                    }
+                    camera.toggle_mode();
+                    break;
                 case SDLK_p:
                     std::cout << "PAUSE\n";
                     clock::toggle_pause();
