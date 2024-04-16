@@ -62,7 +62,9 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
 
-        camera.refresh(bomber_man);
+        bomber_man += displacement;
+        camera.refresh(displacement);
+        displacement.reset();
         gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
                   camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
                   camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
@@ -115,19 +117,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                     std::cout << "LEFT\n";
-                    bomber_man.set_x(bomber_man.get_x() - 0.1f * elapsed_time);
+                    displacement.set_x(0.1f * elapsed_time);
                     break;
                 case SDLK_d:
                     std::cout << "RIGHT\n";
-                    bomber_man.set_x(bomber_man.get_x() + 0.1f * elapsed_time);
+                    displacement.set_x(-0.1f * elapsed_time);
                     break;
                 case SDLK_w:
                     std::cout << "UP\n";
-                    bomber_man.set_z(bomber_man.get_z() - 0.1f * elapsed_time);
+                    displacement.set_z(0.1f * elapsed_time);
                     break;
                 case SDLK_s:
                     std::cout << "DOWN\n";
-                    bomber_man.set_z(bomber_man.get_z() + 0.1f * elapsed_time);
+                    displacement.set_z(-0.1f * elapsed_time);
                     break;
                 case SDLK_v:
                     switch (camera.get_mode())
