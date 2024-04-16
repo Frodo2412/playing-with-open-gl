@@ -9,6 +9,7 @@
 
 #include "OpenGL-basico/geometry//vector.h"
 #include "OpenGL-basico/geometry/grid.h"
+#include "OpenGL-basico/geometry/square.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/camera.h"
@@ -40,7 +41,6 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
-    
     clock::init();
     SDL_Event event;
 
@@ -55,6 +55,11 @@ int main(int argc, char* argv[])
 
     /*SDL_SetWindowGrab(win, SDL_TRUE);
     SDL_ShowCursor(SDL_TRUE);//SDL_FALSE PARA OCULTAR MOUSE*/
+
+    
+    //const auto pause_texture = texture_loader::load_texture("../assets/pausa.png");
+    //const auto pantallaPausa = square(vector(-320,-240,1), vector(320,-240,1), vector(320,240,1), vector(-320,240,1));
+   
     
     do
     {
@@ -67,6 +72,8 @@ int main(int argc, char* argv[])
               camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
+        
+        //renderer::draw(pantallaPausa, pause_texture);
 
         //BOMBERMAN MOMENTANEO
         glPointSize(20);
@@ -74,9 +81,11 @@ int main(int argc, char* argv[])
             glColor3f(1,0,0);
             glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
         glEnd();
+      
+        float elapsed_time = static_cast<float>(clock::get_ticks());
         
         //MANEJO DE EVENTOS
-        while (SDL_PollEvent(&event))
+        while (SDL_PollEvent(&event) )
         {
             switch (event.type)
             {
@@ -89,20 +98,22 @@ int main(int argc, char* argv[])
                 else camera.zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
+                if (event.button.button == SDL_BUTTON_LEFT)
                 {
-                    if (event.button.button == SDL_BUTTON_LEFT)
-                    {
-                        float x_offset = static_cast<float>(event.motion.xrel);
-                        float y_offset = -static_cast<float>(event.motion.yrel);
-                        std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                        camera.rotate(x_offset, y_offset);
-                        camera.set_move_camera_first(true);
-                    } else
-                    {
-                        camera.set_move_camera_first(false);
-                    }
-                    break;
+                    float x_offset = static_cast<float>(event.motion.xrel);
+                    float y_offset = -static_cast<float>(event.motion.yrel);
+                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                    camera.rotate(x_offset, y_offset);
+                    camera.set_move_camera_first(true);
+                } else
+                {
+                    camera.set_move_camera_first(false);
                 }
+                if (event.wheel.y > 0)
+                    camera.zoom_in(0.1f);
+                else
+                    camera.zoom_out(0.1f);
+                break;
             case SDL_QUIT:
                 fin = true;
                 break;
@@ -141,16 +152,19 @@ int main(int argc, char* argv[])
                             camera.set_mode(CameraMode::first);
                             break;
                     }
-                    break;
+                case SDLK_p:
+                        std::cout << "PAUSE\n";
+                        clock::toggle_pause();
+                        break;
                 default: break;
                 }
             case SDL_KEYUP:
                 switch (event.key.keysym.sym)
                 {
-                case SDLK_ESCAPE:
-                    fin = true;
+            case SDLK_q:
+                fin = true;
                     break;
-                default: break;
+            default: break;
                 }
             default: break;
             }
