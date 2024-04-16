@@ -53,8 +53,8 @@ int main(int argc, char* argv[])
     const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
     const auto some_block = cube(1, vector(0, 0, 0));
 
-    SDL_SetWindowGrab(win, SDL_TRUE);
-    SDL_ShowCursor(SDL_TRUE);//SDL_FALSE PARA OCULTAR MOUSE
+    /*SDL_SetWindowGrab(win, SDL_TRUE);
+    SDL_ShowCursor(SDL_TRUE);//SDL_FALSE PARA OCULTAR MOUSE*/
     
     do
     {
