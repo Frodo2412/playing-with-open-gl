@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
         glLoadIdentity();
 
         bomber_man += displacement;
-        camera.refresh(displacement);
+        camera.move(displacement);
         displacement.reset();
         gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
                   camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
