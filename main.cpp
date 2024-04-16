@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
-
+    bool move_camera_first = false;
+    
     clock::init();
     SDL_Event event;
 
@@ -55,9 +56,6 @@ int main(int argc, char* argv[])
     CameraMode cam_mode = CameraMode::first;
     float perspective_zoom = 0;
     auto camera = ::camera(0, 0, 5);
-    auto camera_special = ::camera(0, 0, 5);
-
-    auto displacement = vector(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector(0, 1, 0));
@@ -75,27 +73,30 @@ int main(int argc, char* argv[])
         switch (cam_mode)
         {
             case CameraMode::first:
-                camera.move(displacement);
+                if (!move_camera_first)
+                {
+                    camera.set_direction(vector(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()-5));
+                }
+                camera.set_position(vector(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z()));
                 gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
                       camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
                       camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
-                displacement.reset();
                 break;
             case CameraMode::original:
-                camera_special.set_position(vector (0,10,0));
-                camera_special.set_direction(vector (0,0,0));
-                camera_special.set_up(vector(0,0,-1));
-                gluLookAt(camera_special.get_position().get_x(), camera_special.get_position().get_y(), camera_special.get_position().get_z(),
-                          camera_special.get_direction().get_x(), camera_special.get_direction().get_y(), camera_special.get_direction().get_z(),
-                          camera_special.get_up().get_x(), camera_special.get_up().get_y(), camera_special.get_up().get_z());
+                camera.set_position(vector (0,10,0));
+                camera.set_direction(vector (0,0,0));
+                camera.set_up(vector(0,0,-1));
+                gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
+                          camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                          camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
                 break;
             case CameraMode::perspective:
-                camera_special.set_position(vector (bomber_man.get_x(),bomber_man.get_y()+5+perspective_zoom,bomber_man.get_z()+5));
-                camera_special.set_direction(vector (bomber_man.get_x(),0,bomber_man.get_z()));
-                camera_special.set_up(vector(0,1,0));
-                gluLookAt(camera_special.get_position().get_x(), camera_special.get_position().get_y(), camera_special.get_position().get_z(),
-                          camera_special.get_direction().get_x(), camera_special.get_direction().get_y(), camera_special.get_direction().get_z(),
-                          camera_special.get_up().get_x(), camera_special.get_up().get_y(), camera_special.get_up().get_z());
+                camera.set_position(vector (bomber_man.get_x(),bomber_man.get_y()+5+perspective_zoom,bomber_man.get_z()+5));
+                camera.set_direction(vector (bomber_man.get_x(),0,bomber_man.get_z()));
+                camera.set_up(vector(0,1,0));
+                gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
+                          camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
+                          camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
                 break;
         }
 
@@ -124,10 +125,17 @@ int main(int argc, char* argv[])
                 break;
             case SDL_MOUSEMOTION:
                 {
-                    float x_offset = static_cast<float>(event.motion.xrel);
-                    float y_offset = -static_cast<float>(event.motion.yrel);
-                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                    camera.rotate(x_offset, y_offset);
+                    if (event.button.button == SDL_BUTTON_LEFT)
+                    {
+                        float x_offset = static_cast<float>(event.motion.xrel);
+                        float y_offset = -static_cast<float>(event.motion.yrel);
+                        std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                        camera.rotate(x_offset, y_offset);
+                        move_camera_first = true;
+                    } else
+                    {
+                        move_camera_first = false;
+                    }
                     break;
                 }
             case SDL_QUIT:
@@ -138,27 +146,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                     std::cout << "LEFT\n";
-                    displacement.set_x(0.1f);
-                    if (cam_mode != CameraMode::first)
-                        bomber_man.set_x(bomber_man.get_x() - 0.1f);
+                    bomber_man.set_x(bomber_man.get_x() - 0.1f);
                     break;
                 case SDLK_d:
                     std::cout << "RIGHT\n";
-                    displacement.set_x(-0.1f);
-                    if (cam_mode != CameraMode::first)
-                        bomber_man.set_x(bomber_man.get_x() + 0.1f);
+                    bomber_man.set_x(bomber_man.get_x() + 0.1f);
                     break;
                 case SDLK_w:
                     std::cout << "UP\n";
-                    displacement.set_z(0.1f);
-                    if (cam_mode != CameraMode::first)
-                        bomber_man.set_z(bomber_man.get_z() - 0.1f);
+                    bomber_man.set_z(bomber_man.get_z() - 0.1f);
                     break;
                 case SDLK_s:
                     std::cout << "DOWN\n";
-                    displacement.set_z(-0.1f);
-                    if (cam_mode != CameraMode::first)
-                        bomber_man.set_z(bomber_man.get_z() + 0.1f);
+                    bomber_man.set_z(bomber_man.get_z() + 0.1f);
                     break;
                 case SDLK_v:
                     switch (cam_mode)
@@ -166,7 +166,6 @@ int main(int argc, char* argv[])
                         case CameraMode::first:
                             std::cout << "CAMERA CHANGED TO ORIGINAL\n";
                             cam_mode = CameraMode::original;
-                            bomber_man = camera.get_position();
                             break;
                         case CameraMode::original:
                             std::cout << "CAMERA CHANGED TO PERSPECTIVE\n";
@@ -175,7 +174,6 @@ int main(int argc, char* argv[])
                         case CameraMode::perspective:
                             std::cout << "CAMERA CHANGED TO FIRST PERSON\n";
                             cam_mode = CameraMode::first;
-                            camera.set_position(bomber_man);
                             break;
                     }
                     break;
