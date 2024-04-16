@@ -9,7 +9,7 @@ void clock::init()
 
 void clock::toggle_pause()
 {
-    instance_->is_pause_ = !(instance_->is_pause_);
+    instance_->is_pause_ = !instance_->is_pause_;
 }
 
 
