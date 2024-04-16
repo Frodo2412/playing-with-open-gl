@@ -93,6 +93,28 @@ void renderer::draw(const cube& block, const texture& texture)
     glDisable(GL_TEXTURE_2D);
 }
 
+void renderer::draw(const square& square, const texture& texture)
+{
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
+    glBegin(GL_QUADS);
+    
+    glTexCoord2f(0.0f, 0.0f); 
+    glVertex3f(square.get_a().get_x(), square.get_a().get_y(), square.get_a().get_z());
+    
+    glTexCoord2f(1.0f, 0.0f);  
+    glVertex3f(square.get_b().get_x(), square.get_b().get_y(), square.get_b().get_z());
+
+    glTexCoord2f(1.0f, 1.0f); 
+    glVertex3f(square.get_c().get_x(), square.get_c().get_y(), square.get_c().get_z());
+    
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(square.get_d().get_x(), square.get_d().get_y(), square.get_d().get_z());
+    
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 void renderer::draw(const vertex& v)
 {
     glTexCoord2f(v.tex_coords.get_x(), v.tex_coords.get_y());

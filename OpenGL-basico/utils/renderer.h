@@ -17,4 +17,5 @@ public:
     static void draw(const vector3& v);
     static void draw(const triangle& triangle);
     static void draw(const entity& entity);
+    static void draw(const square&, const texture& texture);
 };
