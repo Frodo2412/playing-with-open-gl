@@ -17,7 +17,7 @@ vector3 camera::get_up() const
     return up_;
 }
 
-CameraMode camera::get_mode()
+camera_mode camera::get_mode()
 {
     return mode_;
 }
@@ -99,12 +99,12 @@ void camera::refresh(vector3 bomber_man)
         this->direction_ = vector3(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
         this->up_ = vector3(0, 1, 0);
         break;
-    case CameraMode::original:
+    case camera_mode::original:
         this->position_ = vector3(0, 10, 0);
         this->direction_ = vector3(0, 0, 0);
         this->up_ = vector3(0, 0, -1);
         break;
-    case CameraMode::perspective:
+    case camera_mode::perspective:
         this->position_ = vector3(bomber_man.get_x(), bomber_man.get_y() + 5 + this->get_perspective_zoom(),
                                   bomber_man.get_z() + 5);
         this->direction_ = vector3(bomber_man.get_x(), 0, bomber_man.get_z());

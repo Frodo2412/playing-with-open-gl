@@ -1,7 +1,7 @@
 #pragma once
 #include "../geometry/vector3.h"
 
-enum CameraMode
+enum camera_mode
 {
     first,
     original,
@@ -11,28 +11,28 @@ enum CameraMode
 class camera
 {
     vector3 position_, direction_, up_;
-    CameraMode mode_;
+    camera_mode mode_;
     float perspective_zoom_;
 
 public:
     explicit camera(const vector3& position, const vector3& direction, const vector3& up)
         : position_(position), direction_(direction), up_(up)
     {
-        mode_ = CameraMode::first;
+        mode_ = camera_mode::first;
         perspective_zoom_ = 0;
     }
 
     explicit camera(const float x, const float y, const float z)
         : position_(vector3(x, y, z)), direction_(vector3(0, 0, 0)), up_(vector3(0, 1, 0))
     {
-        mode_ = CameraMode::first;
+        mode_ = camera_mode::first;
         perspective_zoom_ = 0;
     }
 
     vector3 get_position() const;
     vector3 get_direction() const;
     vector3 get_up() const;
-    CameraMode get_mode();
+    camera_mode get_mode();
     
     float get_perspective_zoom();
     
