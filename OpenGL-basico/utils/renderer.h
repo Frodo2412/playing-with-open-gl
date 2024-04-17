@@ -1,6 +1,6 @@
 #pragma once
 
-#include "camera.h"
+#include "../camera/camera.h"
 #include "../entities/entity.h"
 #include "../geometry/cube.h"
 #include "../geometry/Triangle.h"
