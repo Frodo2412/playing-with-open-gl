@@ -3,18 +3,25 @@
 #include <iostream>
 #include <conio.h>
 #include <GL/glu.h>
-#include <assimp/Importer.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
 
+#include "OpenGL-basico/camera/camera.h"
+#include "OpenGL-basico/camera/camera_handler.h"
 #include "OpenGL-basico/entities/player.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
-#include "OpenGL-basico/utils/camera.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+
+void draw_camera()
+{
+    const auto camera = camera_handler::get_current_camera();
+    gluLookAt(camera->get_position().get_x(), camera->get_position().get_y(), camera->get_position().get_z(),
+              camera->get_direction().get_x(), camera->get_direction().get_y(),
+              camera->get_direction().get_z(),
+              camera->get_up().get_x(), camera->get_up().get_y(), camera->get_up().get_z());
+}
 
 int main(int argc, char* argv[])
 {
@@ -45,7 +52,7 @@ int main(int argc, char* argv[])
     SDL_Event event;
 
     auto bomber_man = vector3(0, 0, 5);
-    auto camera = ::camera(0, 0, 5);
+    // auto camera = ::camera(0, 0, 5);
 
     auto displacement = vector3(0, 0, 0);
 
@@ -63,11 +70,9 @@ int main(int argc, char* argv[])
         glLoadIdentity();
 
         bomber_man += displacement;
-        camera.move(displacement);
+        camera_handler::get_current_camera()->move(displacement);
         displacement.reset();
-        gluLookAt(camera.get_position().get_x(), camera.get_position().get_y(), camera.get_position().get_z(),
-                  camera.get_direction().get_x(), camera.get_direction().get_y(), camera.get_direction().get_z(),
-                  camera.get_up().get_x(), camera.get_up().get_y(), camera.get_up().get_z());
+        draw_camera();
         renderer::draw(floor, grass_texture);
         // renderer::draw(some_block, bricks_texture);
         renderer::draw(bomberman);
@@ -87,27 +92,27 @@ int main(int argc, char* argv[])
             switch (event.type)
             {
             case SDL_MOUSEWHEEL:
-                if (event.wheel.y > 0) camera.zoom_in(0.1f);
-                if ((event.wheel.y > 0 && camera.get_perspective_zoom() < 2) || (event.wheel.y < 0 && camera.
-                    get_perspective_zoom() > -5))
-                {
-                    camera.set_perspective_zoom(camera.get_perspective_zoom() + event.wheel.y * 0.20f);
-                }
-                else camera.zoom_out(0.1f);
+                // if (event.wheel.y > 0) camera.zoom_in(0.1f);
+                // if ((event.wheel.y > 0 && camera.get_perspective_zoom() < 2) || (event.wheel.y < 0 && camera.
+                //     get_perspective_zoom() > -5))
+                // {
+                //     camera.set_perspective_zoom(camera.get_perspective_zoom() + event.wheel.y * 0.20f);
+                // }
+                // else camera.zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
-                if (event.button.button == SDL_BUTTON_LEFT)
-                {
-                    float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
-                    float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
-                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                    camera.rotate(x_offset, y_offset);
-                    camera.set_move_camera_first(true);
-                }
-                else
-                {
-                    camera.set_move_camera_first(false);
-                }
+                // if (event.button.button == SDL_BUTTON_LEFT)
+                // {
+                //     float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
+                //     float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
+                //     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                //     camera.rotate(x_offset, y_offset);
+                //     camera.set_move_camera_first(true);
+                // }
+                // else
+                // {
+                //     camera.set_move_camera_first(false);
+                // }
                 break;
             case SDL_QUIT:
                 fin = true;
@@ -132,7 +137,7 @@ int main(int argc, char* argv[])
                     displacement.set_z(-0.1f * elapsed_time);
                     break;
                 case SDLK_v:
-                    camera.toggle_mode();
+                    camera_handler::toggle_current_camera();
                     break;
                 case SDLK_p:
                     std::cout << "PAUSE\n";
