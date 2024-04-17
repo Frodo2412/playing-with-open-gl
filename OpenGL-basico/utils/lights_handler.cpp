@@ -3,11 +3,12 @@
 #include "SDL_opengl.h"
 #include <GL/glu.h>
 
+
 lights_handler* lights_handler::instance_ = nullptr;
 
 lights_handler::lights_handler()
 {
-    position_ = vector(0, 0, 0);
+    position_ = vector3(0, 0, 0);
 }
 
 lights_handler* lights_handler::get_instance()
@@ -19,13 +20,13 @@ lights_handler* lights_handler::get_instance()
     return instance_;
 }
 
-void lights_handler::set_ligth(CameraMode mode, vector pos)
+void lights_handler::set_ligth(camera_mode mode, vector3 pos)
 {
     position_ = pos;
     mode_ = mode;
     switch (mode_)
     {
-    case CameraMode::first:
+    case camera_mode::first:
         //ILUMINACION PERSONAJE
             glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
@@ -36,7 +37,7 @@ void lights_handler::set_ligth(CameraMode mode, vector pos)
         glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
         glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0055f);
         break;
-    case CameraMode::original:
+    case camera_mode::top_down:
         //ILUMINACION GLOBAL
             glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
@@ -44,7 +45,7 @@ void lights_handler::set_ligth(CameraMode mode, vector pos)
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
         glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{0.f, 0.f, 0.f, 0.f});
         break;
-    case CameraMode::perspective:
+    case camera_mode::perspective:
         //ILUMINACION PERSONAJE
             glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);

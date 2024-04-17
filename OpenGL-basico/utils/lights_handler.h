@@ -1,23 +1,17 @@
 #pragma once
-#include "../geometry/vector.h"
-
-enum CameraMode
-{
-    first,
-    original,
-    perspective
-};
+#include "../geometry/vector3.h"
+#include "../camera/camera_handler.h"
 
 class lights_handler
 {
 private:
-    vector position_;
-    CameraMode mode_;
+    vector3 position_;
+    camera_mode mode_;
     static lights_handler* instance_;
     lights_handler();
 public:
     static lights_handler* get_instance();
-    void set_ligth(CameraMode mode, vector pos);
+    void set_ligth(camera_mode mode, vector3 pos);
 };
 
 

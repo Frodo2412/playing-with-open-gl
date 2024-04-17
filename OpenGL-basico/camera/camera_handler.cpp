@@ -40,3 +40,8 @@ void camera_handler::toggle_current_camera()
         break;
     }
 }
+
+camera_mode camera_handler::get_mode()
+{
+    return mode_;
+}

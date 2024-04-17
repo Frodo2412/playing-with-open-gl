@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -36,3 +35,6 @@
 ./Release/*
 ./OpenGL-basico/Debug/*
 ./OpenGL-basico/Release/*
+*.tlog
+*.xml
+*.pdb
