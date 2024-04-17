@@ -5,7 +5,7 @@
 *.slo
 *.lo
 *.o
-*.obj
+# *.obj para que se suban los modelos .obj
 
 # Precompiled Headers
 *.gch
@@ -37,3 +37,5 @@
 ./OpenGL-basico/Debug/*
 ./OpenGL-basico/Release/*
 *.tlog
+*.xml
+*.pdb

@@ -1,0 +1,19 @@
+Index: OpenGL-basico/utils/camera.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#include \"camera.h\"\r\n\r\nvector camera::get_position() const\r\n{\r\n    return position_;\r\n}\r\n\r\nvector camera::get_direction() const\r\n{\r\n    return direction_;\r\n}\r\n\r\nvector camera::get_up() const\r\n{\r\n    return up_;\r\n}\r\n\r\nvoid camera::move(const vector& displacement)\r\n{\r\n    const auto forward = (direction_ - position_).normalize();\r\n\r\n    const auto forward_movement = forward * displacement.get_z();\r\n    const auto side_movement = up_ * forward * displacement.get_x();\r\n\r\n    const auto movement = forward_movement + side_movement;\r\n\r\n    position_ += movement;\r\n    direction_ += movement;\r\n}\r\n\r\nvoid camera::zoom_in(const float amount)\r\n{\r\n    position_.set_z(position_.get_z() - amount);\r\n}\r\n\r\nvoid camera::zoom_out(const float amount)\r\n{\r\n    position_.set_z(position_.get_z() + amount);\r\n}\r\n\r\nvoid camera::rotate(const float x_offset, const float y_offset)\r\n{\r\n    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive\r\n\r\n    direction_.set_x(direction_.get_x() + x_offset * sensitivity);\r\n\r\n    // Clamp the vertical rotation to be between -90 and 90 degrees\r\n    if (direction_.get_y() - y_offset * sensitivity >= 90.0f)\r\n        direction_.set_y(90.0f);\r\n    else if (direction_.get_y() - y_offset * sensitivity <= -90.0f)\r\n        direction_.set_y(-90.0f);\r\n    else\r\n        direction_.set_y(direction_.get_y() + y_offset * sensitivity);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/OpenGL-basico/utils/camera.cpp b/OpenGL-basico/utils/camera.cpp
+--- a/OpenGL-basico/utils/camera.cpp	
++++ b/OpenGL-basico/utils/camera.cpp	
+@@ -40,7 +40,7 @@
+ 
+ void camera::rotate(const float x_offset, const float y_offset)
+ {
+-    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive
++    constexpr float sensitivity = 0.1f; // Adjust this value to make the camera rotation more or less sensitive
+ 
+     direction_.set_x(direction_.get_x() + x_offset * sensitivity);
+ 
