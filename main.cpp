@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
     auto bomber_man = vector3(0, 0, 5);
     // auto camera = ::camera(0, 0, 5);
-    
+
     auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
@@ -73,7 +73,8 @@ int main(int argc, char* argv[])
 
         bomber_man += displacement;
         camera_handler::get_current_camera()->move(displacement);
-        lights_handler::get_instance()->set_ligth(camera_handler::get_mode(), camera_handler::get_current_camera()->get_direction());
+        lights_handler::get_instance()->set_ligth(camera_handler::get_mode(),
+                                                  camera_handler::get_current_camera()->get_direction());
         displacement.reset();
         draw_camera();
         renderer::draw(floor, grass_texture);

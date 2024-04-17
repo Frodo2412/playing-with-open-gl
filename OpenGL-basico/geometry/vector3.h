@@ -43,5 +43,4 @@ public:
 
     static vector3 zero();
     void reset();
-    
 };
