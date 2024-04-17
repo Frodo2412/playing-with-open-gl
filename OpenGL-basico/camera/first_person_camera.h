@@ -4,6 +4,10 @@
 class first_person_camera final : public camera
 {
 public:
+    first_person_camera(const float x, const float y, const float z): camera(x, y, z)
+    {
+    }
+
     void move(const vector3& displacement) override;
     void rotate(float x_offset, float y_offset) override;
 

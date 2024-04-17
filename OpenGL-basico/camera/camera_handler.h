@@ -1,6 +1,13 @@
 #pragma once
 #include "first_person_camera.h"
 
+enum camera_mode
+{
+    first,
+    top_down,
+    perspective
+};
+
 class camera_handler
 {
     static camera_mode mode_;
@@ -10,8 +17,6 @@ class camera_handler
     static perspective_camera* perspective_instance_;
 
 public:
-
     static camera* get_current_camera();
     static void toggle_current_camera();
-    
 };

@@ -1,20 +1,19 @@
 #pragma once
 #include "../geometry/vector3.h"
 
-class perspective_camera;
-class top_down_camera;
-class first_person_camera;
-
-enum camera_mode
-{
-    first,
-    top_down,
-    perspective
-};
-
 class camera
 {
 protected:
+    explicit camera(const vector3& position, const vector3& direction, const vector3& up)
+        : position_(position), direction_(direction), up_(up)
+    {
+    }
+
+    explicit camera(const float x, const float y, const float z)
+        : position_(vector3(x, y, z)), direction_(vector3(0, 0, 0)), up_(vector3(0, 1, 0))
+    {
+    }
+
     vector3 position_, direction_, up_;
     ~camera();
 

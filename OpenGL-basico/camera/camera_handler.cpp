@@ -7,9 +7,9 @@
 
 camera_mode camera_handler::mode_ = first;
 
-first_person_camera* camera_handler::first_person_instance_ = new first_person_camera();
+first_person_camera* camera_handler::first_person_instance_ = new first_person_camera(0, 0, 5);
 top_down_camera* camera_handler::top_down_instance_ = new top_down_camera();
-perspective_camera* camera_handler::perspective_instance_ = new perspective_camera();
+perspective_camera* camera_handler::perspective_instance_ = new perspective_camera(vector3(0, 0, 5));
 
 camera* camera_handler::get_current_camera()
 {

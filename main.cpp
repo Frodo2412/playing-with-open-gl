@@ -92,28 +92,17 @@ int main(int argc, char* argv[])
             switch (event.type)
             {
             case SDL_MOUSEWHEEL:
-                // if (event.wheel.y > 0) camera.zoom_in(0.1f);
-                // if ((event.wheel.y > 0 && camera.get_perspective_zoom() < 2) || (event.wheel.y < 0 && camera.
-                //     get_perspective_zoom() > -5))
-                // {
-                //     camera.set_perspective_zoom(camera.get_perspective_zoom() + event.wheel.y * 0.20f);
-                // }
-                // else camera.zoom_out(0.1f);
+                if (event.wheel.y > 0) camera_handler::get_current_camera()->zoom_in(0.1f);
+                else camera_handler::get_current_camera()->zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
-                // if (event.button.button == SDL_BUTTON_LEFT)
-                // {
-                //     float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
-                //     float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
-                //     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                //     camera.rotate(x_offset, y_offset);
-                //     camera.set_move_camera_first(true);
-                // }
-                // else
-                // {
-                //     camera.set_move_camera_first(false);
-                // }
-                break;
+                {
+                    const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
+                    const float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
+                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                    camera_handler::get_current_camera()->rotate(x_offset, y_offset);
+                    break;
+                }
             case SDL_QUIT:
                 fin = true;
                 break;
