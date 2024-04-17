@@ -1,5 +1,7 @@
 #pragma once
 #include "first_person_camera.h"
+#include "perspective_camera.h"
+#include "top_down_camera.h"
 
 enum camera_mode
 {

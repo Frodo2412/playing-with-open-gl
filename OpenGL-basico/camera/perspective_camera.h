@@ -4,7 +4,7 @@
 class perspective_camera final : public camera
 {
 public:
-    explicit perspective_camera(const vector3 player): camera(
+    explicit perspective_camera(const vector3& player): camera(
         player, vector3(player.get_x(), player.get_y(), player.get_z() + 5), vector3(0, 1, 0))
     {
     }
