@@ -166,6 +166,8 @@
     </ClCompile>
     <ClCompile Include="utils\camera.cpp" />
     <ClCompile Include="utils\clock.cpp" />
+    <ClCompile Include="utils\gamehud.cpp" />
+    <ClCompile Include="utils\number.cpp" />
     <ClCompile Include="utils\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +180,8 @@
     <ClInclude Include="textures\texture_loader.h" />
     <ClInclude Include="utils\camera.h" />
     <ClInclude Include="utils\clock.h" />
+    <ClInclude Include="utils\gamehud.h" />
+    <ClInclude Include="utils\number.h" />
     <ClInclude Include="utils\renderer.h" />
   </ItemGroup>
   <ItemGroup>

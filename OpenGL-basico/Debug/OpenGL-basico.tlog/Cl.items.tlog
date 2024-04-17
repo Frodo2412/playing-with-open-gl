@@ -8,4 +8,6 @@ C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\textures\textu
 C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\textures\texture_loader.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\texture_loader.obj
 C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\utils\camera.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\camera.obj
 C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\utils\clock.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\clock.obj
+C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\utils\gamehud.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\gamehud.obj
+C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\utils\number.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\number.obj
 C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\utils\renderer.cpp;C:\Users\Usuario\RiderProjects\playing-with-open-gl\OpenGL-basico\Debug\renderer.obj

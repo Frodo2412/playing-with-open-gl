@@ -15,6 +15,7 @@
 #include "OpenGL-basico/utils/camera.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+#include "OpenGL-basico/utils/gamehud.h"
 
 int main(int argc, char* argv[])
 {
@@ -51,14 +52,12 @@ int main(int argc, char* argv[])
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector(0, 1, 0));
 
+    const square contenedor = square(vector(-0.8, -0.9, 0.0), vector(0.8, -0.9, 0.0), vector(0.8, -0.6, 0.0), vector(-0.8, -0.6, 0.0));
     const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
     const auto some_block = cube(1, vector(0, 0, 0));
 
     
-    //const auto pause_texture = texture_loader::load_texture("../assets/pausa.png");
-    //const auto pantallaPausa = square(vector(-320,-240,1), vector(320,-240,1), vector(320,240,1), vector(-320,240,1));
-    
-    
+    gamehud prueba = gamehud();
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -72,11 +71,37 @@ int main(int argc, char* argv[])
                   camera_direction.get_x(), camera_direction.get_y(), camera_direction.get_z(),
                   camera_up.get_x(), camera_up.get_y(), camera_up.get_z());
         displacement.reset();
+        
+        // Limpiar el búfer de color y el búfer de profundidad
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Configurar la proyección ortogonal
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // Especifico la proyección: ortogonal.
+
+        // Configurar la matriz de modelo-vista
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+
+        // Dibujar el contenedor del HUD
+        Uint32 tiempo = clock::get_total_time();
+        prueba.drop_time(tiempo);
+        renderer::draw(contenedor, grass_texture);
+
+        // Restaurar la matriz de modelo-vista
+        glPopMatrix();
+
+        // Restaurar la matriz de proyección
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+
+        // Dibujar el resto de la escena
+        glMatrixMode(GL_MODELVIEW);
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
-        
-        //renderer::draw(pantallaPausa, pause_texture);
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
         
@@ -87,9 +112,9 @@ int main(int argc, char* argv[])
             {
             case SDL_MOUSEWHEEL:
                     if (event.wheel.y > 0)
-                        camera.zoom_in(0.1f);
+                        camera.zoom_in(0.1f * elapsed_time);
                     else
-                        camera.zoom_out(0.1f);
+                        camera.zoom_out(0.1f * elapsed_time);
                 break;
             case SDL_MOUSEMOTION:
                 {

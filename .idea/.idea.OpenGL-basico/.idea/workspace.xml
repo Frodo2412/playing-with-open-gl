@@ -8,7 +8,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="pausa 2">
+      <change afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/cero.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/cinco.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/cuatro.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/dos.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/nueve.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/ocho.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/seis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/siete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/tres.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/two_dots.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/numbers/uno.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/Cl.items.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/Cl.items.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.secondary.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.secondary.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/clock.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/clock.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/renderer.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/renderer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,28 +57,28 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "sofiieww"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sofiieww&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Frodo2412/playing-with-open-gl.git",
-    "accountId": "e10b5594-aafd-4f68-9565-a1d3785b34df"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Frodo2412/playing-with-open-gl.git&quot;,
+    &quot;accountId&quot;: &quot;e10b5594-aafd-4f68-9565-a1d3785b34df&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "Frodo2412",
-    "repository": "playing-with-open-gl"
+    &quot;owner&quot;: &quot;Frodo2412&quot;,
+    &quot;repository&quot;: &quot;playing-with-open-gl&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Freeimage/FreeImage.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_events.h" root0="SKIP_HIGHLIGHTING" />
@@ -75,7 +103,7 @@
     "C++ Project.OpenGL-basico.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "#20 on pausa",
+    "git-widget-placeholder": "gamehud",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
