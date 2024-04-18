@@ -3,8 +3,6 @@
 #include "renderer.h"
 #include "number.h"
 
- gamehud::gamehud(){};
-
 void gamehud::drop_time(Uint32 milisecond)
 {
     Uint32 seconds = (milisecond / 1000);
@@ -16,14 +14,13 @@ void gamehud::drop_time(Uint32 milisecond)
     Uint32 seconds_d = (seconds / 10);
     Uint32 seconds_u = (seconds_d % 10);
 
-
-    const texture prueba = texture_loader::load_texture("../assets/two_dots.jpg");
+    renderer::draw(score_, uno_);
     // probando carga de imagenes
-    renderer::draw(espacio_, number::two()->get_texture());
-    renderer::draw(minutos_decena_, prueba);
-    renderer::draw(minutos_unidades_, prueba);
-    renderer::draw(segundos_decena_, prueba);
-    renderer::draw(segundos_unidades_, prueba);
+    renderer::draw(espacio_, two_dots_);
+    renderer::draw(minutos_decena_, uno_);
+    renderer::draw(minutos_unidades_, uno_);
+    renderer::draw(segundos_decena_, cero_);
+    renderer::draw(segundos_unidades_, cero_);
 
     //std::cout << minutes_d << minutes_u << ":" << seconds_d << seconds_u <<  " transcurridos." << "\n";
     

@@ -187,10 +187,16 @@
   <ItemGroup>
     <Content Include="..\assets\bomberman\source\0d5d63397dc34008a601d00735583069.fbx.fbx" />
     <Content Include="..\assets\bomberman\textures\internal_ground_ao_texture.jpeg" />
-    <Content Include="..\assets\numbers\cero.jpg" />
-    <Content Include="..\assets\numbers\dos.jpg" />
-    <Content Include="..\assets\numbers\tres.jpg" />
-    <Content Include="..\assets\numbers\uno.jpg" />
+    <Content Include="..\assets\numbers\cero.png" />
+    <Content Include="..\assets\numbers\cinco.png" />
+    <Content Include="..\assets\numbers\cuatro.png" />
+    <Content Include="..\assets\numbers\dos.png" />
+    <Content Include="..\assets\numbers\nueve.png" />
+    <Content Include="..\assets\numbers\ocho.png" />
+    <Content Include="..\assets\numbers\seis.png" />
+    <Content Include="..\assets\numbers\siete.png" />
+    <Content Include="..\assets\numbers\tres.png" />
+    <Content Include="..\assets\numbers\uno.png" />
     <Content Include="..\assets\source\bomberman.fbx" />
     <Content Include="..\assets\textures\bomberman.jpeg" />
     <Content Include="..\assets\two_dots.jpg" />
