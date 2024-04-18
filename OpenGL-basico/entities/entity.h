@@ -26,4 +26,6 @@ public:
     texture get_texture() const;
 
     vector3 get_position() const;
+
+    void move(const vector3& displacement);
 };

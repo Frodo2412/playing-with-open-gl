@@ -14,3 +14,8 @@ vector3 entity::get_position() const
 {
     return position_;
 }
+
+void entity::move(const vector3& displacement)
+{
+    position_ += displacement;
+}
