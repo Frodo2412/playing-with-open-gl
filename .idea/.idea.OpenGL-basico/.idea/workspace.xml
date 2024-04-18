@@ -7,9 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="pausa 2">
+    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="fix: add model">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,38 +29,63 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "sofiieww"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sofiieww&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Frodo2412/playing-with-open-gl.git",
-    "accountId": "e10b5594-aafd-4f68-9565-a1d3785b34df"
+}</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Frodo2412/playing-with-open-gl.git&quot;,
+    &quot;accountId&quot;: &quot;2da80b42-5e51-46eb-ac6a-76d04855290d&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "Frodo2412",
-    "repository": "playing-with-open-gl"
+    &quot;owner&quot;: &quot;Frodo2412&quot;,
+    &quot;repository&quot;: &quot;playing-with-open-gl&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files (x86)/Windows Kits/10/Include/10.0.22621.0/um/gl/GL.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include/list" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include/vector" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assimp/include/assimp/mesh.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assimp/include/assimp/postprocess.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assimp/include/assimp/scene.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Freeimage/FreeImage.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/camera/camera.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/camera/camera.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/geometry/cube.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/geometry/grid.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bruno/RiderProjects/playing-with-open-gl/OpenGL-basico/geometry/vector3.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/textures/texture.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bruno/RiderProjects/playing-with-open-gl/OpenGL-basico/textures/texture.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/utils/renderer.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/utils/renderer.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_events.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_opengl.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_stdinc.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_timer.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -75,7 +100,7 @@
     "C++ Project.OpenGL-basico.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "#20 on pausa",
+    "git-widget-placeholder": "clean-up-project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,9 +110,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\Usuario\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Usuario\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Usuario\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\Bruno\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Bruno\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Bruno\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
@@ -135,6 +160,8 @@
       <workItem from="1711752497809" duration="10537000" />
       <workItem from="1713010209889" duration="299000" />
       <workItem from="1713129673944" duration="5931000" />
+      <workItem from="1713438296910" duration="785000" />
+      <workItem from="1713477532581" duration="647000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -224,7 +251,87 @@
       <option name="project" value="LOCAL" />
       <updated>1713135179124</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix: pause working">
+      <option name="closed" value="true" />
+      <created>1713307582808</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713307582808</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: camera movement">
+      <option name="closed" value="true" />
+      <created>1713307850621</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713307850621</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: camera movemetn">
+      <option name="closed" value="true" />
+      <created>1713308216183</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713308216183</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: movement really works now">
+      <option name="closed" value="true" />
+      <created>1713308393198</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713308393198</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix: first_person works now but perspective doesn't">
+      <option name="closed" value="true" />
+      <created>1713309167748</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713309167748</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: Actually using inheritance for something good">
+      <option name="closed" value="true" />
+      <created>1713315422406</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713315422406</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: constructors">
+      <option name="closed" value="true" />
+      <created>1713317405956</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713317405956</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: position, direction and stuff on the entity">
+      <option name="closed" value="true" />
+      <created>1713438869157</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713438869157</updated>
+    </task>
+    <task id="LOCAL-00020" summary="cleanup project">
+      <option name="closed" value="true" />
+      <created>1713478089280</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713478089280</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fix: add model">
+      <option name="closed" value="true" />
+      <created>1713478099965</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713478099965</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +352,16 @@
     <MESSAGE value="feat: failed attempt at moving" />
     <MESSAGE value="pausa" />
     <MESSAGE value="pausa 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="pausa 2" />
+    <MESSAGE value="fix: pause working" />
+    <MESSAGE value="fix: camera movement" />
+    <MESSAGE value="fix: camera movemetn" />
+    <MESSAGE value="fix: movement really works now" />
+    <MESSAGE value="fix: first_person works now but perspective doesn't" />
+    <MESSAGE value="feat: Actually using inheritance for something good" />
+    <MESSAGE value="fix: constructors" />
+    <MESSAGE value="feat: position, direction and stuff on the entity" />
+    <MESSAGE value="cleanup project" />
+    <MESSAGE value="fix: add model" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add model" />
   </component>
 </project>
