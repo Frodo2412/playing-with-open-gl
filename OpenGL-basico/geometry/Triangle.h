@@ -28,5 +28,5 @@ public:
     void set_c(const vector3& new_c);
 
     void move(const vector3& other);
-    void move_left(float distance);
+    void move_left(const float distance);
 };
