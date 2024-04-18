@@ -1,13 +1,14 @@
 #pragma once
 #include "camera.h"
-#include "../entities/entity.h"
+#include "../entities/player.h"
+
 
 class first_person_camera final : public camera
 {
-    entity* player_;
+    player* player_;
 
 public:
-    first_person_camera(const float x, const float y, const float z, entity* player): camera(x, y, z), player_(player)
+    first_person_camera(const float x, const float y, const float z, player* player): camera(x, y, z), player_(player)
     {
     }
 
