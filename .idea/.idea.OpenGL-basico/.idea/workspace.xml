@@ -7,9 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="pausa 2">
+    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.Build.CppClean.log" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.Build.CppClean.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,19 +53,18 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Freeimage/FreeImage.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenGL-basico/utils/lights_handler.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_events.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/SDL2-2.0.12/include/SDL_opengl.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2eNkbobzpfafTIx2X7i5iyLrYH1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -75,7 +74,7 @@
     &quot;C++ Project.OpenGL-basico.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#20 on pausa&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;luz&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
