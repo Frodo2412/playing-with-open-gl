@@ -22,6 +22,6 @@ texture texture_loader::load_texture(const char* file_path)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, static_cast<int>(image_width),
                  static_cast<int>(image_height), 0, GL_BGR, GL_UNSIGNED_BYTE, image_data);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    
+
     return texture(texture_id);
 }
