@@ -19,7 +19,7 @@ lights_handler* lights_handler::get_instance()
     return instance_;
 }
 
-void lights_handler::set_ligth(camera_mode mode, vector3 pos)
+void lights_handler::set_light(camera_mode mode, vector3 pos)
 {
     position_ = pos;
     mode_ = mode;
