@@ -55,9 +55,6 @@ int main(int argc, char* argv[])
     gamehud::init();
     SDL_Event event;
 
-    auto bomber_man = vector3(0, 0, 5);
-    // auto camera = ::camera(0, 0, 5);
-
     auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
@@ -100,20 +97,12 @@ int main(int argc, char* argv[])
         // Dibujar el resto de la escena
         glMatrixMode(GL_MODELVIEW);
         
-        bomber_man += displacement;
         camera_handler::get_current_camera()->move(displacement);
         displacement.reset();
         draw_camera();
         renderer::draw(floor, grass_texture);
-        // renderer::draw(some_block, bricks_texture);
+        renderer::draw(some_block, bricks_texture);
         renderer::draw(bomberman);
-
-        //BOMBERMAN MOMENTANEO
-        glPointSize(20);
-        glBegin(GL_POINTS);
-        glColor3f(1, 0, 0);
-        glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
-        glEnd();
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
 
