@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
         glLoadIdentity();
 
         // Dibujar el contenedor del HUD
-        Uint32 tiempo = clock::get_total_time(); // get_total_time no funciona
+        Uint32 tiempo = clock::get_total_time();
         hud.drop_time(tiempo); 
 
         // Restaurar la matriz de modelo-vista

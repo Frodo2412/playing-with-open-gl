@@ -7,21 +7,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/numbers/time.jpg" afterDir="false" />
+    <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="Se muestra el tiempo durante la partida (este todavía sigue corriendo aunque se pause).">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/textures/texture_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/textures/texture_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/number.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/number.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/Cl.items.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/OpenGL-basico.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.secondary.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.write.1.tlog" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +157,7 @@
       <workItem from="1713415993392" duration="493000" />
       <workItem from="1713440657397" duration="9872000" />
       <workItem from="1713454651092" duration="245000" />
-      <workItem from="1713455018217" duration="4651000" />
+      <workItem from="1713455018217" duration="6263000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -274,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713451149932</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Se muestra el tiempo durante la partida (este todavía sigue corriendo aunque se pause).">
+      <option name="closed" value="true" />
+      <created>1713461622411</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713461622412</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +303,7 @@
     <MESSAGE value="siguen sin funcionar la carga de las texturas de los números" />
     <MESSAGE value="eliminé los warnings." />
     <MESSAGE value="Se muestran los números (ahora los almaceno en el mismo gamehud, ya que jamás funcionó con number).&#10;El clock sigue sin funcionar." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se muestran los números (ahora los almaceno en el mismo gamehud, ya que jamás funcionó con number).&#10;El clock sigue sin funcionar." />
+    <MESSAGE value="Se muestra el tiempo durante la partida (este todavía sigue corriendo aunque se pause)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se muestra el tiempo durante la partida (este todavía sigue corriendo aunque se pause)." />
   </component>
 </project>
