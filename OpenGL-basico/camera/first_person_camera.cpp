@@ -11,8 +11,6 @@ void first_person_camera::move(const vector3& displacement)
 
     position_ += movement;
     direction_ += movement;
-
-    player_->move(movement);
 }
 
 void first_person_camera::rotate(const float x_offset, const float y_offset)

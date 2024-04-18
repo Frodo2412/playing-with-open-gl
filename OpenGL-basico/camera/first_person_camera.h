@@ -5,10 +5,8 @@
 
 class first_person_camera final : public camera
 {
-    player* player_;
-
 public:
-    first_person_camera(const float x, const float y, const float z, player* player): camera(x, y, z), player_(player)
+    first_person_camera(const float x, const float y, const float z): camera(x, y, z)
     {
     }
 
