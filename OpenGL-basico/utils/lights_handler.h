@@ -11,7 +11,7 @@ private:
     lights_handler();
 public:
     static lights_handler* get_instance();
-    void set_ligth(camera_mode mode, vector3 pos);
+    void set_light(camera_mode mode, vector3 pos);
 };
 
 
