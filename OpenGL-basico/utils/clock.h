@@ -2,11 +2,11 @@
 #include <SDL_timer.h>
 
 
+
 class clock
 {
     double start_time_;
     bool is_pause_ = false;
-    Uint32 total_elapsed_time_ = 0;
     static clock* instance_;
     explicit clock(): start_time_(SDL_GetTicks())
     {

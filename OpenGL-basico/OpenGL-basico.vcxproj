@@ -187,8 +187,13 @@
   <ItemGroup>
     <Content Include="..\assets\bomberman\source\0d5d63397dc34008a601d00735583069.fbx.fbx" />
     <Content Include="..\assets\bomberman\textures\internal_ground_ao_texture.jpeg" />
+    <Content Include="..\assets\numbers\cero.jpg" />
+    <Content Include="..\assets\numbers\dos.jpg" />
+    <Content Include="..\assets\numbers\tres.jpg" />
     <Content Include="..\assets\source\bomberman.fbx" />
     <Content Include="..\assets\textures\bomberman.jpeg" />
+    <Content Include="..\assets\two_dots.jpg" />
+    <Content Include="..\assets\uno.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

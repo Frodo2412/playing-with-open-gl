@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
     gamehud prueba = gamehud();
     do
     {
+        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
 
@@ -87,8 +88,8 @@ int main(int argc, char* argv[])
         glLoadIdentity();
 
         // Dibujar el contenedor del HUD
-        Uint32 tiempo = clock::get_total_time();
-        prueba.drop_time(tiempo);
+        Uint32 tiempo = clock::get_total_time(); // get_total_time no funciona
+        prueba.drop_time(tiempo); 
         renderer::draw(contenedor, grass_texture);
 
         // Restaurar la matriz de modelo-vista
@@ -102,9 +103,8 @@ int main(int argc, char* argv[])
         glMatrixMode(GL_MODELVIEW);
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
-
-        float elapsed_time = static_cast<float>(clock::get_ticks());
         
+        float elapsed_time = static_cast<float>(clock::get_ticks());
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event) )
         {

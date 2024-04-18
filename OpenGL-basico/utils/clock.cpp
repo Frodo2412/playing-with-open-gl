@@ -1,4 +1,6 @@
+
 #include "clock.h"
+
 
 clock* clock::instance_ = nullptr;
 
@@ -30,17 +32,10 @@ void clock::reset()
 
 Uint32 clock::get_total_time()
 {
-    double current_time = SDL_GetTicks(); // tiempo actual
-    
-    if (instance_->is_pause_) // Pausa
-    {
-        return instance_->total_elapsed_time_;
-    }
-    else
-    {
-        double elapsed_time = current_time - instance_->start_time_;
-        instance_->total_elapsed_time_ = static_cast<Uint32>(elapsed_time);
-
-        return instance_->total_elapsed_time_;
-    }
+    Uint32 current_time = SDL_GetTicks();
+    Uint32 elapsed_time = static_cast<Uint32>(current_time) - instance_->start_time_;
+    return elapsed_time;
 }
+
+
+

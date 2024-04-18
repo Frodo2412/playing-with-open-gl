@@ -1,17 +1,17 @@
 #include "number.h"
 
-number* number::one_instance_ = new number("../assets/numbers/uno.png");
-number* number::two_instance_ = new number("../assets/numbers/dos.png");
-number* number::three_instance_ = new number("../assets/numbers/tres.png");
+number* number::one_instance_ = new number("../assets/numbers/uno.jpg");
+number* number::two_instance_ = new number("../assets/numbers/dos.jpg");
+number* number::three_instance_ = new number("../assets/numbers/tres.jpg");
 number* number::four_instance_ = new number("../assets/numbers/cuatro.png");
 number* number::five_instance_ = new number("../assets/numbers/cinco.png");
 number* number::six_instance_ = new number("../assets/numbers/seis.png");
 number* number::seven_instance_ = new number("../assets/numbers/siete.png");
 number* number::eight_instance_ = new number("../assets/numbers/ocho.png");
 number* number::nine_instance_ = new number("../assets/numbers/nueve.png");
-number* number::zero_instance_ = new number("../assets/numbers/cero.png");
+number* number::zero_instance_ = new number("../assets/numbers/cero.jpg");
 
-texture number::get_texture() const
+ const texture number::get_texture()
 {
     return texture_;
 }

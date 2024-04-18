@@ -21,7 +21,7 @@ class number
     }
 
 public:
-    texture get_texture() const;
+    const texture get_texture();
 
     static number* one();
     static number* two();
