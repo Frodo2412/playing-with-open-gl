@@ -195,6 +195,7 @@
     <Content Include="..\assets\numbers\ocho.png" />
     <Content Include="..\assets\numbers\seis.png" />
     <Content Include="..\assets\numbers\siete.png" />
+    <Content Include="..\assets\numbers\time.jpg" />
     <Content Include="..\assets\numbers\tres.png" />
     <Content Include="..\assets\numbers\uno.png" />
     <Content Include="..\assets\source\bomberman.fbx" />

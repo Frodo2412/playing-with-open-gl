@@ -2,69 +2,61 @@
 
 #include <iostream>
 
-number* number::zero_instance_ = new number("../assets/numbers/cero.jpg");
-number* number::one_instance_ = new number("../assets/numbers/uno.jpg");
-number* number::two_instance_ = new number("../assets/numbers/dos.jpg");
-number* number::three_instance_ = new number("../assets/numbers/tres.jpg");
-/*number* number::four_instance_ = new number("../assets/numbers/cuatro.png");
-number* number::five_instance_ = new number("../assets/numbers/cinco.png");
-number* number::six_instance_ = new number("../assets/numbers/seis.png");
-number* number::seven_instance_ = new number("../assets/numbers/siete.png");
-number* number::eight_instance_ = new number("../assets/numbers/ocho.png");
-number* number::nine_instance_ = new number("../assets/numbers/nueve.png");*/
+number* number::numero = nullptr;
 
- const texture number::get_texture()
+void number::init()
 {
-    return texture_;
+    numero = new number();
 }
 
-number* number::zero()
- {
-     return zero_instance_;
- }
-
-number* number::one()
-{
-    return one_instance_;
+const texture number::get_texture_zero(){
+    return numero->zero_instance_;
 }
 
-number* number::two()
-{
-    return two_instance_;
+const texture number::get_texture_one(){
+    return numero->one_instance_;
 }
 
-number* number::three()
-{
-    return three_instance_;
+const texture number::get_texture_two(){
+    return numero->two_instance_;
 }
 
-/*number* number::four()
-{
-    return four_instance_;
+const texture number::get_texture_three(){
+    return numero->three_instance_;
 }
 
-number* number::five()
-{
-    return five_instance_;
+const texture number::get_texture_four() {
+    return numero->four_instance_;
 }
 
-number* number::six()
-{
-    return six_instance_;
+const texture number::get_texture_five() {
+    return numero->five_instance_;
 }
 
-number* number::seven()
-{
-    return seven_instance_;
+const texture number::get_texture_six() {
+    return numero->six_instance_;
 }
 
-number* number::eight()
-{
-    return eight_instance_;
+const texture number::get_texture_seven() {
+    return numero->seven_instance_;
 }
 
-number* number::nine()
-{
-    return nine_instance_;
-} */
+const texture number::get_texture_eight() {
+    return numero->eight_instance_;
+}
 
+const texture number::get_texture_nine() {
+    return numero->nine_instance_;
+}
+
+const texture number::get_two_dots(){
+    return numero->two_dots_instance_;
+}
+
+const texture number::get_texture_gamehud(){
+    return numero->gamehud_instance_;
+}
+
+const texture number::get_texture_time(){
+    return numero->time_instance_;
+}

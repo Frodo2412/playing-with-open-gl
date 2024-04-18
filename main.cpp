@@ -43,6 +43,7 @@ int main(int argc, char* argv[])
 
     bool fin = false;
     clock::init();
+    number::init();
     SDL_Event event;
 
     auto camera = ::camera(0, 0, 5);
@@ -51,13 +52,12 @@ int main(int argc, char* argv[])
 
     const auto grass_texture = texture_loader::load_texture("../assets/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector(0, 1, 0));
-
-    const square contenedor = square(vector(-0.8, -0.9, 0.0), vector(0.8, -0.9, 0.0), vector(0.8, -0.6, 0.0), vector(-0.8, -0.6, 0.0));
+    
     const auto bricks_texture = texture_loader::load_texture("../assets/bricks_1.jpg");
     const auto some_block = cube(1, vector(0, 0, 0));
 
     
-    gamehud prueba = gamehud();
+    gamehud hud = gamehud();
     do
     {
         
@@ -89,8 +89,7 @@ int main(int argc, char* argv[])
 
         // Dibujar el contenedor del HUD
         Uint32 tiempo = clock::get_total_time(); // get_total_time no funciona
-        prueba.drop_time(tiempo); 
-        renderer::draw(contenedor, grass_texture);
+        hud.drop_time(tiempo); 
 
         // Restaurar la matriz de modelo-vista
         glPopMatrix();

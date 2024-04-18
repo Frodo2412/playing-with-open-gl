@@ -1,7 +1,25 @@
-
 #include "gamehud.h"
 #include "renderer.h"
 #include "number.h"
+
+ gamehud::gamehud(){};
+
+void gamehud::cambiar_numero(Uint32 valor, square ubicacion) {
+    switch (valor) {
+    case 0: renderer::draw(ubicacion, number::get_texture_zero()); break;
+    case 1: renderer::draw(ubicacion, number::get_texture_one()); break;
+    case 2: renderer::draw(ubicacion, number::get_texture_two()); break;
+    case 3: renderer::draw(ubicacion, number::get_texture_three()); break;
+    case 4: renderer::draw(ubicacion, number::get_texture_four()); break;
+    case 5: renderer::draw(ubicacion, number::get_texture_five()); break;
+    case 6: renderer::draw(ubicacion, number::get_texture_six()); break;
+    case 7: renderer::draw(ubicacion, number::get_texture_seven()); break;
+    case 8: renderer::draw(ubicacion, number::get_texture_eight()); break;
+    case 9: renderer::draw(ubicacion, number::get_texture_nine()); break;
+    default: std::cout << "error " << "\n"; break;
+    }
+}
+
 
 void gamehud::drop_time(Uint32 milisecond)
 {
@@ -10,73 +28,19 @@ void gamehud::drop_time(Uint32 milisecond)
     seconds %= 60;
     minutes %= 60;
     Uint32 minutes_d = (minutes / 10);
-    Uint32 minutes_u = minutes_d % 10;
+    Uint32 minutes_u = minutes % 10;
     Uint32 seconds_d = (seconds / 10);
-    Uint32 seconds_u = (seconds_d % 10);
+    Uint32 seconds_u = (seconds % 10);
 
-    renderer::draw(score_, uno_);
-    // probando carga de imagenes
-    renderer::draw(espacio_, two_dots_);
-    renderer::draw(minutos_decena_, uno_);
-    renderer::draw(minutos_unidades_, uno_);
-    renderer::draw(segundos_decena_, cero_);
-    renderer::draw(segundos_unidades_, cero_);
+    renderer::draw(espacio_, number::get_two_dots());
 
-    //std::cout << minutes_d << minutes_u << ":" << seconds_d << seconds_u <<  " transcurridos." << "\n";
-    
-    switch (minutes_d) {
-    case 0: renderer::draw(minutos_decena_, number::zero()->get_texture()); break;
-    case 1:  renderer::draw(minutos_decena_, number::one()->get_texture()); break;
-    case 2: renderer::draw(minutos_decena_, number::two()->get_texture()); break;
-    case 3: renderer::draw(minutos_decena_, number::three()->get_texture()); break;
-    /*case 4: renderer::draw(minutos_decena_, number::four()->get_texture()); break;
-    case 5: renderer::draw(minutos_decena_, number::five()->get_texture()); break;
-    case 6: renderer::draw(minutos_decena_, number::six()->get_texture()); break;
-    case 7: renderer::draw(minutos_decena_, number::seven()->get_texture()); break;
-    case 8: renderer::draw(minutos_decena_, number::eight()->get_texture()); break;
-    case 9: renderer::draw(minutos_decena_, number::nine()->get_texture()); break;*/
-    default: std::cout << "error" << "\n"; break;
-    }
+    gamehud::cambiar_numero(minutes_d, minutos_decena_);
+    gamehud::cambiar_numero(minutes_u, minutos_unidades_);
+    gamehud::cambiar_numero(seconds_d, segundos_decena_);
+    gamehud::cambiar_numero(seconds_u, segundos_unidades_);
 
-    /*switch (minutes_u) {
-    case 0: renderer::draw(minutos_unidades_, number::zero()->get_texture()); break;
-    case 1: renderer::draw(minutos_unidades_, number::one()->get_texture()); break;
-    case 2: renderer::draw(minutos_unidades_, number::two()->get_texture()); break;
-    case 3: renderer::draw(minutos_unidades_, number::three()->get_texture()); break;
-    case 4: renderer::draw(minutos_unidades_, number::four()->get_texture()); break;
-    case 5: renderer::draw(minutos_unidades_, number::five()->get_texture()); break;
-    case 6: renderer::draw(minutos_unidades_, number::six()->get_texture()); break;
-    case 7: renderer::draw(minutos_unidades_, number::seven()->get_texture()); break;
-    case 8: renderer::draw(minutos_unidades_, number::eight()->get_texture()); break;
-    case 9: renderer::draw(minutos_unidades_, number::nine()->get_texture()); break;
-    default: std::cout << "error" << "\n"; break;
-    }
-    
-    switch (seconds_d) {
-    case 0: renderer::draw(segundos_decena_, number::zero()->get_texture()); break;
-    case 1: renderer::draw(segundos_decena_, number::one()->get_texture()); break;
-    case 2: renderer::draw(segundos_decena_, number::two()->get_texture()); break;
-    case 3: renderer::draw(segundos_decena_, number::three()->get_texture()); break;
-    case 4: renderer::draw(segundos_decena_, number::four()->get_texture()); break;
-    case 5: renderer::draw(segundos_decena_, number::five()->get_texture()); break;
-    case 6: renderer::draw(segundos_decena_, number::six()->get_texture()); break;
-    case 7: renderer::draw(segundos_decena_, number::seven()->get_texture()); break;
-    case 8: renderer::draw(segundos_decena_, number::eight()->get_texture()); break;
-    case 9: renderer::draw(segundos_decena_, number::nine()->get_texture()); break;
-    default: std::cout << "error" << "\n"; break;
-    }
+    // dibujo los detalles
+    renderer::draw(tiempo_, number::get_texture_time());
+    renderer::draw(contenedor_, number::get_texture_gamehud());
 
-    switch (seconds_u) {
-    case 0: renderer::draw(segundos_unidades_, number::zero()->get_texture()); break;
-    case 1: renderer::draw(segundos_unidades_, number::one()->get_texture()); break;
-    case 2: renderer::draw(segundos_unidades_, number::two()->get_texture()); break;
-    case 3: renderer::draw(segundos_unidades_, number::three()->get_texture()); break;
-    case 4: renderer::draw(segundos_unidades_, number::four()->get_texture()); break;
-    case 5: renderer::draw(segundos_unidades_, number::five()->get_texture()); break;
-    case 6: renderer::draw(segundos_unidades_, number::six()->get_texture()); break;
-    case 7: renderer::draw(segundos_unidades_, number::seven()->get_texture()); break;
-    case 8: renderer::draw(segundos_unidades_, number::eight()->get_texture()); break;
-    case 9: renderer::draw(segundos_unidades_, number::nine()->get_texture()); break;
-    default: std::cout << "error undidas" << "\n"; break;
-    } */
 }

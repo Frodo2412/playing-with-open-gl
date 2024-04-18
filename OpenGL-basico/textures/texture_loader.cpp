@@ -25,3 +25,4 @@ texture texture_loader::load_texture(const char* file_path)
     
     return texture(texture_id);
 }
+

@@ -33,8 +33,7 @@ void clock::reset()
 Uint32 clock::get_total_time()
 {
     Uint32 current_time = SDL_GetTicks();
-    Uint32 elapsed_time = static_cast<Uint32>(current_time) - instance_->start_time_;
-    return elapsed_time;
+    return current_time;
 }
 
 
