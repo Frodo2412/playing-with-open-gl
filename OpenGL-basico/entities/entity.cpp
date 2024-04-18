@@ -9,3 +9,8 @@ texture entity::get_texture() const
 {
     return texture_;
 }
+
+vector3 entity::get_position() const
+{
+    return position_;
+}
