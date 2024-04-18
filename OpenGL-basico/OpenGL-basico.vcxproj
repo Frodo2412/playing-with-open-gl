@@ -190,10 +190,10 @@
     <Content Include="..\assets\numbers\cero.jpg" />
     <Content Include="..\assets\numbers\dos.jpg" />
     <Content Include="..\assets\numbers\tres.jpg" />
+    <Content Include="..\assets\numbers\uno.jpg" />
     <Content Include="..\assets\source\bomberman.fbx" />
     <Content Include="..\assets\textures\bomberman.jpeg" />
     <Content Include="..\assets\two_dots.jpg" />
-    <Content Include="..\assets\uno.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

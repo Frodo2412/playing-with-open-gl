@@ -16,26 +16,32 @@ void gamehud::drop_time(Uint32 milisecond)
     Uint32 seconds_d = (seconds / 10);
     Uint32 seconds_u = (seconds_d % 10);
 
-    const texture prueba = texture_loader::load_texture("../assets/two_dots.png");
-    renderer::draw(espacio_, prueba);
 
-    std::cout << minutes_d << minutes_u << ":" << seconds_d << seconds_u <<  " transcurridos." << "\n";
+    const texture prueba = texture_loader::load_texture("../assets/two_dots.jpg");
+    // probando carga de imagenes
+    renderer::draw(espacio_, number::two()->get_texture());
+    renderer::draw(minutos_decena_, prueba);
+    renderer::draw(minutos_unidades_, prueba);
+    renderer::draw(segundos_decena_, prueba);
+    renderer::draw(segundos_unidades_, prueba);
+
+    //std::cout << minutes_d << minutes_u << ":" << seconds_d << seconds_u <<  " transcurridos." << "\n";
     
     switch (minutes_d) {
     case 0: renderer::draw(minutos_decena_, number::zero()->get_texture()); break;
     case 1:  renderer::draw(minutos_decena_, number::one()->get_texture()); break;
     case 2: renderer::draw(minutos_decena_, number::two()->get_texture()); break;
     case 3: renderer::draw(minutos_decena_, number::three()->get_texture()); break;
-    case 4: renderer::draw(minutos_decena_, number::four()->get_texture()); break;
+    /*case 4: renderer::draw(minutos_decena_, number::four()->get_texture()); break;
     case 5: renderer::draw(minutos_decena_, number::five()->get_texture()); break;
     case 6: renderer::draw(minutos_decena_, number::six()->get_texture()); break;
     case 7: renderer::draw(minutos_decena_, number::seven()->get_texture()); break;
     case 8: renderer::draw(minutos_decena_, number::eight()->get_texture()); break;
-    case 9: renderer::draw(minutos_decena_, number::nine()->get_texture()); break;
+    case 9: renderer::draw(minutos_decena_, number::nine()->get_texture()); break;*/
     default: std::cout << "error" << "\n"; break;
     }
 
-    switch (minutes_u) {
+    /*switch (minutes_u) {
     case 0: renderer::draw(minutos_unidades_, number::zero()->get_texture()); break;
     case 1: renderer::draw(minutos_unidades_, number::one()->get_texture()); break;
     case 2: renderer::draw(minutos_unidades_, number::two()->get_texture()); break;
@@ -75,5 +81,5 @@ void gamehud::drop_time(Uint32 milisecond)
     case 8: renderer::draw(segundos_unidades_, number::eight()->get_texture()); break;
     case 9: renderer::draw(segundos_unidades_, number::nine()->get_texture()); break;
     default: std::cout << "error undidas" << "\n"; break;
-    }
+    } */
 }

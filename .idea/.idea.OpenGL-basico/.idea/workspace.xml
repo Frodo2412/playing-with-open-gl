@@ -8,35 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90433066-d022-4b5a-93f8-d0518f133277" name="Changes" comment="siguen sin funcionar la carga de las texturas de los números">
-      <change afterPath="$PROJECT_DIR$/assets/numbers/cero.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/numbers/dos.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/numbers/tres.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/two_dots.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/uno.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenGL-basico/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/OpenGL-basico.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.command.1.tlog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.read.1.tlog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/CL.write.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/Debug/OpenGL-basico.tlog/link.read.1.tlog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/OpenGL-basico.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/clock.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/clock.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/clock.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/gamehud.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/number.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenGL-basico/utils/number.h" beforeDir="false" afterPath="$PROJECT_DIR$/OpenGL-basico/utils/number.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/cero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/cinco.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/cuatro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/dos.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/nueve.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/ocho.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/seis.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/siete.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/tres.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/two_dots.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/numbers/uno.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/uno.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/numbers/uno.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +77,7 @@
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -171,6 +153,8 @@
       <workItem from="1711752497809" duration="10537000" />
       <workItem from="1713010209889" duration="299000" />
       <workItem from="1713129673944" duration="5931000" />
+      <workItem from="1713415993392" duration="493000" />
+      <workItem from="1713440657397" duration="7554000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />

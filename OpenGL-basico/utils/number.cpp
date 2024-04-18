@@ -1,20 +1,27 @@
 #include "number.h"
 
+#include <iostream>
+
+number* number::zero_instance_ = new number("../assets/numbers/cero.jpg");
 number* number::one_instance_ = new number("../assets/numbers/uno.jpg");
 number* number::two_instance_ = new number("../assets/numbers/dos.jpg");
 number* number::three_instance_ = new number("../assets/numbers/tres.jpg");
-number* number::four_instance_ = new number("../assets/numbers/cuatro.png");
+/*number* number::four_instance_ = new number("../assets/numbers/cuatro.png");
 number* number::five_instance_ = new number("../assets/numbers/cinco.png");
 number* number::six_instance_ = new number("../assets/numbers/seis.png");
 number* number::seven_instance_ = new number("../assets/numbers/siete.png");
 number* number::eight_instance_ = new number("../assets/numbers/ocho.png");
-number* number::nine_instance_ = new number("../assets/numbers/nueve.png");
-number* number::zero_instance_ = new number("../assets/numbers/cero.jpg");
+number* number::nine_instance_ = new number("../assets/numbers/nueve.png");*/
 
  const texture number::get_texture()
 {
     return texture_;
 }
+
+number* number::zero()
+ {
+     return zero_instance_;
+ }
 
 number* number::one()
 {
@@ -31,7 +38,7 @@ number* number::three()
     return three_instance_;
 }
 
-number* number::four()
+/*number* number::four()
 {
     return four_instance_;
 }
@@ -59,9 +66,5 @@ number* number::eight()
 number* number::nine()
 {
     return nine_instance_;
-}
+} */
 
-number* number::zero()
-{
-    return zero_instance_;
-}

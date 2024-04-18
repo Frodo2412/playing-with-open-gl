@@ -4,7 +4,7 @@
 class number
 {
     texture texture_;
-
+    
     static number* one_instance_;
     static number* two_instance_;
     static number* three_instance_;

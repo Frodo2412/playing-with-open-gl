@@ -6,17 +6,15 @@
 
 class gamehud
 {
-    square contenedor_ = square(vector(-0.8, -0.9, 0.0), vector(0.8, -0.9, 0.0), vector(0.8, -0.6, 0.0), vector(-0.8, -0.6, 0.0));
-    square tiempo_ = square(vector( -0.75, -0.75, 0.0), vector(-0.5, -0.75, 0.0), vector(-0.5, -0.85, 0.0), vector(- 0.75, -0.85, 0.0));
-    square score_ = square(vector( -0.1, -0.62, 0.0), vector(0.1, -0.62, 0.0), vector(0.1, -0.68, 0.0), vector(- 0.1, -0.68, 0.0));
+    square contenedor_ = square(vector(-0.8f, -0.9f, 0.0f), vector(0.8f, -0.9f, 0.0f), vector(0.8f, -0.6f, 0.0f), vector(-0.8f, -0.6f, 0.0f));
+    square tiempo_ = square(vector(-0.75f, -0.75f, 0.0f), vector(-0.5f, -0.75f, 0.0f), vector(-0.5f, -0.85f, 0.0f), vector(-0.75f, -0.85f, 0.0f));
+    square score_ = square(vector(-0.1f, -0.62f, 0.0f), vector(0.1f, -0.62f, 0.0f), vector(0.1f, -0.68f, 0.0f), vector(-0.1f, -0.68f, 0.0f));
     
-    square minutos_decena_ = square(vector(-0.195 + 0.05, -0.7, 0.0), vector(-0.145 + 0.05, -0.7, 0.0), vector(-0.145 + 0.05, -0.85, 0.0), vector(-0.195 + 0.05, -0.85, 0.0));
-    square minutos_unidades_ = square(vector(-0.135 + 0.05, -0.7, 0.0), vector(-0.085 + 0.05, -0.7, 0.0), vector(-0.085 + 0.05, -0.85, 0.0), vector(-0.135 + 0.05, -0.85, 0.0));
-    square espacio_ = square(vector(-0.075 + 0.05, -0.7, 0.0), vector(-0.025 + 0.05, -0.7, 0.0), vector(-0.025 + 0.05, -0.85, 0.0), vector(-0.075 + 0.05, -0.85, 0.0));
-    square segundos_decena_ = square(vector(-0.015 + 0.05, -0.7, 0.0), vector(0.035 + 0.05, -0.7, 0.0), vector(0.035 + 0.05, -0.85, 0.0), vector(-0.015 + 0.05, -0.85, 0.0));
-    square segundos_unidades_ = square(vector(0.045 + 0.05, -0.7, 0.0), vector(0.095 + 0.05, -0.7, 0.0), vector(0.095 + 0.05, -0.85, 0.0), vector(0.045 + 0.05, -0.85, 0.0));
-
-
+    square minutos_decena_ = square(vector(-0.145f, -0.7f, 0.0f), vector(-0.095f, -0.7f, 0.0f), vector(-0.095f, -0.85f, 0.0f), vector(-0.145f, -0.85f, 0.0f));
+    square minutos_unidades_ = square(vector(-0.085f, -0.7f, 0.0f), vector(-0.035f, -0.7f, 0.0f), vector(-0.035f, -0.85f, 0.0f), vector(-0.085f, -0.85f, 0.0f));
+    square espacio_ = square(vector(-0.025f, -0.7f, 0.0f), vector(0.025f, -0.7f, 0.0f), vector(0.025f, -0.85f, 0.0f), vector(-0.025f, -0.85f, 0.0f));
+    square segundos_decena_ = square(vector(0.035f, -0.7f, 0.0f), vector(0.085f, -0.7f, 0.0f), vector(0.085f, -0.85f, 0.0f), vector(0.035f, -0.85f, 0.0f));
+    square segundos_unidades_ = square(vector(0.095f, -0.7f, 0.0f), vector(0.145f, -0.7f, 0.0f), vector(0.145f, -0.85f, 0.0f), vector(0.095f, -0.85f, 0.0f));
 public:
     explicit gamehud();
     void drop_time(Uint32 milisecond);
