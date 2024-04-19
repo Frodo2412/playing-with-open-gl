@@ -31,10 +31,8 @@
 *.out
 *.app
 
-./idea/*
-./Debug/*
-./Release/*
-./OpenGL-basico/Debug/*
-./OpenGL-basico/Release/*
-*.tlog
-*.pdb
+.idea
+Debug
+Release
+OpenGL-basico/Debug
+OpenGL-basico/Release
