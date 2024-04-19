@@ -13,6 +13,7 @@
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+#include "OpenGL-basico/utils/lights_handler.h"
 
 void draw_camera()
 {
@@ -71,6 +72,8 @@ int main(int argc, char* argv[])
 
         bomber_man += displacement;
         camera_handler::get_current_camera()->move(displacement);
+        lights_handler::get_instance()->set_light(camera_handler::get_mode(),
+                                                  camera_handler::get_current_camera()->get_direction());
         displacement.reset();
         draw_camera();
         renderer::draw(floor, grass_texture);

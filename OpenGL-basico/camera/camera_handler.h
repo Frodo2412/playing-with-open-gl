@@ -21,4 +21,5 @@ class camera_handler
 public:
     static camera* get_current_camera();
     static void toggle_current_camera();
+    static camera_mode get_mode();
 };
