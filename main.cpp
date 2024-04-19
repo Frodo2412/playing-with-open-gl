@@ -13,6 +13,7 @@
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+#include "OpenGL-basico/entities/block.h"
 
 void draw_camera()
 {
@@ -63,6 +64,9 @@ int main(int argc, char* argv[])
     const auto some_block = cube(1, vector3(0, 0, 0));
 
     const auto bomberman = player();
+    std::vector<block> bloques;
+    bloques.push_back(block(vector3(0.5, -0.5, 0)));
+    bloques.push_back(block(vector3(1.5, -0.5, 0)));
 
     do
     {
@@ -73,6 +77,11 @@ int main(int argc, char* argv[])
         camera_handler::get_current_camera()->move(displacement);
         displacement.reset();
         draw_camera();
+
+        for(auto bloque: bloques){
+            bloque.draw_block();
+        }
+        
         renderer::draw(floor, grass_texture);
         // renderer::draw(some_block, bricks_texture);
         renderer::draw(bomberman);

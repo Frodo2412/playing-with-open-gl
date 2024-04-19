@@ -161,6 +161,7 @@
         <ClCompile Include="camera\first_person_camera.cpp"/>
         <ClCompile Include="camera\perspective_camera.cpp"/>
         <ClCompile Include="camera\top_down_camera.cpp"/>
+        <ClCompile Include="entities\block.cpp" />
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
         <ClCompile Include="geometry\cube.cpp"/>
@@ -259,6 +260,7 @@
         <ClInclude Include="camera\first_person_camera.h"/>
         <ClInclude Include="camera\perspective_camera.h"/>
         <ClInclude Include="camera\top_down_camera.h"/>
+        <ClInclude Include="entities\block.h" />
         <ClInclude Include="entities\entity.h"/>
         <ClInclude Include="entities\player.h"/>
         <ClInclude Include="geometry\cube.h"/>
