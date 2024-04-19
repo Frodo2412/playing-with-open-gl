@@ -32,7 +32,6 @@
 //         break;
 //     }
 // }
-camera::~camera() = default;
 
 vector3 camera::get_position() const
 {
@@ -47,4 +46,40 @@ vector3 camera::get_direction() const
 vector3 camera::get_up() const
 {
     return up_;
+}
+
+void camera::set_direction(const vector3& direction)
+{
+    direction_ = direction;
+}
+
+void camera::set_position(const vector3& position)
+{
+    position_ = position;
+}
+
+void camera::set_up(const vector3& up)
+{
+    up_ = up;
+}
+
+void camera::move(const vector3& displacement)
+{
+    direction_ += displacement;
+    position_ += displacement;
+}
+
+void camera::rotate(const float x_offset, const float y_offset)
+{
+    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive
+
+    direction_.set_x(direction_.get_x() + x_offset * sensitivity);
+
+    // Clamp the vertical rotation to be between -90 and 90 degrees
+    if (direction_.get_y() - y_offset * sensitivity >= 90.0f)
+        direction_.set_y(90.0f);
+    else if (direction_.get_y() - y_offset * sensitivity <= -90.0f)
+        direction_.set_y(-90.0f);
+    else
+        direction_.set_y(direction_.get_y() + y_offset * sensitivity);
 }

@@ -26,6 +26,10 @@ public:
     texture get_texture() const;
 
     vector3 get_position() const;
+    vector3 get_direction() const;
+    vector3 get_up() const;
+
+    void set_direction(const vector3& direction);
 
     void move(const vector3& displacement);
 };
