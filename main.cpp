@@ -13,6 +13,8 @@
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+#include "OpenGL-basico/graphics/gamehud.h"
+#include "OpenGL-basico/graphics/number.h"
 
 void draw_camera()
 {
@@ -49,6 +51,7 @@ int main(int argc, char* argv[])
 
     bool fin = false;
     clock::init();
+    number::init();
     SDL_Event event;
 
     auto bomber_man = vector3(0, 0, 5);
@@ -63,12 +66,40 @@ int main(int argc, char* argv[])
     const auto some_block = cube(1, vector3(0, 0, 0));
 
     const auto bomberman = player();
-
+    gamehud hud;
+    
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
 
+        // Configurar la proyección ortogonal
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // Especifico la proyección: ortogonal.
+
+        // Configurar la matriz de modelo-vista
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+
+        
+        glColor3f(1.0f, 1.0f, 1.0f); 
+        // Dibujar el contenedor del HUD
+        Uint32 tiempo = clock::get_total_time();
+        hud.drop_time(tiempo); 
+
+        // Restaurar la matriz de modelo-vista
+        glPopMatrix();
+
+        // Restaurar la matriz de proyección
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+
+        // Dibujar el resto de la escena
+        glMatrixMode(GL_MODELVIEW);
+        
         bomber_man += displacement;
         camera_handler::get_current_camera()->move(displacement);
         displacement.reset();
