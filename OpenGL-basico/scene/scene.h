@@ -18,10 +18,12 @@ class scene
     camera* camera_;
 
 public:
-    explicit scene(player* player)
+    explicit scene(player* player, const vector3& initial_player_position)
         : player_(player),
-          camera_(new camera(0, 0, 5))
+          camera_(new camera(initial_player_position.get_x(), initial_player_position.get_y(),
+                             initial_player_position.get_z()))
     {
+        player_->set_position(initial_player_position);
     }
 
     // Camera related functionality

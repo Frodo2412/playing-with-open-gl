@@ -29,6 +29,4 @@ public:
     void move(const vector3& displacement);
     void rotate(float x_offset, float y_offset);
 
-    // virtual void zoom_in(float amount) = 0;
-    // virtual void zoom_out(float amount) = 0;
 };

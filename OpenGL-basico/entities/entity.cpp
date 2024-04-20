@@ -30,6 +30,11 @@ void entity::set_direction(const vector3& direction)
     direction_ = direction;
 }
 
+void entity::set_position(const vector3& position)
+{
+    position_ = position;
+}
+
 void entity::move(const vector3& displacement)
 {
     position_ += displacement;

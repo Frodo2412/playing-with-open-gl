@@ -24,7 +24,7 @@ void scene::toggle_camera()
     case perspective:
         camera_mode_ = first;
         camera_->set_direction(player_->get_direction());
-        camera_->set_position(player_->get_position());
+        camera_->set_position(player_->get_position() + vector3(5, 5, 0));
         break;
     }
 }
@@ -56,20 +56,25 @@ void scene::move_player(const vector3& displacement) const
             const auto forward_movement = forward * displacement.get_z();
             const auto side_movement = up * forward * displacement.get_x();
 
-            const auto movement = forward_movement + side_movement;
+            auto movement = forward_movement + side_movement;
 
+            movement.set_y(0);
+            
             camera_->move(movement);
             player_->move(movement);
             break;
         }
     case top_down:
-        player_->move(-displacement);
-        player_->set_direction(-displacement);
-        break;
+        {
+            const auto movement = vector3(-displacement.get_x(), -displacement.get_z(), -displacement.get_y());
+            player_->move(movement);
+            player_->set_direction(movement);
+            break;
+        }
     case perspective:
-        camera_->move(-displacement);
-        player_->move(-displacement);
-        player_->set_direction(-displacement);
+        const auto movement = vector3(-displacement.get_x(), -displacement.get_z(), -displacement.get_y());
+        player_->move(movement);
+        player_->set_direction(movement);
         break;
     }
 }

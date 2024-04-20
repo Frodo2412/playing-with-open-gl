@@ -89,7 +89,6 @@ int main(int argc, char* argv[])
         // Dibujar el resto de la escena
         glMatrixMode(GL_MODELVIEW);
         
-        camera_handler::get_current_camera()->move(displacement);
         current_scene.move_player(displacement);
         displacement.reset();
 
