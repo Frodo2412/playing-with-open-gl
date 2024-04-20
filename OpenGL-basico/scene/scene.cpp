@@ -17,9 +17,9 @@ void scene::toggle_camera()
     case top_down:
         {
             camera_mode_ = perspective;
-            const auto player = player_->get_direction();
-            camera_->set_position(vector3(player.get_x(), player.get_y() + 10, player.get_z()));
-            camera_->set_direction(player);
+            const auto player_position = player_->get_position();
+            camera_->set_position(player_position + vector3(0, 10, 5));
+            camera_->set_direction(player_position);
             camera_->set_up(vector3(0, 0, -1));
             break;
         }
