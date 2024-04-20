@@ -1,5 +1,6 @@
 #include "scene.h"
 
+#include <iostream>
 #include <GL/glu.h>
 
 #include "../utils/renderer.h"
@@ -18,13 +19,16 @@ void scene::toggle_camera()
         {
             camera_mode_ = perspective;
             const auto player = player_->get_direction();
-            camera_->set_position(vector3(player.get_x(), player.get_y() + 5, player.get_z()));
+            camera_->set_position(vector3(player.get_x(), player.get_y() + 10, player.get_z()));
+            camera_->set_direction(player);
+            camera_->set_up(vector3(0, 0, -1));
             break;
         }
     case perspective:
         camera_mode_ = first;
+        camera_->set_up(player_->get_up());
         camera_->set_direction(player_->get_direction());
-        camera_->set_position(player_->get_position() + vector3(5, 5, 0));
+        camera_->set_position(player_->get_position());
         break;
     }
 }
@@ -38,7 +42,7 @@ void scene::rotate_camera(const float x, const float y) const
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
-        
+        glRotatef(x, player_->get_position().get_x(), 1, player_->get_position().get_z());
     default: break;
     }
 }
@@ -68,15 +72,14 @@ void scene::move_player(const vector3& displacement) const
         }
     case top_down:
         {
-            const auto movement = vector3(-displacement.get_x(), -displacement.get_z(), -displacement.get_y());
-            player_->move(movement);
-            player_->set_direction(movement);
+            player_->move(displacement);
+            player_->set_direction(displacement);
             break;
         }
     case perspective:
-        const auto movement = vector3(-displacement.get_x(), -displacement.get_z(), -displacement.get_y());
-        player_->move(movement);
-        player_->set_direction(movement);
+        player_->move(displacement);
+        player_->set_direction(displacement);
+        camera_->move(displacement);
         break;
     }
 }
