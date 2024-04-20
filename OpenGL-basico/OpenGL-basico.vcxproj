@@ -157,18 +157,8 @@
             <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
-        <ClCompile Include="entities\entity.cpp"/>
-        <ClCompile Include="entities\player.cpp"/>
-        <ClCompile Include="geometry\cube.cpp"/>
-        <ClCompile Include="geometry\grid.cpp"/>
-        <ClCompile Include="geometry\square.cpp"/>
-        <ClCompile Include="geometry\Triangle.cpp"/>
-        <ClCompile Include="geometry\vector2.cpp"/>
-        <ClCompile Include="geometry\vector3.cpp"/>
         <ClCompile Include="graphics\gamehud.cpp"/>
-        <ClCompile Include="graphics\model_loader.cpp"/>
         <ClCompile Include="graphics\number.cpp"/>
-        <ClCompile Include="graphics\vertex.cpp"/>
         <ClCompile Include="textures\texture.cpp"/>
         <ClCompile Include="textures\texture_loader.cpp">
             <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -294,7 +284,6 @@
         <Content Include="..\assets\textures\numbers\tres.png"/>
         <Content Include="..\assets\textures\numbers\two_dots.jpg"/>
         <Content Include="..\assets\textures\numbers\uno.png"/>
-        <ClCompile Include="scene\camera.cpp"/>
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
         <ClCompile Include="geometry\cube.cpp"/>
