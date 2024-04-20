@@ -170,7 +170,9 @@
         <ClCompile Include="geometry\Triangle.cpp"/>
         <ClCompile Include="geometry\vector2.cpp"/>
         <ClCompile Include="geometry\vector3.cpp"/>
+        <ClCompile Include="graphics\gamehud.cpp" />
         <ClCompile Include="graphics\model_loader.cpp"/>
+        <ClCompile Include="graphics\number.cpp" />
         <ClCompile Include="graphics\vertex.cpp"/>
         <ClCompile Include="textures\texture.cpp"/>
         <ClCompile Include="textures\texture_loader.cpp">
@@ -269,7 +271,9 @@
         <ClInclude Include="geometry\Triangle.h"/>
         <ClInclude Include="geometry\vector2.h"/>
         <ClInclude Include="geometry\vector3.h"/>
+        <ClInclude Include="graphics\gamehud.h" />
         <ClInclude Include="graphics\model_loader.h"/>
+        <ClInclude Include="graphics\number.h" />
         <ClInclude Include="graphics\vertex.h"/>
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>
@@ -283,6 +287,18 @@
         <Content Include="..\assets\textures\Doodler.png"/>
         <Content Include="..\assets\textures\grass_1.jpg"/>
         <Content Include="..\assets\textures\bomberman.jpeg"/>
+        <Content Include="..\assets\textures\numbers\cero.png" />
+        <Content Include="..\assets\textures\numbers\cinco.png" />
+        <Content Include="..\assets\textures\numbers\cuatro.png" />
+        <Content Include="..\assets\textures\numbers\dos.png" />
+        <Content Include="..\assets\textures\numbers\time.jpg" />
+        <Content Include="..\assets\textures\numbers\nueve.png" />
+        <Content Include="..\assets\textures\numbers\ocho.png" />
+        <Content Include="..\assets\textures\numbers\seis.png" />
+        <Content Include="..\assets\textures\numbers\siete.png" />
+        <Content Include="..\assets\textures\numbers\tres.png" />
+        <Content Include="..\assets\textures\numbers\two_dots.jpg" />
+        <Content Include="..\assets\textures\numbers\uno.png" />
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">
