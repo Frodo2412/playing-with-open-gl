@@ -1,6 +1,5 @@
 #include "scene.h"
 
-#include <iostream>
 #include <GL/glu.h>
 
 #include "../utils/renderer.h"
