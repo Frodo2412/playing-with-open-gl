@@ -23,7 +23,7 @@ void renderer::draw(const entity& entity)
     for (auto& vertex : entity.get_vertices())
     {
         glTexCoord2f(vertex.tex_coords.get_x(), vertex.tex_coords.get_y());
-        draw(vertex.position);
+        draw(vertex.position + entity.get_position());
     }
 
     glEnd();
