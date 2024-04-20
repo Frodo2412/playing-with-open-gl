@@ -17,4 +17,5 @@ public:
     static double get_ticks();
     static void toggle_pause();
     static void reset();
+    static Uint32 get_total_time();
 };
