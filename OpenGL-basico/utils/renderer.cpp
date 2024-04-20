@@ -110,7 +110,6 @@ void renderer::draw(const square& square, const texture& texture)
 
     glTexCoord2f(0.0f, 0.0f); 
     glVertex3f(square.get_d().get_x(), square.get_d().get_y(), square.get_d().get_z());
-
     
     glEnd();
     glDisable(GL_TEXTURE_2D);

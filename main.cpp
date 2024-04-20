@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
     bool fin = false;
     clock::init();
     number::init();
+    gamehud::init();
     SDL_Event event;
 
     auto bomber_man = vector3(0, 0, 5);
@@ -66,7 +67,6 @@ int main(int argc, char* argv[])
     const auto some_block = cube(1, vector3(0, 0, 0));
 
     const auto bomberman = player();
-    gamehud hud;
     
     do
     {
@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
         glColor3f(1.0f, 1.0f, 1.0f); 
         // Dibujar el contenedor del HUD
         Uint32 tiempo = clock::get_total_time();
-        hud.drop_time(tiempo); 
+        gamehud::draw_time(tiempo); 
 
         // Restaurar la matriz de modelo-vista
         glPopMatrix();

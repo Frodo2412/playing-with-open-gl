@@ -2,7 +2,14 @@
 #include "../utils/renderer.h"
 #include "number.h"
 
- gamehud::gamehud(){};
+
+gamehud* gamehud::instance_ = nullptr;
+
+
+void gamehud::init()
+{
+     instance_ = new gamehud();
+};
 
 void gamehud::cambiar_numero(Uint32 valor, square ubicacion) {
     switch (valor) {
@@ -16,12 +23,12 @@ void gamehud::cambiar_numero(Uint32 valor, square ubicacion) {
     case 7: renderer::draw(ubicacion, number::get_texture_seven()); break;
     case 8: renderer::draw(ubicacion, number::get_texture_eight()); break;
     case 9: renderer::draw(ubicacion, number::get_texture_nine()); break;
-    default: std::cout << "error " << "\n"; break;
+    default: break;
     }
 }
 
 
-void gamehud::drop_time(Uint32 milisecond)
+void gamehud::draw_time(Uint32 milisecond)
 {
     Uint32 seconds = (milisecond / 1000);
     Uint32 minutes = (seconds / 60);
@@ -32,15 +39,15 @@ void gamehud::drop_time(Uint32 milisecond)
     Uint32 seconds_d = (seconds / 10);
     Uint32 seconds_u = (seconds % 10);
 
-    renderer::draw(espacio_, number::get_two_dots());
+    renderer::draw(instance_->espacio_, number::get_two_dots());
 
-    gamehud::cambiar_numero(minutes_d, minutos_decena_);
-    gamehud::cambiar_numero(minutes_u, minutos_unidades_);
-    gamehud::cambiar_numero(seconds_d, segundos_decena_);
-    gamehud::cambiar_numero(seconds_u, segundos_unidades_);
+    gamehud::cambiar_numero(minutes_d, instance_->minutos_decena_);
+    gamehud::cambiar_numero(minutes_u, instance_->minutos_unidades_);
+    gamehud::cambiar_numero(seconds_d, instance_->segundos_decena_);
+    gamehud::cambiar_numero(seconds_u, instance_->segundos_unidades_);
 
     // dibujo los detalles
-    renderer::draw(tiempo_, number::get_texture_time());
-    renderer::draw(contenedor_, number::get_texture_gamehud());
+    renderer::draw(instance_->tiempo_, number::get_texture_time());
+    renderer::draw(instance_->contenedor_, number::get_texture_gamehud());
 
 }
