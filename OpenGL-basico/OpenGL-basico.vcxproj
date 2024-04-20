@@ -238,8 +238,6 @@
             </AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
-        <ClCompile Include="transformations\rotation.cpp"/>
-        <ClCompile Include="transformations\transformation.cpp"/>
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
@@ -260,8 +258,6 @@
         <ClInclude Include="scene\scene.h"/>
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>
-        <ClInclude Include="transformations\rotation.h"/>
-        <ClInclude Include="transformations\transformation.h"/>
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\renderer.h"/>
     </ItemGroup>
