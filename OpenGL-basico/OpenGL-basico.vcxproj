@@ -157,10 +157,6 @@
             <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
-        <ClCompile Include="camera\camera_handler.cpp"/>
-        <ClCompile Include="camera\first_person_camera.cpp"/>
-        <ClCompile Include="camera\perspective_camera.cpp"/>
-        <ClCompile Include="camera\top_down_camera.cpp"/>
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
         <ClCompile Include="geometry\cube.cpp"/>
@@ -340,6 +336,8 @@
             </AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <ClCompile Include="transformations\rotation.cpp" />
+        <ClCompile Include="transformations\transformation.cpp" />
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
@@ -360,6 +358,8 @@
         <ClInclude Include="scene\scene.h"/>
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>
+        <ClInclude Include="transformations\rotation.h" />
+        <ClInclude Include="transformations\transformation.h" />
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\renderer.h"/>
     </ItemGroup>
@@ -471,10 +471,6 @@
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
         <ClCompile Include="textures\texture.cpp"/>
-        <ClCompile Include="camera\camera_handler.cpp"/>
-        <ClCompile Include="camera\first_person_camera.cpp"/>
-        <ClCompile Include="camera\perspective_camera.cpp"/>
-        <ClCompile Include="camera\top_down_camera.cpp"/>
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
         <ClCompile Include="geometry\cube.cpp"/>
@@ -490,7 +486,6 @@
         <ClCompile Include="textures\texture.cpp"/>
         <ClCompile Include="utils\clock.cpp" />
         <ClCompile Include="utils\renderer.cpp" />
-        <ClInclude Include="scene\camera.h" />
         <ClInclude Include="graphics\gamehud.h" />
         <ClInclude Include="graphics\number.h" />
         <ClInclude Include="scene\scene.h" />

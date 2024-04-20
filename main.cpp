@@ -56,7 +56,8 @@ int main(int argc, char* argv[])
 
 
     auto bomberman = player();
-    auto current_scene = scene(&bomberman);
+    auto current_scene = scene(&bomberman, vector3(0, 0, -5));
+    
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

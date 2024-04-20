@@ -18,7 +18,7 @@ void scene::toggle_camera()
         {
             camera_mode_ = perspective;
             const auto player = player_->get_direction();
-            camera_->set_position(vector3(player.get_x(), player.get_y(), player.get_z() + 5));
+            camera_->set_position(vector3(player.get_x(), player.get_y() + 5, player.get_z()));
             break;
         }
     case perspective:
@@ -37,6 +37,8 @@ void scene::rotate_camera(const float x, const float y) const
         camera_->rotate(x, y);
         player_->set_direction(camera_->get_direction());
         break;
+    case perspective:
+        
     default: break;
     }
 }
@@ -59,7 +61,7 @@ void scene::move_player(const vector3& displacement) const
             auto movement = forward_movement + side_movement;
 
             movement.set_y(0);
-            
+
             camera_->move(movement);
             player_->move(movement);
             break;
