@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 
 #include "OpenGL-basico/entities/player.h"
+#include "OpenGL-basico/entities/block.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/textures/texture.h"
@@ -52,7 +53,9 @@ int main(int argc, char* argv[])
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
 
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
-    const auto some_block = cube(1, vector3(0, 0, 0));
+    std::vector<block> bloques;
+    bloques.push_back(block(vector3(0.5, -0.5, 0)));
+    bloques.push_back(block(vector3(1.5, -0.5, 0)));
 
 
     auto bomberman = player();
@@ -94,9 +97,9 @@ int main(int argc, char* argv[])
         displacement.reset();
 
         current_scene.render_scene();
-
-        renderer::draw(floor, grass_texture);
-        renderer::draw(some_block, bricks_texture);
+        renderer::draw(floor, grass_texture);for(auto bloque: bloques){
+            bloque.draw_block();
+        }
         renderer::draw(bomberman);
 
         float elapsed_time = static_cast<float>(clock::get_ticks());

@@ -245,6 +245,7 @@
         <ClInclude Include="scene\camera.h"/>
         <ClInclude Include="entities\entity.h"/>
         <ClInclude Include="entities\player.h"/>
+        <ClInclude Include="entities\block.h"/>
         <ClInclude Include="geometry\cube.h"/>
         <ClInclude Include="geometry\grid.h"/>
         <ClInclude Include="geometry\square.h"/>
@@ -282,6 +283,7 @@
         <Content Include="..\assets\textures\numbers\uno.png"/>
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
+        <ClCompile Include="entities\block.cpp"/>
         <ClCompile Include="geometry\cube.cpp"/>
         <ClCompile Include="geometry\grid.cpp"/>
         <ClCompile Include="geometry\square.cpp"/>
