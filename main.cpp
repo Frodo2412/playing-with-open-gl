@@ -6,6 +6,7 @@
 
 #include "OpenGL-basico/entities/player.h"
 #include "OpenGL-basico/entities/block.h"
+#include "OpenGL-basico/entities/wall.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/textures/texture.h"
@@ -56,7 +57,9 @@ int main(int argc, char* argv[])
     std::vector<block> bloques;
     bloques.push_back(block(vector3(0.5, -0.5, 0)));
     bloques.push_back(block(vector3(1.5, -0.5, 0)));
-
+    std::vector<wall> paredes;
+    paredes.push_back(wall(vector3(2.5,-0.5,0)));
+    paredes.push_back(wall(vector3(1.5,-0.5,1)));
 
     auto bomberman = player();
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
@@ -97,8 +100,12 @@ int main(int argc, char* argv[])
         displacement.reset();
 
         current_scene.render_scene();
-        renderer::draw(floor, grass_texture);for(auto bloque: bloques){
+        renderer::draw(floor, grass_texture);
+        for(auto bloque: bloques){
             bloque.draw_block();
+        }
+        for(auto pared: paredes){
+            pared.draw_wall();
         }
         renderer::draw(bomberman);
 
