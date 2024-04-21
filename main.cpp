@@ -4,8 +4,6 @@
 #include <conio.h>
 #include <GL/glu.h>
 
-#include "OpenGL-basico/camera/camera.h"
-#include "OpenGL-basico/camera/camera_handler.h"
 #include "OpenGL-basico/entities/player.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
@@ -13,16 +11,10 @@
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
-#include "OpenGL-basico/entities/block.h"
+#include "OpenGL-basico/scene/scene.h"
+#include "OpenGL-basico/graphics/gamehud.h"
+#include "OpenGL-basico/graphics/number.h"
 
-void draw_camera()
-{
-    const auto camera = camera_handler::get_current_camera();
-    gluLookAt(camera->get_position().get_x(), camera->get_position().get_y(), camera->get_position().get_z(),
-              camera->get_direction().get_x(), camera->get_direction().get_y(),
-              camera->get_direction().get_z(),
-              camera->get_up().get_x(), camera->get_up().get_y(), camera->get_up().get_z());
-}
 
 int main(int argc, char* argv[])
 {
@@ -50,10 +42,9 @@ int main(int argc, char* argv[])
 
     bool fin = false;
     clock::init();
+    number::init();
+    gamehud::init();
     SDL_Event event;
-
-    auto bomber_man = vector3(0, 0, 5);
-    // auto camera = ::camera(0, 0, 5);
 
     auto displacement = vector3(0, 0, 0);
 
@@ -63,35 +54,50 @@ int main(int argc, char* argv[])
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
     const auto some_block = cube(1, vector3(0, 0, 0));
 
-    const auto bomberman = player();
-    std::vector<block> bloques;
-    bloques.push_back(block(vector3(0.5, -0.5, 0)));
-    bloques.push_back(block(vector3(1.5, -0.5, 0)));
 
+    auto bomberman = player();
+    auto current_scene = scene(&bomberman, vector3(0, 0, -5));
+    
     do
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
 
-        bomber_man += displacement;
-        camera_handler::get_current_camera()->move(displacement);
-        displacement.reset();
-        draw_camera();
+        // Configurar la proyección ortogonal
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // Especifico la proyección: ortogonal.
 
-        for(auto bloque: bloques){
-            bloque.draw_block();
-        }
+        // Configurar la matriz de modelo-vista
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+
         
-        renderer::draw(floor, grass_texture);
-        // renderer::draw(some_block, bricks_texture);
-        renderer::draw(bomberman);
+        glColor3f(1.0f, 1.0f, 1.0f); 
+        // Dibujar el contenedor del HUD
+        Uint32 tiempo = clock::get_total_time();
+        gamehud::draw_time(tiempo); 
 
-        //BOMBERMAN MOMENTANEO
-        glPointSize(20);
-        glBegin(GL_POINTS);
-        glColor3f(1, 0, 0);
-        glVertex3f(bomber_man.get_x(), bomber_man.get_y(), bomber_man.get_z());
-        glEnd();
+        // Restaurar la matriz de modelo-vista
+        glPopMatrix();
+
+        // Restaurar la matriz de proyección
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+
+        // Dibujar el resto de la escena
+        glMatrixMode(GL_MODELVIEW);
+        
+        current_scene.move_player(displacement);
+        displacement.reset();
+
+        current_scene.render_scene();
+
+        renderer::draw(floor, grass_texture);
+        renderer::draw(some_block, bricks_texture);
+        renderer::draw(bomberman);
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
 
@@ -101,15 +107,15 @@ int main(int argc, char* argv[])
             switch (event.type)
             {
             case SDL_MOUSEWHEEL:
-                if (event.wheel.y > 0) camera_handler::get_current_camera()->zoom_in(0.1f);
-                else camera_handler::get_current_camera()->zoom_out(0.1f);
+                // if (event.wheel.y > 0) camera_handler::get_current_camera()->zoom_in(0.1f);
+                // else camera_handler::get_current_camera()->zoom_out(0.1f);
                 break;
             case SDL_MOUSEMOTION:
                 {
                     const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
                     const float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
                     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                    camera_handler::get_current_camera()->rotate(x_offset, y_offset);
+                    current_scene.rotate_camera(x_offset, y_offset);
                     break;
                 }
             case SDL_QUIT:
@@ -135,7 +141,7 @@ int main(int argc, char* argv[])
                     displacement.set_z(-0.1f * elapsed_time);
                     break;
                 case SDLK_v:
-                    camera_handler::toggle_current_camera();
+                    current_scene.toggle_camera();
                     break;
                 case SDLK_p:
                     std::cout << "PAUSE\n";
