@@ -28,3 +28,9 @@ void clock::reset()
 {
     instance_->start_time_ = SDL_GetTicks();
 }
+
+Uint32 clock::get_total_time()
+{
+    Uint32 current_time = SDL_GetTicks();
+    return current_time;
+}

@@ -3,7 +3,11 @@
 
 class camera
 {
-protected:
+    vector3 position_, direction_, up_;
+
+public:
+
+
     explicit camera(const vector3& position, const vector3& direction, const vector3& up)
         : position_(position), direction_(direction), up_(up)
     {
@@ -14,17 +18,15 @@ protected:
     {
     }
 
-    vector3 position_, direction_, up_;
-    ~camera();
-
-public:
     vector3 get_position() const;
     vector3 get_direction() const;
     vector3 get_up() const;
 
-    virtual void move(const vector3& displacement) = 0;
-    virtual void rotate(float x_offset, float y_offset) = 0;
+    void set_direction(const vector3& direction);
+    void set_position(const vector3& position);
+    void set_up(const vector3& up);
 
-    virtual void zoom_in(float amount) = 0;
-    virtual void zoom_out(float amount) = 0;
+    void move(const vector3& displacement);
+    void rotate(float x_offset, float y_offset);
+
 };
