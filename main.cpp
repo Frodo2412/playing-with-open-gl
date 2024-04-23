@@ -4,8 +4,6 @@
 #include <conio.h>
 #include <GL/glu.h>
 
-#include "OpenGL-basico/camera/camera.h"
-#include "OpenGL-basico/camera/camera_handler.h"
 #include "OpenGL-basico/entities/player.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
@@ -94,10 +92,8 @@ int main(int argc, char* argv[])
         glMatrixMode(GL_MODELVIEW);
         
         current_scene.move_player(displacement);
-        bomber_man += displacement;
-        camera_handler::get_current_camera()->move(displacement);
-        lights_handler::get_instance()->set_light(camera_handler::get_mode(),
-                                                  camera_handler::get_current_camera()->get_direction());
+        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
+                                                  current_scene.get_camera()->get_direction());
         displacement.reset();
 
         current_scene.render_scene();

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../geometry/vector3.h"
-#include "../camera/camera_handler.h"
+#include "../scene/scene.h"
 
 class lights_handler
 {
