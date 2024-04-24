@@ -127,7 +127,10 @@ void renderer::draw(const vector3& v)
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
 
-void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, const texture& enabled_texture, const texture& disabled_texture)
+void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture,
+                            const texture& enabled_texture, const texture& disabled_texture, const texture& day_settings_texture,
+                            const texture& night_settings_texture, const texture& red_settings_texture,
+                            const texture& green_settings_texture, const texture& blue_settings_texture) 
 {
     glEnable(GL_LIGHTING);//ILUMINAR LAS SETTINGS
     glEnable(GL_LIGHT2);
@@ -223,23 +226,37 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glTexCoord2f(0,1);
     glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
     glEnd();
-    
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
 
-    if (settings->get_instance()->get_wireframe_enabled())//LUCES!!!!!!!!!!!
-        glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
-    else
-        glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
+    enabled_coord_x = enabled_coord_x - 25;
+    enabled_coord_y = enabled_coord_y - winHeight*0.15;
+    settings->get_instance()->set_enabled_screen_coords(4, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    switch (settings->get_instance()->get_light_color())
+    {
+        case day:
+            glBindTexture(GL_TEXTURE_2D, day_settings_texture.get_texture_id());
+            break;
+        case night:
+            glBindTexture(GL_TEXTURE_2D, night_settings_texture.get_texture_id());
+            break;
+        case red:
+            glBindTexture(GL_TEXTURE_2D, red_settings_texture.get_texture_id());
+            break;
+        case green:
+            glBindTexture(GL_TEXTURE_2D, green_settings_texture.get_texture_id());
+            break;
+        case blue:
+            glBindTexture(GL_TEXTURE_2D, blue_settings_texture.get_texture_id());
+            break;
+    }
     glBegin(GL_QUADS);
     glTexCoord2f(0,0);
     glVertex3f(enabled_coord_x,enabled_coord_y,1);
     glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y,1);
+    glVertex3f(enabled_coord_x + 100,enabled_coord_y,1);
     glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y + 50,1);
+    glVertex3f(enabled_coord_x + 100,enabled_coord_y + 50,1);
     glTexCoord2f(0,1);
     glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
     glEnd();
-    
     glDisable(GL_LIGHT2);
 }

@@ -19,6 +19,9 @@ public:
     static void draw(const triangle& triangle);
     static void draw(const entity& entity);
     static void draw(const square&, const texture& texture);
-    static void draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, const texture& enabled_texture, const texture& disabled_texture);
+    static void draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture,
+                            const texture& enabled_texture, const texture& disabled_texture, const texture& day_settings_texture,
+                            const texture& night_settings_texture, const texture& red_settings_texture,
+                            const texture& green_settings_texture, const texture& blue_settings_texture);
 };
 

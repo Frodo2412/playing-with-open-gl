@@ -4,7 +4,8 @@
 
 enum light_colors
 {
-    natural,
+    day,
+    night,
     red,
     green,
     blue
@@ -21,7 +22,7 @@ private:
     static settings* instance_;
     int winHeigth;
     int winWidth;
-    vector2 enabled_screen_coords[4];
+    vector2 enabled_screen_coords[5];
     settings();
 public:
     static settings* get_instance();

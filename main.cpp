@@ -58,19 +58,27 @@ int main(int argc, char* argv[])
     const auto ajustes_texture = texture_loader::load_texture("../assets/textures/settings/ajustes.jpg");
     const auto enabled_texture = texture_loader::load_texture("../assets/textures/settings/enabled.jpg");
     const auto disabled_texture = texture_loader::load_texture("../assets/textures/settings/disabled.jpg");
+    const auto day_settings_texture = texture_loader::load_texture("../assets/textures/settings/dia.jpg");
+    const auto night_settings_texture = texture_loader::load_texture("../assets/textures/settings/noche.jpg");
+    const auto red_settings_texture = texture_loader::load_texture("../assets/textures/settings/rojo.jpg");
+    const auto green_settings_texture = texture_loader::load_texture("../assets/textures/settings/verde.jpg");
+    const auto blue_settings_texture = texture_loader::load_texture("../assets/textures/settings/azul.jpg");
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
     const auto some_block = cube(1, vector3(0, 0, 0));
-
 
     auto bomberman = player();
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
     
-    //int targetFrameDuration = 1000 / 60;//60 FPS
+    //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
+    Uint32 lastFrameTime = SDL_GetTicks();
+    int frames = 0;
+    int time = 0;
+
+    //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
+    float game_velocity = 1;
     
     do
     {
-        Uint32 lastFrameTime = SDL_GetTicks();
-        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
         if (clock::get_instance()->get_is_paused())
@@ -83,7 +91,8 @@ int main(int argc, char* argv[])
             glOrtho(-winWidth/2, winWidth/2, -winHeigth/2, winHeigth/2, -1.0, 1.0);
             settings::get_instance()->set_winHeigth(winHeigth);//ESTO LO PONGO QUE LO ACTUALICE SIEMPRE POR SI DESPUES HACEMOS QUE SE PUEDA CAMBIAR LA RESOLUCION
             settings::get_instance()->set_winWidth(winWidth);
-            renderer::draw(settings::get_instance(), current_scene.get_camera()->get_position(), ajustes_texture, enabled_texture, disabled_texture);
+            renderer::draw(settings::get_instance(), current_scene.get_camera()->get_position(), ajustes_texture, enabled_texture, disabled_texture , day_settings_texture,
+                            night_settings_texture, red_settings_texture, green_settings_texture, blue_settings_texture);
             glPopMatrix();
         } else
         {
@@ -112,7 +121,13 @@ int main(int argc, char* argv[])
 
         // Dibujar el resto de la escena
         glMatrixMode(GL_MODELVIEW);
-        
+        if (settings::get_instance()->get_slow_mode())//CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
+        {
+            game_velocity = 0.5f;
+        } else
+        {
+            game_velocity = 1.f;
+        }
         if (settings::get_instance()->get_wireframe_enabled())
         {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -142,24 +157,31 @@ int main(int argc, char* argv[])
         displacement.reset();
 
         current_scene.render_scene();
-        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
+        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(), settings::get_instance()->get_light_color(),
                                                   current_scene.get_camera()->get_position());
 
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
-        
-        
-        /*Uint32 currentFrameTime = SDL_GetTicks();
+
+        //CONTROL DE FRAMES
+        frames++;
+        Uint32 currentFrameTime = SDL_GetTicks();
         Uint32 deltaTime = currentFrameTime - lastFrameTime;
-        std::cout << "deltaTime: " << deltaTime << std::endl;
-        if (deltaTime < targetFrameDuration)//limita a 60fps maximo
+        lastFrameTime = currentFrameTime;
+        time += deltaTime;
+        if (time >= 1000)
         {
-            SDL_Delay(targetFrameDuration-deltaTime); 
+            std::cout << "FPS: " << frames << std::endl;
+            frames = 0;
+            time = 0;
         }
-        if (settings::get_instance()->get_slow_mode())//ARREGLAR DESPEUS
+        
+        if (deltaTime < 1000/60)//limita a 60fps maximo
         {
-            deltaTime = deltaTime * 2;
-        }*/
+            SDL_Delay(1000/60-deltaTime); 
+        }
+
+        
         float elapsed_time = static_cast<float>(clock::get_ticks());
 
         //MANEJO DE EVENTOS

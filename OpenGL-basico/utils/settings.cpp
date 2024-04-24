@@ -9,7 +9,7 @@ settings::settings()
     wireframe_enabled_ = false;
     textures_enabled_ = true;
     facetado_enabled_ = false;
-    light_color_ = light_colors::natural;
+    light_color_ = light_colors::day;
 }
 
 settings* settings::get_instance()
@@ -111,8 +111,28 @@ void settings::event_handler(int x, int y)
     }
     if (x >= enabled_screen_coords[3].get_x() && x <= enabled_screen_coords[3].get_x() + 50 && y >= enabled_screen_coords[3].get_y() && y <= enabled_screen_coords[3].get_y() + 50)
     {
-        std::cout << "entro Facetado" << std::endl;
         facetado_enabled_ = !facetado_enabled_;
+    }
+    if (x >= enabled_screen_coords[4].get_x() && x <= enabled_screen_coords[4].get_x() + 100 && y >= enabled_screen_coords[4].get_y() && y <= enabled_screen_coords[4].get_y() + 50)
+    {
+        switch (light_color_)
+        {
+        case light_colors::day:
+            light_color_ = light_colors::night;
+            break;
+        case light_colors::night:
+            light_color_ = light_colors::red;
+            break;
+        case light_colors::red:
+            light_color_ = light_colors::green;
+            break;
+        case light_colors::green:
+            light_color_ = light_colors::blue;
+            break;
+        case light_colors::blue:
+            light_color_ = light_colors::day;
+            break;
+        }
     }
 }
 
