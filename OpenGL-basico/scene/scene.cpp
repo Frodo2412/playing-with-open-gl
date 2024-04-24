@@ -92,6 +92,11 @@ void scene::render_scene() const
     renderer::draw(*player_);
 }
 
+camera_mode scene::get_camera_mode()
+{
+    return camera_mode_;
+}
+
 camera* scene::get_camera()
 {
     return camera_;

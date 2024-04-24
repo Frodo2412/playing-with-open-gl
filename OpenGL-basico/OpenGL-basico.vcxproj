@@ -239,6 +239,7 @@
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
         <ClCompile Include="utils\clock.cpp"/>
+        <ClCompile Include="utils\lights_handler.cpp" />
         <ClCompile Include="utils\renderer.cpp"/>
         <ClCompile Include="utils\settings.cpp" />
     </ItemGroup>
@@ -260,6 +261,7 @@
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>
         <ClInclude Include="utils\clock.h"/>
+        <ClInclude Include="utils\lights_handler.h" />
         <ClInclude Include="utils\renderer.h"/>
         <ClInclude Include="utils\settings.h" />
     </ItemGroup>

@@ -31,7 +31,8 @@ public:
     void rotate_camera(const float x, const float y) const;
 
     void move_player(const vector3& displacement) const;
-
+    camera_mode get_camera_mode();
+    camera* get_camera();
     void render_scene() const;
 
     camera* get_camera();
