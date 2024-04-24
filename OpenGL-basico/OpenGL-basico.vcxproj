@@ -80,7 +80,8 @@
     </ItemDefinitionGroup>
     <ItemGroup>
         <ClCompile Include="..\main.cpp"/>
-        <ClCompile Include="entities\wall.cpp" />
+        <ClCompile Include="entities\brick_block.cpp" />
+        <ClCompile Include="entities\metal_block.cpp" />
         <ClCompile Include="scene\camera.cpp">
             <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
             <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -243,7 +244,8 @@
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
     <ItemGroup>
-        <ClInclude Include="entities\wall.h" />
+        <ClInclude Include="entities\brick_block.h" />
+        <ClInclude Include="entities\metal_block.h" />
         <ClInclude Include="scene\camera.h"/>
         <ClInclude Include="entities\entity.h"/>
         <ClInclude Include="entities\player.h"/>
@@ -271,6 +273,7 @@
         <Content Include="..\assets\textures\Doodler.png"/>
         <Content Include="..\assets\textures\grass_1.jpg"/>
         <Content Include="..\assets\textures\bomberman.jpeg"/>
+        <Content Include="..\assets\textures\metal_1.jpg" />
         <Content Include="..\assets\textures\numbers\cero.png"/>
         <Content Include="..\assets\textures\numbers\cinco.png"/>
         <Content Include="..\assets\textures\numbers\cuatro.png"/>
