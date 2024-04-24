@@ -234,6 +234,7 @@
           <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
           <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <ClCompile Include="interfaces\settings_screen.cpp" />
         <ClCompile Include="scene\camera.cpp">
             <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
             <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -398,6 +399,7 @@
     <ItemGroup>
         <ClInclude Include="interfaces\gamehud.h" />
         <ClInclude Include="interfaces\number.h" />
+        <ClInclude Include="interfaces\settings_screen.h" />
         <ClInclude Include="scene\camera.h" />
         <ClInclude Include="entities\entity.h" />
         <ClInclude Include="entities\player.h" />
