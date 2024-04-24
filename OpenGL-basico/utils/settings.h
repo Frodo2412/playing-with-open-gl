@@ -4,7 +4,7 @@
 
 enum light_colors
 {
-    normal,
+    natural,
     red,
     green,
     blue
@@ -13,7 +13,7 @@ enum light_colors
 class settings
 {
 private:
-    float game_velocity_;//ES UN MULTIPLICADOR DE LA VELOCIDAD NORMAL DEL JUEGO
+    bool slow_mode_ = false;
     bool wireframe_enabled_ = false;
     bool textures_enabled_ = true;
     bool facetado_enabled_ = false;
@@ -21,12 +21,12 @@ private:
     static settings* instance_;
     int winHeigth;
     int winWidth;
-    vector2 enabled_screen_coords[3];
+    vector2 enabled_screen_coords[4];
     settings();
 public:
     static settings* get_instance();
-    void set_game_velocity(float velocity);
-    float get_game_velocity();
+    void set_slow_mode(bool slow_mode);
+    bool get_slow_mode();
     void set_wireframe_enabled(bool wireframe);
     bool get_wireframe_enabled();
     void set_light_color(light_colors color);

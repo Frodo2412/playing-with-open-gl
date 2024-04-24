@@ -154,8 +154,8 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     
     int enabled_coord_x = winWidth/2 - winWidth*0.28125;
     int enabled_coord_y = winHeight/2 - winHeight*0.322917 + (winHeight-480)*0.05;
-
-    if (settings->get_instance()->get_wireframe_enabled())//VELOCIDAD!!!!!!!!!!
+    settings->get_instance()->set_enabled_screen_coords(0, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    if (settings->get_instance()->get_slow_mode())
         glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
     else
         glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
@@ -171,7 +171,7 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glEnd();
     
     enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(0, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    settings->get_instance()->set_enabled_screen_coords(1, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_wireframe_enabled())
         glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
@@ -189,7 +189,7 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glEnd();
     
     enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(1,  vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    settings->get_instance()->set_enabled_screen_coords(2,  vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_textures_enabled())
         glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
@@ -207,7 +207,7 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glEnd();
     
     enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(2, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    settings->get_instance()->set_enabled_screen_coords(3, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_facetado_enabled())
         glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());

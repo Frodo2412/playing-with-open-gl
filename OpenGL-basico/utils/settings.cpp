@@ -5,11 +5,11 @@ settings* settings::instance_ = nullptr;
 
 settings::settings()
 {
-    game_velocity_ = 1;
+    slow_mode_ = false;
     wireframe_enabled_ = false;
     textures_enabled_ = true;
     facetado_enabled_ = false;
-    light_color_ = light_colors::normal;
+    light_color_ = light_colors::natural;
 }
 
 settings* settings::get_instance()
@@ -20,14 +20,14 @@ settings* settings::get_instance()
 }
 
 
-void settings::set_game_velocity(float velocity)
+void settings::set_slow_mode(bool slow_mode)
 {
-    game_velocity_ = velocity;
+    slow_mode_ = slow_mode;
 }
 
-float settings::get_game_velocity()
+bool settings::get_slow_mode()
 {
-    return game_velocity_;
+    return slow_mode_;
 }
 
 void settings::set_wireframe_enabled(bool wireframe)
@@ -99,13 +99,17 @@ void settings::event_handler(int x, int y)
 {
     if (x >= enabled_screen_coords[0].get_x() && x <= enabled_screen_coords[0].get_x() + 50 && y >= enabled_screen_coords[0].get_y() && y <= enabled_screen_coords[0].get_y() + 50)
     {
-        wireframe_enabled_ = !wireframe_enabled_;
+        slow_mode_ = !slow_mode_;
     }
     if (x >= enabled_screen_coords[1].get_x() && x <= enabled_screen_coords[1].get_x() + 50 && y >= enabled_screen_coords[1].get_y() && y <= enabled_screen_coords[1].get_y() + 50)
     {
-        textures_enabled_ = !textures_enabled_;
+        wireframe_enabled_ = !wireframe_enabled_;
     }
     if (x >= enabled_screen_coords[2].get_x() && x <= enabled_screen_coords[2].get_x() + 50 && y >= enabled_screen_coords[2].get_y() && y <= enabled_screen_coords[2].get_y() + 50)
+    {
+        textures_enabled_ = !textures_enabled_;
+    }
+    if (x >= enabled_screen_coords[3].get_x() && x <= enabled_screen_coords[3].get_x() + 50 && y >= enabled_screen_coords[3].get_y() && y <= enabled_screen_coords[3].get_y() + 50)
     {
         std::cout << "entro Facetado" << std::endl;
         facetado_enabled_ = !facetado_enabled_;
