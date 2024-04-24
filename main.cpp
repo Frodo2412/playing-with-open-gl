@@ -92,15 +92,15 @@ int main(int argc, char* argv[])
         glMatrixMode(GL_MODELVIEW);
         
         current_scene.move_player(displacement);
-        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
-                                                  current_scene.get_camera()->get_direction());
+        
         displacement.reset();
 
         current_scene.render_scene();
+        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
+                                                  current_scene.get_camera()->get_position());
 
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
-        renderer::draw(bomberman);
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
 
