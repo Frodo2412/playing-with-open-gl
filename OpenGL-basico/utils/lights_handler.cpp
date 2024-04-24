@@ -7,8 +7,6 @@ lights_handler* lights_handler::instance_ = nullptr;
 
 lights_handler::lights_handler()
 {
-    position_ = vector3(0, 0, 0);
-    mode_ = camera_mode::first;
 }
 
 lights_handler* lights_handler::get_instance()
@@ -20,17 +18,15 @@ lights_handler* lights_handler::get_instance()
     return instance_;
 }
 
-void lights_handler::set_light(camera_mode mode, vector3 pos)
+void lights_handler::set_light(camera_mode mode, vector3 position)
 {
-    position_ = pos;
-    mode_ = mode;
-    switch (mode_)
+    switch (mode)
     {
     case camera_mode::first:
         //ILUMINACION PERSONAJE
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
-        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{position_.get_x(), 0, position_.get_z(), 1.f});
+        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{position.get_x(), 0, position.get_z(), 1.f});
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
         glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 0.0f});
         glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);
@@ -52,7 +48,7 @@ void lights_handler::set_light(camera_mode mode, vector3 pos)
         //ILUMINACION PERSONAJE
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
-        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{position_.get_x(), 0, position_.get_z(), 1.f});
+        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{position.get_x(), 0, position.get_z(), 1.f});
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
         glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 0.0f});
         glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);

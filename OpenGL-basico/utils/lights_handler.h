@@ -5,8 +5,6 @@
 class lights_handler
 {
 private:
-    vector3 position_;
-    camera_mode mode_;
     static lights_handler* instance_;
     lights_handler();
 public:
