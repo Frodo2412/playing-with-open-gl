@@ -58,12 +58,12 @@ void lights_handler::set_light(camera_mode mode, light_colors light_color, vecto
         //ILUMINACION GLOBAL
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
-        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{0.f,-1.f,0.f,1.f});
+        glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{0, 0, 0, 1.f});
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{color.get_x(), color.get_y(), color.get_z(), 1.f});
-        glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{color.get_x(), color.get_y(), color.get_z(), 0.0f});
+        glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{color.get_x(), color.get_y(), color.get_z(), 0.f});
         glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);
         glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
-        glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0f);
+        glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0000000000000001f);
         break;
     case camera_mode::perspective:
         //ILUMINACION PERSONAJE

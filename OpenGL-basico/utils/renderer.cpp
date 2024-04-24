@@ -136,7 +136,7 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glEnable(GL_LIGHT2);
     glLightfv(GL_LIGHT2, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f,1.f});
     glLightfv(GL_LIGHT2, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
-    glLightfv(GL_LIGHT2, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 0.0f});
+    glLightfv(GL_LIGHT2, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 1.0f});
     glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
