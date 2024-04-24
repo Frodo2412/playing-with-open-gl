@@ -11,10 +11,17 @@ enum light_colors
     blue
 };
 
+enum game_velocity
+{
+    slow,
+    normal,
+    fast
+};
+
 class settings
 {
 private:
-    bool slow_mode_ = false;
+    game_velocity game_velocity_ = game_velocity::normal;
     bool wireframe_enabled_ = false;
     bool textures_enabled_ = true;
     bool facetado_enabled_ = false;
@@ -26,8 +33,8 @@ private:
     settings();
 public:
     static settings* get_instance();
-    void set_slow_mode(bool slow_mode);
-    bool get_slow_mode();
+    void set_game_velocity(game_velocity game_velocity);
+    game_velocity get_game_velocity();
     void set_wireframe_enabled(bool wireframe);
     bool get_wireframe_enabled();
     void set_light_color(light_colors color);

@@ -5,7 +5,7 @@ settings* settings::instance_ = nullptr;
 
 settings::settings()
 {
-    slow_mode_ = false;
+    game_velocity_ = game_velocity::normal;
     wireframe_enabled_ = false;
     textures_enabled_ = true;
     facetado_enabled_ = false;
@@ -20,14 +20,14 @@ settings* settings::get_instance()
 }
 
 
-void settings::set_slow_mode(bool slow_mode)
+void settings::set_game_velocity(game_velocity game_velocity)
 {
-    slow_mode_ = slow_mode;
+    game_velocity_ = game_velocity;
 }
 
-bool settings::get_slow_mode()
+game_velocity settings::get_game_velocity()
 {
-    return slow_mode_;
+    return game_velocity_;
 }
 
 void settings::set_wireframe_enabled(bool wireframe)
@@ -97,9 +97,20 @@ void settings::set_enabled_screen_coords(int index, vector2 vector)
 
 void settings::event_handler(int x, int y)
 {
-    if (x >= enabled_screen_coords[0].get_x() && x <= enabled_screen_coords[0].get_x() + 50 && y >= enabled_screen_coords[0].get_y() && y <= enabled_screen_coords[0].get_y() + 50)
+    if (x >= enabled_screen_coords[0].get_x() && x <= enabled_screen_coords[0].get_x() + 100 && y >= enabled_screen_coords[0].get_y() && y <= enabled_screen_coords[0].get_y() + 50)
     {
-        slow_mode_ = !slow_mode_;
+        switch (game_velocity_)
+        {
+        case game_velocity::slow:
+            game_velocity_ = game_velocity::normal;
+            break;
+        case game_velocity::normal:
+            game_velocity_ = game_velocity::fast;
+            break;
+        case game_velocity::fast:
+            game_velocity_ = game_velocity::slow;
+            break;
+        }
     }
     if (x >= enabled_screen_coords[1].get_x() && x <= enabled_screen_coords[1].get_x() + 50 && y >= enabled_screen_coords[1].get_y() && y <= enabled_screen_coords[1].get_y() + 50)
     {

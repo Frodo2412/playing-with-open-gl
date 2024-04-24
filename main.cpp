@@ -56,6 +56,9 @@ int main(int argc, char* argv[])
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
     const auto ajustes_texture = texture_loader::load_texture("../assets/textures/settings/ajustes.jpg");
+    const auto slow_settings_texture = texture_loader::load_texture("../assets/textures/settings/slow.jpg");
+    const auto normal_settings_texture = texture_loader::load_texture("../assets/textures/settings/normal.jpg");
+    const auto fast_settings_texture = texture_loader::load_texture("../assets/textures/settings/fast.jpg");
     const auto enabled_texture = texture_loader::load_texture("../assets/textures/settings/enabled.jpg");
     const auto disabled_texture = texture_loader::load_texture("../assets/textures/settings/disabled.jpg");
     const auto day_settings_texture = texture_loader::load_texture("../assets/textures/settings/dia.jpg");
@@ -91,7 +94,8 @@ int main(int argc, char* argv[])
             glOrtho(-winWidth/2, winWidth/2, -winHeigth/2, winHeigth/2, -1.0, 1.0);
             settings::get_instance()->set_winHeigth(winHeigth);//ESTO LO PONGO QUE LO ACTUALICE SIEMPRE POR SI DESPUES HACEMOS QUE SE PUEDA CAMBIAR LA RESOLUCION
             settings::get_instance()->set_winWidth(winWidth);
-            renderer::draw(settings::get_instance(), current_scene.get_camera()->get_position(), ajustes_texture, enabled_texture, disabled_texture , day_settings_texture,
+            renderer::draw(settings::get_instance(), current_scene.get_camera()->get_position(), ajustes_texture,
+                            slow_settings_texture, normal_settings_texture, fast_settings_texture, enabled_texture, disabled_texture , day_settings_texture,
                             night_settings_texture, red_settings_texture, green_settings_texture, blue_settings_texture);
             glPopMatrix();
         } else
@@ -121,13 +125,18 @@ int main(int argc, char* argv[])
 
         // Dibujar el resto de la escena
         glMatrixMode(GL_MODELVIEW);
-        if (settings::get_instance()->get_slow_mode())//CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
+        switch (settings::get_instance()->get_game_velocity())//CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
-            game_velocity = 0.5f;
-        } else
-        {
-            game_velocity = 1.f;
-        }
+            case game_velocity::slow:
+                game_velocity = 0.3;
+                break;
+            case game_velocity::normal:
+                game_velocity = 1;
+                break;
+            case game_velocity::fast:
+                game_velocity = 2;
+                break;
+        } 
         if (settings::get_instance()->get_wireframe_enabled())
         {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -195,8 +204,8 @@ int main(int argc, char* argv[])
                 break;
             case SDL_MOUSEMOTION:
                 {
-                    const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time;
-                    const float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time;
+                    const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time * game_velocity;
+                    const float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time * game_velocity;
                     std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
                     current_scene.rotate_camera(x_offset, y_offset);
                     break;
@@ -215,19 +224,19 @@ int main(int argc, char* argv[])
                 {
                 case SDLK_a:
                     std::cout << "LEFT\n";
-                    displacement.set_x(0.1f * elapsed_time);
+                    displacement.set_x(0.1f * elapsed_time*game_velocity);
                     break;
                 case SDLK_d:
                     std::cout << "RIGHT\n";
-                    displacement.set_x(-0.1f * elapsed_time);
+                    displacement.set_x(-0.1f * elapsed_time*game_velocity);
                     break;
                 case SDLK_w:
                     std::cout << "UP\n";
-                    displacement.set_z(0.1f * elapsed_time);
+                    displacement.set_z(0.1f * elapsed_time*game_velocity);
                     break;
                 case SDLK_s:
                     std::cout << "DOWN\n";
-                    displacement.set_z(-0.1f * elapsed_time);
+                    displacement.set_z(-0.1f * elapsed_time*game_velocity);
                     break;
                 case SDLK_v:
                     current_scene.toggle_camera();

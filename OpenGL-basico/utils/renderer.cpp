@@ -127,7 +127,8 @@ void renderer::draw(const vector3& v)
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
 
-void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture,
+void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, 
+                            const texture& slow_settings_texture, const texture& normal_settings_texture, const texture& fast_settings_texture,
                             const texture& enabled_texture, const texture& disabled_texture, const texture& day_settings_texture,
                             const texture& night_settings_texture, const texture& red_settings_texture,
                             const texture& green_settings_texture, const texture& blue_settings_texture) 
@@ -155,24 +156,34 @@ void renderer::draw(const settings* settings, vector3 bomber_man_pos, const text
     glVertex3f(-winWidth/2,winHeight/2,0);
     glEnd();
     
-    int enabled_coord_x = winWidth/2 - winWidth*0.28125;
+    int enabled_coord_x = (int)winWidth/2 - winWidth*0.28125;
     int enabled_coord_y = winHeight/2 - winHeight*0.322917 + (winHeight-480)*0.05;
+    enabled_coord_x = enabled_coord_x - 25;
     settings->get_instance()->set_enabled_screen_coords(0, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
-    if (settings->get_instance()->get_slow_mode())
-        glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
-    else
-        glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
+    switch(settings->get_instance()->get_game_velocity())
+    {
+        case game_velocity::slow:
+            glBindTexture(GL_TEXTURE_2D, slow_settings_texture.get_texture_id());
+            break;
+        case game_velocity::normal:
+            glBindTexture(GL_TEXTURE_2D, normal_settings_texture.get_texture_id());
+            break;
+        case game_velocity::fast:
+            glBindTexture(GL_TEXTURE_2D, fast_settings_texture.get_texture_id());
+            break;
+    }
     glBegin(GL_QUADS);
     glTexCoord2f(0,0);
     glVertex3f(enabled_coord_x,enabled_coord_y,1);
     glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y,1);
+    glVertex3f(enabled_coord_x + 100,enabled_coord_y,1);
     glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y + 50,1);
+    glVertex3f(enabled_coord_x + 100,enabled_coord_y + 50,1);
     glTexCoord2f(0,1);
     glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
     glEnd();
-    
+
+    enabled_coord_x = enabled_coord_x + 25;
     enabled_coord_y = enabled_coord_y - winHeight*0.15;
     settings->get_instance()->set_enabled_screen_coords(1, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
