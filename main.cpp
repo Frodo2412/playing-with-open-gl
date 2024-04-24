@@ -7,16 +7,14 @@
 #include "OpenGL-basico/entities/player.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
+#include "OpenGL-basico/interfaces/gamehud.h"
+#include "OpenGL-basico/interfaces/number.h"
 #include "OpenGL-basico/textures/texture.h"
 #include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
 #include "OpenGL-basico/scene/scene.h"
-#include "OpenGL-basico/graphics/gamehud.h"
-#include "OpenGL-basico/graphics/number.h"
 #include "OpenGL-basico/utils/lights_handler.h"
-#include "OpenGL-basico/utils/renderer.h"
-
 
 int main(int argc, char* argv[])
 {
