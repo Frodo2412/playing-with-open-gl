@@ -91,3 +91,8 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
     renderer::draw(*player_);
 }
+
+camera* scene::get_camera()
+{
+    return camera_;
+}

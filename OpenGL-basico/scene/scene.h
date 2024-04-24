@@ -33,4 +33,6 @@ public:
     void move_player(const vector3& displacement) const;
 
     void render_scene() const;
+
+    camera* get_camera();
 };

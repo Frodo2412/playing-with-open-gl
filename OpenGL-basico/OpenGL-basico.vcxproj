@@ -240,6 +240,7 @@
         </ClCompile>
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\renderer.cpp"/>
+        <ClCompile Include="utils\settings.cpp" />
     </ItemGroup>
     <ItemGroup>
         <ClInclude Include="scene\camera.h"/>
@@ -260,6 +261,7 @@
         <ClInclude Include="textures\texture_loader.h"/>
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\renderer.h"/>
+        <ClInclude Include="utils\settings.h" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\assets\models\Doodler.obj"/>
@@ -367,6 +369,9 @@
             <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <Content Include="..\assets\textures\settings\ajustes.jpg" />
+        <Content Include="..\assets\textures\settings\disabled.jpg" />
+        <Content Include="..\assets\textures\settings\enabled.jpg" />
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,7 @@
 #include "../geometry/vector3.h"
 #include "../geometry/grid.h"
 #include "../textures/texture.h"
+#include "./settings.h"
 
 class renderer
 {
@@ -18,4 +19,6 @@ public:
     static void draw(const triangle& triangle);
     static void draw(const entity& entity);
     static void draw(const square&, const texture& texture);
+    static void draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, const texture& enabled_texture, const texture& disabled_texture);
 };
+
