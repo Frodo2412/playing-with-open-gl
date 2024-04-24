@@ -196,10 +196,6 @@ int main(int argc, char* argv[])
         {
             switch (event.type)
             {
-            case SDL_MOUSEWHEEL:
-                // if (event.wheel.y > 0) camera_handler::get_current_camera()->zoom_in(0.1f);
-                // else camera_handler::get_current_camera()->zoom_out(0.1f);
-                break;
             case SDL_MOUSEMOTION:
                 {
                     const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time * game_velocity;
