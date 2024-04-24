@@ -211,7 +211,7 @@ int main(int argc, char* argv[])
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
-                if (event.button.button == SDL_BUTTON_LEFT) {
+                if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused()) {
                     settings::get_instance()->event_handler(event.button.x, -event.button.y); //Y ES NEGATIVO PORQUE ARRIBA ES 0 Y ABAJO ES 480
                     std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
                 }
