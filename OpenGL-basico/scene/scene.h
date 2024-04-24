@@ -34,6 +34,4 @@ public:
     camera_mode get_camera_mode();
     camera* get_camera();
     void render_scene() const;
-
-    camera* get_camera();
 };

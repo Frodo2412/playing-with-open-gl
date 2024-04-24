@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     auto bomberman = player();
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
     
-    int targetFrameDuration = 1000 / 60;//60 FPS
+    //int targetFrameDuration = 1000 / 60;//60 FPS
     
     do
     {
@@ -147,21 +147,19 @@ int main(int argc, char* argv[])
 
         renderer::draw(floor, grass_texture);
         renderer::draw(some_block, bricks_texture);
-
-        renderer::draw(bomberman);
         
         
-        Uint32 currentFrameTime = SDL_GetTicks();
+        /*Uint32 currentFrameTime = SDL_GetTicks();
         Uint32 deltaTime = currentFrameTime - lastFrameTime;
         std::cout << "deltaTime: " << deltaTime << std::endl;
-        /*if (deltaTime < targetFrameDuration)//limita a 60fps maximo
+        if (deltaTime < targetFrameDuration)//limita a 60fps maximo
         {
             SDL_Delay(targetFrameDuration-deltaTime); 
-        }*/
+        }
         if (settings::get_instance()->get_slow_mode())//ARREGLAR DESPEUS
         {
             deltaTime = deltaTime * 2;
-        }
+        }*/
         float elapsed_time = static_cast<float>(clock::get_ticks());
 
         //MANEJO DE EVENTOS
