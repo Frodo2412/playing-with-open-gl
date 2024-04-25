@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
     
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
-    Uint32 lastFrameTime = SDL_GetTicks();
+    Uint32 lastFrameTime = clock::get_instance()->get_total_time();
     int frames = 0;
     int time = 0;
 
@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
 
         //CONTROL DE FRAMES
         frames++;
-        Uint32 currentFrameTime = SDL_GetTicks();
+        Uint32 currentFrameTime = clock::get_instance()->get_total_time();
         Uint32 deltaTime = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
         time += deltaTime;
