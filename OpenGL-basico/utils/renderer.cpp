@@ -127,12 +127,21 @@ void renderer::draw(const vector3& v)
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
 
-void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, 
-                            const texture& slow_settings_texture, const texture& normal_settings_texture, const texture& fast_settings_texture,
-                            const texture& enabled_texture, const texture& disabled_texture, const texture& day_settings_texture,
-                            const texture& night_settings_texture, const texture& red_settings_texture,
-                            const texture& green_settings_texture, const texture& blue_settings_texture) 
+void renderer::draw(const settings* settings) 
 {
+
+    const texture& ajustes_texture = settings->get_instance()->get_ajustes_texture();
+    const texture& slow_settings_texture = settings->get_instance()->get_slow_settings_texture();
+    const texture& normal_settings_texture = settings->get_instance()->get_normal_settings_texture();
+    const texture& fast_settings_texture = settings->get_instance()->get_fast_settings_texture();
+    const texture& enabled_texture = settings->get_instance()->get_enabled_texture();
+    const texture& disabled_texture = settings->get_instance()->get_disabled_texture();
+    const texture& day_settings_texture = settings->get_instance()->get_day_settings_texture();
+    const texture& night_settings_texture = settings->get_instance()->get_night_settings_texture();
+    const texture& red_settings_texture = settings->get_instance()->get_red_settings_texture();
+    const texture& green_settings_texture = settings->get_instance()->get_green_settings_texture();
+    const texture& blue_settings_texture = settings->get_instance()->get_blue_settings_texture();
+    
     glEnable(GL_LIGHTING);//ILUMINAR LAS SETTINGS
     glEnable(GL_LIGHT2);
     glLightfv(GL_LIGHT2, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f,1.f});

@@ -55,17 +55,6 @@ int main(int argc, char* argv[])
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
-    const auto ajustes_texture = texture_loader::load_texture("../assets/textures/settings/ajustes.jpg");
-    const auto slow_settings_texture = texture_loader::load_texture("../assets/textures/settings/slow.jpg");
-    const auto normal_settings_texture = texture_loader::load_texture("../assets/textures/settings/normal.jpg");
-    const auto fast_settings_texture = texture_loader::load_texture("../assets/textures/settings/fast.jpg");
-    const auto enabled_texture = texture_loader::load_texture("../assets/textures/settings/enabled.jpg");
-    const auto disabled_texture = texture_loader::load_texture("../assets/textures/settings/disabled.jpg");
-    const auto day_settings_texture = texture_loader::load_texture("../assets/textures/settings/dia.jpg");
-    const auto night_settings_texture = texture_loader::load_texture("../assets/textures/settings/noche.jpg");
-    const auto red_settings_texture = texture_loader::load_texture("../assets/textures/settings/rojo.jpg");
-    const auto green_settings_texture = texture_loader::load_texture("../assets/textures/settings/verde.jpg");
-    const auto blue_settings_texture = texture_loader::load_texture("../assets/textures/settings/azul.jpg");
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
     const auto some_block = cube(1, vector3(0, 0, 0));
 
@@ -94,9 +83,7 @@ int main(int argc, char* argv[])
             glOrtho(-winWidth/2, winWidth/2, -winHeigth/2, winHeigth/2, -1.0, 1.0);
             settings::get_instance()->set_winHeigth(winHeigth);//ESTO LO PONGO QUE LO ACTUALICE SIEMPRE POR SI DESPUES HACEMOS QUE SE PUEDA CAMBIAR LA RESOLUCION
             settings::get_instance()->set_winWidth(winWidth);
-            renderer::draw(settings::get_instance(), current_scene.get_camera()->get_position(), ajustes_texture,
-                            slow_settings_texture, normal_settings_texture, fast_settings_texture, enabled_texture, disabled_texture , day_settings_texture,
-                            night_settings_texture, red_settings_texture, green_settings_texture, blue_settings_texture);
+            renderer::draw(settings::get_instance());
             glPopMatrix();
         } else
         {

@@ -147,6 +147,61 @@ void settings::event_handler(int x, int y)
     }
 }
 
+texture settings::get_ajustes_texture()
+{
+    return ajustes_texture;
+}
+
+texture settings::get_slow_settings_texture()
+{
+    return slow_settings_texture;
+}
+
+texture settings::get_normal_settings_texture()
+{
+    return normal_settings_texture;
+}
+
+texture settings::get_fast_settings_texture()
+{
+    return fast_settings_texture;
+}
+
+texture settings::get_enabled_texture()
+{
+    return enabled_texture;
+}
+
+texture settings::get_disabled_texture()
+{
+    return disabled_texture;
+}
+
+texture settings::get_day_settings_texture()
+{
+    return day_settings_texture;
+}
+
+texture settings::get_night_settings_texture()
+{
+    return night_settings_texture;
+}
+
+texture settings::get_red_settings_texture()
+{
+    return red_settings_texture;
+}
+
+texture settings::get_green_settings_texture()
+{
+    return green_settings_texture;
+}
+
+texture settings::get_blue_settings_texture()
+{
+    return blue_settings_texture;
+}
+
 settings::~settings()
 {
 }
