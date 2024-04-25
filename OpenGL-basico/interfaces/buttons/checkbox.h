@@ -39,6 +39,8 @@ public:
     }
 
     facetado_checkbox() = default;
+
+    void on_click() override;
 };
 
 class wireframe_checkbox final : public checkbox
@@ -52,6 +54,8 @@ public:
     }
 
     wireframe_checkbox() = default;
+
+    void on_click() override;
 };
 
 class texturas_checkbox final : public checkbox
@@ -65,4 +69,5 @@ public:
     }
 
     texturas_checkbox() = default;
+    void on_click() override;
 };

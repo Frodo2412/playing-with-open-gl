@@ -22,5 +22,6 @@ public:
     {
     }
 
+    void on_click() override;
     GLuint get_texture_id() const override;
 };

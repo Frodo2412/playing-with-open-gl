@@ -37,6 +37,13 @@ std::array<button*, 5> settings_screen::get_buttons()
     return {&speed_button_, &wireframe_checkbox_, &facetado_checkbox_, &texturas_checkbox_, &lights_button_};
 }
 
+void settings_screen::handle_click(const int x, const int y)
+{
+    for (const auto button : get_buttons())
+        if (button->is_inside(x, y))
+            button->on_click();
+}
+
 GLuint settings_screen::get_background_texture_id()
 {
     return background_image_.get_texture_id();

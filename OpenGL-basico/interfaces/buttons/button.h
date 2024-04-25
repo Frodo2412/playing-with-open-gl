@@ -27,7 +27,6 @@ public:
     float get_bottom_right_x() const;
     float get_bottom_right_y() const;
 
-    virtual GLuint get_texture_id() const
-    =
-    0;
+    virtual void on_click() = 0;
+    virtual GLuint get_texture_id() const =0;
 };

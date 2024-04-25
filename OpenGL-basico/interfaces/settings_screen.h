@@ -19,5 +19,6 @@ public:
     explicit settings_screen(const int window_width, const int window_height);
 
     std::array<button*, 5> get_buttons();
+    void handle_click(int x, int y);
     static GLuint get_background_texture_id();
 };

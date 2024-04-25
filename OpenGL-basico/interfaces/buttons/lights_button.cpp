@@ -1,6 +1,30 @@
 #include "lights_button.h"
 #include "../../interfaces/settings.h"
 
+const auto settings = settings::get_instance();
+
+void lights_button::on_click()
+{
+    switch (settings->light_color)
+    {
+    case day:
+        settings->light_color = night;
+        break;
+    case night:
+        settings->light_color = red;
+        break;
+    case red:
+        settings->light_color = green;
+        break;
+    case green:
+        settings->light_color = blue;
+        break;
+    case blue:
+        settings->light_color = day;
+        break;
+    }
+}
+
 GLuint lights_button::get_texture_id() const
 {
     switch (settings::get_instance()->light_color)
