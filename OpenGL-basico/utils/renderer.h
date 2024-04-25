@@ -1,13 +1,11 @@
 #pragma once
 
-#include "../scene/camera.h"
 #include "../entities/entity.h"
 #include "../geometry/cube.h"
 #include "../geometry/Triangle.h"
 #include "../geometry/vector3.h"
 #include "../geometry/grid.h"
 #include "../textures/texture.h"
-#include "./settings.h"
 
 class settings_screen;
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL_opengl.h>
 
+#include "../interfaces/settings.h"
 #include "../interfaces/settings_screen.h"
 #include "../textures/texture.h"
 
@@ -139,10 +140,10 @@ void draw_button(const button* button)
 
 void renderer::draw(settings_screen* settings_screen)
 {
-    const auto settings = settings::get_instance();
+    const auto settings = ::settings::get_instance();
 
-    const int window_height = settings->get_winHeigth();
-    const int window_width = settings->get_winWidth();
+    const int window_height = settings->window_size.get_y();
+    const int window_width = settings->window_size.get_x();
 
     // ILUMINAR LAS SETTINGS
     glEnable(GL_LIGHTING);

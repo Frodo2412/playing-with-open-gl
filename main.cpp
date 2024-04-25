@@ -81,9 +81,9 @@ int main(int argc, char* argv[])
             glPushMatrix();
             glLoadIdentity();
             glOrtho(-winWidth / 2, winWidth / 2, -winHeigth / 2, winHeigth / 2, -1.0, 1.0);
-            settings::get_instance()->set_winHeigth(winHeigth);
+            // settings::get_instance()->set_winHeigth(winHeigth);
             //ESTO LO PONGO QUE LO ACTUALICE SIEMPRE POR SI DESPUES HACEMOS QUE SE PUEDA CAMBIAR LA RESOLUCION
-            settings::get_instance()->set_winWidth(winWidth);
+            // settings::get_instance()->set_winWidth(winWidth);
             renderer::draw(settings_screen);
             glPopMatrix();
         }
@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 
         // Dibujar el resto de la escena
         glMatrixMode(GL_MODELVIEW);
-        switch (settings::get_instance()->get_game_velocity())
+        switch (settings::get_instance()->game_velocity)
         //CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
         case game_velocity::slow:
@@ -126,8 +126,9 @@ int main(int argc, char* argv[])
         case game_velocity::fast:
             game_velocity = 2;
             break;
+        default: break;
         }
-        if (settings::get_instance()->get_wireframe_enabled())
+        if (settings::get_instance()->wireframe_enabled)
         {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         }
@@ -136,7 +137,7 @@ int main(int argc, char* argv[])
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
 
-        if (settings::get_instance()->get_textures_enabled())
+        if (settings::get_instance()->textures_enabled)
         {
             glEnable(GL_TEXTURE_2D);
         }
@@ -145,7 +146,7 @@ int main(int argc, char* argv[])
             glDisable(GL_TEXTURE_2D);
         }
 
-        if (settings::get_instance()->get_facetado_enabled())
+        if (settings::get_instance()->facetado_enabled)
         {
             glShadeModel(GL_FLAT);
         }
@@ -160,7 +161,7 @@ int main(int argc, char* argv[])
 
         current_scene.render_scene();
         lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
-                                                  settings::get_instance()->get_light_color(),
+                                                  settings::get_instance()->light_color,
                                                   current_scene.get_camera()->get_position());
 
         renderer::draw(floor, grass_texture);
@@ -203,7 +204,7 @@ int main(int argc, char* argv[])
             case SDL_MOUSEBUTTONDOWN:
                 if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused())
                 {
-                    settings::get_instance()->event_handler(event.button.x, -event.button.y);
+                    // settings::get_instance()->event_handler(event.button.x, -event.button.y);
                     //Y ES NEGATIVO PORQUE ARRIBA ES 0 Y ABAJO ES 480
                     std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
                 }

@@ -16,8 +16,7 @@ public:
     {
     }
 
-    lights_button()
-        :
+    lights_button():
         day_texture_(texture_loader::load_texture("../assets/textures/settings/dia.jpg")),
         night_texture_(texture_loader::load_texture("../assets/textures/settings/noche.jpg")),
         red_texture_(texture_loader::load_texture("../assets/textures/settings/rojo.jpg")),

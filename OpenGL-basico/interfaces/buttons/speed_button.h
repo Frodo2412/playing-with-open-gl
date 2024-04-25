@@ -1,6 +1,6 @@
 #pragma once
 #include "button.h"
-#include "../../utils/settings.h"
+#include "../../interfaces/settings.h"
 #include "../../textures/texture_loader.h"
 
 class speed_button final : public button

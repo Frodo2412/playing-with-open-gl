@@ -314,6 +314,7 @@
           <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
           <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <ClCompile Include="interfaces\settings.cpp" />
         <ClCompile Include="interfaces\settings_screen.cpp" />
         <ClCompile Include="scene\camera.cpp">
             <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -474,7 +475,6 @@
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\lights_handler.cpp" />
         <ClCompile Include="utils\renderer.cpp"/>
-        <ClCompile Include="utils\settings.cpp" />
     </ItemGroup>
     <ItemGroup>
         <ClInclude Include="interfaces\buttons\button.h" />
@@ -483,6 +483,7 @@
         <ClInclude Include="interfaces\buttons\speed_button.h" />
         <ClInclude Include="interfaces\gamehud.h" />
         <ClInclude Include="interfaces\number.h" />
+        <ClInclude Include="interfaces\settings.h" />
         <ClInclude Include="interfaces\settings_screen.h" />
         <ClInclude Include="scene\camera.h" />
         <ClInclude Include="entities\entity.h" />
@@ -501,7 +502,6 @@
         <ClInclude Include="utils\clock.h" />
         <ClInclude Include="utils\lights_handler.h" />
         <ClInclude Include="utils\renderer.h" />
-        <ClInclude Include="utils\settings.h" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\assets\models\Doodler.obj" />

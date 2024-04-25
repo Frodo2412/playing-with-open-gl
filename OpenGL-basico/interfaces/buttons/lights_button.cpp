@@ -1,9 +1,9 @@
 #include "lights_button.h"
-#include "../../utils/settings.h"
+#include "../../interfaces/settings.h"
 
 GLuint lights_button::get_texture_id() const
 {
-    switch (settings::get_instance()->get_light_color())
+    switch (settings::get_instance()->light_color)
     {
     case day: return day_texture_.get_texture_id();
     case night: return night_texture_.get_texture_id();

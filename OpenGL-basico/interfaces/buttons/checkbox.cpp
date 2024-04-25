@@ -1,5 +1,5 @@
 #include "checkbox.h"
-#include "../../utils/settings.h"
+#include  "../../interfaces/settings.h"
 
 GLuint checkbox::get_texture_id() const
 {
@@ -9,15 +9,15 @@ GLuint checkbox::get_texture_id() const
 
 bool facetado_checkbox::is_enabled() const
 {
-    return settings::get_instance()->get_facetado_enabled();
+    return settings::get_instance()->facetado_enabled;
 }
 
 bool wireframe_checkbox::is_enabled() const
 {
-    return settings::get_instance()->get_wireframe_enabled();
+    return settings::get_instance()->wireframe_enabled;
 }
 
 bool texturas_checkbox::is_enabled() const
 {
-    return settings::get_instance()->get_textures_enabled();
+    return settings::get_instance()->textures_enabled;
 }
