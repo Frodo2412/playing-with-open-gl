@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL_opengl.h>
 
+#include "../interfaces/settings_screen.h"
 #include "../textures/texture.h"
 
 void renderer::draw(const triangle& triangle)
@@ -16,7 +17,6 @@ void renderer::draw(const triangle& triangle)
 
 void renderer::draw(const entity& entity)
 {
-    
     glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());
     glBegin(GL_TRIANGLES);
 
@@ -27,7 +27,6 @@ void renderer::draw(const entity& entity)
     }
 
     glEnd();
-    
 }
 
 void renderer::draw(const grid& grid, const texture& texture)
@@ -41,7 +40,7 @@ void renderer::draw(const grid& grid, const texture& texture)
     const auto left = -static_cast<float>(columns) * d;
     const auto top = -static_cast<float>(rows) * d;
 
-    
+
     glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
     for (int row = 0; row < rows; ++row)
     {
@@ -66,14 +65,13 @@ void renderer::draw(const grid& grid, const texture& texture)
         }
         glEnd();
     }
-    
 }
 
 void renderer::draw(const cube& block, const texture& texture)
 {
     const auto faces = block.get_faces();
 
-    
+
     glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
     glBegin(GL_QUADS);
 
@@ -90,29 +88,26 @@ void renderer::draw(const cube& block, const texture& texture)
     }
 
     glEnd();
-    
 }
 
 void renderer::draw(const square& square, const texture& texture)
 {
-    
     glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
     glBegin(GL_QUADS);
-    
-    glTexCoord2f(0.0f, 1.0f); 
+
+    glTexCoord2f(0.0f, 1.0f);
     glVertex3f(square.get_a().get_x(), square.get_a().get_y(), square.get_a().get_z());
 
-    glTexCoord2f(1.0f, 1.0f); 
+    glTexCoord2f(1.0f, 1.0f);
     glVertex3f(square.get_b().get_x(), square.get_b().get_y(), square.get_b().get_z());
 
     glTexCoord2f(1.0f, 0.0f);
     glVertex3f(square.get_c().get_x(), square.get_c().get_y(), square.get_c().get_z());
 
-    glTexCoord2f(0.0f, 0.0f); 
+    glTexCoord2f(0.0f, 0.0f);
     glVertex3f(square.get_d().get_x(), square.get_d().get_y(), square.get_d().get_z());
-    
+
     glEnd();
-    
 }
 
 void renderer::draw(const vertex& v)
@@ -127,147 +122,53 @@ void renderer::draw(const vector3& v)
     glVertex3f(v.get_x(), v.get_y(), v.get_z());
 }
 
-void renderer::draw(const settings* settings, vector3 bomber_man_pos, const texture& ajustes_texture, 
-                            const texture& slow_settings_texture, const texture& normal_settings_texture, const texture& fast_settings_texture,
-                            const texture& enabled_texture, const texture& disabled_texture, const texture& day_settings_texture,
-                            const texture& night_settings_texture, const texture& red_settings_texture,
-                            const texture& green_settings_texture, const texture& blue_settings_texture) 
+void draw_button(const button* button)
 {
-    glEnable(GL_LIGHTING);//ILUMINAR LAS SETTINGS
+    glBindTexture(GL_TEXTURE_2D, button->get_texture_id());
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(button->get_top_left_x(), button->get_top_left_y(), 1);
+    glTexCoord2f(1, 0);
+    glVertex3f(button->get_top_left_x(), button->get_bottom_right_y(), 1);
+    glTexCoord2f(1, 1);
+    glVertex3f(button->get_bottom_right_x(), button->get_bottom_right_y(), 1);
+    glTexCoord2f(0, 1);
+    glVertex3f(button->get_bottom_right_x(), button->get_top_left_y(), 1);
+    glEnd();
+}
+
+void renderer::draw(settings_screen* settings_screen)
+{
+    const auto settings = settings::get_instance();
+
+    const int window_height = settings->get_winHeigth();
+    const int window_width = settings->get_winWidth();
+
+    // ILUMINAR LAS SETTINGS
+    glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT2);
-    glLightfv(GL_LIGHT2, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f,1.f});
+    glLightfv(GL_LIGHT2, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f, 1.f});
     glLightfv(GL_LIGHT2, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
     glLightfv(GL_LIGHT2, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 1.0f});
     glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
-    int winHeight = settings->get_instance()->get_winHeigth();
-    int winWidth = settings->get_instance()->get_winWidth();
 
-    glBindTexture(GL_TEXTURE_2D, ajustes_texture.get_texture_id());
+    // Draw the background image
+    glBindTexture(GL_TEXTURE_2D, settings_screen::get_background_texture_id());
     glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(-winWidth/2,-winHeight/2,0);
-    glTexCoord2f(1,0);
-    glVertex3f(winWidth/2,-winHeight/2,0);
-    glTexCoord2f(1,1);
-    glVertex3f(winWidth/2,winHeight/2,0);
-    glTexCoord2f(0,1);
-    glVertex3f(-winWidth/2,winHeight/2,0);
-    glEnd();
-    
-    int enabled_coord_x = (int)winWidth/2 - winWidth*0.28125;
-    int enabled_coord_y = winHeight/2 - winHeight*0.322917 + (winHeight-480)*0.05;
-    enabled_coord_x = enabled_coord_x - 25;
-    settings->get_instance()->set_enabled_screen_coords(0, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
-    switch(settings->get_instance()->get_game_velocity())
-    {
-        case game_velocity::slow:
-            glBindTexture(GL_TEXTURE_2D, slow_settings_texture.get_texture_id());
-            break;
-        case game_velocity::normal:
-            glBindTexture(GL_TEXTURE_2D, normal_settings_texture.get_texture_id());
-            break;
-        case game_velocity::fast:
-            glBindTexture(GL_TEXTURE_2D, fast_settings_texture.get_texture_id());
-            break;
-    }
-    glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(enabled_coord_x,enabled_coord_y,1);
-    glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 100,enabled_coord_y,1);
-    glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 100,enabled_coord_y + 50,1);
-    glTexCoord2f(0,1);
-    glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
+    glTexCoord2f(0, 0);
+    glVertex3f(-window_width / 2, -window_height / 2, 0);
+    glTexCoord2f(1, 0);
+    glVertex3f(window_width / 2, -window_height / 2, 0);
+    glTexCoord2f(1, 1);
+    glVertex3f(window_width / 2, window_height / 2, 0);
+    glTexCoord2f(0, 1);
+    glVertex3f(-window_width / 2, window_height / 2, 0);
     glEnd();
 
-    enabled_coord_x = enabled_coord_x + 25;
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(1, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
+    // Draw the buttons
+    for (const auto button : settings_screen->get_buttons()) draw_button(button);
 
-    if (settings->get_instance()->get_wireframe_enabled())
-        glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
-    else
-        glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
-    glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(enabled_coord_x,enabled_coord_y,1);
-    glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y,1);
-    glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y + 50,1);
-    glTexCoord2f(0,1);
-    glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
-    glEnd();
-    
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(2,  vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
-
-    if (settings->get_instance()->get_textures_enabled())
-        glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
-    else
-        glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
-    glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(enabled_coord_x,enabled_coord_y,1);
-    glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y,1);
-    glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y + 50,1);
-    glTexCoord2f(0,1);
-    glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
-    glEnd();
-    
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(3, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
-
-    if (settings->get_instance()->get_facetado_enabled())
-        glBindTexture(GL_TEXTURE_2D, enabled_texture.get_texture_id());
-    else
-        glBindTexture(GL_TEXTURE_2D, disabled_texture.get_texture_id());
-    glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(enabled_coord_x,enabled_coord_y,1);
-    glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y,1);
-    glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 50,enabled_coord_y + 50,1);
-    glTexCoord2f(0,1);
-    glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
-    glEnd();
-
-    enabled_coord_x = enabled_coord_x - 25;
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
-    settings->get_instance()->set_enabled_screen_coords(4, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
-    switch (settings->get_instance()->get_light_color())
-    {
-        case day:
-            glBindTexture(GL_TEXTURE_2D, day_settings_texture.get_texture_id());
-            break;
-        case night:
-            glBindTexture(GL_TEXTURE_2D, night_settings_texture.get_texture_id());
-            break;
-        case red:
-            glBindTexture(GL_TEXTURE_2D, red_settings_texture.get_texture_id());
-            break;
-        case green:
-            glBindTexture(GL_TEXTURE_2D, green_settings_texture.get_texture_id());
-            break;
-        case blue:
-            glBindTexture(GL_TEXTURE_2D, blue_settings_texture.get_texture_id());
-            break;
-    }
-    glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(enabled_coord_x,enabled_coord_y,1);
-    glTexCoord2f(1,0);
-    glVertex3f(enabled_coord_x + 100,enabled_coord_y,1);
-    glTexCoord2f(1,1);
-    glVertex3f(enabled_coord_x + 100,enabled_coord_y + 50,1);
-    glTexCoord2f(0,1);
-    glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
-    glEnd();
     glDisable(GL_LIGHT2);
 }
