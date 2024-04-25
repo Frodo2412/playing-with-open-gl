@@ -10,6 +10,8 @@ settings::settings()
     textures_enabled_ = true;
     facetado_enabled_ = false;
     light_color_ = light_colors::day;
+    winHeigth_ = 480;
+    winWidth_ = 640;
 }
 
 settings* settings::get_instance()
@@ -50,24 +52,24 @@ light_colors settings::get_light_color()
     return light_color_;
 }
 
-int settings::get_winHeigth()
+float settings::get_winHeigth()
 {
-    return winHeigth;
+    return winHeigth_;
 }
 
-int settings::get_winWidth()
+float settings::get_winWidth()
 {
-    return winWidth;
+    return winWidth_;
 }
 
-void settings::set_winHeigth(int winHeigth)
+void settings::set_winHeigth(float winHeigth)
 {
-    this->winHeigth = winHeigth;
+    this->winHeigth_ = winHeigth;
 }
 
-void settings::set_winWidth(int winWidth)
+void settings::set_winWidth(float winWidth)
 {
-    this->winWidth = winWidth;
+    this->winWidth_ = winWidth;
 }
 
 bool settings::get_textures_enabled()
@@ -95,7 +97,7 @@ void settings::set_enabled_screen_coords(int index, vector2 vector)
     enabled_screen_coords[index] = vector;
 }
 
-void settings::event_handler(int x, int y)
+void settings::event_handler(float x, float y)
 {
     if (x >= enabled_screen_coords[0].get_x() && x <= enabled_screen_coords[0].get_x() + 100 && y >= enabled_screen_coords[0].get_y() && y <= enabled_screen_coords[0].get_y() + 50)
     {

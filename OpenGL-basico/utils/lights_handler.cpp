@@ -1,7 +1,6 @@
 ﻿#include "lights_handler.h"
 #include "SDL.h"
 #include "SDL_opengl.h"
-#include <GL/glu.h>
 
 lights_handler* lights_handler::instance_ = nullptr;
 

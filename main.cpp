@@ -15,7 +15,7 @@
 #include "OpenGL-basico/graphics/gamehud.h"
 #include "OpenGL-basico/graphics/number.h"
 #include "OpenGL-basico/utils/lights_handler.h"
-#include "OpenGL-basico/utils/renderer.h"
+
 
 
 int main(int argc, char* argv[])
@@ -27,13 +27,13 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
-    int winHeigth = 480;
-    int winWidth = 640;
+    float winHeigth = 480;
+    float winWidth = 640;
     
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       winWidth, winHeigth, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                       (int)winWidth, (int)winHeigth, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
     glMatrixMode(GL_PROJECTION);
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 lastFrameTime = clock::get_instance()->get_total_time();
     int frames = 0;
-    int time = 0;
+    Uint32 time = 0;
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
         switch (settings::get_instance()->get_game_velocity())//CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
             case game_velocity::slow:
-                game_velocity = 0.3;
+                game_velocity = 0.3f;
                 break;
             case game_velocity::normal:
                 game_velocity = 1;
@@ -167,7 +167,7 @@ int main(int argc, char* argv[])
         time += deltaTime;
         if (time >= 1000)
         {
-            std::cout << "FPS: " << frames << std::endl;
+            std::cout << "FPS: " << frames << "\n";
             frames = 0;
             time = 0;
         }
@@ -199,8 +199,8 @@ int main(int argc, char* argv[])
                 }
             case SDL_MOUSEBUTTONDOWN:
                 if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused()) {
-                    settings::get_instance()->event_handler(event.button.x, -event.button.y); //Y ES NEGATIVO PORQUE ARRIBA ES 0 Y ABAJO ES 480
-                    std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
+                    settings::get_instance()->event_handler((float)event.button.x, (float)-event.button.y); //Y ES NEGATIVO PORQUE ARRIBA ES 0 Y ABAJO ES 480
+                    std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << "\n";
                 }
                 break;
             case SDL_QUIT:

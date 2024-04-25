@@ -150,8 +150,8 @@ void renderer::draw(const settings* settings)
     glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0f);
     glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
-    int winHeight = settings->get_instance()->get_winHeigth();
-    int winWidth = settings->get_instance()->get_winWidth();
+    float winHeight = settings->get_instance()->get_winHeigth();
+    float winWidth = settings->get_instance()->get_winWidth();
 
     glBindTexture(GL_TEXTURE_2D, ajustes_texture.get_texture_id());
     glBegin(GL_QUADS);
@@ -165,8 +165,8 @@ void renderer::draw(const settings* settings)
     glVertex3f(-winWidth/2,winHeight/2,0);
     glEnd();
     
-    int enabled_coord_x = (int)winWidth/2 - winWidth*0.28125;
-    int enabled_coord_y = winHeight/2 - winHeight*0.322917 + (winHeight-480)*0.05;
+    float enabled_coord_x = (float)winWidth/2 - (float)(winWidth*0.28125);
+    float enabled_coord_y = (float)winHeight/2 - (float)(winHeight*0.322917) + (float)((winHeight-480)*0.05);
     enabled_coord_x = enabled_coord_x - 25;
     settings->get_instance()->set_enabled_screen_coords(0, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
     switch(settings->get_instance()->get_game_velocity())
@@ -193,7 +193,7 @@ void renderer::draw(const settings* settings)
     glEnd();
 
     enabled_coord_x = enabled_coord_x + 25;
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
+    enabled_coord_y = enabled_coord_y - (float)(winHeight*0.15);
     settings->get_instance()->set_enabled_screen_coords(1, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_wireframe_enabled())
@@ -211,7 +211,7 @@ void renderer::draw(const settings* settings)
     glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
     glEnd();
     
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
+    enabled_coord_y = enabled_coord_y - (float)(winHeight*0.15);
     settings->get_instance()->set_enabled_screen_coords(2,  vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_textures_enabled())
@@ -229,7 +229,7 @@ void renderer::draw(const settings* settings)
     glVertex3f(enabled_coord_x,enabled_coord_y + 50,1);
     glEnd();
     
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
+    enabled_coord_y = enabled_coord_y - (float)(winHeight*0.15);
     settings->get_instance()->set_enabled_screen_coords(3, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
 
     if (settings->get_instance()->get_facetado_enabled())
@@ -248,7 +248,7 @@ void renderer::draw(const settings* settings)
     glEnd();
 
     enabled_coord_x = enabled_coord_x - 25;
-    enabled_coord_y = enabled_coord_y - winHeight*0.15;
+    enabled_coord_y = enabled_coord_y - (float)(winHeight*0.15);
     settings->get_instance()->set_enabled_screen_coords(4, vector2 (enabled_coord_x + winWidth/2, enabled_coord_y - winHeight/2));
     switch (settings->get_instance()->get_light_color())
     {
