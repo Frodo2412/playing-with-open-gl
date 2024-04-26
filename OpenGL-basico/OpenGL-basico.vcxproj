@@ -80,6 +80,7 @@
     </ItemDefinitionGroup>
     <ItemGroup>
         <ClCompile Include="..\main.cpp"/>
+        <ClCompile Include="entities\block.cpp"/>
         <ClCompile Include="entities\brick_block.cpp"/>
         <ClCompile Include="entities\metal_block.cpp"/>
         <ClCompile Include="interfaces\buttons\button.cpp"/>
@@ -251,6 +252,7 @@
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
     <ItemGroup>
+        <ClInclude Include="entities\block.h"/>
         <ClInclude Include="entities\brick_block.h"/>
         <ClInclude Include="entities\metal_block.h"/>
         <ClInclude Include="interfaces\buttons\button.h"/>
