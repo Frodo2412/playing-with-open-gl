@@ -1,4 +1,5 @@
 #include "texture_loader.h"
+
 #include "FreeImage.h"
 
 texture texture_loader::load_texture(const char* file_path)

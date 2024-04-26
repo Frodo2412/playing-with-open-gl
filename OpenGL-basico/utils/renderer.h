@@ -6,7 +6,8 @@
 #include "../geometry/vector3.h"
 #include "../geometry/grid.h"
 #include "../textures/texture.h"
-#include "./settings.h"
+
+class settings_screen;
 
 class renderer
 {
@@ -18,6 +19,5 @@ public:
     static void draw(const triangle& triangle);
     static void draw(const entity& entity);
     static void draw(const square&, const texture& texture);
-    static void draw(const settings* settings);
+    static void draw(settings_screen* settings_screen);
 };
-
