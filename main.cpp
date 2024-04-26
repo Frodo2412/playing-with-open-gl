@@ -19,6 +19,7 @@
 
 int main(int argc, char* argv[])
 {
+    auto settings = settings::get_instance();
     //INICIALIZACION
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -26,13 +27,11 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
-    int winHeigth = 480;
-    int winWidth = 640;
-
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
                                        SDL_WINDOWPOS_CENTERED,
                                        SDL_WINDOWPOS_CENTERED,
-                                       winWidth, winHeigth, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+                                       settings->window_width, settings->window_height,
+                                       SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
     glMatrixMode(GL_PROJECTION);
@@ -50,7 +49,7 @@ int main(int argc, char* argv[])
     gamehud::init();
     SDL_Event event;
 
-    auto settings_screen = new ::settings_screen(winWidth, winHeigth);
+    auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
@@ -77,13 +76,9 @@ int main(int argc, char* argv[])
         {
             glMatrixMode(GL_PROJECTION);
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            glEnable(GL_TEXTURE_2D);
             glPushMatrix();
             glLoadIdentity();
-            glOrtho(-winWidth / 2, winWidth / 2, -winHeigth / 2, winHeigth / 2, -1.0, 1.0);
-            // settings::get_instance()->set_winHeigth(winHeigth);
-            //ESTO LO PONGO QUE LO ACTUALICE SIEMPRE POR SI DESPUES HACEMOS QUE SE PUEDA CAMBIAR LA RESOLUCION
-            // settings::get_instance()->set_winWidth(winWidth);
+            glOrtho(-settings->window_width / 2, settings->window_width / 2, -settings->window_height / 2, settings->window_height / 2, -1.0, 1.0);
             renderer::draw(settings_screen);
             glPopMatrix();
         }
@@ -118,7 +113,7 @@ int main(int argc, char* argv[])
         //CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
         case game_velocity::slow:
-            game_velocity = 0.3;
+            game_velocity = 0.3f;
             break;
         case game_velocity::normal:
             game_velocity = 1;
@@ -204,8 +199,8 @@ int main(int argc, char* argv[])
             case SDL_MOUSEBUTTONDOWN:
                 if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused())
                 {
-                    // settings::get_instance()->event_handler(event.button.x, -event.button.y);
-                    //Y ES NEGATIVO PORQUE ARRIBA ES 0 Y ABAJO ES 480
+                    settings_screen->handle_click(event.button.x, -event.button.y);
+                    // y negativo porque el 0 esta arriba
                     std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
                 }
                 break;

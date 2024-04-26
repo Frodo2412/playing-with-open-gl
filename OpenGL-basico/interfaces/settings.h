@@ -29,7 +29,8 @@ public:
     bool textures_enabled = true;
     bool facetado_enabled = false;
     light_colors light_color = day;
-    vector2 window_size = vector2(640, 480);
+    int window_width = 640;
+    int window_height = 480;
 
     static settings* get_instance();
 };

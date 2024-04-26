@@ -142,8 +142,8 @@ void renderer::draw(settings_screen* settings_screen)
 {
     const auto settings = ::settings::get_instance();
 
-    const int window_height = settings->window_size.get_y();
-    const int window_width = settings->window_size.get_x();
+    const int window_height = settings->window_height;
+    const int window_width = settings->window_width;
 
     // ILUMINAR LAS SETTINGS
     glEnable(GL_LIGHTING);
@@ -156,7 +156,8 @@ void renderer::draw(settings_screen* settings_screen)
     glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
 
     // Draw the background image
-    glBindTexture(GL_TEXTURE_2D, settings_screen::get_background_texture_id());
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, settings_screen->get_background_texture_id());
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glVertex3f(-window_width / 2, -window_height / 2, 0);
@@ -170,6 +171,8 @@ void renderer::draw(settings_screen* settings_screen)
 
     // Draw the buttons
     for (const auto button : settings_screen->get_buttons()) draw_button(button);
+
+    glDisable(GL_TEXTURE_2D);
 
     glDisable(GL_LIGHT2);
 }
