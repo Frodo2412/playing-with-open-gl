@@ -18,7 +18,7 @@ bool button::is_inside(const int x, const int y) const
 
     
     const auto horizontal = float_x >= top_left_.get_x() && float_x <= bottom_right_.get_x();
-    const auto vertical = float_y <= top_left_.get_y() && float_y >= bottom_right_.get_y();
+    const auto vertical = float_y >= top_left_.get_y() && float_y <= bottom_right_.get_y();
 
     return horizontal && vertical;
 }
