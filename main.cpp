@@ -52,12 +52,11 @@ int main(int argc, char* argv[])
     gamehud::init();
     SDL_Event event;
 
-    auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
+    const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
-    const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
     std::vector<std::unique_ptr<block>> bloques;
 
     bloques.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));

@@ -18,12 +18,14 @@ void renderer::draw(const triangle& triangle)
 
 void renderer::draw(const entity& entity)
 {
-    std::vector<vertex> vertices = entity.get_vertices();
+    const std::vector<vertex> vertices = entity.get_vertices();
 
     // Create separate arrays for positions, normals, and texture coordinates
     std::vector<float> positions(3 * vertices.size()); // x, y, z for each vertex
     std::vector<float> normals(3 * vertices.size());
     std::vector<float> tex_coords(2 * vertices.size()); // u, v for each vertex
+
+    // Use the smallest scale factor to maintain
 
     for (size_t i = 0, j = 0; i < vertices.size(); ++i, j += 3)
     {
@@ -56,6 +58,9 @@ void renderer::draw(const entity& entity)
     glPushMatrix();
     const auto position = entity.get_position();
     glTranslatef(position.get_x(), position.get_y(), position.get_z());
+
+    const auto scale_factor = entity.get_scale_factor();
+    glScalef(scale_factor, scale_factor, scale_factor);
 
     // Bind the texture
     glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());

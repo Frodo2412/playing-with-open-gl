@@ -96,6 +96,11 @@ void scene::render_scene() const
               camera_->get_direction().get_z(),
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
     renderer::draw(*player_);
+
+    for (const auto& enemy : enemies_)
+    {
+        renderer::draw(enemy);
+    }
 }
 
 camera_mode scene::get_camera_mode() const
