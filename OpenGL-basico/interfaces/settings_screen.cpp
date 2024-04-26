@@ -12,41 +12,27 @@ settings_screen::settings_screen(const int window_width, const int window_height
 
     enabled_coord_x = enabled_coord_x - 25;
 
-    std::cout << "Speed button:\n" << "-Top left: " << enabled_coord_x << ", " << enabled_coord_y << '\n'
-        << "-Bottom right: " << enabled_coord_x + 100 << ", " << enabled_coord_y + 50 << '\n';
-
     speed_button_ = speed_button(vector2(enabled_coord_x, enabled_coord_y),
                                  vector2(enabled_coord_x + 100, enabled_coord_y + 50));
 
     enabled_coord_x = enabled_coord_x + 25;
-
     enabled_coord_y = enabled_coord_y - static_cast<float>(window_height * 0.15);
-
-    std::cout << "Wireframe checkbox:\n" << "-Top left: " << enabled_coord_x << ", " << enabled_coord_y << '\n'
-        << "-Bottom right: " << enabled_coord_x + 50 << ", " << enabled_coord_y + 50 << '\n';
 
     wireframe_checkbox_ = wireframe_checkbox(vector2(enabled_coord_x, enabled_coord_y),
                                              vector2(enabled_coord_x + 50, enabled_coord_y + 50));
 
     enabled_coord_y = enabled_coord_y - static_cast<float>(window_height * 0.15);
 
-    std::cout << "Texturas checkbox:\n" << "-Top left: " << enabled_coord_x << ", " << enabled_coord_y << '\n'
-        << "-Bottom right: " << enabled_coord_x + 50 << ", " << enabled_coord_y + 50 << '\n';
-
     texturas_checkbox_ = texturas_checkbox(vector2(enabled_coord_x, enabled_coord_y),
                                            vector2(enabled_coord_x + 50, enabled_coord_y + 50));
 
     enabled_coord_y = enabled_coord_y - static_cast<float>(window_height * 0.15);
 
-    std::cout << "Facetado checkbox:\n" << "-Top left: " << enabled_coord_x << ", " << enabled_coord_y << '\n'
-        << "-Bottom right: " << enabled_coord_x + 50 << ", " << enabled_coord_y + 50 << '\n';
     facetado_checkbox_ = facetado_checkbox(vector2(enabled_coord_x, enabled_coord_y),
                                            vector2(enabled_coord_x + 50, enabled_coord_y + 50));
 
     enabled_coord_y = enabled_coord_y - static_cast<float>(window_height * 0.15);
 
-    std::cout << "Lights button:\n" << "-Top left: " << enabled_coord_x << ", " << enabled_coord_y << '\n'
-        << "-Bottom right: " << enabled_coord_x + 100 << ", " << enabled_coord_y + 50 << '\n';
     lights_button_ = lights_button(vector2(enabled_coord_x - 25, enabled_coord_y),
                                    vector2(enabled_coord_x + 75, enabled_coord_y + 50));
 }
