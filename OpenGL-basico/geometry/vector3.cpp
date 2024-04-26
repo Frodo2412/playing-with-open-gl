@@ -52,7 +52,7 @@ vector3 vector3::operator/(const int s) const
 
 vector3 vector3::operator-() const
 {
-    return vector3(-x_, -y_ - z_);
+    return vector3(-x_, -y_, -z_);
 }
 
 float vector3::dot_product(const vector3& other) const
