@@ -43,7 +43,9 @@ void scene::rotate_camera(const float x, const float y) const
         break;
     case perspective:
         glRotatef(x, player_->get_position().get_x(), 1, player_->get_position().get_z());
-    default: break;
+        break;
+    case top_down:
+        break;
     }
 }
 
@@ -72,15 +74,19 @@ void scene::move_player(const vector3& displacement) const
         }
     case top_down:
         {
-            player_->move(displacement);
-            player_->set_direction(displacement);
+            const auto movement = -displacement;
+            player_->move(movement);
+            player_->set_direction(movement);
             break;
         }
     case perspective:
-        player_->move(displacement);
-        player_->set_direction(displacement);
-        camera_->move(displacement);
-        break;
+        {
+            const auto movement = -displacement;
+            player_->move(movement);
+            player_->set_direction(movement);
+            camera_->move(movement);
+            break;
+        }
     }
 }
 
@@ -93,12 +99,12 @@ void scene::render_scene() const
     renderer::draw(*player_);
 }
 
-camera_mode scene::get_camera_mode()
+camera_mode scene::get_camera_mode() const
 {
     return camera_mode_;
 }
 
-camera* scene::get_camera()
+camera* scene::get_camera() const
 {
     return camera_;
 }
