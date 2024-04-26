@@ -39,3 +39,8 @@ void entity::move(const vector3& displacement)
 {
     position_ += displacement;
 }
+
+float entity::get_scale_factor() const
+{
+    return scale_factor_;
+}

@@ -74,8 +74,6 @@ int main(int argc, char* argv[])
     int frames = 0;
     Uint32 time = 0;
 
-    int cantBombas = 3;
-
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
 

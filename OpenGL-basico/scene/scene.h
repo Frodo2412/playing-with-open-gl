@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-
+#include "../entities/enemy.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
 #include "../entities/block.h"
@@ -18,6 +17,8 @@ class scene
     camera_mode camera_mode_ = first;
 
     player* player_;
+    std::vector<enemy> enemies_;
+
     camera* camera_;
 
 public:
@@ -27,6 +28,7 @@ public:
                              initial_player_position.get_z()))
     {
         player_->set_position(initial_player_position);
+        enemies_.emplace_back();
     }
 
     // Camera related functionality
