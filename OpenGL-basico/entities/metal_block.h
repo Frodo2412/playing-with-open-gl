@@ -1,13 +1,16 @@
 #pragma once
 #include "block.h"
 #include "../geometry/vector3.h"
-#include "../textures/texture_loader.h"
 
-class metal_block : public block
+
+class metal_block final: public block
 {
-    texture texture_;
-    bool destructible_ = false;
+    bool is_active_;
+
 public:
-    metal_block(const vector3& pos): block(pos), texture_(texture_loader::load_texture("../assets/textures/metal_1.jpg")) {};
-     const texture get_texture() override;
+    explicit metal_block(const vector3& pos, float size): block(pos, size, block::metal_texture), is_active_(true) {}
+       
+    bool is_destroyable() override;
+    bool is_active() override;
+    void destroy() override;
 };

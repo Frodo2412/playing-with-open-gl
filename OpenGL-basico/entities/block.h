@@ -5,17 +5,23 @@
 
 class block
 {
+    vector3 position_;
+    cube* cube_;
+    texture texture_;
+
 protected:
-    float size_ = 1.0f; // tamaño del bloque
-    bool active_ = true;
-    const vector3 posicion_;
-    bool destructible_ = true;
+    explicit block(const vector3& pos, float size, texture texture): position_(pos), cube_(new cube(size, pos)), texture_(texture) {};
     
 public:
-    block(const vector3& pos): posicion_(pos) {};
-    virtual const texture get_texture() = 0;
+    const texture get_texture();
     const vector3 get_posicion();
-    const cube get_block();
-    bool is_active();
-    float get_size();
+    cube* get_block();
+
+    virtual bool is_destroyable() = 0;
+    virtual bool is_active() = 0;
+    virtual void destroy() = 0;
+
+    static texture metal_texture;
+    static texture brick_texture;
 };
+

@@ -2,6 +2,7 @@
 
 #include <GL/glu.h>
 
+#include "../entities/bomb.h"
 #include "../utils/renderer.h"
 
 void scene::toggle_camera()
@@ -101,3 +102,12 @@ camera* scene::get_camera()
 {
     return camera_;
 }
+
+
+void scene::drop_bomb(std::vector<block*>& bloques)
+{
+    bomb* bomba = new bomb();
+    bomba->set_position(vector3(player_->get_position().get_x(), -0.5, player_->get_position().get_z()));
+    renderer::draw(*bomba);
+    bomba->explotar(bloques);
+};

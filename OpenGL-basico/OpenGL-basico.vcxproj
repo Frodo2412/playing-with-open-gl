@@ -81,6 +81,7 @@
     <ItemGroup>
         <ClCompile Include="..\main.cpp"/>
         <ClCompile Include="entities\block.cpp"/>
+        <ClCompile Include="entities\bomb.cpp" />
         <ClCompile Include="entities\brick_block.cpp"/>
         <ClCompile Include="entities\metal_block.cpp"/>
         <ClCompile Include="interfaces\buttons\button.cpp"/>
@@ -253,6 +254,7 @@
     </ItemGroup>
     <ItemGroup>
         <ClInclude Include="entities\block.h"/>
+        <ClInclude Include="entities\bomb.h" />
         <ClInclude Include="entities\brick_block.h"/>
         <ClInclude Include="entities\metal_block.h"/>
         <ClInclude Include="interfaces\buttons\button.h"/>
@@ -282,9 +284,11 @@
         <ClInclude Include="utils\renderer.h"/>
     </ItemGroup>
     <ItemGroup>
+        <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\models\Doodler.obj"/>
         <Content Include="..\assets\source\bomberman.fbx"/>
         <Content Include="..\assets\textures\bricks_1.jpg"/>
+        <Content Include="..\assets\textures\Diffuse.jpg" />
         <Content Include="..\assets\textures\Doodler.png"/>
         <Content Include="..\assets\textures\grass_1.jpg"/>
         <Content Include="..\assets\textures\bomberman.jpeg"/>

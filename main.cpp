@@ -8,6 +8,7 @@
 #include "OpenGL-basico/entities/block.h"
 #include "OpenGL-basico/entities/brick_block.h"
 #include "OpenGL-basico/entities/metal_block.h"
+#include "OpenGL-basico/entities/bomb.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/interfaces/gamehud.h"
@@ -58,12 +59,12 @@ int main(int argc, char* argv[])
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
-    std::vector<std::unique_ptr<block>> bloques;
 
-    bloques.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<brick_block>(vector3(1.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<metal_block>(vector3(2.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<metal_block>(vector3(1.5, -0.5, 1)));
+    std::vector<block*> bloques;
+    bloques.push_back(new brick_block(vector3(0.5, -0.5, 0), 1));
+    bloques.push_back(new brick_block(vector3(1.5, -0.5, 0), 1));
+    bloques.push_back(new metal_block(vector3(2.5, -0.5, 0), 1));
+    bloques.push_back(new metal_block(vector3(1.5, -0.5, 1), 1));
 
     auto bomberman = player();
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
@@ -72,6 +73,8 @@ int main(int argc, char* argv[])
     Uint32 lastFrameTime = clock::get_instance()->get_total_time();
     int frames = 0;
     Uint32 time = 0;
+
+    int cantBombas = 3;
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
@@ -170,7 +173,8 @@ int main(int argc, char* argv[])
 
         renderer::draw(floor, grass_texture);
         for (const auto& bloqueRef : bloques) {
-            renderer::draw(bloqueRef.get()->get_block(), bloqueRef.get()->get_texture());
+            if(bloqueRef->is_active())
+                renderer::draw(*bloqueRef->get_block(), bloqueRef->get_texture());
         }
 
         //CONTROL DE FRAMES
@@ -223,25 +227,29 @@ int main(int argc, char* argv[])
                     std::cout << "LEFT\n";
                     displacement.set_x(0.1f * elapsed_time * game_velocity);
                     break;
-                case SDLK_d:
-                    std::cout << "RIGHT\n";
+            case SDLK_d:
+                std::cout << "RIGHT\n";
                     displacement.set_x(-0.1f * elapsed_time * game_velocity);
                     break;
-                case SDLK_w:
-                    std::cout << "UP\n";
+            case SDLK_w:
+                std::cout << "UP\n";
                     displacement.set_z(0.1f * elapsed_time * game_velocity);
                     break;
-                case SDLK_s:
-                    std::cout << "DOWN\n";
+            case SDLK_s:
+                std::cout << "DOWN\n";
                     displacement.set_z(-0.1f * elapsed_time * game_velocity);
                     break;
-                case SDLK_v:
-                    current_scene.toggle_camera();
+            case SDLK_v:
+                current_scene.toggle_camera();
                     break;
-                case SDLK_p:
-                    std::cout << "PAUSE\n";
+            case SDLK_p:
+                std::cout << "PAUSE\n";
                     clock::toggle_pause();
                     break;
+            case SDLK_b:
+                        std::cout << "Bomb!\n";
+                        current_scene.drop_bomb(bloques);
+                        break;
                 default: break;
                 }
             case SDL_KEYUP:

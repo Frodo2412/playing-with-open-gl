@@ -1,6 +1,9 @@
 #pragma once
+#include <memory>
+
 #include "../scene/camera.h"
 #include "../entities/player.h"
+#include "../entities/block.h"
 
 enum camera_mode
 {
@@ -33,5 +36,6 @@ public:
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode();
     camera* get_camera();
+    void drop_bomb(std::vector<block*>& bloques);
     void render_scene() const;
 };

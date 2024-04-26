@@ -3,10 +3,12 @@
 
 class brick_block : public block
 {
-   texture texture_;
-   bool destructible_ = true;
+   bool is_active_;
+
 public:
-   brick_block(const vector3& pos): block(pos), texture_(texture_loader::load_texture("../assets/textures/bricks_1.jpg") ) {};
-   void destruir();
-   const texture get_texture() override;
+   explicit brick_block(const vector3& pos, float size): block(pos, size, block::brick_texture), is_active_(true) {}
+       
+   bool is_destroyable() override;
+   bool is_active() override;
+   void destroy() override;
 };

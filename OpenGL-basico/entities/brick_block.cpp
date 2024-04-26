@@ -1,11 +1,16 @@
 #include "brick_block.h"
 
-void brick_block::destruir()
+bool brick_block::is_destroyable()
 {
-    this->active_ = false; // la bomba pasa a estar inactiva.
+    return true;
 }
 
-const texture brick_block::get_texture()
+bool brick_block::is_active()
 {
-    return texture_;
+    return is_active_;
+}
+
+void brick_block::destroy()
+{
+    is_active_ = false;
 }
