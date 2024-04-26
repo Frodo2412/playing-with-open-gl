@@ -20,5 +20,5 @@ public:
 
     std::array<button*, 5> get_buttons();
     void handle_click(int x, int y);
-    GLuint get_background_texture_id();
+    GLuint get_background_texture_id() const;
 };

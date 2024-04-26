@@ -78,7 +78,8 @@ int main(int argc, char* argv[])
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             glPushMatrix();
             glLoadIdentity();
-            glOrtho(-settings->window_width / 2, settings->window_width / 2, -settings->window_height / 2, settings->window_height / 2, -1.0, 1.0);
+            glOrtho(-settings->window_width / 2, settings->window_width / 2, -settings->window_height / 2,
+                    settings->window_height / 2, -1.0, 1.0);
             renderer::draw(settings_screen);
             glPopMatrix();
         }
@@ -199,8 +200,7 @@ int main(int argc, char* argv[])
             case SDL_MOUSEBUTTONDOWN:
                 if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused())
                 {
-                    settings_screen->handle_click(event.button.x, -event.button.y);
-                    // y negativo porque el 0 esta arriba
+                    settings_screen->handle_click(event.button.x, event.button.y);
                     std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
                 }
                 break;

@@ -25,12 +25,9 @@ private:
 
 public:
     game_velocity game_velocity = normal;
-    bool wireframe_enabled = false;
-    bool textures_enabled = true;
-    bool facetado_enabled = false;
+    bool wireframe_enabled = false, textures_enabled = true, facetado_enabled = false;
     light_colors light_color = day;
-    int window_width = 640;
-    int window_height = 480;
+    int window_width = 640, window_height = 480;
 
     static settings* get_instance();
 };
