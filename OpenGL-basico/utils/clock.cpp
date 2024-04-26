@@ -31,6 +31,18 @@ void clock::reset()
 
 Uint32 clock::get_total_time()
 {
-    Uint32 current_time = SDL_GetTicks();
+    const Uint32 current_time = SDL_GetTicks();
     return current_time;
+}
+
+bool clock::get_is_paused() const
+{
+    return is_pause_;
+}
+
+clock* clock::get_instance()
+{
+    if (instance_ == nullptr)
+        instance_ = new clock();
+    return instance_;
 }

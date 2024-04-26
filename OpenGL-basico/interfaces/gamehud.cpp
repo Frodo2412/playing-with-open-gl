@@ -39,6 +39,14 @@ void gamehud::draw_time(Uint32 milisecond)
     Uint32 seconds_d = (seconds / 10);
     Uint32 seconds_u = (seconds % 10);
 
+    glEnable(GL_LIGHTING);//ILUMINAR SIEMPRE EL HUD
+    glEnable(GL_LIGHT1);
+    glLightfv(GL_LIGHT1, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f,1.f});
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
+    glLightfv(GL_LIGHT1, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 0.0f});
+    glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0f);
     renderer::draw(instance_->espacio_, number::get_two_dots());
 
     gamehud::cambiar_numero(minutes_d, instance_->minutos_decena_);
@@ -49,5 +57,5 @@ void gamehud::draw_time(Uint32 milisecond)
     // dibujo los detalles
     renderer::draw(instance_->tiempo_, number::get_texture_time());
     renderer::draw(instance_->contenedor_, number::get_texture_gamehud());
-
+    glDisable(GL_LIGHT1);
 }
