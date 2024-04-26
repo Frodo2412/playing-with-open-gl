@@ -18,4 +18,6 @@ public:
     static void toggle_pause();
     static void reset();
     static Uint32 get_total_time();
+    bool get_is_paused();
+    static clock* get_instance();
 };

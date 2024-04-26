@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../scene/camera.h"
 #include "../entities/entity.h"
 #include "../geometry/cube.h"
 #include "../geometry/Triangle.h"
 #include "../geometry/vector3.h"
 #include "../geometry/grid.h"
 #include "../textures/texture.h"
+#include "./settings.h"
 
 class renderer
 {
@@ -18,4 +18,6 @@ public:
     static void draw(const triangle& triangle);
     static void draw(const entity& entity);
     static void draw(const square&, const texture& texture);
+    static void draw(const settings* settings);
 };
+
