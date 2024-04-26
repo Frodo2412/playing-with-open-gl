@@ -130,11 +130,11 @@ void draw_button(const button* button)
     glTexCoord2f(0, 0);
     glVertex3f(button->get_top_left_x(), button->get_top_left_y(), 1);
     glTexCoord2f(1, 0);
-    glVertex3f(button->get_top_left_x(), button->get_bottom_right_y(), 1);
+    glVertex3f(button->get_bottom_right_x(), button->get_top_left_y(), 1);
     glTexCoord2f(1, 1);
     glVertex3f(button->get_bottom_right_x(), button->get_bottom_right_y(), 1);
     glTexCoord2f(0, 1);
-    glVertex3f(button->get_bottom_right_x(), button->get_top_left_y(), 1);
+    glVertex3f(button->get_top_left_x(), button->get_bottom_right_y(), 1);
     glEnd();
 }
 

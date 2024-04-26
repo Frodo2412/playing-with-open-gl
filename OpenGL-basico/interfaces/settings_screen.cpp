@@ -5,8 +5,8 @@ settings_screen::settings_screen(const int window_width, const int window_height
 {
     float enabled_coord_x = static_cast<float>(window_width) / 2 - static_cast<float>(window_width * 0.28125);
     float enabled_coord_y = static_cast<float>(window_height) / 2 - static_cast<float>(window_height * 0.322917) +
-        static_cast
-        <float>((window_height - 480) * 0.05);
+        static_cast<float>((window_height - 480) * 0.05);
+
     enabled_coord_x = enabled_coord_x - 25;
 
     speed_button_ = speed_button(vector2(enabled_coord_x, enabled_coord_y),
