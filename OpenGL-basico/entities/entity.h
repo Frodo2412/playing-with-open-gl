@@ -5,7 +5,6 @@
 #include "../graphics/model_loader.h"
 #include "../graphics/vertex.h"
 #include "../textures/texture.h"
-#include "../textures/texture_loader.h"
 
 class entity : public game_object
 {
@@ -56,7 +55,6 @@ public:
     }
 
     std::vector<vertex> get_vertices() const;
-    texture get_texture() const;
 
     vector3 get_direction() const;
     vector3 get_up() const;

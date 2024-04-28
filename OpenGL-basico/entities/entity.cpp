@@ -5,11 +5,6 @@ std::vector<vertex> entity::get_vertices() const
     return vertices_;
 }
 
-texture entity::get_texture() const
-{
-    return texture_;
-}
-
 vector3 entity::get_direction() const
 {
     return direction_;
