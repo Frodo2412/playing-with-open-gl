@@ -47,6 +47,7 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
+    texture_manager::init();
     clock::init();
     number::init();
     gamehud::init();
