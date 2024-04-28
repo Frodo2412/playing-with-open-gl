@@ -65,5 +65,6 @@ public:
     void move(const vector3& displacement);
     float get_scale_factor() const;
 
+    virtual void handle_collision(game_object* other) =0;
     aabb get_bounding_box() override;
 };
