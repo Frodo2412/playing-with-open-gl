@@ -22,5 +22,5 @@ public:
     virtual bool is_active() const = 0;
     virtual bool is_destructible() const = 0;
 
-    aabb get_bounding_box() override;
+    aabb get_bounding_box() const override;
 };

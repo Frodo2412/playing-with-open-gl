@@ -58,15 +58,8 @@ int main(int argc, char* argv[])
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
-    std::vector<std::unique_ptr<block>> bloques;
 
-    bloques.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<brick_block>(vector3(1.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<metal_block>(vector3(2.5, -0.5, 0)));
-    bloques.push_back(std::make_unique<metal_block>(vector3(1.5, -0.5, 1)));
-
-    auto bomberman = player();
-    auto current_scene = scene(&bomberman, vector3(0, 0, -5));
+    auto current_scene = scene(vector3(0, 0, -5));
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 lastFrameTime = clock::get_instance()->get_total_time();
@@ -160,7 +153,7 @@ int main(int argc, char* argv[])
         }
 
         current_scene.move_player(displacement);
-
+        current_scene.update_scene();
         displacement.reset();
 
         current_scene.render_scene();
@@ -169,9 +162,6 @@ int main(int argc, char* argv[])
                                                   current_scene.get_camera()->get_position());
 
         renderer::draw(floor, grass_texture);
-        for (const auto& bloqueRef : bloques) {
-            renderer::draw(bloqueRef.get()->get_block(), bloqueRef.get()->get_texture());
-        }
 
         //CONTROL DE FRAMES
         frames++;

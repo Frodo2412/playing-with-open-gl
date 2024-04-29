@@ -30,6 +30,7 @@ public:
     vector3 operator+(const vector3& other) const;
     void operator+=(const vector3& other);
     vector3 operator -(const vector3& other) const;
+    void operator-=(const vector3& other);
     vector3 operator*(float s) const;
     vector3 operator*(const vector3& other) const;
     vector3 operator/(int s) const;

@@ -8,14 +8,14 @@
 
 class entity : public game_object
 {
-protected:
-    ~entity() = default;
-
-private:
     std::vector<vertex> vertices_;
     vector3 direction_, up_;
     float scale_factor_ = 1.0f;
-    aabb bounding_box_;
+
+protected:
+    vector3 speed_;
+
+    ~entity() = default;
 
 public:
     explicit entity(const std::string& file_path, const texture texture, const float hitbox_size,
@@ -24,7 +24,7 @@ public:
                     const vector3& up = vector3(0, 1, 0)): game_object(position, texture),
                                                            vertices_(model_loader::load_model(file_path)),
                                                            direction_(direction),
-                                                           up_(up)
+                                                           up_(up), speed_(vector3(0, 0, 0))
     {
         float min_x = std::numeric_limits<float>::max();
         float max_x = std::numeric_limits<float>::lowest();
@@ -61,10 +61,14 @@ public:
 
     void set_direction(const vector3& direction);
     void set_position(const vector3& position);
+    void set_speed(const vector3& speed);
+    void move();
 
-    void move(const vector3& displacement);
     float get_scale_factor() const;
 
-    virtual void handle_collision(game_object* other) =0;
-    aabb get_bounding_box() override;
+    virtual void handle_collision(game_object* other) = 0;
+
+    bool check_collision(const game_object* other_object) const;
+
+    aabb get_bounding_box() const override;
 };

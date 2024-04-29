@@ -30,6 +30,13 @@ vector3 vector3::operator -(const vector3& other) const
     return vector3(x_ - other.x_, y_ - other.y_, z_ - other.z_);
 }
 
+void vector3::operator-=(const vector3& other)
+{
+    x_ -= other.x_;
+    y_ -= other.y_;
+    z_ -= other.z_;
+}
+
 vector3 vector3::operator*(const float s) const
 {
     return vector3(x_ * s, y_ * s, z_ * s);

@@ -22,9 +22,8 @@ protected:
     ~game_object() = default;
 
 public:
-    virtual aabb get_bounding_box() = 0;
+    virtual aabb get_bounding_box() const = 0;
 
-    bool check_collision(const aabb& other);
     vector3 get_position() const;
     texture get_texture() const;
 };
