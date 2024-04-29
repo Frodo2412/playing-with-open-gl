@@ -18,16 +18,63 @@ void renderer::draw(const triangle& triangle)
 
 void renderer::draw(const entity& entity)
 {
-    glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());
-    glBegin(GL_TRIANGLES);
+    const std::vector<vertex> vertices = entity.get_vertices();
 
-    for (auto& vertex : entity.get_vertices())
+    // Create separate arrays for positions, normals, and texture coordinates
+    std::vector<float> positions(3 * vertices.size()); // x, y, z for each vertex
+    std::vector<float> normals(3 * vertices.size());
+    std::vector<float> tex_coords(2 * vertices.size()); // u, v for each vertex
+
+    // Use the smallest scale factor to maintain
+
+    for (size_t i = 0, j = 0; i < vertices.size(); ++i, j += 3)
     {
-        glTexCoord2f(vertex.tex_coords.get_x(), vertex.tex_coords.get_y());
-        draw(vertex.position + entity.get_position());
+        positions[j] = vertices[i].position.get_x();
+        positions[j + 1] = vertices[i].position.get_y();
+        positions[j + 2] = vertices[i].position.get_z();
+
+        normals[j] = vertices[i].normal.get_x();
+        normals[j + 1] = vertices[i].normal.get_y();
+        normals[j + 2] = vertices[i].normal.get_z();
     }
 
-    glEnd();
+    for (size_t i = 0, j = 0; i < vertices.size(); ++i, j += 2)
+    {
+        tex_coords[j] = vertices[i].tex_coords.get_x();
+        tex_coords[j + 1] = vertices[i].tex_coords.get_y();
+    }
+
+    // Enable the vertex array feature and other features
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    // Specify the format and the address of the arrays
+    glVertexPointer(3, GL_FLOAT, 0, positions.data());
+    glNormalPointer(GL_FLOAT, 0, normals.data());
+    glTexCoordPointer(2, GL_FLOAT, 0, tex_coords.data());
+
+    // Apply the transformations
+    glPushMatrix();
+    const auto position = entity.get_position();
+    glTranslatef(position.get_x(), position.get_y(), position.get_z());
+
+    const auto scale_factor = entity.get_scale_factor();
+    glScalef(scale_factor, scale_factor, scale_factor);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());
+
+    // Draw the model
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+    // Restore the original matrix
+    glPopMatrix();
+
+    // Disable the vertex array feature and other features
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void renderer::draw(const grid& grid, const texture& texture)
