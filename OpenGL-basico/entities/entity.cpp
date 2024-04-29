@@ -51,6 +51,5 @@ bool entity::check_collision(const game_object* other_object) const
 
 aabb entity::get_bounding_box() const
 {
-    const vector3 half_scale(scale_factor_ / 2);
-    return {position_ - half_scale, position_ + half_scale};
+    return {bounding_box_.min + position_, bounding_box_.max + position_};
 }

@@ -10,4 +10,5 @@ public:
     }
 
     void handle_collision(game_object* other) override;
+    vector3& get_speed();
 };

@@ -62,6 +62,8 @@ void scene::update_scene() const
             player_->handle_collision(enemy.get());
         enemy.get()->move();
     }
+
+    camera_->move(player_->get_speed());
 }
 
 void scene::move_player(const vector3& displacement) const
@@ -83,7 +85,6 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
-            camera_->move(movement);
             player_->set_speed(movement);
             break;
         }
@@ -99,7 +100,6 @@ void scene::move_player(const vector3& displacement) const
             const auto movement = -displacement;
             player_->set_speed(movement);
             player_->set_direction(movement);
-            camera_->move(movement);
             break;
         }
     }

@@ -10,6 +10,7 @@ class entity : public game_object
 {
     std::vector<vertex> vertices_;
     vector3 direction_, up_;
+    aabb bounding_box_;
     float scale_factor_ = 1.0f;
 
 protected:
@@ -52,6 +53,7 @@ public:
         float scale_z = hitbox_size / model_depth;
 
         scale_factor_ = std::min({scale_x, scale_y, scale_z});
+        bounding_box_ = {vector3(min_x, min_y, min_z) * scale_factor_, vector3(max_x, max_y, max_z) * scale_factor_};
     }
 
     std::vector<vertex> get_vertices() const;
