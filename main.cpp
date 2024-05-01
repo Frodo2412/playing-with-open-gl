@@ -59,13 +59,13 @@ int main(int argc, char* argv[])
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
     const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
-
     std::vector<block*> bloques;
+
     bloques.push_back(new brick_block(vector3(0.5, -0.5, 0), 1));
     bloques.push_back(new brick_block(vector3(1.5, -0.5, 0), 1));
     bloques.push_back(new metal_block(vector3(2.5, -0.5, 0), 1));
     bloques.push_back(new metal_block(vector3(1.5, -0.5, 1), 1));
-
+    
     auto bomberman = player();
     auto current_scene = scene(&bomberman, vector3(0, 0, -5));
 
@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
             if(bloqueRef->is_active())
                 renderer::draw(*bloqueRef->get_block(), bloqueRef->get_texture());
         }
-
+        
         //CONTROL DE FRAMES
         frames++;
         Uint32 currentFrameTime = clock::get_instance()->get_total_time();
@@ -225,23 +225,23 @@ int main(int argc, char* argv[])
                     std::cout << "LEFT\n";
                     displacement.set_x(0.1f * elapsed_time * game_velocity);
                     break;
-            case SDLK_d:
-                std::cout << "RIGHT\n";
+                case SDLK_d:
+                    std::cout << "RIGHT\n";
                     displacement.set_x(-0.1f * elapsed_time * game_velocity);
                     break;
-            case SDLK_w:
-                std::cout << "UP\n";
+                case SDLK_w:
+                    std::cout << "UP\n";
                     displacement.set_z(0.1f * elapsed_time * game_velocity);
                     break;
-            case SDLK_s:
-                std::cout << "DOWN\n";
+                case SDLK_s:
+                    std::cout << "DOWN\n";
                     displacement.set_z(-0.1f * elapsed_time * game_velocity);
                     break;
-            case SDLK_v:
-                current_scene.toggle_camera();
+                case SDLK_v:
+                    current_scene.toggle_camera();
                     break;
-            case SDLK_p:
-                std::cout << "PAUSE\n";
+                case SDLK_p:
+                    std::cout << "PAUSE\n";
                     clock::toggle_pause();
                     break;
             case SDLK_b:

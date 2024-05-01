@@ -115,10 +115,11 @@ camera* scene::get_camera() const
 }
 
 
-void scene::drop_bomb(std::vector<block*>& bloques)
+void scene::drop_bomb(std::vector<block*> bloques)
 {
     bomb* bomba = new bomb();
-    bomba->set_position(vector3(player_->get_position().get_x(), -0.5, player_->get_position().get_z()));
+    bomba->set_position(vector3(0.5, -0.5, 0)); // LE PASO LA POSICIÓN DE UN BLOQUE DESTRUCT
+    //bomba->set_position(vector3(camera_->get_position().get_x(), -0.5, camera_->get_position().get_z()));
     renderer::draw(*bomba);
     bomba->explotar(bloques);
 };

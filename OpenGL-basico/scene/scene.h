@@ -4,6 +4,8 @@
 #include "../entities/player.h"
 #include "../entities/block.h"
 
+class block;
+
 enum camera_mode
 {
     first,
@@ -34,7 +36,7 @@ public:
     // Camera related functionality
     void toggle_camera();
     void rotate_camera(const float x, const float y) const;
-
+    void drop_bomb(std::vector<block*> bloques);
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode();
     camera* get_camera();
