@@ -39,9 +39,8 @@ public:
     void toggle_camera();
     void rotate_camera(const float x, const float y) const;
     void move_player(const vector3& displacement) const;
-    camera_mode get_camera_mode();
-    camera* get_camera();
-    void drop_bomb(std::vector<block*>& bloques);
+    camera_mode get_camera_mode() const;
+    camera* get_camera() const;
     void render_scene() const;
 
     

@@ -115,7 +115,6 @@ camera* scene::get_camera() const
     return camera_;
 }
 
-
 void scene::drop_bomb()
 {
     bomb* bomba = new bomb();
