@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
         }
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
-
+        current_scene.update_bomb(elapsed_time, bloques);
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event))
         {
@@ -244,9 +244,9 @@ int main(int argc, char* argv[])
                     std::cout << "PAUSE\n";
                     clock::toggle_pause();
                     break;
-            case SDLK_b:
-                        std::cout << "Bomb!\n";
-                        current_scene.drop_bomb(bloques);
+                case SDLK_b:
+                    current_scene.drop_bomb();
+                    std::cout << "Bomb placed!\n";
                         break;
                 default: break;
                 }

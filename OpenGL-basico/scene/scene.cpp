@@ -98,9 +98,10 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
     renderer::draw(*player_);
 
-    for (const auto& enemy : enemies_)
+    for (auto enemigo : enemies_)
     {
-        renderer::draw(enemy);
+        if(enemigo.is_active())
+            renderer::draw(enemigo);
     }
 }
 
@@ -115,11 +116,25 @@ camera* scene::get_camera() const
 }
 
 
-void scene::drop_bomb(std::vector<block*> bloques)
+void scene::drop_bomb()
 {
     bomb* bomba = new bomb();
-    bomba->set_position(vector3(0.5, -0.5, 0)); // LE PASO LA POSICIÓN DE UN BLOQUE DESTRUCT
-    //bomba->set_position(vector3(camera_->get_position().get_x(), -0.5, camera_->get_position().get_z()));
+    vector3 playerPosition = player_->get_position();
+    playerPosition.set_y(-0.5);
+    bomba->set_position(playerPosition);
+    bomb_ = bomba;
+    bombs_.push_back(bomba);
     renderer::draw(*bomba);
-    bomba->explotar(bloques);
+}
+
+void scene::update_bomb(float elapsed_time, std::vector<block*>& bloques)
+{
+    for(auto& bomba : bombs_)
+    {
+        bomba->set_timer(bomba->get_timer() - elapsed_time);
+        if(bomba->get_timer() <= 0 && !bomba->is_exploded()) // si el timer llega a 0 y no ha explotado --> explota
+        {
+            bomba->explotar(bloques, enemies_);
+        }
+    }
 };
