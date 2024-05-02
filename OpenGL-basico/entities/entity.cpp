@@ -5,16 +5,6 @@ std::vector<vertex> entity::get_vertices() const
     return vertices_;
 }
 
-texture entity::get_texture() const
-{
-    return texture_;
-}
-
-vector3 entity::get_position() const
-{
-    return position_;
-}
-
 vector3 entity::get_direction() const
 {
     return direction_;
@@ -43,4 +33,10 @@ void entity::move(const vector3& displacement)
 float entity::get_scale_factor() const
 {
     return scale_factor_;
+}
+
+aabb entity::get_bounding_box()
+{
+    const vector3 half_scale(scale_factor_ / 2);
+    return {position_ - half_scale, position_ + half_scale};
 }

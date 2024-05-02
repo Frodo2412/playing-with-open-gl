@@ -1,23 +1,12 @@
 #include "block.h"
-#include "../utils/renderer.h"
-#include "../geometry/cube.h"
 
-const vector3 block::get_posicion()
+cube block::get_block() const
 {
-    return posicion_;
+    return cube_;
 }
 
-const cube block::get_block()
+aabb block::get_bounding_box()
 {
-    const auto pared = cube(this->size_, this->posicion_);
-    return pared;
-};
-
-bool block::is_active(){
-    return active_;
-};
-
-float block::get_size()
-{
-    return size_;
+    const vector3 half_extents(size_ / 2, size_ / 2, size_ / 2);
+    return {position_ - half_extents, position_ + half_extents};
 };

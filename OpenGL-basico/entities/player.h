@@ -1,10 +1,11 @@
 #pragma once
 #include "entity.h"
+#include "../textures/texture_manager.h"
 
-class player : public entity
+class player final : public entity
 {
 public:
-    explicit player(): entity("../assets/models/Doodler.obj", "../assets/textures/Doodler.png", 1)
+    explicit player(): entity("../assets/models/Doodler.obj", texture_manager::player_texture(), 1)
     {
     }
 };

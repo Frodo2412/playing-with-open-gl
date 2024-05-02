@@ -1,7 +1,11 @@
 #include "metal_block.h"
 
-
-const texture metal_block::get_texture()
+bool metal_block::is_active() const
 {
-    return texture_;
+    return true;
+}
+
+bool metal_block::is_destructible() const
+{
+    return false;
 }

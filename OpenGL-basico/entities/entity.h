@@ -1,27 +1,30 @@
 #pragma once
 #include <vector>
 
+#include "game_object.h"
 #include "../graphics/model_loader.h"
 #include "../graphics/vertex.h"
 #include "../textures/texture.h"
-#include "../textures/texture_loader.h"
 
-class entity
+class entity : public game_object
 {
+protected:
+    ~entity() = default;
+
+private:
     std::vector<vertex> vertices_;
-    vector3 position_, direction_, up_;
+    vector3 direction_, up_;
     float scale_factor_ = 1.0f;
-    texture texture_;
+    aabb bounding_box_;
 
 public:
-    explicit entity(const std::string& file_path, const char* texture_path, const float hitbox_size,
+    explicit entity(const std::string& file_path, const texture texture, const float hitbox_size,
                     const vector3& position = vector3(0, 0, 0),
                     const vector3& direction = vector3(1, 0, 0),
-                    const vector3& up = vector3(0, 1, 0)): vertices_(model_loader::load_model(file_path)),
-                                                           position_(position),
+                    const vector3& up = vector3(0, 1, 0)): game_object(position, texture),
+                                                           vertices_(model_loader::load_model(file_path)),
                                                            direction_(direction),
-                                                           up_(up),
-                                                           texture_(texture_loader::load_texture(texture_path))
+                                                           up_(up)
     {
         float min_x = std::numeric_limits<float>::max();
         float max_x = std::numeric_limits<float>::lowest();
@@ -52,9 +55,7 @@ public:
     }
 
     std::vector<vertex> get_vertices() const;
-    texture get_texture() const;
 
-    vector3 get_position() const;
     vector3 get_direction() const;
     vector3 get_up() const;
 
@@ -63,4 +64,6 @@ public:
 
     void move(const vector3& displacement);
     float get_scale_factor() const;
+
+    aabb get_bounding_box() override;
 };
