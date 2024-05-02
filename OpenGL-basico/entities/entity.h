@@ -8,6 +8,10 @@
 
 class entity : public game_object
 {
+protected:
+    ~entity() = default;
+
+private:
     std::vector<vertex> vertices_;
     vector3 direction_, up_;
     aabb bounding_box_;
