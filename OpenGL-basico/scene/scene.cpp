@@ -256,14 +256,14 @@ void scene::update_scene(const float elapsed_time)
     blocks_.erase(std::remove_if(blocks_.begin(), blocks_.end(),
                                  [](const std::unique_ptr<block>& ptr)
                                  {
-                                     return ptr->is_active();
+                                     return !ptr->is_active();
                                  }),
                   blocks_.end());
 
     enemies_.erase(std::remove_if(enemies_.begin(), enemies_.end(),
                                   [](const std::unique_ptr<enemy>& ptr)
                                   {
-                                      return ptr->is_active();
+                                      return !ptr->is_active();
                                   }),
                    enemies_.end());
 
