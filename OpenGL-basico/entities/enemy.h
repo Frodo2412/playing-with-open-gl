@@ -8,4 +8,6 @@ public:
     explicit enemy(): entity("../assets/models/spider.obj", texture_manager::enemy_texture(), 1)
     {
     }
+
+    void handle_collision(game_object* other) override;
 };

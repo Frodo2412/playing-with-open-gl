@@ -8,4 +8,7 @@ public:
     explicit player(): entity("../assets/models/Doodler.obj", texture_manager::player_texture(), 1)
     {
     }
+
+    void handle_collision(game_object* other) override;
+    vector3& get_speed();
 };
