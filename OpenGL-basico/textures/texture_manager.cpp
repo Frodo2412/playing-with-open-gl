@@ -27,3 +27,8 @@ texture texture_manager::metal_block_texture()
 {
     return instance_->metal_block_texture_;
 }
+
+texture texture_manager::bomb_texture()
+{
+    return instance_->bomb_texture_;
+}

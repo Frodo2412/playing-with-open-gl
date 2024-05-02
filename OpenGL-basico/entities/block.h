@@ -18,9 +18,12 @@ protected:
 public:
     virtual ~block() = default;
 
+    vector3 get_position() const;
     cube get_block() const;
     virtual bool is_active() const = 0;
     virtual bool is_destructible() const = 0;
 
     aabb get_bounding_box() const override;
+
+    virtual void destroy() = 0;
 };

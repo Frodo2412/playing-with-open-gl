@@ -293,7 +293,6 @@
         <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\models\Doodler.obj"/>
         <Content Include="..\assets\models\spider.obj" />
-        <Content Include="..\assets\source\bomberman.fbx"/>
         <Content Include="..\assets\textures\bricks_1.jpg"/>
         <Content Include="..\assets\textures\Diffuse.jpg" />
         <Content Include="..\assets\textures\Doodler.png"/>

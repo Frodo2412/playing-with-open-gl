@@ -11,7 +11,8 @@ public:
     {
     }
 
-    void destruir();
     bool is_active() const override;
     bool is_destructible() const override;
+    
+    void destroy() override;
 };
