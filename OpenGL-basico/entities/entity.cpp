@@ -53,8 +53,3 @@ aabb entity::get_bounding_box() const
 {
     return {bounding_box_.min + position_, bounding_box_.max + position_};
 }
-
-float entity::get_scale_factor() const
-{
-    return scale_factor_;
-}
