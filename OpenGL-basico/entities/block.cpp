@@ -1,5 +1,10 @@
 #include "block.h"
 
+vector3 block::get_position() const
+{
+    return position_;
+}
+
 cube block::get_block() const
 {
     return cube_;

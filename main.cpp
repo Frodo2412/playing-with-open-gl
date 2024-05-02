@@ -4,10 +4,6 @@
 #include <conio.h>
 #include <GL/glu.h>
 
-#include "OpenGL-basico/entities/player.h"
-#include "OpenGL-basico/entities/block.h"
-#include "OpenGL-basico/entities/brick_block.h"
-#include "OpenGL-basico/entities/metal_block.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/interfaces/gamehud.h"
@@ -153,7 +149,6 @@ int main(int argc, char* argv[])
         }
 
         current_scene.move_player(displacement);
-        current_scene.update_scene();
         displacement.reset();
 
         current_scene.render_scene();
@@ -182,6 +177,7 @@ int main(int argc, char* argv[])
         }
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
+        current_scene.update_scene(elapsed_time);
 
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event))
@@ -231,6 +227,10 @@ int main(int argc, char* argv[])
                 case SDLK_p:
                     std::cout << "PAUSE\n";
                     clock::toggle_pause();
+                    break;
+                case SDLK_b:
+                    current_scene.drop_bomb();
+                    std::cout << "Bomb placed!\n";
                     break;
                 default: break;
                 }

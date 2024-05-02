@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "../entities/bomb.h"
 #include  "../entities/block.h"
 #include  "../entities/metal_block.h"
 #include  "../entities/brick_block.h"
@@ -24,6 +25,9 @@ class scene
     std::vector<std::unique_ptr<block>> blocks_;
 
     camera* camera_;
+    std::vector<std::unique_ptr<bomb>> bombs_;
+
+    void set_off_bomb(bomb* bomb) const;
 
 public:
     explicit scene(const vector3& initial_player_position)
@@ -41,11 +45,12 @@ public:
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;
-
-    void update_scene() const;
-
+    void update_scene(float elapsed_time);
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;
     void render_scene() const;
+
+
+    void drop_bomb();
 };

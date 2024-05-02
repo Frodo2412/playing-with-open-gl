@@ -9,3 +9,7 @@ bool metal_block::is_destructible() const
 {
     return false;
 }
+
+void metal_block::destroy()
+{
+}
