@@ -82,7 +82,6 @@
         <ClCompile Include="..\main.cpp"/>
         <ClCompile Include="entities\block.cpp"/>
         <ClCompile Include="entities\bomb.cpp" />
-        <ClCompile Include="entities\bomb.cpp" />
         <ClCompile Include="entities\brick_block.cpp"/>
         <ClCompile Include="entities\enemy.cpp" />
         <ClCompile Include="entities\game_object.cpp" />
@@ -400,16 +399,8 @@
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
         <Content Include="..\assets\textures\spider.jpg" />
-        <ClCompile Include="entities\enemy.cpp" />
-        <ClCompile Include="entities\game_object.cpp" />
-        <ClCompile Include="textures\texture_manager.cpp" />
         <ClInclude Include="entities\bomb.h" />
-        <ClInclude Include="entities\enemy.h" />
-        <ClInclude Include="entities\game_object.h" />
-        <ClInclude Include="entities\enemy.h" />
-        <ClInclude Include="textures\texture_manager.h" />
         <Content Include="..\assets\models\Bomb.obj" />
-        <Content Include="..\assets\models\spider.obj" />
         <Content Include="..\assets\textures\Diffuse.jpg" />
         <Content Include="..\assets\textures\spider.jpg" />
         <Content Include="..\assets\textures\wall_1.jpg"/>
