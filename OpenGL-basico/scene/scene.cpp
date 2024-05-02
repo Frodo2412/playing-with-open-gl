@@ -49,6 +49,24 @@ void scene::rotate_camera(const float x, const float y) const
     }
 }
 
+void scene::update_scene() const
+{
+    player_->move();
+
+    for (auto& block : blocks_)
+        if (player_->check_collision(block.get()))
+            player_->handle_collision(block.get());
+
+    for (auto& enemy : enemies_)
+    {
+        if (player_->check_collision(enemy.get()))
+            player_->handle_collision(enemy.get());
+        enemy.get()->move();
+    }
+
+    camera_->move(player_->get_speed());
+}
+
 void scene::move_player(const vector3& displacement) const
 {
     switch (camera_mode_)
@@ -68,23 +86,21 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
-            camera_->move(movement);
-            player_->move(movement);
+            player_->set_speed(movement);
             break;
         }
     case top_down:
         {
             const auto movement = -displacement;
-            player_->move(movement);
+            player_->set_speed(movement);
             player_->set_direction(movement);
             break;
         }
     case perspective:
         {
             const auto movement = -displacement;
-            player_->move(movement);
+            player_->set_speed(movement);
             player_->set_direction(movement);
-            camera_->move(movement);
             break;
         }
     }
@@ -98,10 +114,13 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
     renderer::draw(*player_);
 
-    for (auto enemigo : enemies_)
+    for (auto& enemy : enemies_)
     {
-        if(enemigo.is_active())
-            renderer::draw(enemigo);
+        renderer::draw(*enemy.get());
+    }
+    for (const auto& block : blocks_)
+    {
+        renderer::draw(block->get_block(), block->get_texture());
     }
 }
 

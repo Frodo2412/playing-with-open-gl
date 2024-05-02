@@ -1,15 +1,11 @@
 #include "metal_block.h"
 
-bool metal_block::is_destroyable()
+bool metal_block::is_active() const
+{
+    return true;
+}
+
+bool metal_block::is_destructible() const
 {
     return false;
-}
-
-bool metal_block::is_active()
-{
-    return is_active_;
-}
-
-void metal_block::destroy()
-{
 }

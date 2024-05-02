@@ -82,8 +82,10 @@
         <ClCompile Include="..\main.cpp"/>
         <ClCompile Include="entities\block.cpp"/>
         <ClCompile Include="entities\bomb.cpp" />
+        <ClCompile Include="entities\bomb.cpp" />
         <ClCompile Include="entities\brick_block.cpp"/>
         <ClCompile Include="entities\enemy.cpp" />
+        <ClCompile Include="entities\game_object.cpp" />
         <ClCompile Include="entities\metal_block.cpp"/>
         <ClCompile Include="interfaces\buttons\button.cpp"/>
         <ClCompile Include="interfaces\buttons\checkbox.cpp"/>
@@ -249,6 +251,7 @@
             </AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <ClCompile Include="textures\texture_manager.cpp" />
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\lights_handler.cpp"/>
         <ClCompile Include="utils\renderer.cpp"/>
@@ -258,6 +261,7 @@
         <ClInclude Include="entities\bomb.h" />
         <ClInclude Include="entities\brick_block.h"/>
         <ClInclude Include="entities\enemy.h" />
+        <ClInclude Include="entities\game_object.h" />
         <ClInclude Include="entities\metal_block.h"/>
         <ClInclude Include="interfaces\buttons\button.h"/>
         <ClInclude Include="interfaces\buttons\checkbox.h"/>
@@ -281,6 +285,7 @@
         <ClInclude Include="scene\scene.h"/>
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>
+        <ClInclude Include="textures\texture_manager.h" />
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\lights_handler.h"/>
         <ClInclude Include="utils\renderer.h"/>
@@ -394,6 +399,18 @@
             <AdditionalIncludeDirectories>C:\Users\Bruno\RiderProjects\playing-with-open-gl\\Assimp\include;;C:\Users\Bruno\vcpkg\installed\x86-windows\include</AdditionalIncludeDirectories>
             <LinkCompiled>true</LinkCompiled>
         </ClCompile>
+        <Content Include="..\assets\textures\spider.jpg" />
+        <ClCompile Include="entities\enemy.cpp" />
+        <ClCompile Include="entities\game_object.cpp" />
+        <ClCompile Include="textures\texture_manager.cpp" />
+        <ClInclude Include="entities\bomb.h" />
+        <ClInclude Include="entities\enemy.h" />
+        <ClInclude Include="entities\game_object.h" />
+        <ClInclude Include="entities\enemy.h" />
+        <ClInclude Include="textures\texture_manager.h" />
+        <Content Include="..\assets\models\Bomb.obj" />
+        <Content Include="..\assets\models\spider.obj" />
+        <Content Include="..\assets\textures\Diffuse.jpg" />
         <Content Include="..\assets\textures\spider.jpg" />
         <Content Include="..\assets\textures\wall_1.jpg"/>
         <Content Include="..\assets\textures\settings\ajustes.jpg"/>

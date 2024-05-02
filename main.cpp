@@ -8,7 +8,6 @@
 #include "OpenGL-basico/entities/block.h"
 #include "OpenGL-basico/entities/brick_block.h"
 #include "OpenGL-basico/entities/metal_block.h"
-#include "OpenGL-basico/entities/bomb.h"
 #include "OpenGL-basico/geometry/vector3.h"
 #include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/interfaces/gamehud.h"
@@ -48,26 +47,19 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
+    texture_manager::init();
     clock::init();
     number::init();
     gamehud::init();
     SDL_Event event;
 
-    auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
+    const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
     const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
     const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
-    const auto bricks_texture = texture_loader::load_texture("../assets/textures/bricks_1.jpg");
-    std::vector<block*> bloques;
 
-    bloques.push_back(new brick_block(vector3(0.5, -0.5, 0), 1));
-    bloques.push_back(new brick_block(vector3(1.5, -0.5, 0), 1));
-    bloques.push_back(new metal_block(vector3(2.5, -0.5, 0), 1));
-    bloques.push_back(new metal_block(vector3(1.5, -0.5, 1), 1));
-    
-    auto bomberman = player();
-    auto current_scene = scene(&bomberman, vector3(0, 0, -5));
+    auto current_scene = scene(vector3(0, 0, -5));
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 lastFrameTime = clock::get_instance()->get_total_time();
@@ -161,7 +153,7 @@ int main(int argc, char* argv[])
         }
 
         current_scene.move_player(displacement);
-
+        current_scene.update_scene();
         displacement.reset();
 
         current_scene.render_scene();
@@ -170,11 +162,7 @@ int main(int argc, char* argv[])
                                                   current_scene.get_camera()->get_position());
 
         renderer::draw(floor, grass_texture);
-        for (const auto& bloqueRef : bloques) {
-            if(bloqueRef->is_active())
-                renderer::draw(*bloqueRef->get_block(), bloqueRef->get_texture());
-        }
-        
+
         //CONTROL DE FRAMES
         frames++;
         Uint32 currentFrameTime = clock::get_instance()->get_total_time();
@@ -194,7 +182,7 @@ int main(int argc, char* argv[])
         }
 
         float elapsed_time = static_cast<float>(clock::get_ticks());
-        current_scene.update_bomb(elapsed_time, bloques);
+
         //MANEJO DE EVENTOS
         while (SDL_PollEvent(&event))
         {
@@ -244,10 +232,6 @@ int main(int argc, char* argv[])
                     std::cout << "PAUSE\n";
                     clock::toggle_pause();
                     break;
-                case SDLK_b:
-                    current_scene.drop_bomb();
-                    std::cout << "Bomb placed!\n";
-                        break;
                 default: break;
                 }
             case SDL_KEYUP:

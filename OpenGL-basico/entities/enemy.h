@@ -1,14 +1,13 @@
 #pragma once
 #include "entity.h"
+#include "../textures/texture_manager.h"
 
 class enemy final : public entity
 {
-private:
-    bool active_;
 public:
-    explicit enemy(): entity("../assets/models/spider.obj", "../assets/textures/spider.jpg", 1), active_(true)
+    explicit enemy(): entity("../assets/models/spider.obj", texture_manager::enemy_texture(), 1)
     {
     }
-    const bool is_active();
-    void destroy();
+
+    void handle_collision(game_object* other) override;
 };

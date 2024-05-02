@@ -1,27 +1,26 @@
 #pragma once
+#include "game_object.h"
 #include "../geometry/vector3.h"
 #include "../geometry/cube.h"
 #include "../textures/texture_loader.h"
 
-class block
+class block : public game_object
 {
-    vector3 position_;
-    cube* cube_;
-    texture texture_;
+    cube cube_;
+    float size_;
 
 protected:
-    explicit block(const vector3& pos, float size, texture texture): position_(pos), cube_(new cube(size, pos)), texture_(texture) {};
-    
+    explicit block(const vector3& position, const texture texture, const float size = 1.0):
+        game_object(position, texture), cube_(cube(size, position)), size_(size)
+    {
+    }
+
 public:
-    const texture get_texture();
-    const vector3 get_posicion();
-    cube* get_block();
+    virtual ~block() = default;
 
-    virtual bool is_destroyable() = 0;
-    virtual bool is_active() = 0;
-    virtual void destroy() = 0;
+    cube get_block() const;
+    virtual bool is_active() const = 0;
+    virtual bool is_destructible() const = 0;
 
-    static texture metal_texture;
-    static texture brick_texture;
+    aabb get_bounding_box() const override;
 };
-

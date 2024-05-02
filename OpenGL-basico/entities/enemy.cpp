@@ -1,11 +1,5 @@
 #include "enemy.h"
 
-void enemy::destroy()
+void enemy::handle_collision(game_object* other)
 {
-    active_ = false;
-}
-
-const bool enemy::is_active()
-{
-    return active_;
 }

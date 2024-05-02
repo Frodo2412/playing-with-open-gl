@@ -1,14 +1,17 @@
 #pragma once
 #include "block.h"
+#include "../textures/texture_manager.h"
 
-class brick_block : public block
+class brick_block final : public block
 {
-   bool is_active_;
+    bool active_;
 
 public:
-   explicit brick_block(const vector3& pos, float size): block(pos, size, block::brick_texture), is_active_(true) {}
-       
-   bool is_destroyable() override;
-   bool is_active() override;
-   void destroy() override;
+    explicit brick_block(const vector3& pos): block(pos, texture_manager::brick_block_texture()), active_(true)
+    {
+    }
+
+    void destruir();
+    bool is_active() const override;
+    bool is_destructible() const override;
 };

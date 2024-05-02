@@ -1,19 +1,16 @@
 #include "brick_block.h"
 
-#include <iostream>
+void brick_block::destruir()
+{
+    this->active_ = false; // la bomba pasa a estar inactiva.
+}
 
-bool brick_block::is_destroyable()
+bool brick_block::is_active() const
+{
+    return active_;
+}
+
+bool brick_block::is_destructible() const
 {
     return true;
-}
-
-bool brick_block::is_active()
-{
-    return is_active_;
-}
-
-void brick_block::destroy()
-{
-    is_active_ = false;
-    std::cout<< "Block destroyed" << "\n";
 }
