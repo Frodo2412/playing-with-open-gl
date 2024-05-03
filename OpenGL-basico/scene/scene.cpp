@@ -320,8 +320,12 @@ void scene::render_scene() const
               camera_->get_direction().get_x(), camera_->get_direction().get_y(),
               camera_->get_direction().get_z(),
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
-    renderer::draw(*player_);
 
+    if (camera_mode_ != first)
+    {
+        renderer::draw(*player_);
+    }
+    
     for (auto& enemy : enemies_)
     {
         renderer::draw(*enemy.get());
