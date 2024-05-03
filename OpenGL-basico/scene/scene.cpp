@@ -52,6 +52,19 @@ void scene::rotate_camera(const float x, const float y) const
     }
 }
 
+void scene::update_camera() const
+{
+    switch (camera_mode_)
+    {
+    case first:
+    case perspective:
+        camera_->move(player_->get_speed());
+        break;
+    case top_down:
+        break;
+    }
+}
+
 void scene::set_off_bomb(bomb* bomb) const
 {
     {
@@ -242,7 +255,7 @@ void scene::update_scene(const float elapsed_time)
         enemy.get()->move();
     }
 
-    camera_->move(player_->get_speed());
+    update_camera();
 
     for (auto& bomba : bombs_)
     {

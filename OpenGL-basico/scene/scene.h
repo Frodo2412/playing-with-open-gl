@@ -27,6 +27,7 @@ class scene
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;
 
+    void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
 public:
