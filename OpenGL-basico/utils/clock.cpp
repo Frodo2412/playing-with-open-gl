@@ -32,8 +32,7 @@ void clock::reset()
 
 Uint32 clock::get_total_time()
 {
-    const Uint32 current_time = instance_->played_time_;
-    return current_time;
+    return instance_->played_time_;
 }
 
 bool clock::get_is_paused() const
