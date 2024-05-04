@@ -7,6 +7,7 @@
 #include "../entities/enemy.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
+#include "../geometry/grid.h"
 
 enum camera_mode
 {
@@ -20,6 +21,8 @@ class scene
 {
     camera_mode camera_mode_ = first;
 
+    grid floor_;
+
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
@@ -32,9 +35,10 @@ class scene
 
 public:
     explicit scene(const vector3& initial_player_position)
-        : player_(std::make_unique<player>()),
-          camera_(new camera(initial_player_position.get_x(), initial_player_position.get_y(),
-                             initial_player_position.get_z()))
+        : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
+          player_(std::make_unique<player>()), camera_(new camera(initial_player_position.get_x(),
+                                                                  initial_player_position.get_y(),
+                                                                  initial_player_position.get_z()))
     {
         player_->set_position(initial_player_position);
         enemies_.emplace_back(std::make_unique<enemy>(enemy()));
@@ -54,4 +58,5 @@ public:
 
 
     void drop_bomb();
+    grid get_floor() const;
 };

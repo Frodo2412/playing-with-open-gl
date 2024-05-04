@@ -3,6 +3,9 @@
 #include <iostream>
 #include <SDL_opengl.h>
 
+#include "clock.h"
+#include "lights_handler.h"
+#include "../interfaces/gamehud.h"
 #include "../interfaces/settings.h"
 #include "../interfaces/settings_screen.h"
 #include "../textures/texture.h"
@@ -192,6 +195,12 @@ void renderer::draw(settings_screen* settings_screen)
     const int window_height = settings->window_height;
     const int window_width = settings->window_width;
 
+    glMatrixMode(GL_PROJECTION);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(-window_width / 2, window_width / 2, -window_height / 2, window_height / 2, -1.0, 1.0);
+
     // ILUMINAR LAS SETTINGS
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT2);
@@ -222,4 +231,53 @@ void renderer::draw(settings_screen* settings_screen)
     glDisable(GL_TEXTURE_2D);
 
     glDisable(GL_LIGHT2);
+
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void renderer::draw_gamehud()
+{
+    glDisable(GL_DEPTH_TEST);
+    // Configurar la proyeccion ortogonal
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // Especifico la proyeccion: ortogonal.
+    // Configurar la matriz de modelo-vista
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    // Dibujar el contenedor del HUD
+    const Uint32 time = clock::get_total_time();
+    gamehud::draw_time(time);
+
+    // Restaurar la matriz de modelo-vista
+    glEnable(GL_DEPTH_TEST);
+    glPopMatrix();
+    // Restaurar la matriz de proyeccion
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+
+    // Dibujar el resto de la escena
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void renderer::draw(const scene& current_scene)
+{
+    if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    if (settings::get_instance()->textures_enabled) glEnable(GL_TEXTURE_2D);
+    else glDisable(GL_TEXTURE_2D);
+    if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
+    else glShadeModel(GL_SMOOTH);
+
+
+    current_scene.render_scene();
+    lights_handler::get_instance()->set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
+                                              current_scene.get_camera()->get_position());
+
+    draw(current_scene.get_floor(), texture_manager::grass_texture());
 }

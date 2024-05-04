@@ -334,11 +334,8 @@ void scene::render_scene() const
               camera_->get_direction().get_z(),
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
-    if (camera_mode_ != first)
-    {
-        renderer::draw(*player_);
-    }
-    
+    renderer::draw(*player_);
+
     for (auto& enemy : enemies_)
     {
         renderer::draw(*enemy.get());
@@ -369,4 +366,9 @@ void scene::drop_bomb()
     vector3 player_position = player_->get_position();
     bombs_.emplace_back(std::make_unique<bomb>(player_->get_position()));
     player_position.set_y(-0.5);
+}
+
+grid scene::get_floor() const
+{
+    return floor_;
 }
