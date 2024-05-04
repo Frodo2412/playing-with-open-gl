@@ -64,22 +64,17 @@ void lights_handler::set_light(const camera_mode mode, const light_colors light_
 
     // Assuming other lights and settings are already initialized
     glEnable(GL_LIGHT1); // Enable an additional light
-
     // Define the color components for the new light
     constexpr GLfloat ambient_light[] = {0.2f, 0.2f, 0.2f, 1.0f}; // Dim white for ambient light
     constexpr GLfloat diffuse_light[] = {1.0f, 1.0f, 1.0f, 1.0f}; // Full white for diffuse light
     constexpr GLfloat specular_light[] = {1.0f, 1.0f, 1.0f, 1.0f}; // Full white for specular light
-
     // Set up the new light properties
     glLightfv(GL_LIGHT1, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT1, GL_SPECULAR, specular_light);
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.005f);
 
     // Position the new light as a directional light
-    constexpr GLfloat light_position[] = {0, 10.0f, 0, 0.0f}; // Example directional vector
+    constexpr GLfloat light_position[] = {-1.0f, 2.0f, 1.0f, 0.0f}; // Example directional vector
     glLightfv(GL_LIGHT1, GL_POSITION, light_position);
 }
 
