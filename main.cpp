@@ -41,7 +41,6 @@ int main(int argc, char* argv[])
     glClearColor(color, color, color, 1);
 
     gluPerspective(45, 640 / 480.f, 0.1, 100);
-    glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
@@ -202,5 +201,10 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
     {
         renderer::draw(current_scene);
         renderer::draw_gamehud();
+    }
+
+    GLenum err;
+    while ((err = glGetError()) != GL_NO_ERROR) {
+        std::cerr << "OpenGL error: " << err << std::endl;
     }
 }

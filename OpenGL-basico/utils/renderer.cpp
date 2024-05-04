@@ -243,7 +243,6 @@ void renderer::draw_gamehud()
     gamehud::draw_time(time);
 
     // Restaurar la matriz de modelo-vista
-    glEnable(GL_DEPTH_TEST);
     glPopMatrix();
     // Restaurar la matriz de proyeccion
     glMatrixMode(GL_PROJECTION);
@@ -262,6 +261,7 @@ void renderer::draw(const scene& current_scene)
     if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
     else glShadeModel(GL_SMOOTH);
 
+    glEnable(GL_DEPTH_TEST);
 
     lights_handler::set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
                               current_scene.get_camera()->get_position());
