@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     auto current_scene = scene(vector3(0, 0, -5));
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
-    Uint32 lastFrameTime = clock::get_instance()->get_total_time();
+    Uint32 last_frame_time = clock::get_total_time();
     int frames = 0;
     Uint32 time = 0;
 
@@ -68,13 +68,13 @@ int main(int argc, char* argv[])
         switch (settings::get_instance()->game_velocity)
         //CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
-        case game_velocity::slow:
+        case slow:
             game_velocity = 0.3f;
             break;
-        case game_velocity::normal:
+        case normal:
             game_velocity = 1;
             break;
-        case game_velocity::fast:
+        case fast:
             game_velocity = 2;
             break;
         default: break;
@@ -82,10 +82,10 @@ int main(int argc, char* argv[])
 
         //CONTROL DE FRAMES
         frames++;
-        Uint32 currentFrameTime = clock::get_instance()->get_total_time();
-        Uint32 deltaTime = currentFrameTime - lastFrameTime;
-        lastFrameTime = currentFrameTime;
-        time += deltaTime;
+        const Uint32 current_frame_time = clock::get_total_time();
+        const Uint32 delta_time = current_frame_time - last_frame_time;
+        last_frame_time = current_frame_time;
+        time += delta_time;
         if (time >= 1000)
         {
             std::cout << "FPS: " << frames << "\n";
@@ -93,9 +93,9 @@ int main(int argc, char* argv[])
             time = 0;
         }
 
-        if (deltaTime < 1000 / 60) //limita a 60fps maximo
+        if (delta_time < 1000 / 60) //limita a 60fps maximo
         {
-            SDL_Delay(1000 / 60 - deltaTime);
+            SDL_Delay(1000 / 60 - delta_time);
         }
 
         const float elapsed_time = static_cast<float>(clock::get_ticks());

@@ -201,16 +201,6 @@ void renderer::draw(settings_screen* settings_screen)
     glLoadIdentity();
     glOrtho(-window_width / 2, window_width / 2, -window_height / 2, window_height / 2, -1.0, 1.0);
 
-    // ILUMINAR LAS SETTINGS
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT2);
-    glLightfv(GL_LIGHT2, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f, 1.f});
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
-    glLightfv(GL_LIGHT2, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 1.0f});
-    glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0.0f);
-
     // Draw the background image
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, settings_screen->get_background_texture_id());
@@ -229,8 +219,6 @@ void renderer::draw(settings_screen* settings_screen)
     for (const auto button : settings_screen->get_buttons()) draw_button(button);
 
     glDisable(GL_TEXTURE_2D);
-
-    glDisable(GL_LIGHT2);
 
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
@@ -275,9 +263,9 @@ void renderer::draw(const scene& current_scene)
     else glShadeModel(GL_SMOOTH);
 
 
+    lights_handler::set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
+                              current_scene.get_camera()->get_position());
     current_scene.render_scene();
-    lights_handler::get_instance()->set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
-                                              current_scene.get_camera()->get_position());
-
     draw(current_scene.get_floor(), texture_manager::grass_texture());
+    lights_handler::disable_light();
 }

@@ -4,9 +4,12 @@
 
 #include "../entities/bomb.h"
 #include "../utils/renderer.h"
+#include "../interfaces/settings.h"
+#include "../utils/lights_handler.h"
 
 constexpr auto rango_horizontal = 3;
 constexpr auto rango_vertical = 3;
+const auto settings = settings::get_instance();
 
 void scene::toggle_camera()
 {
@@ -337,18 +340,11 @@ void scene::render_scene() const
     renderer::draw(*player_);
 
     for (auto& enemy : enemies_)
-    {
         renderer::draw(*enemy.get());
-    }
     for (const auto& block : blocks_)
-    {
         renderer::draw(block->get_block(), block->get_texture());
-    }
-
     for (auto& bomb : bombs_)
-    {
         renderer::draw(*bomb.get());
-    }
 }
 
 camera_mode scene::get_camera_mode() const

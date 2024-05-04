@@ -40,29 +40,21 @@ void gamehud::cambiar_numero(const Uint32 valor, square ubicacion)
 }
 
 
-void gamehud::draw_time(const Uint32 milisecond)
+void gamehud::draw_time(const Uint32 millisecond)
 {
-    Uint32 seconds = (milisecond / 1000);
-    Uint32 minutes = (seconds / 60);
+    Uint32 seconds = millisecond / 1000;
+    Uint32 minutes = seconds / 60;
     seconds %= 60;
     minutes %= 60;
-    const Uint32 minutes_d = (minutes / 10);
+    const Uint32 minutes_d = minutes / 10;
     const Uint32 minutes_u = minutes % 10;
-    const Uint32 seconds_d = (seconds / 10);
-    const Uint32 seconds_u = (seconds % 10);
+    const Uint32 seconds_d = seconds / 10;
+    const Uint32 seconds_u = seconds % 10;
     Uint32 score_m = instance_->score_ / 1000;
     Uint32 score_c = (instance_->score_ % 1000) / 100;
     Uint32 score_d = (instance_->score_ % 100) / 10;
     Uint32 score_u = instance_->score_ % 10;
 
-    glEnable(GL_LIGHTING); //ILUMINAR SIEMPRE EL HUD
-    glEnable(GL_LIGHT1);
-    glLightfv(GL_LIGHT1, GL_POSITION, new float[4]{-0.8f, -0.9f, 0.0f, 1.f});
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, new float[4]{1.f, 1.f, 1.f, 1.f});
-    glLightfv(GL_LIGHT1, GL_AMBIENT, new float[4]{1.f, 1.f, 1.f, 0.0f});
-    glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0f);
-    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.0f);
     renderer::draw(instance_->espacio_, number::get_two_dots());
 
     cambiar_numero(minutes_d, instance_->minutos_decena_);
@@ -78,7 +70,6 @@ void gamehud::draw_time(const Uint32 milisecond)
     // dibujo los detalles
     renderer::draw(instance_->tiempo_, number::get_texture_time());
     renderer::draw(instance_->contenedor_, number::get_texture_gamehud());
-    glDisable(GL_LIGHT1);
 }
 
 void gamehud::enemy_points()
