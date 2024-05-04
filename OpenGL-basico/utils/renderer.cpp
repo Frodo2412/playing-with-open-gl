@@ -254,8 +254,6 @@ void renderer::draw_gamehud()
 
 void renderer::draw(const scene& current_scene)
 {
-    lights_handler::set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
-                              current_scene.get_camera()->get_position());
 
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

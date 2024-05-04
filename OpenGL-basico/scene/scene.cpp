@@ -332,6 +332,8 @@ void scene::move_player(const vector3& displacement) const
 
 void scene::render_scene() const
 {
+    lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_position());
+
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
               camera_->get_direction().get_x(), camera_->get_direction().get_y(),
               camera_->get_direction().get_z(),
