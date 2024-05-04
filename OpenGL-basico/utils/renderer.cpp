@@ -254,6 +254,9 @@ void renderer::draw_gamehud()
 
 void renderer::draw(const scene& current_scene)
 {
+    lights_handler::set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
+                              current_scene.get_camera()->get_position());
+
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     if (settings::get_instance()->textures_enabled) glEnable(GL_TEXTURE_2D);
@@ -261,10 +264,6 @@ void renderer::draw(const scene& current_scene)
     if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
     else glShadeModel(GL_SMOOTH);
 
-    glEnable(GL_DEPTH_TEST);
-
-    lights_handler::set_light(current_scene.get_camera_mode(), settings::get_instance()->light_color,
-                              current_scene.get_camera()->get_position());
     current_scene.render_scene();
     draw(current_scene.get_floor(), texture_manager::grass_texture());
     lights_handler::disable_light();

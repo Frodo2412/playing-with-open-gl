@@ -74,9 +74,12 @@ void lights_handler::set_light(const camera_mode mode, const light_colors light_
     glLightfv(GL_LIGHT1, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT1, GL_SPECULAR, specular_light);
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.005f);
 
     // Position the new light as a directional light
-    constexpr GLfloat light_position[] = {-1.0f, 2.0f, 1.0f, 0.0f}; // Example directional vector
+    constexpr GLfloat light_position[] = {0, 10.0f, 0, 0.0f}; // Example directional vector
     glLightfv(GL_LIGHT1, GL_POSITION, light_position);
 }
 
