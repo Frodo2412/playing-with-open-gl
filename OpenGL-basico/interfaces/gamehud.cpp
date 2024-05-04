@@ -38,6 +38,10 @@ void gamehud::draw_time(Uint32 milisecond)
     Uint32 minutes_u = minutes % 10;
     Uint32 seconds_d = (seconds / 10);
     Uint32 seconds_u = (seconds % 10);
+    Uint32 score_m = instance_->score_ / 1000;
+    Uint32 score_c = (instance_->score_ % 1000) / 100;
+    Uint32 score_d = (instance_->score_ % 100) / 10;
+    Uint32 score_u = instance_->score_ % 10;
 
     glEnable(GL_LIGHTING);//ILUMINAR SIEMPRE EL HUD
     glEnable(GL_LIGHT1);
@@ -53,9 +57,24 @@ void gamehud::draw_time(Uint32 milisecond)
     gamehud::cambiar_numero(minutes_u, instance_->minutos_unidades_);
     gamehud::cambiar_numero(seconds_d, instance_->segundos_decena_);
     gamehud::cambiar_numero(seconds_u, instance_->segundos_unidades_);
+    
+    gamehud::cambiar_numero(score_m, instance_->score_miles_);
+    gamehud::cambiar_numero(score_c, instance_->score_cientos_);
+    gamehud::cambiar_numero(score_d, instance_->score_decenas_);
+    gamehud::cambiar_numero(score_u, instance_->score_unidades_);
 
     // dibujo los detalles
     renderer::draw(instance_->tiempo_, number::get_texture_time());
     renderer::draw(instance_->contenedor_, number::get_texture_gamehud());
     glDisable(GL_LIGHT1);
 }
+
+void gamehud::enemy_points()
+{
+    instance_->score_ += 15;
+};
+
+void gamehud::block_points()
+{
+    instance_->score_ += 10;
+};
