@@ -22,9 +22,9 @@ void scene::toggle_camera()
         {
             camera_mode_ = perspective;
             const auto player_position = player_->get_position();
-            camera_->set_position(player_position + vector3(0, 10, 5));
+            camera_->set_position(player_position + vector3(0, 5, 5));
             camera_->set_direction(player_position);
-            camera_->set_up(vector3(0, 0, -1));
+            camera_->set_up(vector3(0, 1, 0));
             break;
         }
     case perspective:
@@ -45,7 +45,7 @@ void scene::rotate_camera(const float x, const float y) const
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
-        glRotatef(x, player_->get_position().get_x(), 1, player_->get_position().get_z());
+        camera_->rotate(-x*0.3, y*0.3);
         break;
     case top_down:
         break;
