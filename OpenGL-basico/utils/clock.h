@@ -7,8 +7,9 @@ class clock
     double start_time_;
     bool is_pause_ = false;
     static clock* instance_;
+    Uint32 played_time_;
 
-    explicit clock(): start_time_(SDL_GetTicks())
+    explicit clock(): start_time_(SDL_GetTicks()), played_time_(0)
     {
     }
 

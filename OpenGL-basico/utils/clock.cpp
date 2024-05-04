@@ -9,7 +9,7 @@ void clock::init()
 
 void clock::toggle_pause()
 {
-    instance_->is_pause_ = !(instance_->is_pause_);
+    instance_->is_pause_ = !instance_->is_pause_;
 }
 
 
@@ -21,6 +21,7 @@ double clock::get_ticks()
 
     if (instance_->is_pause_)
         delta_time = 0;
+    instance_->played_time_ = delta_time + instance_->played_time_;
     return delta_time;
 }
 
@@ -31,8 +32,7 @@ void clock::reset()
 
 Uint32 clock::get_total_time()
 {
-    const Uint32 current_time = SDL_GetTicks();
-    return current_time;
+    return instance_->played_time_;
 }
 
 bool clock::get_is_paused() const
