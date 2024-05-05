@@ -5,7 +5,7 @@
 class player final : public entity
 {
 public:
-    explicit player(): entity("../assets/models/Doodler.obj", texture_manager::player_texture(), 1)
+    explicit player(): entity("../assets/models/bomberman.obj", texture_manager::player_texture(), 1)
     {
     }
 
