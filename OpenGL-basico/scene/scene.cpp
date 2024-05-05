@@ -7,8 +7,6 @@
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
 
-constexpr auto rango_horizontal = 3;
-constexpr auto rango_vertical = 3;
 const auto settings = settings::get_instance();
 
 void scene::toggle_camera()
@@ -73,13 +71,13 @@ void scene::set_off_bomb(bomb* bomb) const
     bomb->explotar();
     bool continuar = true;
 
-    int i_max = rango_horizontal;
-    int k_min = -rango_horizontal;
-    int j_max = rango_vertical;
-    int l_min = -rango_vertical;
+    int i_max = bomb::radius;
+    int k_min = -bomb::radius;
+    int j_max = bomb::radius;
+    int l_min = -bomb::radius;
 
     //ROMPER HORIZONTAL
-    for (int i = 0; i <= rango_horizontal; i++)
+    for (int i = 0; i <= bomb::radius; i++)
     {
         vector3 pos = bomb->get_position() + vector3(static_cast<float>(i), 0, 0);
         for (const auto& bloque : blocks_)
@@ -111,7 +109,7 @@ void scene::set_off_bomb(bomb* bomb) const
             break;
     }
     continuar = true;
-    for (int k = -rango_horizontal; k < 0; k++)
+    for (int k = -bomb::radius; k < 0; k++)
     {
         vector3 pos = bomb->get_position() + vector3(static_cast<float>(k), 0, 0);
         for (auto& bloque : blocks_)
@@ -144,7 +142,7 @@ void scene::set_off_bomb(bomb* bomb) const
     }
     continuar = true;
     //ROMPER VERTICAL
-    for (int j = 0; j <= rango_vertical; j++)
+    for (int j = 0; j <= bomb::radius; j++)
     {
         vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(j));
         for (auto& bloque : blocks_)
@@ -176,7 +174,7 @@ void scene::set_off_bomb(bomb* bomb) const
             break;
     }
     continuar = true;
-    for (int l = -rango_vertical; l < 0; l++)
+    for (int l = -bomb::radius; l < 0; l++)
     {
         vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(l));
         for (auto& bloque : blocks_)
@@ -338,7 +336,7 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
 
-    if(camera_mode_ != first)
+    if (camera_mode_ != first)
         renderer::draw(*player_);
 
     for (auto& enemy : enemies_)
