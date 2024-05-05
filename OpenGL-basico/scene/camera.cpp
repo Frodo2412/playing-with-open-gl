@@ -1,7 +1,5 @@
 #include "camera.h"
-
 #include <iostream>
-
 #include "../entities/player.h"
 
 vector3 camera::get_position() const

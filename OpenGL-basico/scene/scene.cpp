@@ -248,12 +248,9 @@ void scene::update_scene(const float elapsed_time)
     player_->move();
 
     for (const auto& block : blocks_)
-    {
         if (player_->check_collision(block.get()))
-        {
             player_->handle_collision(block.get());
-        }
-    }
+
     for (auto& enemy : enemies_)
     {
         if (player_->check_collision(enemy.get()))
