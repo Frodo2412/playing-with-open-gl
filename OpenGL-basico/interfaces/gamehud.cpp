@@ -75,12 +75,7 @@ void gamehud::draw_time(const Uint32 millisecond)
     glEnable(GL_DEPTH_TEST);
 }
 
-void gamehud::enemy_points()
+void gamehud::update_points(Uint32 points)
 {
-    instance_->score_ += 15;
-};
-
-void gamehud::block_points()
-{
-    instance_->score_ += 10;
+    instance_->score_ += points;
 };
