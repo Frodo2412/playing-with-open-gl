@@ -60,6 +60,8 @@ void scene::update_camera() const
     switch (camera_mode_)
     {
     case first:
+        camera_->move(player_->get_speed());
+        break;
     case perspective:
         camera_->move(player_->get_speed());
         break;
@@ -245,10 +247,13 @@ void scene::update_scene(const float elapsed_time)
 {
     player_->move();
 
-    for (auto& block : blocks_)
+    for (const auto& block : blocks_)
+    {
         if (player_->check_collision(block.get()))
+        {
             player_->handle_collision(block.get());
-
+        }
+    }
     for (auto& enemy : enemies_)
     {
         if (player_->check_collision(enemy.get()))

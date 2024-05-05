@@ -71,7 +71,7 @@ void camera::move(const vector3& displacement)
 
 void camera::rotate(const float x_offset, const float y_offset)
 {
-    constexpr float sensitivity = 0.01f; // Adjust this value to make the camera rotation more or less sensitive
+    constexpr float sensitivity = 0.005f; // Adjust this value to make the camera rotation more or less sensitive
 
     direction_.set_x(direction_.get_x() - x_offset * sensitivity);
 

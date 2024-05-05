@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     constexpr float color = 0;
     glClearColor(color, color, color, 1);
 
-    gluPerspective(45, 640 / 480.f, 0.1, 100);
+    gluPerspective(45, 640 / 480.f, 0.001, 100);
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
         //CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
         case slow:
-            game_velocity = 0.3f;
+            game_velocity = 0.3;
             break;
         case normal:
             game_velocity = 1;
@@ -145,19 +145,19 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
             {
             case SDLK_a:
                 std::cout << "LEFT\n";
-                displacement.set_x(0.1f * delta_time);
+                displacement.set_x(0.01f * delta_time);
                 break;
             case SDLK_d:
                 std::cout << "RIGHT\n";
-                displacement.set_x(-0.1f * delta_time);
+                displacement.set_x(-0.01f * delta_time);
                 break;
             case SDLK_w:
                 std::cout << "UP\n";
-                displacement.set_z(0.1f * delta_time);
+                displacement.set_z(0.01f * delta_time);
                 break;
             case SDLK_s:
                 std::cout << "DOWN\n";
-                displacement.set_z(-0.1f * delta_time);
+                displacement.set_z(-0.01f * delta_time);
                 break;
             case SDLK_v:
                 current_scene.toggle_camera();
