@@ -6,7 +6,7 @@ void player::handle_collision(game_object* other)
     speed_ = vector3::zero();
 }
 
-vector3& player::get_speed()
+vector3 player::get_speed() const
 {
     return speed_;
 }

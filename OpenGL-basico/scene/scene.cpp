@@ -60,6 +60,8 @@ void scene::update_camera() const
     switch (camera_mode_)
     {
     case first:
+        camera_->move(player_.get());
+        break;
     case perspective:
         camera_->move(player_->get_speed());
         break;
@@ -245,7 +247,7 @@ void scene::update_scene(const float elapsed_time)
 {
     player_->move();
 
-    for (auto& block : blocks_)
+    for (const auto& block : blocks_)
         if (player_->check_collision(block.get()))
             player_->handle_collision(block.get());
 
@@ -338,7 +340,7 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
 
-    if(camera_mode_ != first)
+    if (camera_mode_ != first)
         renderer::draw(*player_);
 
     for (auto& enemy : enemies_)

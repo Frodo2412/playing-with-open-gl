@@ -1,4 +1,6 @@
 #include "entity.h"
+#include "../scene/scene.h"
+
 
 std::vector<vertex> entity::get_vertices() const
 {
