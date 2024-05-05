@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
     const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
-    auto current_scene = scene(vector3(0, 0, -5));
+    auto current_scene = scene(vector3(0, -0.5, -5));
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 last_frame_time = clock::get_total_time();
