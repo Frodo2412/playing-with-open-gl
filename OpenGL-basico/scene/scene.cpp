@@ -60,7 +60,7 @@ void scene::update_camera() const
     switch (camera_mode_)
     {
     case first:
-        camera_->move(player_->get_speed());
+        camera_->move(player_.get());
         break;
     case perspective:
         camera_->move(player_->get_speed());
@@ -343,7 +343,7 @@ void scene::render_scene() const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
 
-    if(camera_mode_ != first)
+    if (camera_mode_ != first)
         renderer::draw(*player_);
 
     for (auto& enemy : enemies_)

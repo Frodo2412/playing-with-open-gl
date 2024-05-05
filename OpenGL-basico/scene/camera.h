@@ -1,4 +1,5 @@
 #pragma once
+#include "../entities/player.h"
 #include "../geometry/vector3.h"
 
 class camera
@@ -6,8 +7,6 @@ class camera
     vector3 position_, direction_, up_;
 
 public:
-
-
     explicit camera(const vector3& position, const vector3& direction, const vector3& up)
         : position_(position), direction_(direction), up_(up)
     {
@@ -27,6 +26,6 @@ public:
     void set_up(const vector3& up);
 
     void move(const vector3& displacement);
+    void move(const player* player);
     void rotate(float x_offset, float y_offset);
-
 };

@@ -6,7 +6,6 @@
 #include "../graphics/vertex.h"
 #include "../textures/texture.h"
 
-
 class entity : public game_object
 {
     std::vector<vertex> vertices_;

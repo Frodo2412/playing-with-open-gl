@@ -2,36 +2,7 @@
 
 #include <iostream>
 
-// void camera::move(const vector3& displacement)
-// {
-//     switch (mode_)
-//     {
-//     case first:
-//         {
-//             const auto forward = (direction_ - position_).normalize();
-//
-//             const auto forward_movement = forward * displacement.get_z();
-//             const auto side_movement = up_ * forward * displacement.get_x();
-//
-//             const auto movement = forward_movement + side_movement;
-//
-//             position_ += movement;
-//             direction_ += movement;
-//         }
-//         break;
-//     case original:
-//         this->set_position(vector3(0, 10, 0));
-//         this->set_direction(vector3(0, 0, 0));
-//         this->set_up(vector3(0, 0, -1));
-//         break;
-//     case perspective:
-//         position_ += vector3(displacement.get_x(), displacement.get_y() + this->get_perspective_zoom(),
-//                              displacement.get_z());
-//         direction_ += vector3(displacement.get_x(), 0, displacement.get_z());
-//         direction_ += vector3(0, 1, 0);
-//         break;
-//     }
-// }
+#include "../entities/player.h"
 
 vector3 camera::get_position() const
 {
@@ -69,6 +40,27 @@ void camera::move(const vector3& displacement)
     position_ += displacement;
 }
 
+void camera::move(const player* player)
+{
+    // Predict new position based on player speed
+    auto new_position = position_ + player->get_speed();
+
+    // Get player's bounding box
+    const aabb entity_box = player->get_bounding_box();
+
+    // Constrain new position within the bounding box
+    new_position.set_x(std::max(entity_box.min.get_x(),
+                                std::min(entity_box.max.get_x(), new_position.get_x())));
+    new_position.set_y(std::max(entity_box.min.get_y(),
+                                std::min(entity_box.max.get_y(), new_position.get_y())));
+    new_position.set_z(std::max(entity_box.min.get_z(),
+                                std::min(entity_box.max.get_z(), new_position.get_z())));
+
+    // Set camera's new constrained position
+    position_ = new_position;
+    direction_ += player->get_speed();
+}
+
 void camera::rotate(const float x_offset, const float y_offset)
 {
     constexpr float sensitivity = 0.005f; // Adjust this value to make the camera rotation more or less sensitive
@@ -82,5 +74,4 @@ void camera::rotate(const float x_offset, const float y_offset)
         direction_.set_y(-90.0f);
     else
         direction_.set_y(direction_.get_y() + y_offset * sensitivity);
-
 }
