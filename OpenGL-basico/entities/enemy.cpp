@@ -8,7 +8,7 @@ void enemy::handle_collision(game_object* other)
 void enemy::destroy()
 {
     is_active_ = false;
-    gamehud::enemy_points();
+    gamehud::update_points(15);
 }
 
 bool enemy::is_active() const

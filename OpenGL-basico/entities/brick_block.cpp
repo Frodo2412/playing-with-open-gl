@@ -14,5 +14,5 @@ bool brick_block::is_destructible() const
 void brick_block::destroy()
 {
     this->active_ = false; // la bomba pasa a estar inactiva.
-    gamehud::block_points();
+    gamehud::update_points(10);
 }
