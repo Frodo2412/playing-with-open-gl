@@ -11,7 +11,7 @@ class bomb final : public entity
 
 public:
     explicit bomb(const vector3& position): entity("../assets/models/Bomb.obj", texture_manager::bomb_texture(), 1),
-                                            timer_(5),
+                                            timer_(bomb_duration),
                                             exploded_(false)
     {
         position_ = position;
@@ -23,4 +23,10 @@ public:
     void set_timer(float timer);
 
     void handle_collision(game_object* other) override;
+
+    /**
+     * The duration of the timer that makes the bomb go off in milliseconds.
+     */
+    static float const bomb_duration;
+    static int const radius;
 };

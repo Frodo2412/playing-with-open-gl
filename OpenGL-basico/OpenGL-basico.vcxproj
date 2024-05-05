@@ -170,7 +170,6 @@
         <ClCompile Include="graphics\vertex.cpp"/>
         <ClCompile Include="scene\scene.cpp"/>
         <Content Include="..\assets\textures\spider.jpg" />
-        <ClInclude Include="entities\bomb.h" />
         <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\textures\spider.jpg" />
         <Content Include="..\assets\textures\wall_1.jpg"/>
