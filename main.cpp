@@ -5,16 +5,18 @@
 #include <GL/glu.h>
 
 #include "OpenGL-basico/geometry/vector3.h"
-#include "OpenGL-basico/geometry/grid.h"
 #include "OpenGL-basico/interfaces/gamehud.h"
 #include "OpenGL-basico/interfaces/number.h"
 #include "OpenGL-basico/interfaces/settings_screen.h"
-#include "OpenGL-basico/textures/texture.h"
-#include "OpenGL-basico/textures/texture_loader.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
 #include "OpenGL-basico/scene/scene.h"
 #include "OpenGL-basico/utils/lights_handler.h"
+
+void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
+                   float delta_time);
+void update_game_state(scene& current_scene, vector3& displacement, float delta_time);
+void render_everything(settings_screen* settings_screen, const scene& current_scene);
 
 int main(int argc, char* argv[])
 {
@@ -23,7 +25,7 @@ int main(int argc, char* argv[])
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         std::cerr << "No se pudo iniciar SDL: " << SDL_GetError() << '\n';
-        exit(1);
+        return 1;
     }
 
     SDL_Window* win = SDL_CreateWindow("ICG-UdelaR",
@@ -39,7 +41,6 @@ int main(int argc, char* argv[])
     glClearColor(color, color, color, 1);
 
     gluPerspective(45, 640 / 480.f, 0.1, 100);
-    glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
@@ -47,18 +48,14 @@ int main(int argc, char* argv[])
     clock::init();
     number::init();
     gamehud::init();
-    SDL_Event event;
 
     const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
-    const auto grass_texture = texture_loader::load_texture("../assets/textures/grass_1.jpg");
-    const auto floor = grid(10, 10, 1, vector3(0, 1, 0));
-
     auto current_scene = scene(vector3(0, 0, -5));
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
-    Uint32 lastFrameTime = clock::get_instance()->get_total_time();
+    Uint32 last_frame_time = clock::get_total_time();
     int frames = 0;
     Uint32 time = 0;
 
@@ -67,103 +64,27 @@ int main(int argc, char* argv[])
 
     do
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLoadIdentity();
-        if (clock::get_instance()->get_is_paused())
-        {
-            glMatrixMode(GL_PROJECTION);
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            glPushMatrix();
-            glLoadIdentity();
-            glOrtho(-settings->window_width / 2, settings->window_width / 2, -settings->window_height / 2,
-                    settings->window_height / 2, -1.0, 1.0);
-            renderer::draw(settings_screen);
-            glPopMatrix();
-        }
-        else
-        {
-            // Configurar la proyección ortogonal
-            glMatrixMode(GL_PROJECTION);
-            glPushMatrix();
-            glLoadIdentity();
-            glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0); // Especifico la proyección: ortogonal.
-            // Configurar la matriz de modelo-vista
-            glMatrixMode(GL_MODELVIEW);
-            glPushMatrix();
-            glLoadIdentity();
-
-            glColor3f(1.0f, 1.0f, 1.0f);
-            // Dibujar el contenedor del HUD
-            Uint32 tiempo = clock::get_total_time();
-            gamehud::draw_time(tiempo);
-
-            // Restaurar la matriz de modelo-vista
-            glPopMatrix();
-
-            // Restaurar la matriz de proyección
-            glMatrixMode(GL_PROJECTION);
-            glPopMatrix();
-        }
-
-        // Dibujar el resto de la escena
-        glMatrixMode(GL_MODELVIEW);
         switch (settings::get_instance()->game_velocity)
         //CONSTANTE CON LA QUE MULTIPLICAR LAS ANIMACIONES Y MOVIMIENTOS
         {
-        case game_velocity::slow:
+        case slow:
             game_velocity = 0.3f;
             break;
-        case game_velocity::normal:
+        case normal:
             game_velocity = 1;
             break;
-        case game_velocity::fast:
+        case fast:
             game_velocity = 2;
             break;
         default: break;
         }
-        if (settings::get_instance()->wireframe_enabled)
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        }
-        else
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        }
-
-        if (settings::get_instance()->textures_enabled)
-        {
-            glEnable(GL_TEXTURE_2D);
-        }
-        else
-        {
-            glDisable(GL_TEXTURE_2D);
-        }
-
-        if (settings::get_instance()->facetado_enabled)
-        {
-            glShadeModel(GL_FLAT);
-        }
-        else
-        {
-            glShadeModel(GL_SMOOTH);
-        }
-
-        current_scene.move_player(displacement);
-        displacement.reset();
-
-        current_scene.render_scene();
-        lights_handler::get_instance()->set_light(current_scene.get_camera_mode(),
-                                                  settings::get_instance()->light_color,
-                                                  current_scene.get_camera()->get_position());
-
-        renderer::draw(floor, grass_texture);
 
         //CONTROL DE FRAMES
         frames++;
-        Uint32 currentFrameTime = clock::get_instance()->get_total_time();
-        Uint32 deltaTime = currentFrameTime - lastFrameTime;
-        lastFrameTime = currentFrameTime;
-        time += deltaTime;
+        const Uint32 current_frame_time = clock::get_total_time();
+        const Uint32 delta_time = current_frame_time - last_frame_time;
+        last_frame_time = current_frame_time;
+        time += delta_time;
         if (time >= 1000)
         {
             std::cout << "FPS: " << frames << "\n";
@@ -171,81 +92,17 @@ int main(int argc, char* argv[])
             time = 0;
         }
 
-        if (deltaTime < 1000 / 60) //limita a 60fps maximo
+        if (delta_time < 1000 / 60) //limita a 60fps maximo
         {
-            SDL_Delay(1000 / 60 - deltaTime);
+            SDL_Delay(1000 / 60 - delta_time);
         }
 
-        float elapsed_time = static_cast<float>(clock::get_ticks());
-        current_scene.update_scene(elapsed_time);
+        const float elapsed_time = static_cast<float>(clock::get_ticks());
 
-        //MANEJO DE EVENTOS
-        while (SDL_PollEvent(&event))
-        {
-            switch (event.type)
-            {
-            case SDL_MOUSEMOTION:
-                {
-                    const float x_offset = static_cast<float>(event.motion.xrel) * elapsed_time * game_velocity;
-                    const float y_offset = -static_cast<float>(event.motion.yrel) * elapsed_time * game_velocity;
-                    std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
-                    current_scene.rotate_camera(x_offset, y_offset);
-                    break;
-                }
-            case SDL_MOUSEBUTTONDOWN:
-                if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused())
-                {
-                    settings_screen->handle_click(event.button.x, event.button.y);
-                    std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
-                }
-                break;
-            case SDL_QUIT:
-                fin = true;
-                break;
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_a:
-                    std::cout << "LEFT\n";
-                    displacement.set_x(0.1f * elapsed_time * game_velocity);
-                    break;
-                case SDLK_d:
-                    std::cout << "RIGHT\n";
-                    displacement.set_x(-0.1f * elapsed_time * game_velocity);
-                    break;
-                case SDLK_w:
-                    std::cout << "UP\n";
-                    displacement.set_z(0.1f * elapsed_time * game_velocity);
-                    break;
-                case SDLK_s:
-                    std::cout << "DOWN\n";
-                    displacement.set_z(-0.1f * elapsed_time * game_velocity);
-                    break;
-                case SDLK_v:
-                    current_scene.toggle_camera();
-                    break;
-                case SDLK_p:
-                    std::cout << "PAUSE\n";
-                    clock::toggle_pause();
-                    break;
-                case SDLK_b:
-                    current_scene.drop_bomb();
-                    std::cout << "Bomb placed!\n";
-                    break;
-                default: break;
-                }
-            case SDL_KEYUP:
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_q:
-                    fin = true;
-                    break;
-                default: break;
-                }
-            default: break;
-            }
-        }
-        //FIN MANEJO DE EVENTOS
+
+        handle_events(settings_screen, current_scene, displacement, fin, elapsed_time * game_velocity);
+        update_game_state(current_scene, displacement, elapsed_time * game_velocity);
+        render_everything(settings_screen, current_scene);
         SDL_GL_SwapWindow(win);
     }
     while (!fin);
@@ -255,4 +112,99 @@ int main(int argc, char* argv[])
     SDL_DestroyWindow(win);
     SDL_Quit();
     return 0;
+}
+
+void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
+                   const float delta_time)
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_MOUSEMOTION:
+            {
+                const float x_offset = static_cast<float>(event.motion.xrel) * delta_time;
+                const float y_offset = -static_cast<float>(event.motion.yrel) * delta_time;
+                std::cout << "Mouse movement: " << x_offset << ", " << y_offset << "\n";
+                current_scene.rotate_camera(x_offset, y_offset);
+                break;
+            }
+        case SDL_MOUSEBUTTONDOWN:
+            if (event.button.button == SDL_BUTTON_LEFT && clock::get_instance()->get_is_paused())
+            {
+                settings_screen->handle_click(event.button.x, event.button.y);
+                std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
+            }
+            break;
+        case SDL_QUIT:
+            fin = true;
+            break;
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_a:
+                std::cout << "LEFT\n";
+                displacement.set_x(0.1f * delta_time);
+                break;
+            case SDLK_d:
+                std::cout << "RIGHT\n";
+                displacement.set_x(-0.1f * delta_time);
+                break;
+            case SDLK_w:
+                std::cout << "UP\n";
+                displacement.set_z(0.1f * delta_time);
+                break;
+            case SDLK_s:
+                std::cout << "DOWN\n";
+                displacement.set_z(-0.1f * delta_time);
+                break;
+            case SDLK_v:
+                current_scene.toggle_camera();
+                break;
+            case SDLK_p:
+                std::cout << "PAUSE\n";
+                clock::toggle_pause();
+                break;
+            case SDLK_b:
+                current_scene.drop_bomb();
+                std::cout << "Bomb placed!\n";
+                break;
+            default: break;
+            }
+        case SDL_KEYUP:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_q:
+                fin = true;
+                break;
+            default: break;
+            }
+        default: break;
+        }
+    }
+}
+
+void update_game_state(scene& current_scene, vector3& displacement, const float delta_time)
+{
+    current_scene.move_player(displacement);
+    displacement.reset();
+    current_scene.update_scene(delta_time);
+}
+
+void render_everything(settings_screen* settings_screen, const scene& current_scene)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    if (clock::get_instance()->get_is_paused()) renderer::draw(settings_screen);
+    else
+    {
+        renderer::draw(current_scene);
+        renderer::draw_gamehud();
+    }
+
+    GLenum err;
+    while ((err = glGetError()) != GL_NO_ERROR) {
+        std::cerr << "OpenGL error: " << err << std::endl;
+    }
 }

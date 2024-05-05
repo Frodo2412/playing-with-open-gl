@@ -32,3 +32,8 @@ texture texture_manager::bomb_texture()
 {
     return instance_->bomb_texture_;
 }
+
+texture texture_manager::grass_texture()
+{
+    return instance_->grass_texture_;
+}

@@ -5,6 +5,7 @@
 #include "../geometry/Triangle.h"
 #include "../geometry/vector3.h"
 #include "../geometry/grid.h"
+#include "../scene/scene.h"
 #include "../textures/texture.h"
 
 class settings_screen;
@@ -20,4 +21,6 @@ public:
     static void draw(const entity& entity);
     static void draw(const square&, const texture& texture);
     static void draw(settings_screen* settings_screen);
+    static void draw_gamehud();
+    static void draw(const scene& current_scene);
 };
