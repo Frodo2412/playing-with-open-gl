@@ -48,7 +48,7 @@ void scene::rotate_camera(const float x, const float y) const
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
-        camera_->rotate(-x*0.3, y*0.3);
+        camera_->rotate(-x * 0.3, y * 0.3);
         break;
     case top_down:
         break;
@@ -70,174 +70,172 @@ void scene::update_camera() const
 
 void scene::set_off_bomb(bomb* bomb) const
 {
+    bomb->explotar();
+    bool continuar = true;
+
+    int i_max = rango_horizontal;
+    int k_min = -rango_horizontal;
+    int j_max = rango_vertical;
+    int l_min = -rango_vertical;
+
+    //ROMPER HORIZONTAL
+    for (int i = 0; i <= rango_horizontal; i++)
     {
-        bomb->explotar();
-        bool continuar = true;
+        vector3 pos = bomb->get_position() + vector3(static_cast<float>(i), 0, 0);
+        for (const auto& bloque : blocks_)
+        {
+            brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
+            if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
+                bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
+                get_position().
+                get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
+            {
+                bloque_destructible->destroy();
+            }
+            else if (bloque_destructible == nullptr)
+            // si no es un bloque destructible --> es no destructible, para la explosión.
+            {
+                metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
+                if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
+                    get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
+                    bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
+                    get_position().get_z() - 0.5 < pos.get_z())
+                {
+                    i_max = i;
+                    continuar = false;
+                    break;
+                }
+            }
+        }
+        if (!continuar)
+            break;
+    }
+    continuar = true;
+    for (int k = -rango_horizontal; k < 0; k++)
+    {
+        vector3 pos = bomb->get_position() + vector3(static_cast<float>(k), 0, 0);
+        for (auto& bloque : blocks_)
+        {
+            auto bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
+            if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
+                bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
+                get_position().
+                get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
+            {
+                bloque_destructible->destroy();
+            }
+            else if (bloque_destructible == nullptr)
+            // si no es un bloque destructible --> es no destructible, para la explosión.
+            {
+                metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
+                if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
+                    get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
+                    bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
+                    get_position().get_z() - 0.5 < pos.get_z())
+                {
+                    k_min = k;
+                    continuar = false;
+                    break;
+                }
+            }
+        }
+        if (!continuar)
+            break;
+    }
+    continuar = true;
+    //ROMPER VERTICAL
+    for (int j = 0; j <= rango_vertical; j++)
+    {
+        vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(j));
+        for (auto& bloque : blocks_)
+        {
+            brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
+            if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
+                bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
+                get_position().
+                get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
+            {
+                bloque_destructible->destroy();
+            }
+            else if (bloque_destructible == nullptr)
+            // si no es un bloque destructible --> es no destructible, para la explosión.
+            {
+                metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
+                if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
+                    get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
+                    bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
+                    get_position().get_z() - 0.5 < pos.get_z())
+                {
+                    j_max = j;
+                    continuar = false;
+                    break;
+                }
+            }
+        }
+        if (!continuar)
+            break;
+    }
+    continuar = true;
+    for (int l = -rango_vertical; l < 0; l++)
+    {
+        vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(l));
+        for (auto& bloque : blocks_)
+        {
+            brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
+            if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
+                bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
+                get_position().
+                get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
+            {
+                bloque_destructible->destroy();
+            }
+            else if (bloque_destructible == nullptr)
+            // si no es un bloque destructible --> es no destructible, para la explosión.
+            {
+                const metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
+                if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
+                    get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
+                    bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
+                    get_position().get_z() - 0.5 < pos.get_z())
+                {
+                    l_min = l;
+                    continuar = false;
+                    break;
+                }
+            }
+        }
+        if (!continuar)
+            break;
+    }
 
-        int i_max = rango_horizontal;
-        int k_min = -rango_horizontal;
-        int j_max = rango_vertical;
-        int l_min = -rango_vertical;
-
-        //ROMPER HORIZONTAL
-        for (int i = 0; i <= rango_horizontal; i++)
+    //ENEMIGOS
+    for (int w = k_min; w <= i_max; w++)
+    {
+        vector3 pos = bomb->get_position() + vector3(static_cast<float>(w), 0, 0);
+        for (const auto& enemigo : enemies_)
         {
-            vector3 pos = bomb->get_position() + vector3(static_cast<float>(i), 0, 0);
-            for (const auto& bloque : blocks_)
+            if (enemigo->get_position().get_x() + 0.5 > pos.get_x() && enemigo->get_position().get_x() - 0.5 < pos.
+                get_x()
+                && enemigo->get_position().get_z() + 0.5 > pos.get_z() && enemigo->get_position().get_z() - 0.5 <
+                pos.
+                get_z())
             {
-                brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
-                if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
-                    bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
-                    get_position().
-                    get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
-                {
-                    bloque_destructible->destroy();
-                }
-                else if (bloque_destructible == nullptr)
-                // si no es un bloque destructible --> es no destructible, para la explosión.
-                {
-                    metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
-                    if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
-                        get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
-                        bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
-                        get_position().get_z() - 0.5 < pos.get_z())
-                    {
-                        i_max = i;
-                        continuar = false;
-                        break;
-                    }
-                }
-            }
-            if (!continuar)
-                break;
-        }
-        continuar = true;
-        for (int k = -rango_horizontal; k < 0; k++)
-        {
-            vector3 pos = bomb->get_position() + vector3(static_cast<float>(k), 0, 0);
-            for (auto& bloque : blocks_)
-            {
-                auto bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
-                if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
-                    bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
-                    get_position().
-                    get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
-                {
-                    bloque_destructible->destroy();
-                }
-                else if (bloque_destructible == nullptr)
-                // si no es un bloque destructible --> es no destructible, para la explosión.
-                {
-                    metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
-                    if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
-                        get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
-                        bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
-                        get_position().get_z() - 0.5 < pos.get_z())
-                    {
-                        k_min = k;
-                        continuar = false;
-                        break;
-                    }
-                }
-            }
-            if (!continuar)
-                break;
-        }
-        continuar = true;
-        //ROMPER VERTICAL
-        for (int j = 0; j <= rango_vertical; j++)
-        {
-            vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(j));
-            for (auto& bloque : blocks_)
-            {
-                brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
-                if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
-                    bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
-                    get_position().
-                    get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
-                {
-                    bloque_destructible->destroy();
-                }
-                else if (bloque_destructible == nullptr)
-                // si no es un bloque destructible --> es no destructible, para la explosión.
-                {
-                    metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
-                    if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
-                        get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
-                        bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
-                        get_position().get_z() - 0.5 < pos.get_z())
-                    {
-                        j_max = j;
-                        continuar = false;
-                        break;
-                    }
-                }
-            }
-            if (!continuar)
-                break;
-        }
-        continuar = true;
-        for (int l = -rango_vertical; l < 0; l++)
-        {
-            vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(l));
-            for (auto& bloque : blocks_)
-            {
-                brick_block* bloque_destructible = dynamic_cast<brick_block*>(bloque.get());
-                if (bloque_destructible != nullptr && bloque_destructible->get_position().get_x() + 0.5 > pos.get_x() &&
-                    bloque_destructible->get_position().get_x() - 0.5 < pos.get_x() && bloque_destructible->
-                    get_position().
-                    get_z() + 0.5 > pos.get_z() && bloque_destructible->get_position().get_z() - 0.5 < pos.get_z())
-                {
-                    bloque_destructible->destroy();
-                }
-                else if (bloque_destructible == nullptr)
-                // si no es un bloque destructible --> es no destructible, para la explosión.
-                {
-                    const metal_block* bloque_no_destructible = dynamic_cast<metal_block*>(bloque.get());
-                    if (bloque_no_destructible != nullptr && bloque_no_destructible->get_position().get_x() + 0.5 > pos.
-                        get_x() && bloque_no_destructible->get_position().get_x() - 0.5 < pos.get_x() &&
-                        bloque_no_destructible->get_position().get_z() + 0.5 > pos.get_z() && bloque_no_destructible->
-                        get_position().get_z() - 0.5 < pos.get_z())
-                    {
-                        l_min = l;
-                        continuar = false;
-                        break;
-                    }
-                }
-            }
-            if (!continuar)
-                break;
-        }
-
-        //ENEMIGOS
-        for (int w = k_min; w <= i_max; w++)
-        {
-            vector3 pos = bomb->get_position() + vector3(static_cast<float>(w), 0, 0);
-            for (const auto& enemigo : enemies_)
-            {
-                if (enemigo->get_position().get_x() + 0.5 > pos.get_x() && enemigo->get_position().get_x() - 0.5 < pos.
-                    get_x()
-                    && enemigo->get_position().get_z() + 0.5 > pos.get_z() && enemigo->get_position().get_z() - 0.5 <
-                    pos.
-                    get_z())
-                {
-                    enemigo->destroy();
-                }
+                enemigo->destroy();
             }
         }
-        for (int q = l_min; q <= j_max; q++)
+    }
+    for (int q = l_min; q <= j_max; q++)
+    {
+        vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(q));
+        for (const auto& enemigo : enemies_)
         {
-            vector3 pos = bomb->get_position() + vector3(0, 0, static_cast<float>(q));
-            for (const auto& enemigo : enemies_)
+            if (enemigo->get_position().get_x() + 0.5 > pos.get_x() && enemigo->get_position().get_x() - 0.5 < pos.
+                get_x()
+                && enemigo->get_position().get_z() + 0.5 > pos.get_z() && enemigo->get_position().get_z() - 0.5 <
+                pos.
+                get_z())
             {
-                if (enemigo->get_position().get_x() + 0.5 > pos.get_x() && enemigo->get_position().get_x() - 0.5 < pos.
-                    get_x()
-                    && enemigo->get_position().get_z() + 0.5 > pos.get_z() && enemigo->get_position().get_z() - 0.5 <
-                    pos.
-                    get_z())
-                {
-                    enemigo->destroy();
-                }
+                enemigo->destroy();
             }
         }
     }
@@ -347,6 +345,10 @@ void scene::render_scene() const
         renderer::draw(block->get_block(), block->get_texture());
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
+
+    renderer::draw(floor_, texture_manager::grass_texture());
+
+    lights_handler::disable_light();
 }
 
 camera_mode scene::get_camera_mode() const

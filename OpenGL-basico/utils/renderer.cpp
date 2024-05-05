@@ -263,6 +263,5 @@ void renderer::draw(const scene& current_scene)
     else glShadeModel(GL_SMOOTH);
 
     current_scene.render_scene();
-    draw(current_scene.get_floor(), texture_manager::grass_texture());
-    lights_handler::disable_light();
+
 }
