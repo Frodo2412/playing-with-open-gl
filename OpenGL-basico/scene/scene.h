@@ -34,18 +34,14 @@ class scene
     void set_off_bomb(bomb* bomb) const;
 
 public:
-    explicit scene(const vector3& initial_player_position)
+    explicit scene(const vector3& initial_player_position, std::vector<std::unique_ptr<enemy>> enemies,
+                   std::vector<std::unique_ptr<block>> blocks)
         : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
-          player_(std::make_unique<player>()), camera_(new camera(initial_player_position.get_x(),
-                                                                  initial_player_position.get_y(),
-                                                                  initial_player_position.get_z()))
+          player_(std::make_unique<player>()), enemies_(enemies), blocks_(blocks), camera_(new camera(
+              initial_player_position.get_x(),
+              initial_player_position.get_y(),
+              initial_player_position.get_z()))
     {
-        player_->set_position(initial_player_position);
-        enemies_.emplace_back(std::make_unique<enemy>(enemy()));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(1.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(2.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(1.5, -0.5, 1)));
     }
 
     void toggle_camera();

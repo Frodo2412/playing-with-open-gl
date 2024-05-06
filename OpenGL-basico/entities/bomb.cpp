@@ -1,8 +1,5 @@
 #include "bomb.h"
 
-#include "brick_block.h"
-#include "metal_block.h"
-
 constexpr float bomb::bomb_duration = 5000;
 constexpr int bomb::radius = 3;
 
