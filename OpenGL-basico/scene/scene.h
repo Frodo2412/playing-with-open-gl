@@ -61,4 +61,5 @@ public:
 
     void drop_bomb();
     grid get_floor() const;
+    cube get_skybox() const;
 };

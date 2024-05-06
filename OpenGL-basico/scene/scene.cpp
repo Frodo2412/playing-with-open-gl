@@ -375,3 +375,9 @@ grid scene::get_floor() const
 {
     return floor_;
 }
+
+
+cube scene::get_skybox() const
+{
+    return skybox_;
+};

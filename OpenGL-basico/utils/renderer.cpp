@@ -252,6 +252,7 @@ void renderer::draw_gamehud()
 
 void renderer::draw_skybox(const cube& skybox)
 {
+    
     std::array<texture, 6> textures = {
         texture_manager::skybox_texture_ft(),
         texture_manager::skybox_texture_bk(),
