@@ -22,5 +22,6 @@ public:
     static void draw(const square&, const texture& texture);
     static void draw(settings_screen* settings_screen);
     static void draw_gamehud();
+    static void draw_skybox(const cube& skybox);
     static void draw(const scene& current_scene);
 };

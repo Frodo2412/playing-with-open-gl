@@ -238,7 +238,6 @@ void renderer::draw_gamehud()
     glLoadIdentity();
 
     glColor3f(1.0f, 1.0f, 1.0f);
-    // Dibujar el contenedor del HUD
     const Uint32 time = clock::get_total_time();
     gamehud::draw_time(time);
 
@@ -248,13 +247,46 @@ void renderer::draw_gamehud()
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
 
-    // Dibujar el resto de la escena
     glMatrixMode(GL_MODELVIEW);
+}
+
+void renderer::draw_skybox(const cube& skybox)
+{
+    std::array<texture, 6> textures = {
+        texture_manager::skybox_texture_ft(),
+        texture_manager::skybox_texture_bk(),
+        texture_manager::skybox_texture_up(),
+        texture_manager::skybox_texture_dn(),
+        texture_manager::skybox_texture_rt(),
+        texture_manager::skybox_texture_lf(),
+    };
+
+    glEnable(GL_TEXTURE_2D);
+
+    // Dibuja cada cara del cubo con su respectiva textura
+    auto faces = skybox.get_faces();
+    for (int i = 0; i < 6; ++i)
+    {
+        auto texture = textures[i].get_texture_id();
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(faces[i].get_a().get_x(), faces[i].get_a().get_y(), faces[i].get_a().get_z());
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(faces[i].get_b().get_x(), faces[i].get_b().get_y(), faces[i].get_b().get_z());
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(faces[i].get_c().get_x(), faces[i].get_c().get_y(), faces[i].get_c().get_z());
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(faces[i].get_d().get_x(), faces[i].get_d().get_y(), faces[i].get_d().get_z());
+        glEnd();
+    }
+    
+    glDisable(GL_TEXTURE_2D);
 }
 
 void renderer::draw(const scene& current_scene)
 {
-
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     if (settings::get_instance()->textures_enabled) glEnable(GL_TEXTURE_2D);
@@ -263,5 +295,4 @@ void renderer::draw(const scene& current_scene)
     else glShadeModel(GL_SMOOTH);
 
     current_scene.render_scene();
-
 }

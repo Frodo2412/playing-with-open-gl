@@ -37,3 +37,33 @@ texture texture_manager::grass_texture()
 {
     return instance_->grass_texture_;
 }
+
+texture texture_manager::skybox_texture_bk()
+{
+    return instance_->skybox_texture_bk_;
+}
+
+texture texture_manager::skybox_texture_dn()
+{
+    return instance_->skybox_texture_dn_;
+}
+
+texture texture_manager::skybox_texture_ft()
+{
+    return instance_->skybox_texture_ft_;
+}
+
+texture texture_manager::skybox_texture_lf()
+{
+    return instance_->skybox_texture_lf_;
+}
+
+texture texture_manager::skybox_texture_rt()
+{
+    return instance_->skybox_texture_rt_;
+}
+
+texture texture_manager::skybox_texture_up()
+{
+    return instance_->skybox_texture_up_;
+}

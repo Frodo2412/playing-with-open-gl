@@ -349,6 +349,7 @@ void scene::render_scene() const
         renderer::draw(*bomb.get());
 
     renderer::draw(floor_, texture_manager::grass_texture());
+    renderer::draw_skybox(skybox_);
 
     lights_handler::disable_light();
 }
