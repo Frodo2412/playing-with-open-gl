@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     constexpr float color = 0;
     glClearColor(color, color, color, 1);
 
-    gluPerspective(45, 640 / 480.f, 0.001, 100);
+    gluPerspective(45, 640 / 480.f, 0.1, 100);
     glMatrixMode(GL_MODELVIEW);
 
     bool fin = false;
