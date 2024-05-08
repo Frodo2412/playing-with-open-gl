@@ -200,7 +200,6 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
     else
     {
         renderer::draw(current_scene);
-        renderer::draw_skybox(current_scene.get_skybox());
         renderer::draw_gamehud();
     }
 

@@ -7,6 +7,8 @@
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
 
+cube scene::skybox_ = cube(50.0f, vector3(0,4,0));
+
 const auto settings = settings::get_instance();
 
 void scene::toggle_camera()
@@ -349,7 +351,8 @@ void scene::render_scene() const
         renderer::draw(*bomb.get());
 
     renderer::draw(floor_, texture_manager::grass_texture());
-    renderer::draw_skybox(skybox_);
+    if (settings::get_instance()->textures_enabled)
+        renderer::draw_skybox(skybox_);
 
     lights_handler::disable_light();
 }
@@ -375,9 +378,3 @@ grid scene::get_floor() const
 {
     return floor_;
 }
-
-
-cube scene::get_skybox() const
-{
-    return skybox_;
-};
