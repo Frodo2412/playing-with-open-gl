@@ -176,7 +176,6 @@
         <Content Include="..\assets\textures\sh_rt.png" />
         <Content Include="..\assets\textures\sh_up.png" />
         <Content Include="..\assets\textures\spider.jpg" />
-        <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\textures\spider.jpg" />
         <Content Include="..\assets\textures\wall_1.jpg"/>
         <Content Include="..\assets\textures\settings\ajustes.jpg"/>

@@ -37,7 +37,7 @@ class scene
 public:
     explicit scene(const vector3& initial_player_position)
         : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
-          skybox_(cube(12.0f, vector3(0,4,0))),
+          skybox_(cube(50.0f, vector3(0,4,0))),
           player_(std::make_unique<player>()), camera_(new camera(initial_player_position.get_x(),
                                                                   initial_player_position.get_y(),
                                                                   initial_player_position.get_z()))

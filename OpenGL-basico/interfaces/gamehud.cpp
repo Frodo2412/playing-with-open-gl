@@ -42,6 +42,7 @@ void gamehud::cambiar_numero(const Uint32 valor, square ubicacion)
 
 void gamehud::draw_time(const Uint32 millisecond)
 {
+    glEnable(GL_TEXTURE_2D);
     Uint32 seconds = millisecond / 1000;
     Uint32 minutes = seconds / 60;
     seconds %= 60;
@@ -73,6 +74,7 @@ void gamehud::draw_time(const Uint32 millisecond)
     renderer::draw(instance_->tiempo_, number::get_texture_time());
 
     glEnable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
 }
 
 void gamehud::update_points(Uint32 points)
