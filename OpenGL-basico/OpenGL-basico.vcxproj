@@ -89,6 +89,8 @@
         <ClCompile Include="entities\enemy.cpp" />
         <ClCompile Include="entities\game_object.cpp" />
         <ClCompile Include="entities\metal_block.cpp"/>
+        <ClCompile Include="entities\particle.cpp" />
+        <ClCompile Include="geometry\vector4.cpp" />
         <ClCompile Include="interfaces\buttons\button.cpp"/>
         <ClCompile Include="interfaces\buttons\checkbox.cpp"/>
         <ClCompile Include="interfaces\buttons\lights_button.cpp"/>
@@ -112,6 +114,8 @@
         <ClInclude Include="entities\enemy.h" />
         <ClInclude Include="entities\game_object.h" />
         <ClInclude Include="entities\metal_block.h"/>
+        <ClInclude Include="entities\particle.h" />
+        <ClInclude Include="geometry\vector4.h" />
         <ClInclude Include="interfaces\buttons\button.h"/>
         <ClInclude Include="interfaces\buttons\checkbox.h"/>
         <ClInclude Include="interfaces\buttons\lights_button.h"/>
