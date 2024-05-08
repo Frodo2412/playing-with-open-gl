@@ -22,6 +22,7 @@ class scene
     camera_mode camera_mode_ = first;
 
     grid floor_;
+    static cube skybox_;
 
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
