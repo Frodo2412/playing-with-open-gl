@@ -105,6 +105,7 @@
         <ClCompile Include="textures\texture_manager.cpp" />
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\lights_handler.cpp"/>
+        <ClCompile Include="utils\particles_handler.cpp" />
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
     <ItemGroup>
@@ -141,6 +142,7 @@
         <ClInclude Include="textures\texture_manager.h" />
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\lights_handler.h"/>
+        <ClInclude Include="utils\particles_handler.h" />
         <ClInclude Include="utils\renderer.h"/>
     </ItemGroup>
     <ItemGroup>

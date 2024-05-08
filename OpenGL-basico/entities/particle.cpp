@@ -75,3 +75,7 @@ void particle::update(int number_of_frame)
         color_.set_alpha(alpha);
     }
 }
+
+particle::~particle()
+{
+}

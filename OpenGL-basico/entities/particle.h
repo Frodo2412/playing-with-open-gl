@@ -27,4 +27,5 @@ public:
     vector4 get_color();
     int get_life_time_in_frames_();
     void update(int number_of_frame);
+    ~particle();
 };
