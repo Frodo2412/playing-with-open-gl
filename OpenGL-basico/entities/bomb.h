@@ -4,6 +4,7 @@
 #include "block.h"
 #include "enemy.h"
 #include "../utils/particles_handler.h"
+#include "../utils/clock.h"
 
 class bomb final : public entity
 {

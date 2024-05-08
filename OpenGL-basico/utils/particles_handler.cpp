@@ -52,6 +52,6 @@ void particles_handler::create_explotion(int seconds, vector3 position, int numb
         vector3 velocity = vector3((rand() % 100 - 50) / 10.0f, (rand() % 100 - 50) / 10.0f, (rand() % 100 - 50) / 10.0f);
         vector4 initial_color = vector4(1, 0, 0, 1);
         vector4 final_color = vector4(1, 1, 0, 1);
-        add(seconds, position, velocity, initial_color, final_color, 360);
+        add(seconds, position, velocity, initial_color, final_color, 6);
     }
 }
