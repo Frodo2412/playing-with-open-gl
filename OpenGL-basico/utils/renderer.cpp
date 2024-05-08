@@ -294,3 +294,18 @@ void renderer::draw(const scene& current_scene)
 
     current_scene.render_scene();
 }
+
+void renderer::draw(particle* particle)
+{
+    float r = particle->get_color().get_r();
+    float g = particle->get_color().get_g();
+    float b = particle->get_color().get_b();
+    float alpha = particle->get_color().get_alpha();
+    float x = particle->get_position().get_x();
+    float y = particle->get_position().get_y();
+    float z = particle->get_position().get_z();
+    glPointSize(1);//TAMANIO DE LAS PATICULAS(PUNTOS)
+    glBegin(GL_POINTS);
+    glColor4f(r, g, b, alpha);
+    glVertex3f(x, y, z);
+}

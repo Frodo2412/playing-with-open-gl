@@ -32,3 +32,8 @@ void particles_handler::add(int number_of_frame, vector3 position, vector3 veloc
 {
     particles_.push_back(new particle(position, velocity, initial_color, final_color, life_time_in_frames + number_of_frame));
 }
+
+std::vector<particle*> particles_handler::get_particles()
+{
+    return particles_;
+}
