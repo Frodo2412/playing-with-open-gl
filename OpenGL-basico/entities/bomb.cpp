@@ -27,5 +27,7 @@ void bomb::handle_collision(game_object* other)
 
 void bomb::explotar()
 {
+    particles_handler* particles_handler = particles_handler::get_instance();
+    particles_handler->create_explotion(0, position_, 32);
     exploded_ = true;
 };
