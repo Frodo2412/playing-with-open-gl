@@ -17,14 +17,20 @@ particles_handler* particles_handler::get_instance()
 
 void particles_handler::update(int number_of_frame)
 {
-    for (particle* particle_pointer : particles_)
+    auto it = particles_.begin();
+    while (it != particles_.end())
     {
+        particle* particle_pointer = *it;
         particle_pointer->update(number_of_frame);
-        if (number_of_frame >= particle_pointer->get_life_time_in_frames_())//SI YA SE TERMINO EL LIFE_TIME DE LA PARTICULA LA BORRO
+        if (number_of_frame >= particle_pointer->get_life_time_in_frames_())
         {
-            particles_.erase(std::remove(particles_.begin(), particles_.end(), particle_pointer), particles_.end());
             delete particle_pointer;
+            it = particles_.erase(it);
             printf("PARTICULA BORRADA\n");
+        }
+        else
+        {
+            ++it;
         }
     }
 }

@@ -67,6 +67,7 @@ int main(int argc, char* argv[])
 
     particles_handler->add(total_frames, vector3(0, 1, 0), vector3(0, 3, 0), vector4(1, 0, 0, 1), vector4(1, 0, 1, 1), 360);
     particles_handler->add(total_frames, vector3(0, 1, 0), vector3(3, 3, 0), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 360);
+    particles_handler->add(total_frames, vector3(0, 1, 0), vector3(3, 0, 3), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 360);
     
     do
     {
