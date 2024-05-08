@@ -24,6 +24,7 @@ void particles_handler::update(int number_of_frame)
         {
             particles_.erase(std::remove(particles_.begin(), particles_.end(), particle_pointer), particles_.end());
             delete particle_pointer;
+            printf("PARTICULA BORRADA\n");
         }
     }
 }

@@ -8,6 +8,7 @@
 #include "../scene/camera.h"
 #include "../entities/player.h"
 #include "../geometry/grid.h"
+#include "../utils/particles_handler.h"
 
 enum camera_mode
 {
@@ -34,6 +35,8 @@ class scene
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
+    particles_handler* particles_handler_ = particles_handler::get_instance();
+
 public:
     explicit scene(const vector3& initial_player_position)
         : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
@@ -55,7 +58,7 @@ public:
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;
-    void render_scene() const;
+    void render_scene(int number_of_frame) const;
 
 
     void drop_bomb();

@@ -5,6 +5,7 @@
 
 #include "clock.h"
 #include "lights_handler.h"
+#include "particles_handler.h"
 #include "../interfaces/gamehud.h"
 #include "../interfaces/settings.h"
 #include "../interfaces/settings_screen.h"
@@ -283,7 +284,7 @@ void renderer::draw_skybox(const cube& skybox)
 
 }
 
-void renderer::draw(const scene& current_scene)
+void renderer::draw(int number_of_frame, const scene& current_scene)
 {
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -292,7 +293,7 @@ void renderer::draw(const scene& current_scene)
     if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
     else glShadeModel(GL_SMOOTH);
 
-    current_scene.render_scene();
+    current_scene.render_scene(number_of_frame);
 }
 
 void renderer::draw(particle* particle)
@@ -304,8 +305,19 @@ void renderer::draw(particle* particle)
     float x = particle->get_position().get_x();
     float y = particle->get_position().get_y();
     float z = particle->get_position().get_z();
-    glPointSize(1);//TAMANIO DE LAS PATICULAS(PUNTOS)
+    glPointSize(10);//TAMANIO DE LAS PARTICULAS(PUNTOS)
     glBegin(GL_POINTS);
-    glColor4f(r, g, b, alpha);
-    glVertex3f(x, y, z);
+        glColor4f(1, 0, 0, alpha);
+        glVertex3f(x, y, z);
+    glEnd();
+}
+
+
+void renderer::draw(int number_of_frame, particles_handler* particles_handler)
+{
+    particles_handler->get_instance()->update(number_of_frame);
+    for (particle* particle : particles_handler->get_instance()->get_particles())
+    {
+       draw(particle);
+    }
 }

@@ -62,16 +62,17 @@ vector4 particle::get_color()
 
 void particle::update(int number_of_frame)
 {
-    if (life_time_in_frames_ - number_of_frame >= 0)
+    float remaining_frames = (float)(life_time_in_frames_ - number_of_frame);
+    if (remaining_frames >= 0)
     {
-        position_ += velocity_*0.01;//SE VA DESACELERANDO
-        float r = (initial_color_.get_r()*((float)life_time_in_frames_ - (float)number_of_frame) + final_color_.get_r()*(float)number_of_frame)/(float)life_time_in_frames_;
-        float g = (initial_color_.get_g()*((float)life_time_in_frames_ - (float)number_of_frame) + final_color_.get_g()*(float)number_of_frame)/(float)life_time_in_frames_;
-        float b = (initial_color_.get_b()*((float)life_time_in_frames_ - (float)number_of_frame) + final_color_.get_b()*(float)number_of_frame)/(float)life_time_in_frames_;
-        float alpha = (initial_color_.get_alpha()*((float)life_time_in_frames_ - (float)number_of_frame) + final_color_.get_alpha()*(float)number_of_frame)/(float)life_time_in_frames_;
+        position_ += velocity_ * remaining_frames * 0.00001;//SE VA DESACELERANDO POR REMAINING_FRAMES
+        float r = initial_color_.get_r()*remaining_frames/(float)life_time_in_frames_ + final_color_.get_r()*(float)number_of_frame/(float)life_time_in_frames_;
+        float g = initial_color_.get_g()*remaining_frames/(float)life_time_in_frames_ + final_color_.get_g()*(float)number_of_frame/(float)life_time_in_frames_;
+        float b = initial_color_.get_b()*remaining_frames/(float)life_time_in_frames_ + final_color_.get_b()*(float)number_of_frame/(float)life_time_in_frames_;
+        float alpha = initial_color_.get_alpha()*remaining_frames/(float)life_time_in_frames_ + final_color_.get_alpha()*(float)number_of_frame/(float)life_time_in_frames_;
         color_.set_r(r);
         color_.set_g(g);
-        color_.set_b(b);
+        color_.set_b(g);
         color_.set_alpha(alpha);
     }
 }
