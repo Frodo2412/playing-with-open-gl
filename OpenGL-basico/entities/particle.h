@@ -11,10 +11,11 @@ private:
     vector4 initial_color_;
     vector4 final_color_;
     vector4 color_;
+    int size_;
     int life_time_;
     
 public:
-    particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int life_time);
+    particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time);
     void set_position(vector3 position);
     void set_velocity(vector3 velocity);
     void set_initial_color(vector4 color);
@@ -28,4 +29,6 @@ public:
     int get_life_time_();
     void update(int seconds);
     ~particle();
+    int get_size();
+    void set_size(int size);
 };

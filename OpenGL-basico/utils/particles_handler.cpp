@@ -35,9 +35,9 @@ void particles_handler::update(int seconds)
     }
 }
 
-void particles_handler::add(int seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int life_time)
+void particles_handler::add(int seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time)
 {
-    particles_.push_back(new particle(position, velocity, initial_color, final_color, life_time + seconds));
+    particles_.push_back(new particle(position, velocity, initial_color, final_color, size, life_time + seconds));
 }
 
 std::vector<particle*> particles_handler::get_particles()
@@ -49,9 +49,9 @@ void particles_handler::create_explotion(int seconds, vector3 position, int numb
 {
     for (int i = 0; i < number_of_particles; i++)
     {
-        vector3 velocity = vector3((rand() % 100 - 50) / 10.0f, (rand() % 100 - 50) / 10.0f, (rand() % 100 - 50) / 10.0f);
+        vector3 velocity = vector3((rand() % 50) - 25, (rand() % 50) - 25, (rand() % 50) - 25);
         vector4 initial_color = vector4(1, 0, 0, 1);
-        vector4 final_color = vector4(1, 1, 0, 1);
-        add(seconds, position, velocity, initial_color, final_color, 6);
+        vector4 final_color = vector4(1, 1, 0, 0);
+        add(seconds, position, velocity, initial_color, final_color, rand() % 10, 2);
     }
 }

@@ -298,6 +298,9 @@ void renderer::draw(int seconds, const scene& current_scene)
 
 void renderer::draw(particle* particle)
 {
+    glDisable(GL_LIGHT0);
+    glEnable(GL_LIGHT7);
+    glEnable(GL_LIGHT7);
     float r = particle->get_color().get_r();
     float g = particle->get_color().get_g();
     float b = particle->get_color().get_b();
@@ -305,11 +308,20 @@ void renderer::draw(particle* particle)
     float x = particle->get_position().get_x();
     float y = particle->get_position().get_y();
     float z = particle->get_position().get_z();
-    glPointSize(10);//TAMANIO DE LAS PARTICULAS(PUNTOS)
+    int size = particle->get_size();
+    glLightfv(GL_LIGHT7, GL_POSITION, new float[4]{x, y, z, 1.f});
+    glLightfv(GL_LIGHT7, GL_DIFFUSE, new float[4]{r, g, b, alpha});
+    glLightfv(GL_LIGHT7, GL_AMBIENT, new float[4]{r, g, b, 0});
+    glLightf(GL_LIGHT7, GL_CONSTANT_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT7, GL_LINEAR_ATTENUATION, 0.0f);
+    glLightf(GL_LIGHT7, GL_QUADRATIC_ATTENUATION, 0.00000000001f);
+    glPointSize(size);//TAMANIO DE LAS PARTICULAS(PUNTOS)
     glBegin(GL_POINTS);
-        glColor4f(1, 0, 0, alpha);
+        glColor4f(r, g, b, alpha);
         glVertex3f(x, y, z);
     glEnd();
+    glDisable(GL_LIGHT7);
+    glEnable(GL_LIGHT0);
 }
 
 

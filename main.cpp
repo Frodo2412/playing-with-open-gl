@@ -63,13 +63,6 @@ int main(int argc, char* argv[])
     
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-
-    particles_handler->add(0, vector3(0, 1, 0), vector3(0, 3, 0), vector4(1, 0, 0, 1), vector4(1, 0, 1, 1), 5);
-    particles_handler->add(0, vector3(0, 1, 0), vector3(30, 30, 0), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 5);
-    particles_handler->add(0, vector3(0, 1, 0), vector3(3, 0, -3), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 5);
-    particles_handler->add(0, vector3(0, 1, 0), vector3(3, 4, 3), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 5);
-    particles_handler->add(0, vector3(0, 1, 0), vector3(-3, 0, 0), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 5);
-    particles_handler->add(0, vector3(0, 1, 0), vector3(3, 1, 3), vector4(1, 0, 1, 1), vector4(1, 0, 1, 1), 5);
     
     do
     {

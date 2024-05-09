@@ -1,7 +1,7 @@
 ﻿#include "particle.h"
 
-particle::particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int life_time)
-    : position_(position), velocity_(velocity), initial_color_(initial_color), final_color_(final_color), color_(initial_color), life_time_(life_time)
+particle::particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time)
+    : position_(position), velocity_(velocity), initial_color_(initial_color), final_color_(final_color), color_(initial_color), size_(size), life_time_(life_time)
 {
 }
 
@@ -58,6 +58,16 @@ int particle::get_life_time_()
 vector4 particle::get_color()
 {
     return color_;
+}
+
+int particle::get_size()
+{
+    return size_;
+}
+
+void particle::set_size(int size)
+{
+    size_ = size;
 }
 
 void particle::update(int seconds)

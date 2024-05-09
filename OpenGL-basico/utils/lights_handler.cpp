@@ -31,7 +31,7 @@ void lights_handler::set_light(const camera_mode mode, const light_colors light_
         glEnable(GL_LIGHT0);
         glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{0, 0, 0, 1.f});
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{color.get_x(), color.get_y(), color.get_z(), 1.f});
-        glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{color.get_x(), color.get_y(), color.get_z(), 0.0f});
+        glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{color.get_x(), color.get_y(), color.get_z(), 0.0});
         glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0f);
         glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
         glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0000000001f);
@@ -42,13 +42,15 @@ void lights_handler::set_light(const camera_mode mode, const light_colors light_
         glLightfv(GL_LIGHT0, GL_POSITION, new float[4]{position.get_x(), 0, position.get_z(), 1.f});
         glLightfv(GL_LIGHT0, GL_DIFFUSE, new float[4]{color.get_x(), color.get_y(), color.get_z(), 1.f});
         glLightfv(GL_LIGHT0, GL_AMBIENT, new float[4]{color.get_x(), color.get_y(), color.get_z(), 0.0f});
-        glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0000000001f);
+        glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.00000000001f);
         glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0f);
         glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0f);
     }
 }
 
 void lights_handler::disable_light()
+
 {
+    glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
 }

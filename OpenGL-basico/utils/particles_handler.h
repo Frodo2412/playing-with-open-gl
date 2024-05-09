@@ -12,7 +12,7 @@ private:
 public:
     static particles_handler* get_instance();
     void update(int seconds);
-    void add(int seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int life_time);
+    void add(int seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time);
     std::vector<particle*> get_particles();//USAR DESPUES DE UPDATE!!!
     void create_explotion(int seconds, vector3 position, int number_of_particles);
 };

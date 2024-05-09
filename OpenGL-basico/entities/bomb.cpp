@@ -29,6 +29,6 @@ void bomb::explotar()
 {
     clock* clock = clock::get_instance();
     particles_handler* particles_handler = particles_handler::get_instance();
-    particles_handler->create_explotion(clock->get_total_time(), position_, 32);
+    particles_handler->create_explotion(clock->get_total_time()/1000, position_, 128);
     exploded_ = true;
 };
