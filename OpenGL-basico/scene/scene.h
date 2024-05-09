@@ -15,7 +15,7 @@ enum camera_mode
 };
 
 
-class scene
+class scene final
 {
     camera_mode camera_mode_ = first;
 
