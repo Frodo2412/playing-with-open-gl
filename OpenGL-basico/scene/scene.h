@@ -20,8 +20,6 @@ enum camera_mode
 class scene
 {
     camera_mode camera_mode_ = first;
-
-    grid floor_;
     static cube skybox_;
 
     std::unique_ptr<player> player_;
@@ -34,12 +32,15 @@ class scene
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
+protected:
+    grid floor_;
+
 public:
     explicit scene(const vector3& initial_player_position)
-        : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
-          player_(std::make_unique<player>()), camera_(new camera(initial_player_position.get_x(),
-                                                                  initial_player_position.get_y(),
-                                                                  initial_player_position.get_z()))
+        : player_(std::make_unique<player>()),
+          camera_(new camera(initial_player_position.get_x(),
+                             initial_player_position.get_y(),
+                             initial_player_position.get_z())), floor_(grid(10, 10, 1, vector3(0, 1, 0)))
     {
         player_->set_position(initial_player_position);
         enemies_.emplace_back(std::make_unique<enemy>(enemy()));
