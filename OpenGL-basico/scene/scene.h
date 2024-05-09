@@ -18,6 +18,8 @@ enum camera_mode
 class scene
 {
     camera_mode camera_mode_ = first;
+
+    grid floor_;
     static cube skybox_;
 
     std::unique_ptr<player> player_;
@@ -29,9 +31,6 @@ class scene
 
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
-
-protected:
-    grid floor_;
 
 public:
     explicit scene(const int grid_width, const int grid_height): player_(std::make_unique<player>()),
