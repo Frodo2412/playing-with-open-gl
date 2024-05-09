@@ -380,3 +380,8 @@ grid scene::get_floor() const
 {
     return floor_;
 }
+
+scene scene::level1()
+{
+    return scene(17, 11);
+}

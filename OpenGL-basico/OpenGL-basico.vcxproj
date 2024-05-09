@@ -98,7 +98,6 @@
         <ClCompile Include="interfaces\settings.cpp"/>
         <ClCompile Include="interfaces\settings_screen.cpp"/>
         <ClCompile Include="scene\camera.cpp"/>
-        <ClCompile Include="scene\level.cpp" />
         <ClCompile Include="textures\texture.cpp"/>
         <ClCompile Include="textures\texture_loader.cpp"/>
         <ClCompile Include="textures\texture_manager.cpp" />
@@ -132,7 +131,6 @@
         <ClInclude Include="geometry\vector3.h"/>
         <ClInclude Include="graphics\model_loader.h"/>
         <ClInclude Include="graphics\vertex.h"/>
-        <ClInclude Include="scene\level.h" />
         <ClInclude Include="scene\scene.h"/>
         <ClInclude Include="textures\texture.h"/>
         <ClInclude Include="textures\texture_loader.h"/>

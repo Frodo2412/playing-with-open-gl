@@ -34,8 +34,10 @@ protected:
     grid floor_;
 
 public:
-    explicit scene(): player_(std::make_unique<player>()), camera_(new camera(player_.get())),
-                      floor_(grid(10, 10, 1, vector3(0, 1, 0)))
+    explicit scene(const int grid_width, const int grid_height): player_(std::make_unique<player>()),
+                                                                 camera_(new camera(player_.get())),
+                                                                 floor_(grid(
+                                                                     grid_width, grid_height, 1, vector3(0, 1, 0)))
     {
     }
 
@@ -45,9 +47,10 @@ public:
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;
-    void render_scene() const;
-
+    virtual void render_scene() const;
 
     void drop_bomb();
     grid get_floor() const;
+
+    static scene level1();
 };
