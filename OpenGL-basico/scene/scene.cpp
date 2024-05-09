@@ -310,12 +310,18 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
+            if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+
             player_->set_speed(movement);
+            
             break;
         }
     case top_down:
         {
             const auto movement = -displacement;
+            if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
@@ -323,11 +329,14 @@ void scene::move_player(const vector3& displacement) const
     case perspective:
         {
             const auto movement = -displacement;
+            if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
         }
     }
+    
 }
 
 void scene::render_scene(int seconds) const

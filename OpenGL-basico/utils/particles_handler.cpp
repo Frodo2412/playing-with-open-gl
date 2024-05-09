@@ -55,3 +55,22 @@ void particles_handler::create_explotion(int seconds, vector3 position, int numb
         add(seconds, position, velocity, initial_color, final_color, rand() % 10, 2);
     }
 }
+
+void particles_handler::walk_particles(int seconds, vector3 position, vector3 speed, int number_of_particles)
+{
+    for (int i = 0; i < number_of_particles; i++)
+    {
+        vector3 velocity;
+        
+        if (speed.get_x() == position.get_x())
+        {
+            velocity = vector3((rand()%20)-10, rand() % 10, -speed.get_z());
+        } else
+        {
+            velocity = vector3(-speed.get_x(), rand() % 10, (rand()%20)-10);
+        }
+        vector4 initial_color = vector4(1, 1, 1, 1);
+        vector4 final_color = vector4(1, 1, 1, 0);
+        add(seconds, position, velocity, initial_color, final_color, rand() % 5, 1);
+    }
+}
