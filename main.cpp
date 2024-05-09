@@ -8,6 +8,7 @@
 #include "OpenGL-basico/interfaces/gamehud.h"
 #include "OpenGL-basico/interfaces/number.h"
 #include "OpenGL-basico/interfaces/settings_screen.h"
+#include "OpenGL-basico/scene/level.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
 #include "OpenGL-basico/scene/scene.h"
@@ -52,7 +53,7 @@ int main(int argc, char* argv[])
     const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
-    auto current_scene = scene(vector3(0, -0.5, -5));
+    auto current_scene = level::level1();
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 last_frame_time = clock::get_total_time();
@@ -204,7 +205,8 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
     }
 
     GLenum err;
-    while ((err = glGetError()) != GL_NO_ERROR) {
+    while ((err = glGetError()) != GL_NO_ERROR)
+    {
         std::cerr << "OpenGL error: " << err << std::endl;
     }
 }
