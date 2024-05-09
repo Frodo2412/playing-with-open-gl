@@ -33,10 +33,10 @@ class scene final
     void set_off_bomb(bomb* bomb) const;
 
 public:
-    explicit scene(const int grid_width, const int grid_height): player_(std::make_unique<player>()),
-                                                                 camera_(new camera(player_.get())),
-                                                                 floor_(grid(
-                                                                     grid_width, grid_height, 1, vector3(0, 1, 0)))
+    explicit scene(const int grid_width, const int grid_height): floor_(grid(grid_width, grid_height, 1,
+                                                                             vector3(0, 1, 0))),
+                                                                 player_(std::make_unique<player>()),
+                                                                 camera_(new camera(player_.get()))
     {
     }
 
