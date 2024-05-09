@@ -98,9 +98,6 @@ void renderer::draw(const grid& grid, const texture& texture)
         glBegin(GL_QUAD_STRIP);
         for (int column = 0; column <= columns; ++column)
         {
-            if (column % 2 == row % 2) glColor3f(0.5f, 0.5f, 0.5f); // Set color to medium gray
-            else glColor3f(1.0f, 1.0f, 1.0f); // Reset color to white
-
             glTexCoord2f(0.0, 0.0);
             glVertex3f(left + static_cast<float>(column) * size,
                        -1, top + static_cast<float>(row) * size);
