@@ -7,8 +7,8 @@ class camera
     vector3 position_, direction_, up_;
 
 public:
-    explicit camera(const player* player)
-        : position_(player->get_position()), direction_(player->get_direction()), up_(player->get_up())
+    explicit camera(const player* player): position_(player->get_position()), direction_(player->get_direction()),
+                                           up_(player->get_up())
     {
     }
 
