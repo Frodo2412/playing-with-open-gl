@@ -21,7 +21,7 @@ protected:
 public:
     explicit entity(const std::string& file_path, const texture texture, const float hitbox_size,
                     const vector3& position = vector3(0, -0.75, 0),
-                    const vector3& direction = vector3(1, 0, 0),
+                    const vector3& direction = vector3(0, 0, 5),
                     const vector3& up = vector3(0, 1, 0)): game_object(position, texture),
                                                            vertices_(model_loader::load_model(file_path)),
                                                            direction_(direction),

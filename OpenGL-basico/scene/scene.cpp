@@ -4,10 +4,12 @@
 
 #include "../entities/bomb.h"
 #include "../utils/renderer.h"
+#include  "../entities/brick_block.h"
+#include  "../entities/metal_block.h"
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
 
-cube scene::skybox_ = cube(50.0f, vector3(0,4,0));
+cube scene::skybox_ = cube(50.0f, vector3(0, 4, 0));
 
 const auto settings = settings::get_instance();
 

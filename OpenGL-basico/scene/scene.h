@@ -2,8 +2,6 @@
 #include <memory>
 #include "../entities/bomb.h"
 #include  "../entities/block.h"
-#include  "../entities/metal_block.h"
-#include  "../entities/brick_block.h"
 #include "../entities/enemy.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
@@ -36,18 +34,9 @@ protected:
     grid floor_;
 
 public:
-    explicit scene(const vector3& initial_player_position)
-        : player_(std::make_unique<player>()),
-          camera_(new camera(initial_player_position.get_x(),
-                             initial_player_position.get_y(),
-                             initial_player_position.get_z())), floor_(grid(10, 10, 1, vector3(0, 1, 0)))
+    explicit scene(): player_(std::make_unique<player>()), camera_(new camera(player_.get())),
+                      floor_(grid(10, 10, 1, vector3(0, 1, 0)))
     {
-        player_->set_position(initial_player_position);
-        enemies_.emplace_back(std::make_unique<enemy>(enemy()));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(1.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(2.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(1.5, -0.5, 1)));
     }
 
     void toggle_camera();

@@ -17,6 +17,11 @@ public:
     {
     }
 
+    explicit camera (const player* player)
+        : position_(player->get_position()), direction_(player->get_direction()), up_(player->get_up())
+    {
+    }
+
     vector3 get_position() const;
     vector3 get_direction() const;
     vector3 get_up() const;
