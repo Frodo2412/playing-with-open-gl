@@ -370,7 +370,7 @@ void scene::move_player(const vector3& displacement) const
 
 void scene::render_scene() const
 {
-    // lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
+    lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
               camera_->get_direction().get_x(), camera_->get_direction().get_y(),
@@ -394,7 +394,7 @@ void scene::render_scene() const
     if (settings::get_instance()->textures_enabled)
         renderer::draw_skybox(skybox_);
 
-    // lights_handler::disable_light();
+    lights_handler::disable_light();
 }
 
 camera_mode scene::get_camera_mode() const
