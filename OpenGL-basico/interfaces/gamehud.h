@@ -28,5 +28,6 @@ public:
     static void init();
     static void draw_time(Uint32 millisecond);
     static void cambiar_numero(Uint32 valor, square ubicacion);
+    static void reset_score();
     static void update_points(Uint32 points);
 };

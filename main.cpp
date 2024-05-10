@@ -59,10 +59,10 @@ int main(int argc, char* argv[])
     Uint32 last_frame_time = clock::get_total_time();
     int frames = 0;
     Uint32 time = 0;
-    
+
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-    
+
     do
     {
         switch (settings::get_instance()->game_velocity)
@@ -100,11 +100,19 @@ int main(int argc, char* argv[])
 
         const float elapsed_time = static_cast<float>(clock::get_ticks());
 
-
-        handle_events(settings_screen, current_scene, displacement, fin, elapsed_time * game_velocity);
-        update_game_state(current_scene, displacement, elapsed_time * game_velocity);
-        render_everything(settings_screen, current_scene, clock::get_total_time() * game_velocity / 1000);//DIVIDIDO 100 PORQUE ES EN SEGUNDOS
-        SDL_GL_SwapWindow(win);
+        try
+        {
+            handle_events(settings_screen, current_scene, displacement, fin, elapsed_time * game_velocity);
+            update_game_state(current_scene, displacement, elapsed_time * game_velocity);
+            render_everything(settings_screen, current_scene, clock::get_total_time() * game_velocity / 1000);
+            //DIVIDIDO 100 PORQUE ES EN SEGUNDOS
+            SDL_GL_SwapWindow(win);
+        }
+        catch (std::runtime_error& e)
+        {
+            current_scene = scene::level1();
+            gamehud::reset_score();
+        }
     }
     while (!fin);
     //FIN LOOP PRINCIPAL
