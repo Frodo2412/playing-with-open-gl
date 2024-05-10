@@ -27,5 +27,8 @@ void bomb::handle_collision(game_object* other)
 
 void bomb::explotar()
 {
+    clock* clock = clock::get_instance();
+    particles_handler* particles_handler = particles_handler::get_instance();
+    particles_handler->create_explotion(clock->get_total_time()/1000, position_, 128);
     exploded_ = true;
 };

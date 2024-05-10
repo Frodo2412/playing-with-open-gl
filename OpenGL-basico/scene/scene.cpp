@@ -10,6 +10,7 @@
 cube scene::skybox_ = cube(50.0f, vector3(0,4,0));
 
 const auto settings = settings::get_instance();
+particles_handler* particles_handler_ = particles_handler::get_instance();
 
 void scene::toggle_camera()
 {
@@ -310,12 +311,18 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
+            //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+
             player_->set_speed(movement);
+            
             break;
         }
     case top_down:
         {
             const auto movement = -displacement;
+            //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
@@ -323,15 +330,19 @@ void scene::move_player(const vector3& displacement) const
     case perspective:
         {
             const auto movement = -displacement;
+            //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
+                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
         }
     }
+    
 }
 
-void scene::render_scene() const
+void scene::render_scene(int seconds) const
 {
+    
     lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
@@ -354,7 +365,9 @@ void scene::render_scene() const
     if (settings::get_instance()->textures_enabled)
         renderer::draw_skybox(skybox_);
 
+    renderer::draw(seconds, particles_handler_);
     lights_handler::disable_light();
+    
 }
 
 camera_mode scene::get_camera_mode() const
