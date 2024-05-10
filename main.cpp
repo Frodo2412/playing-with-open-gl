@@ -22,7 +22,6 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
 int main(int argc, char* argv[])
 {
     auto settings = settings::get_instance();
-    particles_handler* particles_handler = particles_handler::get_instance();
     //INICIALIZACION
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {

@@ -10,6 +10,7 @@
 cube scene::skybox_ = cube(50.0f, vector3(0,4,0));
 
 const auto settings = settings::get_instance();
+particles_handler* particles_handler_ = particles_handler::get_instance();
 
 void scene::toggle_camera()
 {

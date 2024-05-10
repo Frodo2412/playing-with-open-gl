@@ -35,8 +35,6 @@ class scene
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
-    particles_handler* particles_handler_ = particles_handler::get_instance();
-
 public:
     explicit scene(const vector3& initial_player_position)
         : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
