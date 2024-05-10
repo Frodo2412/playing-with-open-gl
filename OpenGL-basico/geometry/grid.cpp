@@ -20,16 +20,6 @@ float grid::get_left() const
     return left_;
 }
 
-float grid::get_right() const
-{
-    return right_;
-}
-
-float grid::get_bottom() const
-{
-    return bottom_;
-}
-
 float grid::get_cell_size() const
 {
     return cell_size_;
