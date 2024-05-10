@@ -6,7 +6,6 @@
 #include "../entities/metal_block.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
-#include "../entities/wall_block.h"
 #include "../geometry/grid.h"
 #include "../utils/particles_handler.h"
 
@@ -15,6 +14,11 @@ enum camera_mode
     first,
     top_down,
     perspective
+};
+
+struct coordinate
+{
+    int height, width;
 };
 
 
@@ -35,10 +39,9 @@ class scene final
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
-    void set_up_wall(int grid_height, int grid_width);
-    
 public:
-    explicit scene(int grid_width, int grid_height);
+    explicit scene(int grid_width, int grid_height, std::vector<coordinate>& brick_blocks,
+                   std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies);
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;
