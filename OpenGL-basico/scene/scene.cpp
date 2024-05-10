@@ -245,11 +245,47 @@ void scene::set_off_bomb(bomb* bomb) const
     }
 }
 
+scene::scene(const int grid_width, const int grid_height): floor_(grid(grid_height, grid_width, block::block_size,
+                                                                       vector3(0, 1, 0))),
+                                                           player_(std::make_unique<player>()),
+                                                           camera_(new camera(player_.get()))
+{
+    // Initialize the grid with the specified dimensions
+    const int rows = grid_height + 1;
+    const int columns = grid_width + 1;
+
+    // Calculate starting positions to center the grid around (0, 0)
+    const auto left = floor_.get_left() - 1;
+    const auto top = floor_.get_top();
+
+    // Adding walls along the borders
+    for (int row = 0; row < rows; ++row)
+    {
+        for (int column = 0; column < columns; ++column)
+        {
+            if (row == 0 || row == rows - 1 || column == 0 || column == columns - 1)
+            {
+                // Assuming wall_block has a constructor that takes a position
+                // Create position vector adjusted for centering
+                auto position = vector3(left + (static_cast<float>(column) + 0.5) * block::block_size,
+                                        -0.5f,
+                                        top + (static_cast<float>(row) + 0.5) * block::block_size);
+                auto wall = std::make_unique<wall_block>(position);
+                wall_.push_back(std::move(wall));
+            }
+        }
+    }
+}
+
 void scene::update_scene(const float elapsed_time)
 {
     player_->move();
 
     for (const auto& block : blocks_)
+        if (player_->check_collision(block.get()))
+            player_->handle_collision(block.get());
+
+    for (const auto& block : wall_)
         if (player_->check_collision(block.get()))
             player_->handle_collision(block.get());
 
@@ -334,7 +370,7 @@ void scene::move_player(const vector3& displacement) const
 
 void scene::render_scene() const
 {
-    lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
+    // lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
               camera_->get_direction().get_x(), camera_->get_direction().get_y(),
@@ -351,12 +387,14 @@ void scene::render_scene() const
         renderer::draw(block->get_block(), block->get_texture());
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
+    for (auto& wall_block : wall_)
+        renderer::draw(wall_block->get_block(), wall_block->get_texture());
 
     renderer::draw(floor_, texture_manager::grass_texture());
     if (settings::get_instance()->textures_enabled)
         renderer::draw_skybox(skybox_);
 
-    lights_handler::disable_light();
+    // lights_handler::disable_light();
 }
 
 camera_mode scene::get_camera_mode() const

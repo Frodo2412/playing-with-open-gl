@@ -82,22 +82,23 @@ void renderer::draw(const entity& entity)
 
 void renderer::draw(const grid& grid, const texture& texture)
 {
-    const auto d = grid.get_cell_size() / 2;
-
     const auto rows = grid.get_rows();
     const auto columns = grid.get_columns();
     const auto size = grid.get_cell_size();
 
-    const auto left = -static_cast<float>(columns) * d;
-    const auto top = -static_cast<float>(rows) * d;
+    const auto left = grid.get_left();
+    const auto top = grid.get_top();
 
 
     glBindTexture(GL_TEXTURE_2D, texture.get_texture_id());
     for (int row = 0; row < rows; ++row)
     {
         glBegin(GL_QUAD_STRIP);
-        for (int column = 0; column <= columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
+            if (column % 2 == row % 2) glColor3f(0.5f, 0.5f, 0.5f); // Set color to medium gray	
+            else glColor3f(1.0f, 1.0f, 1.0f); // Reset color to white
+            
             glTexCoord2f(0.0, 0.0);
             glVertex3f(left + static_cast<float>(column) * size,
                        -1, top + static_cast<float>(row) * size);
@@ -265,7 +266,7 @@ void renderer::draw_skybox(const cube& skybox)
     {
         const auto texture = textures[i].get_texture_id();
         glBindTexture(GL_TEXTURE_2D, texture);
-        
+
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 0.0f);
         glVertex3f(faces[i].get_a().get_x(), faces[i].get_a().get_y(), faces[i].get_a().get_z());
@@ -277,7 +278,6 @@ void renderer::draw_skybox(const cube& skybox)
         glVertex3f(faces[i].get_d().get_x(), faces[i].get_d().get_y(), faces[i].get_d().get_z());
         glEnd();
     }
-
 }
 
 void renderer::draw(const scene& current_scene)

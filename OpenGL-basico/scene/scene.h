@@ -3,8 +3,10 @@
 #include "../entities/bomb.h"
 #include  "../entities/block.h"
 #include "../entities/enemy.h"
+#include "../entities/metal_block.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
+#include "../entities/wall_block.h"
 #include "../geometry/grid.h"
 
 enum camera_mode
@@ -25,6 +27,7 @@ class scene final
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
+    std::vector<std::unique_ptr<wall_block>> wall_;
 
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;
@@ -33,12 +36,7 @@ class scene final
     void set_off_bomb(bomb* bomb) const;
 
 public:
-    explicit scene(const int grid_width, const int grid_height): floor_(grid(grid_width, grid_height, 1,
-                                                                             vector3(0, 1, 0))),
-                                                                 player_(std::make_unique<player>()),
-                                                                 camera_(new camera(player_.get()))
-    {
-    }
+    explicit scene(int grid_width, int grid_height);
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;

@@ -1,9 +1,6 @@
 #include "block.h"
 
-vector3 block::get_position() const
-{
-    return position_;
-}
+const float block::block_size = 1.0;
 
 cube block::get_block() const
 {
@@ -12,6 +9,6 @@ cube block::get_block() const
 
 aabb block::get_bounding_box() const
 {
-    const vector3 half_extents(size_ / 2, size_ / 2, size_ / 2);
+    const vector3 half_extents(block_size / 2, block_size / 2, block_size / 2);
     return {position_ - half_extents, position_ + half_extents};
 };
