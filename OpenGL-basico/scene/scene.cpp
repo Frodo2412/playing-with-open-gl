@@ -423,8 +423,8 @@ camera* scene::get_camera() const
 void scene::drop_bomb()
 {
     vector3 player_position = player_->get_position();
-    bombs_.emplace_back(std::make_unique<bomb>(player_->get_position()));
     player_position.set_y(-0.5);
+    bombs_.emplace_back(std::make_unique<bomb>(player_position));
 }
 
 grid scene::get_floor() const
