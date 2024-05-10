@@ -15,7 +15,7 @@ particles_handler* particles_handler::get_instance()
     return instance;
 }
 
-void particles_handler::update(int seconds)
+void particles_handler::update(float seconds)
 {
     auto it = particles_.begin();
     while (it != particles_.end())
@@ -35,7 +35,7 @@ void particles_handler::update(int seconds)
     }
 }
 
-void particles_handler::add(int seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time)
+void particles_handler::add(float seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, float size, float life_time)
 {
     particles_.push_back(new particle(position, velocity, initial_color, final_color, size, life_time + seconds));
 }
@@ -45,7 +45,7 @@ std::vector<particle*> particles_handler::get_particles()
     return particles_;
 }
 
-void particles_handler::create_explotion(int seconds, vector3 position, int number_of_particles)
+void particles_handler::create_explotion(float seconds, vector3 position, int number_of_particles)
 {
     for (int i = 0; i < number_of_particles; i++)
     {
@@ -56,7 +56,7 @@ void particles_handler::create_explotion(int seconds, vector3 position, int numb
     }
 }
 
-void particles_handler::walk_particles(int seconds, vector3 position, vector3 speed, int number_of_particles)
+void particles_handler::walk_particles(float seconds, vector3 position, vector3 speed, int number_of_particles)
 {
     for (int i = 0; i < number_of_particles; i++)
     {
@@ -70,7 +70,7 @@ void particles_handler::walk_particles(int seconds, vector3 position, vector3 sp
             velocity = vector3(-speed.get_x(), rand() % 10, (rand()%20)-10);
         }
         vector4 initial_color = vector4(1, 1, 1, 1);
-        vector4 final_color = vector4(1, 1, 1, 0);
+        vector4 final_color = vector4(1, 1, 1, 1);
         add(seconds, position, velocity, initial_color, final_color, rand() % 5, 1);
     }
 }

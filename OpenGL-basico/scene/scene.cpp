@@ -340,7 +340,7 @@ void scene::move_player(const vector3& displacement) const
     
 }
 
-void scene::render_scene(int seconds) const
+void scene::render_scene(float seconds) const
 {
     
     lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());

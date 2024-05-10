@@ -284,7 +284,7 @@ void renderer::draw_skybox(const cube& skybox)
 
 }
 
-void renderer::draw(int seconds, const scene& current_scene)
+void renderer::draw(float seconds, const scene& current_scene)
 {
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -306,7 +306,7 @@ void renderer::draw(particle* particle)
     float x = particle->get_position().get_x();
     float y = particle->get_position().get_y();
     float z = particle->get_position().get_z();
-    int size = particle->get_size();
+    float size = particle->get_size();
     glPointSize(size);//TAMANIO DE LAS PARTICULAS(PUNTOS)
     glBegin(GL_POINTS);
         glColor4f(r, g, b, alpha);
@@ -316,7 +316,7 @@ void renderer::draw(particle* particle)
 }
 
 
-void renderer::draw(int seconds, particles_handler* particles_handler)
+void renderer::draw(float seconds, particles_handler* particles_handler)
 {
     particles_handler->get_instance()->update(seconds);
     for (particle* particle : particles_handler->get_instance()->get_particles())
