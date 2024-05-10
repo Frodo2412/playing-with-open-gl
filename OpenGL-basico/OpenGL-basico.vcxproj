@@ -90,6 +90,8 @@
         <ClCompile Include="entities\game_object.cpp" />
         <ClCompile Include="entities\metal_block.cpp"/>
         <ClCompile Include="entities\wall_block.cpp" />
+        <ClCompile Include="entities\particle.cpp" />
+        <ClCompile Include="geometry\vector4.cpp" />
         <ClCompile Include="interfaces\buttons\button.cpp"/>
         <ClCompile Include="interfaces\buttons\checkbox.cpp"/>
         <ClCompile Include="interfaces\buttons\lights_button.cpp"/>
@@ -104,6 +106,7 @@
         <ClCompile Include="textures\texture_manager.cpp" />
         <ClCompile Include="utils\clock.cpp"/>
         <ClCompile Include="utils\lights_handler.cpp"/>
+        <ClCompile Include="utils\particles_handler.cpp" />
         <ClCompile Include="utils\renderer.cpp"/>
     </ItemGroup>
     <ItemGroup>
@@ -114,6 +117,8 @@
         <ClInclude Include="entities\game_object.h" />
         <ClInclude Include="entities\metal_block.h"/>
         <ClInclude Include="entities\wall_block.h" />
+        <ClInclude Include="entities\particle.h" />
+        <ClInclude Include="geometry\vector4.h" />
         <ClInclude Include="interfaces\buttons\button.h"/>
         <ClInclude Include="interfaces\buttons\checkbox.h"/>
         <ClInclude Include="interfaces\buttons\lights_button.h"/>
@@ -139,6 +144,7 @@
         <ClInclude Include="textures\texture_manager.h" />
         <ClInclude Include="utils\clock.h"/>
         <ClInclude Include="utils\lights_handler.h"/>
+        <ClInclude Include="utils\particles_handler.h" />
         <ClInclude Include="utils\renderer.h"/>
     </ItemGroup>
     <ItemGroup>

@@ -5,6 +5,7 @@
 
 #include "clock.h"
 #include "lights_handler.h"
+#include "particles_handler.h"
 #include "../interfaces/gamehud.h"
 #include "../interfaces/settings.h"
 #include "../interfaces/settings_screen.h"
@@ -280,7 +281,7 @@ void renderer::draw_skybox(const cube& skybox)
     }
 }
 
-void renderer::draw(const scene& current_scene)
+void renderer::draw(int seconds, const scene& current_scene)
 {
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -289,5 +290,34 @@ void renderer::draw(const scene& current_scene)
     if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
     else glShadeModel(GL_SMOOTH);
 
-    current_scene.render_scene();
+    current_scene.render_scene(seconds);
+}
+
+void renderer::draw(particle* particle)
+{
+    glDisable(GL_LIGHTING);
+    float r = particle->get_color().get_r();
+    float g = particle->get_color().get_g();
+    float b = particle->get_color().get_b();
+    float alpha = particle->get_color().get_alpha();
+    float x = particle->get_position().get_x();
+    float y = particle->get_position().get_y();
+    float z = particle->get_position().get_z();
+    int size = particle->get_size();
+    glPointSize(size);//TAMANIO DE LAS PARTICULAS(PUNTOS)
+    glBegin(GL_POINTS);
+        glColor4f(r, g, b, alpha);
+        glVertex3f(x, y, z);
+    glEnd();
+    glEnable(GL_LIGHTING);
+}
+
+
+void renderer::draw(int seconds, particles_handler* particles_handler)
+{
+    particles_handler->get_instance()->update(seconds);
+    for (particle* particle : particles_handler->get_instance()->get_particles())
+    {
+       draw(particle);
+    }
 }

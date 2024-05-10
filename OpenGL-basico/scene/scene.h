@@ -8,6 +8,7 @@
 #include "../entities/player.h"
 #include "../entities/wall_block.h"
 #include "../geometry/grid.h"
+#include "../utils/particles_handler.h"
 
 enum camera_mode
 {
@@ -44,7 +45,7 @@ public:
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;
-    void render_scene() const;
+    void render_scene(int seconds) const;
 
     void drop_bomb();
     grid get_floor() const;

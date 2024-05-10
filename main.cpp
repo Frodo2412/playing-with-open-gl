@@ -12,11 +12,12 @@
 #include "OpenGL-basico/utils/renderer.h"
 #include "OpenGL-basico/scene/scene.h"
 #include "OpenGL-basico/utils/lights_handler.h"
+#include "OpenGL-basico/utils/particles_handler.h"
 
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
                    float delta_time);
 void update_game_state(scene& current_scene, vector3& displacement, float delta_time);
-void render_everything(settings_screen* settings_screen, const scene& current_scene);
+void render_everything(settings_screen* settings_screen, const scene& current_scene, int seconds);
 
 int main(int argc, char* argv[])
 {
@@ -58,10 +59,10 @@ int main(int argc, char* argv[])
     Uint32 last_frame_time = clock::get_total_time();
     int frames = 0;
     Uint32 time = 0;
-
+    
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-
+    
     do
     {
         switch (settings::get_instance()->game_velocity)
@@ -102,7 +103,7 @@ int main(int argc, char* argv[])
 
         handle_events(settings_screen, current_scene, displacement, fin, elapsed_time * game_velocity);
         update_game_state(current_scene, displacement, elapsed_time * game_velocity);
-        render_everything(settings_screen, current_scene);
+        render_everything(settings_screen, current_scene, clock::get_total_time() * game_velocity / 1000);//DIVIDIDO 100 PORQUE ES EN SEGUNDOS
         SDL_GL_SwapWindow(win);
     }
     while (!fin);
@@ -192,14 +193,14 @@ void update_game_state(scene& current_scene, vector3& displacement, const float 
     current_scene.update_scene(delta_time);
 }
 
-void render_everything(settings_screen* settings_screen, const scene& current_scene)
+void render_everything(settings_screen* settings_screen, const scene& current_scene, int seconds)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     if (clock::get_instance()->get_is_paused()) renderer::draw(settings_screen);
     else
     {
-        renderer::draw(current_scene);
+        renderer::draw(seconds, current_scene);
         renderer::draw_gamehud();
     }
 

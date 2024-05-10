@@ -7,6 +7,7 @@
 #include "../geometry/grid.h"
 #include "../scene/scene.h"
 #include "../textures/texture.h"
+#include "particles_handler.h"
 
 class settings_screen;
 
@@ -23,5 +24,7 @@ public:
     static void draw(settings_screen* settings_screen);
     static void draw_gamehud();
     static void draw_skybox(const cube& skybox);
-    static void draw(const scene& current_scene);
+    static void draw(int seconds, const scene& current_scene);
+    static void draw(particle* particle);
+    static void draw(int seconds, particles_handler* particles_handler);
 };
