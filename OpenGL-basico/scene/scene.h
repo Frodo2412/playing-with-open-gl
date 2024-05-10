@@ -28,7 +28,6 @@ class scene final
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
-    std::vector<std::unique_ptr<wall_block>> wall_;
 
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;
@@ -36,6 +35,8 @@ class scene final
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
+    void set_up_wall(int grid_height, int grid_width);
+    
 public:
     explicit scene(int grid_width, int grid_height);
 
