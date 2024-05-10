@@ -20,16 +20,15 @@ void scene::toggle_camera()
     {
     case first:
         camera_mode_ = top_down;
-        camera_->set_position(vector3(0, 10, 0));
-        camera_->set_direction(vector3(0, 0, 0));
+        camera_->set_position(player_->get_position() + vector3(0.5, 10, 0));
+        camera_->set_direction(player_->get_position() + vector3(0.5, 0, 0));
         camera_->set_up(vector3(0, 0, -1));
         break;
     case top_down:
         {
             camera_mode_ = perspective;
-            const auto player_position = player_->get_position();
-            camera_->set_position(player_position + vector3(0, 5, 5));
-            camera_->set_direction(player_position);
+            camera_->set_position(player_->get_position() + vector3(0.5, 5, 5));
+            camera_->set_direction(player_->get_position() + vector3(0.5, 1, 0));
             camera_->set_up(vector3(0, 1, 0));
             break;
         }
@@ -69,6 +68,7 @@ void scene::update_camera() const
         camera_->move(player_->get_speed());
         break;
     case top_down:
+        camera_->move(player_->get_speed());
         break;
     }
 }
