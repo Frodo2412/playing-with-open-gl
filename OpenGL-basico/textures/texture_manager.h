@@ -13,7 +13,7 @@ class texture_manager
                                 enemy_texture_(texture_loader::load_texture("../assets/textures/spider.jpg")),
                                 brick_block_texture_(texture_loader::load_texture("../assets/textures/bricks_1.jpg")),
                                 metal_block_texture_(texture_loader::load_texture("../assets/textures/metal_1.jpg")),
-                                bomb_texture_(texture_loader::load_texture("../assets/textures/Diffuse.jpg")),
+                                bomb_texture_(texture_loader::load_texture("../assets/textures/Bomb.png")),
                                 grass_texture_(texture_loader::load_texture("../assets/textures/grass_1.jpg")),
                                 skybox_texture_bk_(texture_loader::load_texture("../assets/textures/sh_bk.png")),
                                 skybox_texture_dn_(texture_loader::load_texture("../assets/textures/sh_dn.png")),

@@ -1,6 +1,6 @@
 ﻿#include "particle.h"
 
-particle::particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, int size, int life_time)
+particle::particle(vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, float size, float life_time)
     : position_(position), velocity_(velocity), initial_color_(initial_color), final_color_(final_color), color_(initial_color), size_(size), life_time_(life_time)
 {
 }
@@ -45,12 +45,12 @@ vector4 particle::get_final_color()
     return final_color_;
 }
 
-void particle::set_life_time_(int life_time)
+void particle::set_life_time_(float life_time)
 {
     life_time_ = life_time;
 }
 
-int particle::get_life_time_()
+float particle::get_life_time_()
 {
     return life_time_;
 }
@@ -60,30 +60,31 @@ vector4 particle::get_color()
     return color_;
 }
 
-int particle::get_size()
+float particle::get_size()
 {
     return size_;
 }
 
-void particle::set_size(int size)
+void particle::set_size(float size)
 {
     size_ = size;
 }
 
-void particle::update(int seconds)
+void particle::update(float seconds)
 {
-    float remaining_time = (float)(life_time_ - seconds);
+    const float remaining_time = (life_time_ - seconds);
     if (remaining_time >= 0)
     {
         position_ += velocity_ * remaining_time * 0.001;//SE VA DESACELERANDO POR REMAINING_time
-        float r = initial_color_.get_r()*remaining_time/(float)life_time_ + final_color_.get_r()*(float)seconds/(float)life_time_;
-        float g = initial_color_.get_g()*remaining_time/(float)life_time_ + final_color_.get_g()*(float)seconds/(float)life_time_;
-        float b = initial_color_.get_b()*remaining_time/(float)life_time_ + final_color_.get_b()*(float)seconds/(float)life_time_;
-        float alpha = initial_color_.get_alpha()*remaining_time/(float)life_time_ + final_color_.get_alpha()*(float)seconds/(float)life_time_;
-        color_.set_r(r);
-        color_.set_g(g);
-        color_.set_b(g);
-        color_.set_alpha(alpha);
+       // const float r = initial_color_.get_r()*remaining_time/life_time_ + final_color_.get_r()*seconds/life_time_;
+       // const float g = initial_color_.get_g()*remaining_time/life_time_ + final_color_.get_g()*seconds/life_time_;
+       // const float b = initial_color_.get_b()*remaining_time/life_time_ + final_color_.get_b()*seconds/life_time_;
+       // const float alpha = initial_color_.get_alpha()*remaining_time/life_time_ + final_color_.get_alpha()*seconds/life_time_;
+        color_.set_r(1);
+        color_.set_g(1);
+        color_.set_b(1);
+        color_.set_alpha(1);
+        
     }
 }
 

@@ -24,7 +24,7 @@ public:
     static void draw(settings_screen* settings_screen);
     static void draw_gamehud();
     static void draw_skybox(const cube& skybox);
-    static void draw(int seconds, const scene& current_scene);
+    static void draw(float seconds, const scene& current_scene);
     static void draw(particle* particle);
-    static void draw(int seconds, particles_handler* particles_handler);
+    static void draw(float seconds, particles_handler* particles_handler);
 };

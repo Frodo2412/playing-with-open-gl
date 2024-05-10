@@ -45,7 +45,7 @@ public:
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;
-    void render_scene(int seconds) const;
+    void render_scene(float seconds) const;
 
     void drop_bomb();
     grid get_floor() const;

@@ -17,7 +17,7 @@
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
                    float delta_time);
 void update_game_state(scene& current_scene, vector3& displacement, float delta_time);
-void render_everything(settings_screen* settings_screen, const scene& current_scene, int seconds);
+void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds);
 
 int main(int argc, char* argv[])
 {
@@ -193,7 +193,7 @@ void update_game_state(scene& current_scene, vector3& displacement, const float 
     current_scene.update_scene(delta_time);
 }
 
-void render_everything(settings_screen* settings_screen, const scene& current_scene, int seconds)
+void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
