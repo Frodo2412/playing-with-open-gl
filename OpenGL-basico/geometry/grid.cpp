@@ -10,6 +10,16 @@ int grid::get_columns() const
     return columns_;
 }
 
+float grid::get_top() const
+{
+    return top_;
+}
+
+float grid::get_left() const
+{
+    return left_;
+}
+
 float grid::get_cell_size() const
 {
     return cell_size_;

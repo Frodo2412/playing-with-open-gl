@@ -4,10 +4,12 @@
 
 #include "../entities/bomb.h"
 #include "../utils/renderer.h"
+#include  "../entities/brick_block.h"
+#include  "../entities/metal_block.h"
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
 
-cube scene::skybox_ = cube(50.0f, vector3(0,4,0));
+cube scene::skybox_ = cube(50.0f, vector3(0, 4, 0));
 
 const auto settings = settings::get_instance();
 particles_handler* particles_handler_ = particles_handler::get_instance();
@@ -244,11 +246,47 @@ void scene::set_off_bomb(bomb* bomb) const
     }
 }
 
+scene::scene(const int grid_width, const int grid_height): floor_(grid(grid_height, grid_width, block::block_size,
+                                                                       vector3(0, 1, 0))),
+                                                           player_(std::make_unique<player>()),
+                                                           camera_(new camera(player_.get()))
+{
+    // Initialize the grid with the specified dimensions
+    const int rows = grid_height + 1;
+    const int columns = grid_width + 1;
+
+    // Calculate starting positions to center the grid around (0, 0)
+    const auto left = floor_.get_left() - 1;
+    const auto top = floor_.get_top();
+
+    // Adding walls along the borders
+    for (int row = 0; row < rows; ++row)
+    {
+        for (int column = 0; column < columns; ++column)
+        {
+            if (row == 0 || row == rows - 1 || column == 0 || column == columns - 1)
+            {
+                // Assuming wall_block has a constructor that takes a position
+                // Create position vector adjusted for centering
+                auto position = vector3(left + (static_cast<float>(column) + 0.5) * block::block_size,
+                                        -0.5f,
+                                        top + (static_cast<float>(row) + 0.5) * block::block_size);
+                auto wall = std::make_unique<wall_block>(position);
+                wall_.push_back(std::move(wall));
+            }
+        }
+    }
+}
+
 void scene::update_scene(const float elapsed_time)
 {
     player_->move();
 
     for (const auto& block : blocks_)
+        if (player_->check_collision(block.get()))
+            player_->handle_collision(block.get());
+
+    for (const auto& block : wall_)
         if (player_->check_collision(block.get()))
             player_->handle_collision(block.get());
 
@@ -360,6 +398,8 @@ void scene::render_scene(int seconds) const
         renderer::draw(block->get_block(), block->get_texture());
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
+    for (auto& wall_block : wall_)
+        renderer::draw(wall_block->get_block(), wall_block->get_texture());
 
     renderer::draw(floor_, texture_manager::grass_texture());
     if (settings::get_instance()->textures_enabled)
@@ -390,4 +430,9 @@ void scene::drop_bomb()
 grid scene::get_floor() const
 {
     return floor_;
+}
+
+scene scene::level1()
+{
+    return scene(17, 11);
 }

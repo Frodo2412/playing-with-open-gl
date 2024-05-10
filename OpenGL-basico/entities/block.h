@@ -7,18 +7,16 @@
 class block : public game_object
 {
     cube cube_;
-    float size_;
 
 protected:
-    explicit block(const vector3& position, const texture texture, const float size = 1.0):
-        game_object(position, texture), cube_(cube(size, position)), size_(size)
+    explicit block(const vector3& position, const texture texture):
+        game_object(position, texture), cube_(cube(block_size, position))
     {
     }
 
 public:
     virtual ~block() = default;
 
-    vector3 get_position() const;
     cube get_block() const;
     virtual bool is_active() const = 0;
     virtual bool is_destructible() const = 0;
@@ -26,4 +24,6 @@ public:
     aabb get_bounding_box() const override;
 
     virtual void destroy() = 0;
+
+    const static float block_size;
 };

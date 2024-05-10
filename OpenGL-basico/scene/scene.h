@@ -2,11 +2,11 @@
 #include <memory>
 #include "../entities/bomb.h"
 #include  "../entities/block.h"
-#include  "../entities/metal_block.h"
-#include  "../entities/brick_block.h"
 #include "../entities/enemy.h"
+#include "../entities/metal_block.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
+#include "../entities/wall_block.h"
 #include "../geometry/grid.h"
 #include "../utils/particles_handler.h"
 
@@ -18,7 +18,7 @@ enum camera_mode
 };
 
 
-class scene
+class scene final
 {
     camera_mode camera_mode_ = first;
 
@@ -28,6 +28,7 @@ class scene
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
+    std::vector<std::unique_ptr<wall_block>> wall_;
 
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;
@@ -36,19 +37,7 @@ class scene
     void set_off_bomb(bomb* bomb) const;
 
 public:
-    explicit scene(const vector3& initial_player_position)
-        : floor_(grid(10, 10, 1, vector3(0, 1, 0))),
-          player_(std::make_unique<player>()), camera_(new camera(initial_player_position.get_x(),
-                                                                  initial_player_position.get_y(),
-                                                                  initial_player_position.get_z()))
-    {
-        player_->set_position(initial_player_position);
-        enemies_.emplace_back(std::make_unique<enemy>(enemy()));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(0.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<brick_block>(vector3(1.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(2.5, -0.5, 0)));
-        blocks_.push_back(std::make_unique<metal_block>(vector3(1.5, -0.5, 1)));
-    }
+    explicit scene(int grid_width, int grid_height);
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;
@@ -58,7 +47,8 @@ public:
     camera* get_camera() const;
     void render_scene(int seconds) const;
 
-
     void drop_bomb();
     grid get_floor() const;
+
+    static scene level1();
 };
