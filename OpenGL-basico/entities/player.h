@@ -5,9 +5,10 @@
 class player final : public entity
 {
 public:
-    explicit player(): entity("../assets/models/bomberman.obj", texture_manager::player_texture(), 1)
+    explicit player(const vector3& position): entity("../assets/models/bomberman.obj",
+                                                     texture_manager::player_texture(), 1,
+                                                     position)
     {
-        position_.set_y(-1);
     }
 
     void handle_collision(game_object* other) override;

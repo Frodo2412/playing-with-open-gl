@@ -8,6 +8,7 @@
 #include  "../entities/metal_block.h"
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
+#include "../entities/wall_block.h"
 
 cube scene::skybox_ = cube(50.0f, vector3(0, 4, 0));
 
@@ -247,14 +248,18 @@ void scene::set_off_bomb(bomb* bomb) const
     }
 }
 
-scene::scene(const int grid_width, const int grid_height): floor_(grid(grid_height, grid_width, block::block_size,
-                                                                       vector3(0, 1, 0))),
-                                                           player_(std::make_unique<player>()),
-                                                           camera_(new camera(player_.get()))
+scene::scene(const int grid_width, const int grid_height, std::vector<coordinate>& brick_blocks,
+             std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies): floor_(grid(
+        grid_height + 1, grid_width, block::block_size,
+        vector3(0, 1, 0))),
+    // Esto es re magico pero es para que aparezca en la esquina de la pantalla como en el juego
+    player_(std::make_unique<player>(
+        vector3(floor_.get_left(), -1, floor_.get_top() + 2))),
+    camera_(new camera(player_.get()))
 {
     // Initialize the grid with the specified dimensions
-    const int rows = grid_height + 1;
-    const int columns = grid_width + 1;
+    const int rows = grid_height + 2;
+    const int columns = grid_width;
 
     // Calculate starting positions to center the grid around (0, 0)
     const auto left = floor_.get_left() - 1;
@@ -273,8 +278,58 @@ scene::scene(const int grid_width, const int grid_height): floor_(grid(grid_heig
                                         -0.5f,
                                         top + (static_cast<float>(row) + 0.5) * block::block_size);
                 auto wall = std::make_unique<wall_block>(position);
-                wall_.push_back(std::move(wall));
+                blocks_.push_back(std::move(wall));
             }
+
+            brick_blocks.erase(std::remove_if(brick_blocks.begin(), brick_blocks.end(),
+                                              [left, column, top, row, this](const coordinate ptr)
+                                              {
+                                                  if (ptr.width == column && ptr.height == row)
+                                                  {
+                                                      auto position = vector3(
+                                                          left + (static_cast<float>(column) + 0.5) * block::block_size,
+                                                          -0.5f,
+                                                          top + (static_cast<float>(row) + 0.5) * block::block_size);
+                                                      auto brick = std::make_unique<brick_block>(position);
+                                                      blocks_.push_back(std::move(brick));
+                                                      return true;
+                                                  }
+                                                  return false;
+                                              }),
+                               brick_blocks.end());
+
+            metal_blocks.erase(std::remove_if(metal_blocks.begin(), metal_blocks.end(),
+                                              [left, column, top, row, this](const coordinate ptr)
+                                              {
+                                                  if (ptr.width == column && ptr.height == row)
+                                                  {
+                                                      auto position = vector3(
+                                                          left + (static_cast<float>(column) + 0.5) * block::block_size,
+                                                          -0.5f,
+                                                          top + (static_cast<float>(row) + 0.5) * block::block_size);
+                                                      auto metal = std::make_unique<metal_block>(position);
+                                                      blocks_.push_back(std::move(metal));
+                                                      return true;
+                                                  }
+                                                  return false;
+                                              }),
+                               metal_blocks.end());
+
+            enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
+                                         [left, column, top, row, this](const coordinate ptr)
+                                         {
+                                             if (ptr.width == column && ptr.height == row)
+                                             {
+                                                 auto position = vector3(
+                                                     left + (static_cast<float>(column) + 0.5) * block::block_size,
+                                                     -0.5f,
+                                                     top + (static_cast<float>(row) + 0.5) * block::block_size);
+                                                 enemies_.push_back(std::make_unique<enemy>(position));
+                                                 return true;
+                                             }
+                                             return false;
+                                         }),
+                          enemies.end());
         }
     }
 }
@@ -284,10 +339,6 @@ void scene::update_scene(const float elapsed_time)
     player_->move();
 
     for (const auto& block : blocks_)
-        if (player_->check_collision(block.get()))
-            player_->handle_collision(block.get());
-
-    for (const auto& block : wall_)
         if (player_->check_collision(block.get()))
             player_->handle_collision(block.get());
 
@@ -351,17 +402,17 @@ void scene::move_player(const vector3& displacement) const
             movement.set_y(0);
 
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
 
             player_->set_speed(movement);
-            
+
             break;
         }
     case top_down:
         {
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
@@ -370,18 +421,16 @@ void scene::move_player(const vector3& displacement) const
         {
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
         }
     }
-    
 }
 
 void scene::render_scene(float seconds) const
 {
-    
     lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
@@ -399,8 +448,6 @@ void scene::render_scene(float seconds) const
         renderer::draw(block->get_block(), block->get_texture());
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
-    for (auto& wall_block : wall_)
-        renderer::draw(wall_block->get_block(), wall_block->get_texture());
 
     renderer::draw(floor_, texture_manager::grass_texture());
     if (settings::get_instance()->textures_enabled)
@@ -408,7 +455,6 @@ void scene::render_scene(float seconds) const
 
     renderer::draw(seconds, particles_handler_);
     lights_handler::disable_light();
-    
 }
 
 camera_mode scene::get_camera_mode() const
@@ -435,5 +481,31 @@ grid scene::get_floor() const
 
 scene scene::level1()
 {
-    return scene(17, 11);
+    std::vector<coordinate> brick_blocks = {
+        {1, 6}, {1, 7}, {1, 8}, {1, 10}, {1, 11}, {1, 12}, {1, 13}, {1, 14},
+        {3, 10}, {3, 12}, {3, 15},
+        {4, 1}, {4, 11},
+        {5, 11},
+        {7, 1}, {7, 5}, {7, 14},
+        {8, 9},
+        {9, 6}, {9, 7},
+        {10, 3}, {10, 13},
+        {11, 9}
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {3, 9},
+        {10, 11},
+        {11, 14}
+    };
+
+    return scene(17, 11, brick_blocks, metal_blocks, enemies);
 }
