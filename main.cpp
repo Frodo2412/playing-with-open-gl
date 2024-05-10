@@ -112,6 +112,8 @@ int main(int argc, char* argv[])
         {
             current_scene = scene::level1();
             gamehud::reset_score();
+            displacement.reset();
+            clock::reset();
         }
     }
     while (!fin);
