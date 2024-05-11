@@ -338,7 +338,7 @@ scene::scene(const int number, const int grid_width, const int grid_height, std:
 }
 
 
-void scene::update_scene(const float elapsed_time)
+void scene::update_scene(const float elapsed_time, sound& explosion)
 {
     player_->move();
 
@@ -360,6 +360,7 @@ void scene::update_scene(const float elapsed_time)
         bomba->set_timer(bomba->get_timer() - elapsed_time);
         if (bomba->get_timer() <= 0 && !bomba->is_exploded()) // si el timer llega a 0 y no ha explotado --> explota
         {
+            explosion.play();
             set_off_bomb(bomba.get());
         }
     }
