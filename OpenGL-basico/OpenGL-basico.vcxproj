@@ -87,6 +87,7 @@
         <ClCompile Include="entities\bomb.cpp" />
         <ClCompile Include="entities\brick_block.cpp"/>
         <ClCompile Include="entities\enemy.cpp" />
+        <ClCompile Include="entities\fire.cpp" />
         <ClCompile Include="entities\game_object.cpp" />
         <ClCompile Include="entities\metal_block.cpp"/>
         <ClCompile Include="entities\wall_block.cpp" />
@@ -118,6 +119,7 @@
         <ClInclude Include="entities\bomb.h" />
         <ClInclude Include="entities\brick_block.h"/>
         <ClInclude Include="entities\enemy.h" />
+        <ClInclude Include="entities\fire.h" />
         <ClInclude Include="entities\game_object.h" />
         <ClInclude Include="entities\metal_block.h"/>
         <ClInclude Include="entities\wall_block.h" />
@@ -158,6 +160,7 @@
     <ItemGroup>
         <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\models\bomberman.obj" />
+        <Content Include="..\assets\models\fire.obj" />
         <Content Include="..\assets\models\spider.obj" />
         <Content Include="..\assets\music\Bomberman Theme (Area 1).wav" />
         <Content Include="..\assets\music\Bomb_Planted.wav" />
@@ -190,6 +193,7 @@
         <ClCompile Include="graphics\model_loader.cpp"/>
         <ClCompile Include="graphics\vertex.cpp"/>
         <ClCompile Include="scene\scene.cpp"/>
+        <Content Include="..\assets\textures\red+hot+fire+flames.jpg" />
         <Content Include="..\assets\textures\sh_bk.png" />
         <Content Include="..\assets\textures\sh_dn.png" />
         <Content Include="..\assets\textures\sh_ft.png" />

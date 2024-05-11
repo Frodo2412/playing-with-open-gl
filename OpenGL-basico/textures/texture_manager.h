@@ -7,7 +7,7 @@ class texture_manager
     static texture_manager* instance_;
     texture player_texture_, enemy_texture_, brick_block_texture_, metal_block_texture_, bomb_texture_, grass_texture_,
             skybox_texture_bk_, skybox_texture_dn_, skybox_texture_ft_, skybox_texture_lf_, skybox_texture_rt_,
-            skybox_texture_up_;
+            skybox_texture_up_, fire_texture_;
 
     explicit texture_manager(): player_texture_(texture_loader::load_texture("../assets/textures/bomberman.png")),
                                 enemy_texture_(texture_loader::load_texture("../assets/textures/spider.jpg")),
@@ -20,7 +20,8 @@ class texture_manager
                                 skybox_texture_ft_(texture_loader::load_texture("../assets/textures/sh_ft.png")),
                                 skybox_texture_lf_(texture_loader::load_texture("../assets/textures/sh_lf.png")),
                                 skybox_texture_rt_(texture_loader::load_texture("../assets/textures/sh_rt.png")),
-                                skybox_texture_up_(texture_loader::load_texture("../assets/textures/sh_up.png"))
+                                skybox_texture_up_(texture_loader::load_texture("../assets/textures/sh_up.png")),
+    fire_texture_(texture_loader::load_texture("../assets/texrures"))
     {
     }
 
