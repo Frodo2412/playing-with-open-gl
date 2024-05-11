@@ -17,7 +17,6 @@ class entity : public game_object
     vector3 direction_, up_;
     aabb bounding_box_;
     float scale_factor_ = 1.0f;
-    float last_rotation_;
     rotation new_rotation_;
 
 protected:
@@ -62,7 +61,6 @@ public:
 
         scale_factor_ = std::min({scale_x, scale_y, scale_z});
         bounding_box_ = {vector3(min_x, min_y, min_z) * scale_factor_, vector3(max_x, max_y, max_z) * scale_factor_};
-        last_rotation_ = 90;
         new_rotation_ = down;
     }
 
@@ -83,9 +81,6 @@ public:
     bool check_collision(const game_object* other_object) const;
 
     aabb get_bounding_box() const override;
-
-    float get_last_rotation();
-    void set_last_rotation(float last_rotation);
     void set_new_rotation(rotation new_rotation);
     rotation get_new_rotation();
     bool get_is_player_();

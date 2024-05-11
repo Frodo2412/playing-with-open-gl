@@ -56,16 +56,6 @@ aabb entity::get_bounding_box() const
     return {bounding_box_.min + position_, bounding_box_.max + position_};
 }
 
-float entity::get_last_rotation()
-{
-    return last_rotation_;
-}
-
-void entity::set_last_rotation(float last_rotation)
-{
-    last_rotation_ = last_rotation;
-}
-
 void entity::set_new_rotation(rotation new_rotation)
 {
     new_rotation_ = new_rotation;
