@@ -10,9 +10,10 @@ private:
     Uint8* m_wavBuffer;
     SDL_AudioDeviceID m_deviceId;
     bool m_isLoaded;
+    bool m_looping;
     
 public:
-    explicit sound(const char* filename) : m_wavBuffer(nullptr), m_wavLength(0), m_deviceId(0) {
+    explicit sound(const char* filename) : m_wavBuffer(nullptr), m_wavLength(46000), m_deviceId(0), m_looping(false) {
         m_wavSpec = {};
         if (SDL_LoadWAV(filename, &m_wavSpec, &m_wavBuffer, &m_wavLength) == nullptr) {
             m_isLoaded = false;
@@ -30,6 +31,4 @@ public:
 
     bool load() const;
     void play();
-    void play_loop();
-
 };

@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    sound sound1("../assets/music/Bomberman Theme (Area 1).wav");
+    //sound sound1("../assets/music/Bomberman Theme (Area 1).wav");
     sound bomb_planted("../assets/music/Bomb_Planted.wav");
     sound explosion("../assets/music/Explosion.wav");
 
@@ -80,8 +80,6 @@ int main(int argc, char* argv[])
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-    
-    sound1.play();
     
     do
     {
