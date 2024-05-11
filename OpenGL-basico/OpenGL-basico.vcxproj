@@ -95,8 +95,10 @@
         <ClCompile Include="interfaces\buttons\button.cpp"/>
         <ClCompile Include="interfaces\buttons\checkbox.cpp"/>
         <ClCompile Include="interfaces\buttons\lights_button.cpp"/>
+        <ClCompile Include="interfaces\buttons\menu_button.cpp" />
         <ClCompile Include="interfaces\buttons\speed_button.cpp"/>
         <ClCompile Include="interfaces\gamehud.cpp"/>
+        <ClCompile Include="interfaces\menu.cpp" />
         <ClCompile Include="interfaces\number.cpp"/>
         <ClCompile Include="interfaces\settings.cpp"/>
         <ClCompile Include="interfaces\settings_screen.cpp"/>
@@ -122,8 +124,10 @@
         <ClInclude Include="interfaces\buttons\button.h"/>
         <ClInclude Include="interfaces\buttons\checkbox.h"/>
         <ClInclude Include="interfaces\buttons\lights_button.h"/>
+        <ClInclude Include="interfaces\buttons\menu_button.h" />
         <ClInclude Include="interfaces\buttons\speed_button.h"/>
         <ClInclude Include="interfaces\gamehud.h"/>
+        <ClInclude Include="interfaces\menu.h" />
         <ClInclude Include="interfaces\number.h"/>
         <ClInclude Include="interfaces\settings.h"/>
         <ClInclude Include="interfaces\settings_screen.h"/>
