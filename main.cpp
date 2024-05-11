@@ -146,6 +146,7 @@ int main(int argc, char* argv[])
                 current_scene = scene::get_level(current_scene->level_number + 1);
                 displacement.reset();
                 clock::reset();
+                std::cout << "NIVEL " << current_scene->level_number << std::endl;
             }
             else
             {
@@ -154,6 +155,7 @@ int main(int argc, char* argv[])
                 gamehud::reset_score();
                 displacement.reset();
                 clock::reset();
+                std::cout << "GANASTE" << current_scene->level_number << std::endl;
             }
         }
     }

@@ -597,7 +597,7 @@ scene* scene::level2()
         {9, 11}
     };
 
-    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(2, 17, 11, brick_blocks, metal_blocks, enemies);
 }
 
 scene* scene::level3()
@@ -630,7 +630,7 @@ scene* scene::level3()
         {11, 14}
     };
 
-    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(3, 17, 11, brick_blocks, metal_blocks, enemies);
 }
 
 scene* scene::level4()
@@ -652,7 +652,7 @@ scene* scene::level4()
         {11, 14}
     };
 
-    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(4, 17, 11, brick_blocks, metal_blocks, enemies);
 }
 
 scene* scene::level5()
@@ -674,7 +674,7 @@ scene* scene::level5()
         {11, 14}
     };
 
-    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(5, 17, 11, brick_blocks, metal_blocks, enemies);
 }
 
 scene* scene::get_level(const int number)
