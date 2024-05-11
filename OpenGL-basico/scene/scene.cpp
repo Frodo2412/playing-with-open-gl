@@ -20,15 +20,15 @@ void scene::toggle_camera()
     {
     case first:
         camera_mode_ = top_down;
-        camera_->set_position(player_->get_position() + vector3(0.5, 10, 0));
-        camera_->set_direction(player_->get_position() + vector3(0.5, 0, 0));
+        camera_->set_position(player_->get_position() + vector3(0, 10, 0));
+        camera_->set_direction(player_->get_position());
         camera_->set_up(vector3(0, 0, -1));
         break;
     case top_down:
         {
             camera_mode_ = perspective;
-            camera_->set_position(player_->get_position() + vector3(0.5, 5, 5));
-            camera_->set_direction(player_->get_position() + vector3(0.5, 1, 0));
+            camera_->set_position(player_->get_position() + vector3(0, 5, 5));
+            camera_->set_direction(player_->get_position() + vector3(0, 1, 0));
             camera_->set_up(vector3(0, 1, 0));
             break;
         }
@@ -352,7 +352,23 @@ void scene::move_player(const vector3& displacement) const
 
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
                 //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
-
+            if (movement.get_x() > 0)
+            {
+                player_->set_new_rotation(right);
+            }
+            if (movement.get_x() < 0)
+            {
+                player_->set_new_rotation(left);
+            }
+            if (movement.get_z() > 0)
+            {
+                player_->set_new_rotation(down);
+            }
+            if (movement.get_z() < 0)
+            {
+                player_->set_new_rotation(rotation::up);
+            }
+            
             player_->set_speed(movement);
             
             break;
@@ -362,6 +378,22 @@ void scene::move_player(const vector3& displacement) const
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
                 //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            if (movement.get_x() > 0)
+            {
+                player_->set_new_rotation(right);
+            }
+            if (movement.get_x() < 0)
+            {
+                player_->set_new_rotation(left);
+            }
+            if (movement.get_z() > 0)
+            {
+                player_->set_new_rotation(down);
+            }
+            if (movement.get_z() < 0)
+            {
+                player_->set_new_rotation(up);
+            }
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
@@ -371,6 +403,22 @@ void scene::move_player(const vector3& displacement) const
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
                 //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            if (movement.get_x() > 0)
+            {
+                player_->set_new_rotation(right);
+            }
+            if (movement.get_x() < 0)
+            {
+                player_->set_new_rotation(left);
+            }
+            if (movement.get_z() > 0)
+            {
+                player_->set_new_rotation(down);
+            }
+            if (movement.get_z() < 0)
+            {
+                player_->set_new_rotation(up);
+            }
             player_->set_speed(movement);
             player_->set_direction(movement);
             break;
@@ -381,7 +429,6 @@ void scene::move_player(const vector3& displacement) const
 
 void scene::render_scene(float seconds) const
 {
-    
     lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
     gluLookAt(camera_->get_position().get_x(), camera_->get_position().get_y(), camera_->get_position().get_z(),
@@ -390,8 +437,9 @@ void scene::render_scene(float seconds) const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
 
-    if (camera_mode_ != first)
+    if (camera_mode_ != first) {
         renderer::draw(*player_);
+    }
 
     for (auto& enemy : enemies_)
         renderer::draw(*enemy.get());

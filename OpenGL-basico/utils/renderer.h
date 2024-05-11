@@ -19,7 +19,7 @@ public:
     static void draw(const vertex& v);
     static void draw(const vector3& v);
     static void draw(const triangle& triangle);
-    static void draw(const entity& entity);
+    static void draw(entity& entity);
     static void draw(const square&, const texture& texture);
     static void draw(settings_screen* settings_screen);
     static void draw_gamehud();

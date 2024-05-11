@@ -46,12 +46,33 @@ bool entity::check_collision(const game_object* other_object) const
 {
     const auto a = get_bounding_box();
     const aabb other = other_object->get_bounding_box();
-    return a.min.get_x() <= other.max.get_x() && a.max.get_x() >= other.min.get_x() &&
+    return a.min.get_x()-0.5 <= other.max.get_x() && a.max.get_x()-0.6 >= other.min.get_x() &&
         (a.min.get_y() <= other.max.get_y() && a.max.get_y() >= other.min.get_y()) &&
-        (a.min.get_z() <= other.max.get_z() && a.max.get_z() >= other.min.get_z());
+        (a.min.get_z()+0.6 <= other.max.get_z() && a.max.get_z()+0.5 >= other.min.get_z());
 }
 
 aabb entity::get_bounding_box() const
 {
     return {bounding_box_.min + position_, bounding_box_.max + position_};
 }
+
+float entity::get_last_rotation()
+{
+    return last_rotation_;
+}
+
+void entity::set_last_rotation(float last_rotation)
+{
+    last_rotation_ = last_rotation;
+}
+
+void entity::set_new_rotation(rotation new_rotation)
+{
+    new_rotation_ = new_rotation;
+}
+
+rotation entity::get_new_rotation()
+{
+    return new_rotation_;
+}
+
