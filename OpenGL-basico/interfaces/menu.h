@@ -1,20 +1,18 @@
 ﻿#pragma once
-#include "../textures/texture.h"
-#include <array>
-#include "buttons/menu_button.h"
+
 #include "../textures/texture_loader.h"
 
 class menu
 {
 private:
-    menu* instance = nullptr;
+    static menu* instance_;
     menu();
-    static texture background_image_;
-    menu_button* start_;
-    menu_button* settings_;
+    texture background_image_ = texture_loader::load_texture("../assets/textures/menu.jpg");
+    bool started_;
 public:
-    menu* get_instance();
-    void handle_click(int x, int y);
+    static menu* get_instance();
+    void set_started(bool started);
+    bool get_started();
     GLuint get_background_texture_id() const;
-    std::array<button*, 5> get_buttons();
+    void handle_event(int x, int y);
 };

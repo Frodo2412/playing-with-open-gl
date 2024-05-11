@@ -95,7 +95,6 @@
         <ClCompile Include="interfaces\buttons\button.cpp"/>
         <ClCompile Include="interfaces\buttons\checkbox.cpp"/>
         <ClCompile Include="interfaces\buttons\lights_button.cpp"/>
-        <ClCompile Include="interfaces\buttons\menu_button.cpp" />
         <ClCompile Include="interfaces\buttons\speed_button.cpp"/>
         <ClCompile Include="interfaces\gamehud.cpp"/>
         <ClCompile Include="interfaces\menu.cpp" />
@@ -124,7 +123,6 @@
         <ClInclude Include="interfaces\buttons\button.h"/>
         <ClInclude Include="interfaces\buttons\checkbox.h"/>
         <ClInclude Include="interfaces\buttons\lights_button.h"/>
-        <ClInclude Include="interfaces\buttons\menu_button.h" />
         <ClInclude Include="interfaces\buttons\speed_button.h"/>
         <ClInclude Include="interfaces\gamehud.h"/>
         <ClInclude Include="interfaces\menu.h" />
@@ -159,6 +157,7 @@
         <Content Include="..\assets\textures\bricks_1.jpg"/>
         <Content Include="..\assets\textures\gamehud.jpg" />
         <Content Include="..\assets\textures\grass_1.jpg"/>
+        <Content Include="..\assets\textures\menu.jpg" />
         <Content Include="..\assets\textures\numbers\cero.png"/>
         <Content Include="..\assets\textures\numbers\cinco.png"/>
         <Content Include="..\assets\textures\numbers\cuatro.png"/>

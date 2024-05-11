@@ -1,18 +1,36 @@
 ﻿#include "menu.h"
-menu* instance = nullptr;
+menu* menu::instance_ = nullptr;
 
 menu::menu()
 {
-    background_image_ = texture_loader::load_texture("../assets/textures/menu/menu.jpg");
-    start_ = new menu_button("../assets/textures/menu/start.jpg");
-    settings_ = new menu_button("../assets/textures/menu/settings.jpg");
+    started_ = false;
 }
 
 menu* menu::get_instance()
 {
-    if (instance == nullptr)
+    if (instance_ == nullptr)
     {
-        instance = new menu();
+        instance_ = new menu();
     }
-    return instance;
+    return instance_;
+}
+
+void menu::set_started(bool started)
+{
+    started_ = started;
+}
+
+bool menu::get_started()
+{
+    return started_;
+}
+
+GLuint menu::get_background_texture_id() const
+{
+    return background_image_.get_texture_id();
+}
+
+void menu::handle_event(int x, int y)
+{
+    started_ = true;
 }

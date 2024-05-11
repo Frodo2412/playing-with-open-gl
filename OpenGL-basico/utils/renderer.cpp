@@ -386,9 +386,6 @@ void renderer::draw(menu* menu)
     glVertex3f(-window_width / 2, window_height / 2, 0);
     glEnd();
 
-    // Draw the buttons
-    for (const auto button : menu->get_buttons()) draw_button(button);
-
     glDisable(GL_TEXTURE_2D);
 
     glPopMatrix();
