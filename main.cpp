@@ -113,6 +113,7 @@ int main(int argc, char* argv[])
         }
         catch (game_over_exception& e)
         {
+            menu::get_instance()->set_started(false);
             current_scene = scene::get_level(1);
             gamehud::reset_score();
             displacement.reset();
@@ -128,6 +129,7 @@ int main(int argc, char* argv[])
             }
             else
             {
+                menu::get_instance()->set_started(false);
                 current_scene = scene::level1();
                 gamehud::reset_score();
                 displacement.reset();
