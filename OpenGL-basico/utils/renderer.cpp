@@ -358,3 +358,37 @@ void renderer::draw(float seconds, particles_handler* particles_handler)
        draw(particle);
     }
 }
+
+void renderer::draw(menu* menu)
+{
+    const auto settings = ::settings::get_instance();
+
+    const int window_height = settings->window_height;
+    const int window_width = settings->window_width;
+
+    glMatrixMode(GL_PROJECTION);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(-window_width / 2, window_width / 2, -window_height / 2, window_height / 2, -1.0, 1.0);
+
+    // Draw the background image
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, menu->get_background_texture_id());
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(-window_width / 2, -window_height / 2, 0);
+    glTexCoord2f(1, 0);
+    glVertex3f(window_width / 2, -window_height / 2, 0);
+    glTexCoord2f(1, 1);
+    glVertex3f(window_width / 2, window_height / 2, 0);
+    glTexCoord2f(0, 1);
+    glVertex3f(-window_width / 2, window_height / 2, 0);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+}
+

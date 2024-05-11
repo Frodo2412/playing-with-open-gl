@@ -15,6 +15,8 @@
 #include "OpenGL-basico/utils/game_over_exception.h"
 #include "OpenGL-basico/utils/lights_handler.h"
 #include "OpenGL-basico/utils/next_level_exception.h"
+#include "OpenGL-basico/utils/particles_handler.h"
+#include "OpenGL-basico/interfaces/menu.h"
 
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
                    float delta_time, sound& bomb_planted);
@@ -131,6 +133,7 @@ int main(int argc, char* argv[])
         }
         catch (game_over_exception& e)
         {
+            menu::get_instance()->set_started(false);
             current_scene = scene::get_level(1);
             gamehud::reset_score();
             displacement.reset();
@@ -146,6 +149,7 @@ int main(int argc, char* argv[])
             }
             else
             {
+                menu::get_instance()->set_started(false);
                 current_scene = scene::level1();
                 gamehud::reset_score();
                 displacement.reset();
@@ -161,6 +165,7 @@ int main(int argc, char* argv[])
     SDL_Quit();
     return 0;
 }
+
 
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
                    const float delta_time, sound& bomb_planted)
@@ -183,6 +188,13 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
             {
                 settings_screen->handle_click(event.button.x, event.button.y);
                 std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
+            }
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                if (!menu::get_instance()->get_started())
+                {
+                    menu::get_instance()->handle_event(event.button.x, event.button.y);
+                }
             }
             break;
         case SDL_QUIT:
@@ -224,6 +236,9 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
         case SDL_KEYUP:
             switch (event.key.keysym.sym)
             {
+            case SDLK_ESCAPE:
+                fin = true;
+                break;
             case SDLK_q:
                 fin = true;
                 break;
@@ -245,16 +260,23 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    if (clock::get_instance()->get_is_paused()) renderer::draw(settings_screen);
-    else
+    if (!menu::get_instance()->get_started())
     {
-        renderer::draw(seconds, current_scene);
-        renderer::draw_gamehud();
-    }
+        renderer::draw(menu::get_instance());
+        clock::get_instance()->reset();
+    } else
+    {
+        if (clock::get_instance()->get_is_paused()) renderer::draw(settings_screen);
+        else
+        {
+            renderer::draw(seconds, current_scene);
+            renderer::draw_gamehud();
+        }
 
-    GLenum err;
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL error: " << err << std::endl;
+        GLenum err;
+        while ((err = glGetError()) != GL_NO_ERROR)
+        {
+            std::cerr << "OpenGL error: " << err << std::endl;
+        }
     }
 }
