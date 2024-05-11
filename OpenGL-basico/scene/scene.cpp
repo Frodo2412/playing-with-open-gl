@@ -252,7 +252,7 @@ void scene::set_off_bomb(bomb* bomb) const
 
 scene::scene(const int number, const int grid_width, const int grid_height, std::vector<coordinate>& brick_blocks,
              std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies): floor_(grid(
-        grid_height + 1, grid_width, block::block_size,
+        grid_height + 1, grid_width - 2, block::block_size,
         vector3(0, 1, 0))),
     // Esto es re magico pero es para que aparezca en la esquina de la pantalla como en el juego
     player_(std::make_unique<player>(
