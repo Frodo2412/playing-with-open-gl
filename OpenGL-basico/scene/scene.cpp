@@ -337,7 +337,6 @@ scene::scene(const int number, const int grid_width, const int grid_height, std:
     }
 }
 
-
 void scene::update_scene(const float elapsed_time, sound& explosion)
 {
     player_->move();
@@ -351,6 +350,12 @@ void scene::update_scene(const float elapsed_time, sound& explosion)
         if (player_->check_collision(enemy.get()))
             throw game_over_exception();
         enemy.get()->move();
+        for (const auto& block : blocks_)
+            if (enemy->check_collision(block.get()))
+                enemy->handle_collision(block.get());
+        for (const auto& bomb : bombs_)
+            if (enemy->check_collision(bomb.get()))
+                enemy->handle_collision(bomb.get());
     }
 
     update_camera();
