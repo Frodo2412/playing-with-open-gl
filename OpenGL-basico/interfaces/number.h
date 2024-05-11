@@ -15,9 +15,7 @@ class number
     const texture eight_instance_;
     const texture nine_instance_;
     const texture zero_instance_;
-    const texture two_dots_instance_;
     const texture gamehud_instance_;
-    const texture time_instance_;
 
     explicit number() : one_instance_(texture_loader::load_texture("../assets/textures/numbers/uno.png")),
         two_instance_(texture_loader::load_texture("../assets/textures/numbers/dos.png")),
@@ -29,9 +27,7 @@ class number
         eight_instance_(texture_loader::load_texture("../assets/textures/numbers/ocho.png")),
         nine_instance_(texture_loader::load_texture("../assets/textures/numbers/nueve.png")),
         zero_instance_(texture_loader::load_texture("../assets/textures/numbers/cero.png")),
-        two_dots_instance_(texture_loader::load_texture("../assets/textures/numbers/two_dots.jpg")),
-        gamehud_instance_(texture_loader::load_texture("../assets/textures/bricks_1.jpg")),
-        time_instance_(texture_loader::load_texture("../assets/textures/numbers/time.jpg"))
+        gamehud_instance_(texture_loader::load_texture("../assets/textures/gamehud.jpg"))
     {
     }
 
@@ -49,7 +45,5 @@ public:
     const static texture get_texture_seven();
     const static texture get_texture_eight();
     const static texture get_texture_nine();
-    const static texture get_two_dots();
     const static texture get_texture_gamehud();
-    const static texture get_texture_time();
 };

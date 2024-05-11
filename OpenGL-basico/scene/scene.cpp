@@ -518,7 +518,7 @@ camera* scene::get_camera() const
 
 void scene::drop_bomb()
 {
-    vector3 player_position = player_->get_position() + vector3(0.5, 0, -0.5);
+    vector3 player_position = player_->get_position() + vector3(0.5, 0.5, -0.5);
     bombs_.emplace_back(std::make_unique<bomb>(player_position));
 }
 

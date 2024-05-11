@@ -153,6 +153,7 @@
         <Content Include="..\assets\models\spider.obj" />
         <Content Include="..\assets\textures\bomberman.png" />
         <Content Include="..\assets\textures\bricks_1.jpg"/>
+        <Content Include="..\assets\textures\gamehud.jpg" />
         <Content Include="..\assets\textures\grass_1.jpg"/>
         <Content Include="..\assets\textures\numbers\cero.png"/>
         <Content Include="..\assets\textures\numbers\cinco.png"/>
