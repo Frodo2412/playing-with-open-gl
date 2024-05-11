@@ -39,9 +39,11 @@ class scene final
     void update_camera() const;
     void set_off_bomb(bomb* bomb) const;
 
-public:
-    explicit scene(int grid_width, int grid_height, std::vector<coordinate>& brick_blocks,
+    explicit scene(int number, int grid_width, int grid_height, std::vector<coordinate>& brick_blocks,
                    std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies);
+
+public:
+    const int level_number;
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;
@@ -54,5 +56,11 @@ public:
     void drop_bomb();
     grid get_floor() const;
 
-    static scene level1();
+    static scene* level1();
+    static scene* level2();
+    static scene* level3();
+    static scene* level4();
+    static scene* level5();
+
+    static scene* get_level(int number);
 };
