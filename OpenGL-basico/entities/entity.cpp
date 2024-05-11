@@ -76,3 +76,9 @@ rotation entity::get_new_rotation()
     return new_rotation_;
 }
 
+bool entity::get_is_player_()
+{
+    return is_player_;
+}
+
+

@@ -61,21 +61,28 @@ void renderer::draw(entity& entity)
     glPushMatrix();
     const auto position = entity.get_position();
     //LAS CONSTANSTES ES PARA CENTRAR EL PERSONAJE
-    switch (entity.get_new_rotation())
+    if (entity.is_player_)
     {
-    case up:
-        glTranslatef(position.get_x()+0.6, position.get_y(), position.get_z()+0.5);
-        break;
-    case down:
-        glTranslatef(position.get_x()-0.6, position.get_y(), position.get_z()-0.5);
-        break;
-    case right:
-        glTranslatef(position.get_x()-0.5, position.get_y(), position.get_z()+0.6);
-        break;
-    case left:
-        glTranslatef(position.get_x()+0.5, position.get_y(), position.get_z()-0.6);
-        break;
+        switch (entity.get_new_rotation())
+        {
+        case up:
+            glTranslatef(position.get_x()+0.6, position.get_y(), position.get_z()+0.5);
+            break;
+        case down:
+            glTranslatef(position.get_x()-0.6, position.get_y(), position.get_z()-0.5);
+            break;
+        case right:
+            glTranslatef(position.get_x()-0.5, position.get_y(), position.get_z()+0.6);
+            break;
+        case left:
+            glTranslatef(position.get_x()+0.5, position.get_y(), position.get_z()-0.6);
+            break;
+        } 
+    } else
+    {
+        glTranslatef(position.get_x(), position.get_y(), position.get_z());
     }
+   
 
     const auto scale_factor = entity.get_scale_factor();
     glScalef(scale_factor, scale_factor, scale_factor);

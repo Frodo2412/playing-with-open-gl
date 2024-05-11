@@ -26,6 +26,7 @@ protected:
     ~entity() = default;
 
 public:
+    bool is_player_ = false;
     explicit entity(const std::string& file_path, const texture texture, const float hitbox_size,
                     const vector3& position = vector3(0, -0.75, 0),
                     const vector3& direction = vector3(0, 0, 5),
@@ -87,4 +88,5 @@ public:
     void set_last_rotation(float last_rotation);
     void set_new_rotation(rotation new_rotation);
     rotation get_new_rotation();
+    bool get_is_player_();
 };

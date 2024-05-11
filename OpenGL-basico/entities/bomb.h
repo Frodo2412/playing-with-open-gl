@@ -17,6 +17,8 @@ public:
                                             exploded_(false)
     {
         position_ = position;
+        position_.set_y(-0.5);
+        is_player_ = false;
     }
 
     void explotar();
