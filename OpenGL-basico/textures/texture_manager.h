@@ -21,7 +21,7 @@ class texture_manager
                                 skybox_texture_lf_(texture_loader::load_texture("../assets/textures/sh_lf.png")),
                                 skybox_texture_rt_(texture_loader::load_texture("../assets/textures/sh_rt.png")),
                                 skybox_texture_up_(texture_loader::load_texture("../assets/textures/sh_up.png")),
-    fire_texture_(texture_loader::load_texture("../assets/texrures"))
+                                fire_texture_(texture_loader::load_texture("../assets/textures/fire.jpg"))
     {
     }
 
@@ -42,4 +42,6 @@ public:
     static texture skybox_texture_lf();
     static texture skybox_texture_rt();
     static texture skybox_texture_up();
+
+    static texture fire_texture();
 };

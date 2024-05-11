@@ -26,6 +26,15 @@ void bomb::handle_collision(game_object* other)
 {
 }
 
+bool bomb::is_active() const
+{
+    return !exploded_;
+}
+
+void bomb::destroy()
+{
+}
+
 void bomb::explotar()
 {
     const auto clock = ::clock::get_instance();

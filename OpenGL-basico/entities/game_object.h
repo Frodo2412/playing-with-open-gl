@@ -25,4 +25,7 @@ public:
     virtual aabb get_bounding_box() const = 0;
     vector3 get_position() const;
     texture get_texture() const;
+
+    virtual bool is_active() const = 0;
+    virtual void destroy() = 0;
 };

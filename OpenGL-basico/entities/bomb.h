@@ -26,6 +26,9 @@ public:
 
     void handle_collision(game_object* other) override;
 
+    bool is_active() const override;
+    void destroy() override;
+
     /**
      * The duration of the timer that makes the bomb go off in milliseconds.
      */

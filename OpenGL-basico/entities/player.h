@@ -14,4 +14,7 @@ public:
 
     void handle_collision(game_object* other) override;
     vector3 get_speed() const;
+
+    bool is_active() const override;
+    void destroy() override;
 };

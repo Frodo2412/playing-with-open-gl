@@ -3,6 +3,7 @@
 #include "../entities/bomb.h"
 #include  "../entities/block.h"
 #include "../entities/enemy.h"
+#include "../entities/fire.h"
 #include "../entities/metal_block.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
@@ -22,7 +23,6 @@ struct coordinate
     int height, width;
 };
 
-
 class scene final
 {
     camera_mode camera_mode_ = first;
@@ -33,6 +33,8 @@ class scene final
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
+
+    std::vector<std::unique_ptr<fire>> fires_;
 
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;

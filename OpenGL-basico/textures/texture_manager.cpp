@@ -67,3 +67,8 @@ texture texture_manager::skybox_texture_up()
 {
     return instance_->skybox_texture_up_;
 }
+
+texture texture_manager::fire_texture()
+{
+    return instance_->fire_texture_;
+}

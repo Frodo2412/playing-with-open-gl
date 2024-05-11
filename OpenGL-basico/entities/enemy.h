@@ -40,6 +40,6 @@ public:
     }
 
     void handle_collision(game_object* other) override;
-    void destroy();
-    bool is_active() const;
+    void destroy() override;
+    bool is_active() const override;
 };

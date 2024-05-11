@@ -193,7 +193,6 @@
         <ClCompile Include="graphics\model_loader.cpp"/>
         <ClCompile Include="graphics\vertex.cpp"/>
         <ClCompile Include="scene\scene.cpp"/>
-        <Content Include="..\assets\textures\red+hot+fire+flames.jpg" />
         <Content Include="..\assets\textures\sh_bk.png" />
         <Content Include="..\assets\textures\sh_dn.png" />
         <Content Include="..\assets\textures\sh_ft.png" />
@@ -201,7 +200,7 @@
         <Content Include="..\assets\textures\sh_rt.png" />
         <Content Include="..\assets\textures\sh_up.png" />
         <Content Include="..\assets\textures\spider.jpg" />
-        <Content Include="..\assets\textures\spider.jpg" />
+        <Content Include="..\assets\textures\fire.jpg" />
         <Content Include="..\assets\textures\wall_1.jpg"/>
         <Content Include="..\assets\textures\settings\ajustes.jpg"/>
         <Content Include="..\assets\textures\settings\disabled.jpg"/>

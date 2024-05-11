@@ -18,12 +18,9 @@ public:
     virtual ~block() = default;
 
     cube get_block() const;
-    virtual bool is_active() const = 0;
     virtual bool is_destructible() const = 0;
 
     aabb get_bounding_box() const override;
-
-    virtual void destroy() = 0;
 
     const static float block_size;
 };
