@@ -38,7 +38,8 @@ int main(int argc, char* argv[])
                                        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
 
-    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+    if (SDL_Init(SDL_INIT_AUDIO) < 0)
+    {
         std::cerr << "No se pudo iniciar SDL para audio: " << SDL_GetError() << '\n';
         return 1;
     }
@@ -47,7 +48,8 @@ int main(int argc, char* argv[])
     sound bomb_planted("../assets/music/Bomb_Planted.wav");
     sound explosion("../assets/music/Explosion.wav");
 
-    if (!sound1.load() || !bomb_planted.load() || !explosion.load()){
+    if (!bomb_planted.load() || !explosion.load())
+    {
         SDL_Log("Error al cargar sonidos.");
         SDL_Quit();
         return 1;
@@ -80,7 +82,7 @@ int main(int argc, char* argv[])
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-    
+
     do
     {
         switch (settings::get_instance()->game_velocity)
@@ -120,7 +122,8 @@ int main(int argc, char* argv[])
 
         try
         {
-            handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity, bomb_planted);
+            handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity,
+                          bomb_planted);
             update_game_state(*current_scene, displacement, elapsed_time * game_velocity, explosion);
             render_everything(settings_screen, *current_scene, clock::get_total_time() * game_velocity / 1000);
             //DIVIDIDO 100 PORQUE ES EN SEGUNDOS
