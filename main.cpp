@@ -11,7 +11,9 @@
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
 #include "OpenGL-basico/scene/scene.h"
+#include "OpenGL-basico/utils/game_over_exception.h"
 #include "OpenGL-basico/utils/lights_handler.h"
+#include "OpenGL-basico/utils/next_level_exception.h"
 #include "OpenGL-basico/utils/particles_handler.h"
 #include "OpenGL-basico/interfaces/menu.h"
 
@@ -54,16 +56,16 @@ int main(int argc, char* argv[])
     const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
-    auto current_scene = scene::level1();
+    scene* current_scene = scene::get_level(1);
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 last_frame_time = clock::get_total_time();
     int frames = 0;
     Uint32 time = 0;
-    
+
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
-    
+
     do
     {
         switch (settings::get_instance()->game_velocity)
@@ -101,11 +103,37 @@ int main(int argc, char* argv[])
 
         const float elapsed_time = static_cast<float>(clock::get_ticks());
 
-
-        handle_events(settings_screen, current_scene, displacement, fin, elapsed_time * game_velocity);
-        update_game_state(current_scene, displacement, elapsed_time * game_velocity);
-        render_everything(settings_screen, current_scene, clock::get_total_time() * game_velocity / 1000);//DIVIDIDO 100 PORQUE ES EN SEGUNDOS
-        SDL_GL_SwapWindow(win);
+        try
+        {
+            handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity);
+            update_game_state(*current_scene, displacement, elapsed_time * game_velocity);
+            render_everything(settings_screen, *current_scene, clock::get_total_time() * game_velocity / 1000);
+            //DIVIDIDO 100 PORQUE ES EN SEGUNDOS
+            SDL_GL_SwapWindow(win);
+        }
+        catch (game_over_exception& e)
+        {
+            current_scene = scene::get_level(1);
+            gamehud::reset_score();
+            displacement.reset();
+            clock::reset();
+        }
+        catch (next_level_exception& e)
+        {
+            if (current_scene->level_number < 5)
+            {
+                current_scene = scene::get_level(current_scene->level_number + 1);
+                displacement.reset();
+                clock::reset();
+            }
+            else
+            {
+                current_scene = scene::level1();
+                gamehud::reset_score();
+                displacement.reset();
+                clock::reset();
+            }
+        }
     }
     while (!fin);
     //FIN LOOP PRINCIPAL

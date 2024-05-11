@@ -9,6 +9,8 @@
 #include "../interfaces/settings.h"
 #include "../utils/lights_handler.h"
 #include "../entities/wall_block.h"
+#include "../utils/game_over_exception.h"
+#include "../utils/next_level_exception.h"
 
 cube scene::skybox_ = cube(50.0f, vector3(0, 4, 0));
 
@@ -248,14 +250,15 @@ void scene::set_off_bomb(bomb* bomb) const
     }
 }
 
-scene::scene(const int grid_width, const int grid_height, std::vector<coordinate>& brick_blocks,
+scene::scene(const int number, const int grid_width, const int grid_height, std::vector<coordinate>& brick_blocks,
              std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies): floor_(grid(
         grid_height + 1, grid_width, block::block_size,
         vector3(0, 1, 0))),
     // Esto es re magico pero es para que aparezca en la esquina de la pantalla como en el juego
     player_(std::make_unique<player>(
-        vector3(floor_.get_left()+0.5, -1, floor_.get_top() + 2))),
-    camera_(new camera(player_.get()))
+        vector3(floor_.get_left() + 0.5, -1, floor_.get_top() + 2))),
+    camera_(new camera(player_.get())),
+    level_number(number)
 {
     // Initialize the grid with the specified dimensions
     const int rows = grid_height + 2;
@@ -334,6 +337,7 @@ scene::scene(const int grid_width, const int grid_height, std::vector<coordinate
     }
 }
 
+
 void scene::update_scene(const float elapsed_time)
 {
     player_->move();
@@ -345,7 +349,7 @@ void scene::update_scene(const float elapsed_time)
     for (auto& enemy : enemies_)
     {
         if (player_->check_collision(enemy.get()))
-            player_->handle_collision(enemy.get());
+            throw game_over_exception();
         enemy.get()->move();
     }
 
@@ -380,6 +384,12 @@ void scene::update_scene(const float elapsed_time)
                                     return ptr->is_exploded();
                                 }),
                  bombs_.end());
+
+    if (enemies_.empty())
+    {
+        std::cout << "Next level!" << std::endl;
+        throw next_level_exception();
+    }
 }
 
 void scene::move_player(const vector3& displacement) const
@@ -402,7 +412,7 @@ void scene::move_player(const vector3& displacement) const
             movement.set_y(0);
 
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             if (movement.get_x() > 0)
             {
                 player_->set_new_rotation(right);
@@ -419,16 +429,16 @@ void scene::move_player(const vector3& displacement) const
             {
                 player_->set_new_rotation(rotation::up);
             }
-            
+
             player_->set_speed(movement);
-            
+
             break;
         }
     case top_down:
         {
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             if (movement.get_x() > 0)
             {
                 player_->set_new_rotation(right);
@@ -453,7 +463,7 @@ void scene::move_player(const vector3& displacement) const
         {
             const auto movement = -displacement;
             //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-                //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
+            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
             if (movement.get_x() > 0)
             {
                 player_->set_new_rotation(right);
@@ -487,7 +497,8 @@ void scene::render_scene(float seconds) const
               camera_->get_up().get_x(), camera_->get_up().get_y(), camera_->get_up().get_z());
 
 
-    if (camera_mode_ != first) {
+    if (camera_mode_ != first)
+    {
         renderer::draw(*player_);
     }
 
@@ -518,7 +529,7 @@ camera* scene::get_camera() const
 
 void scene::drop_bomb()
 {
-    vector3 player_position = player_->get_position() + vector3(0.5, 0.5, -0.5);
+    vector3 player_position = player_->get_position() + vector3(0, 0.5, 0);
     bombs_.emplace_back(std::make_unique<bomb>(player_position));
 }
 
@@ -527,7 +538,7 @@ grid scene::get_floor() const
     return floor_;
 }
 
-scene scene::level1()
+scene* scene::level1()
 {
     std::vector<coordinate> brick_blocks = {
         {1, 6}, {1, 7}, {1, 8}, {1, 10}, {1, 11}, {1, 12}, {1, 13}, {1, 14},
@@ -555,5 +566,125 @@ scene scene::level1()
         {11, 14}
     };
 
-    return scene(17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+}
+
+scene* scene::level2()
+{
+    std::vector<coordinate> brick_blocks = {
+        {1, 10}, {1, 13}, {1, 14},
+        {2, 7}, {2, 9}, {2, 13}, {2, 15},
+        {3, 3}, {3, 4}, {3, 8}, {3, 9}, {3, 10}, {3, 11},
+        {4, 1}, {4, 5},
+        {6, 3},
+        {7, 2}, {7, 3}, {7, 4},
+        {9, 6}, {9, 7}, {9, 14},
+        {10, 9}, {10, 15},
+        {11, 6}, {11, 8}, {11, 11}, {11, 14}
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {4, 13},
+        {9, 11}
+    };
+
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+}
+
+scene* scene::level3()
+{
+    std::vector<coordinate> brick_blocks = {
+        {1, 5}, {1, 12},
+        {2, 7}, {2, 9},
+        {3, 2}, {3, 7}, {3, 8}, {3, 9}, {3, 13}, {3, 12},
+        {4, 5}, {4, 5},
+        {5, 1}, {5, 2}, {5, 6}, {5, 15},
+        {6, 7}, {6, 9}, {6, 11},
+        {7, 2}, {7, 4},
+        {8, 9},
+        {9, 1}, {9, 14},
+        {10, 1}, {10, 3}, {10, 11},
+        {11, 10}, {11, 13}
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {1, 6},
+        {6, 5},
+        {11, 14}
+    };
+
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+}
+
+scene* scene::level4()
+{
+    std::vector<coordinate> brick_blocks = {
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {1, 6},
+        {6, 5},
+        {11, 14}
+    };
+
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+}
+
+scene* scene::level5()
+{
+    std::vector<coordinate> brick_blocks = {
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {1, 6},
+        {6, 5},
+        {11, 14}
+    };
+
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+}
+
+scene* scene::get_level(const int number)
+{
+    switch (number)
+    {
+    case 1: return level1();
+    case 2: return level2();
+    case 3: return level3();
+    case 4: return level4();
+    case 5: return level5();
+    default: throw std::runtime_error("Invalid Level!");
+    }
 }

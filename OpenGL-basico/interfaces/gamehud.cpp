@@ -39,6 +39,11 @@ void gamehud::cambiar_numero(const Uint32 valor, square ubicacion)
     }
 }
 
+void gamehud::reset_score()
+{
+    instance_->score_ = 0;
+}
+
 
 void gamehud::draw_time(const Uint32 millisecond)
 {
@@ -63,7 +68,7 @@ void gamehud::draw_time(const Uint32 millisecond)
     cambiar_numero(minutes_u, instance_->minutos_unidades_);
     cambiar_numero(seconds_d, instance_->segundos_decena_);
     cambiar_numero(seconds_u, instance_->segundos_unidades_);
-    
+
     cambiar_numero(score_m, instance_->score_miles_);
     cambiar_numero(score_c, instance_->score_cientos_);
     cambiar_numero(score_d, instance_->score_decenas_);

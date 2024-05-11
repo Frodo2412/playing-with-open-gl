@@ -28,6 +28,7 @@ double clock::get_ticks()
 void clock::reset()
 {
     instance_->start_time_ = SDL_GetTicks();
+    instance_->played_time_ = 0;
 }
 
 Uint32 clock::get_total_time()
