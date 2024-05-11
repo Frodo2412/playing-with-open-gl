@@ -20,7 +20,7 @@ void renderer::draw(const triangle& triangle)
     glEnd();
 }
 
-void renderer::draw(const entity& entity)
+void renderer::draw(entity& entity)
 {
     const std::vector<vertex> vertices = entity.get_vertices();
 
@@ -57,21 +57,58 @@ void renderer::draw(const entity& entity)
     glVertexPointer(3, GL_FLOAT, 0, positions.data());
     glNormalPointer(GL_FLOAT, 0, normals.data());
     glTexCoordPointer(2, GL_FLOAT, 0, tex_coords.data());
-
     // Apply the transformations
     glPushMatrix();
     const auto position = entity.get_position();
-    glTranslatef(position.get_x(), position.get_y(), position.get_z());
+    //LAS CONSTANSTES ES PARA CENTRAR EL PERSONAJE
+    if (entity.is_player_)
+    {
+        switch (entity.get_new_rotation())
+        {
+        case up:
+            glTranslatef(position.get_x()+0.6, position.get_y(), position.get_z()+0.5);
+            break;
+        case down:
+            glTranslatef(position.get_x()-0.6, position.get_y(), position.get_z()-0.5);
+            break;
+        case right:
+            glTranslatef(position.get_x()-0.5, position.get_y(), position.get_z()+0.6);
+            break;
+        case left:
+            glTranslatef(position.get_x()+0.5, position.get_y(), position.get_z()-0.6);
+            break;
+        } 
+    } else
+    {
+        glTranslatef(position.get_x(), position.get_y(), position.get_z());
+    }
+   
 
     const auto scale_factor = entity.get_scale_factor();
     glScalef(scale_factor, scale_factor, scale_factor);
-
     // Bind the texture
     glBindTexture(GL_TEXTURE_2D, entity.get_texture().get_texture_id());
-
+    // Draw the model
+    glPushMatrix();
+    switch (entity.get_new_rotation())
+    {
+        case up:
+            glRotatef(90, 0, 1, 0);
+        break;
+        case down:
+            glRotatef(-90, 0, 1, 0);
+        break;
+        case right:
+            glRotatef(0, 0, 1, 0);
+        break;
+        case left:
+            glRotatef(180, 0, 1, 0); 
+        break;
+    }
+    
     // Draw the model
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
+    glPopMatrix();
     // Restore the original matrix
     glPopMatrix();
 

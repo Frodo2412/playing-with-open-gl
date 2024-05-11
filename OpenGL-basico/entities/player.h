@@ -9,6 +9,7 @@ public:
                                                      texture_manager::player_texture(), 1,
                                                      position)
     {
+        is_player_ = true;
     }
 
     void handle_collision(game_object* other) override;
