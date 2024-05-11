@@ -8,6 +8,7 @@
 #include "../entities/player.h"
 #include "../geometry/grid.h"
 #include "../utils/particles_handler.h"
+#include "../utils/sound.h"
 
 enum camera_mode
 {
@@ -47,7 +48,7 @@ public:
 
     void toggle_camera();
     void rotate_camera(float x, float y) const;
-    void update_scene(float elapsed_time);
+    void update_scene(float elapsed_time, sound& explosion);
     void move_player(const vector3& displacement) const;
     camera_mode get_camera_mode() const;
     camera* get_camera() const;

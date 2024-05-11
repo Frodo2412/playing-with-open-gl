@@ -10,14 +10,15 @@
 #include "OpenGL-basico/interfaces/settings_screen.h"
 #include "OpenGL-basico/utils/clock.h"
 #include "OpenGL-basico/utils/renderer.h"
+#include "OpenGL-basico/utils/sound.h"
 #include "OpenGL-basico/scene/scene.h"
 #include "OpenGL-basico/utils/game_over_exception.h"
 #include "OpenGL-basico/utils/lights_handler.h"
 #include "OpenGL-basico/utils/next_level_exception.h"
 
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
-                   float delta_time);
-void update_game_state(scene& current_scene, vector3& displacement, float delta_time);
+                   float delta_time, sound& bomb_planted);
+void update_game_state(scene& current_scene, vector3& displacement, float delta_time, sound& explosion);
 void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds);
 
 int main(int argc, char* argv[])
@@ -36,6 +37,24 @@ int main(int argc, char* argv[])
                                        settings->window_width, settings->window_height,
                                        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     SDL_GLContext context = SDL_GL_CreateContext(win);
+
+    if (SDL_Init(SDL_INIT_AUDIO) < 0)
+    {
+        std::cerr << "No se pudo iniciar SDL para audio: " << SDL_GetError() << '\n';
+        return 1;
+    }
+
+    //sound sound1("../assets/music/Bomberman Theme (Area 1).wav");
+    sound bomb_planted("../assets/music/Bomb_Planted.wav");
+    sound explosion("../assets/music/Explosion.wav");
+
+    if (!bomb_planted.load() || !explosion.load())
+    {
+        SDL_Log("Error al cargar sonidos.");
+        SDL_Quit();
+        return 1;
+    }
+
 
     glMatrixMode(GL_PROJECTION);
 
@@ -103,8 +122,9 @@ int main(int argc, char* argv[])
 
         try
         {
-            handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity);
-            update_game_state(*current_scene, displacement, elapsed_time * game_velocity);
+            handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity,
+                          bomb_planted);
+            update_game_state(*current_scene, displacement, elapsed_time * game_velocity, explosion);
             render_everything(settings_screen, *current_scene, clock::get_total_time() * game_velocity / 1000);
             //DIVIDIDO 100 PORQUE ES EN SEGUNDOS
             SDL_GL_SwapWindow(win);
@@ -143,7 +163,7 @@ int main(int argc, char* argv[])
 }
 
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
-                   const float delta_time)
+                   const float delta_time, sound& bomb_planted)
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -195,6 +215,7 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
                 clock::toggle_pause();
                 break;
             case SDLK_b:
+                bomb_planted.play();
                 current_scene.drop_bomb();
                 std::cout << "Bomb placed!\n";
                 break;
@@ -213,11 +234,11 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
     }
 }
 
-void update_game_state(scene& current_scene, vector3& displacement, const float delta_time)
+void update_game_state(scene& current_scene, vector3& displacement, const float delta_time, sound& explosion)
 {
     current_scene.move_player(displacement);
     displacement.reset();
-    current_scene.update_scene(delta_time);
+    current_scene.update_scene(delta_time, explosion);
 }
 
 void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds)
