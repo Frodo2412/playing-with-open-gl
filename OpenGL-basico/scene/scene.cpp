@@ -345,7 +345,7 @@ void scene::update_scene(const float elapsed_time)
     for (auto& enemy : enemies_)
     {
         if (player_->check_collision(enemy.get()))
-            player_->handle_collision(enemy.get());
+            throw std::runtime_error("Game Over");
         enemy.get()->move();
     }
 
