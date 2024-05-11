@@ -353,6 +353,9 @@ void scene::update_scene(const float elapsed_time)
         for (const auto& block : blocks_)
             if (enemy->check_collision(block.get()))
                 enemy->handle_collision(block.get());
+        for (const auto& bomb : bombs_)
+            if (enemy->check_collision(bomb.get()))
+                enemy->handle_collision(bomb.get());
     }
 
     update_camera();

@@ -46,9 +46,15 @@ bool entity::check_collision(const game_object* other_object) const
 {
     const auto a = get_bounding_box();
     const aabb other = other_object->get_bounding_box();
-    return a.min.get_x()-0.5 <= other.max.get_x() && a.max.get_x()-0.6 >= other.min.get_x() &&
+
+    if (is_player_)
+        return a.min.get_x() - 0.5 <= other.max.get_x() && a.max.get_x() - 0.6 >= other.min.get_x() &&
+            (a.min.get_y() <= other.max.get_y() && a.max.get_y() >= other.min.get_y()) &&
+            (a.min.get_z() + 0.6 <= other.max.get_z() && a.max.get_z() + 0.5 >= other.min.get_z());
+
+    return a.min.get_x() <= other.max.get_x() && a.max.get_x() >= other.min.get_x() &&
         (a.min.get_y() <= other.max.get_y() && a.max.get_y() >= other.min.get_y()) &&
-        (a.min.get_z()+0.6 <= other.max.get_z() && a.max.get_z()+0.5 >= other.min.get_z());
+        (a.min.get_z() <= other.max.get_z() && a.max.get_z() >= other.min.get_z());
 }
 
 aabb entity::get_bounding_box() const
@@ -70,5 +76,3 @@ bool entity::get_is_player_()
 {
     return is_player_;
 }
-
-

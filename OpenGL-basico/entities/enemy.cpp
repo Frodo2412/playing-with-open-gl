@@ -18,18 +18,26 @@ int enemy::get_new_direction()
 void enemy::handle_collision(game_object* other)
 {
     const auto new_direction = get_new_direction();
-    
+
     position_ -= speed_;
-    
+
     switch (new_direction)
     {
-    case 1: speed_ = vector3(0, 0, -0.1f);
+    case 1:
+        speed_ = vector3(0, 0, -0.05f);
+        set_new_rotation(down);
         break;
-    case 2: speed_ = vector3(0, 0, 0.1f);
+    case 2:
+        speed_ = vector3(0, 0, 0.05f);
+        set_new_rotation(up);
         break;
-    case 3: speed_ = vector3(-0.1f, 0, 0);
+    case 3:
+        speed_ = vector3(-0.05f, 0, 0);
+        set_new_rotation(right);
         break;
-    case 4: speed_ = vector3(0.1f, 0, 0);
+    case 4:
+        speed_ = vector3(0.05f, 0, 0);
+        set_new_rotation(left);
         break;
     default: break;
     }
