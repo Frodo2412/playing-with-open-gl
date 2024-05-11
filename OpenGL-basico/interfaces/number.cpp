@@ -49,14 +49,7 @@ const texture number::get_texture_nine() {
     return numero->nine_instance_;
 }
 
-const texture number::get_two_dots(){
-    return numero->two_dots_instance_;
-}
 
 const texture number::get_texture_gamehud(){
     return numero->gamehud_instance_;
-}
-
-const texture number::get_texture_time(){
-    return numero->time_instance_;
 }

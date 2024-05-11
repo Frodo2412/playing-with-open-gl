@@ -58,7 +58,6 @@ void gamehud::draw_time(const Uint32 millisecond)
 
     glDisable(GL_DEPTH_TEST);
     renderer::draw(instance_->contenedor_, number::get_texture_gamehud());
-    renderer::draw(instance_->espacio_, number::get_two_dots());
 
     cambiar_numero(minutes_d, instance_->minutos_decena_);
     cambiar_numero(minutes_u, instance_->minutos_unidades_);
@@ -69,9 +68,6 @@ void gamehud::draw_time(const Uint32 millisecond)
     cambiar_numero(score_c, instance_->score_cientos_);
     cambiar_numero(score_d, instance_->score_decenas_);
     cambiar_numero(score_u, instance_->score_unidades_);
-
-    // dibujo los detalles
-    renderer::draw(instance_->tiempo_, number::get_texture_time());
 
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
