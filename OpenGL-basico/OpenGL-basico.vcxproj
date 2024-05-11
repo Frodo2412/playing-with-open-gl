@@ -110,6 +110,7 @@
         <ClCompile Include="utils\next_level_exception.cpp" />
         <ClCompile Include="utils\particles_handler.cpp" />
         <ClCompile Include="utils\renderer.cpp"/>
+        <ClCompile Include="utils\sound.cpp" />
     </ItemGroup>
     <ItemGroup>
         <ClInclude Include="entities\block.h"/>
@@ -150,11 +151,15 @@
         <ClInclude Include="utils\next_level_exception.h" />
         <ClInclude Include="utils\particles_handler.h" />
         <ClInclude Include="utils\renderer.h"/>
+        <ClInclude Include="utils\sound.h" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\models\bomberman.obj" />
         <Content Include="..\assets\models\spider.obj" />
+        <Content Include="..\assets\music\Bomberman Theme (Area 1).wav" />
+        <Content Include="..\assets\music\Bomb_Planted.wav" />
+        <Content Include="..\assets\music\Explosion.wav" />
         <Content Include="..\assets\textures\bomberman.png" />
         <Content Include="..\assets\textures\bricks_1.jpg"/>
         <Content Include="..\assets\textures\gamehud.jpg" />
