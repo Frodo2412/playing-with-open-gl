@@ -61,13 +61,7 @@ void camera::move(const player* player)
 
 void camera::rotate(const float x_offset, const float y_offset, bool first)
 {
-    constexpr float sensitivity = 0.005f; // Adjust this value to make the camera rotation more or less sensitive
-    printf("%f\n", x_offset);
-    // if(x_offset <= 10)
-    // {
-    //     direction_.set_x( direction_.get_x() * -1);
-    //     direction_.set_x( direction_.get_x() * -1);
-    // }
+    constexpr float sensitivity = 0.005f; 
     if(first)
     {
         if(position_.get_z() <= 0.0f)
