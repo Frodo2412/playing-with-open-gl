@@ -62,9 +62,10 @@ void camera::move(const player* player)
 void camera::rotate(const float x_offset, const float y_offset)
 {
     constexpr float sensitivity = 0.005f; // Adjust this value to make the camera rotation more or less sensitive
-
+    
     direction_.set_x(direction_.get_x() - x_offset * sensitivity);
-
+    direction_.set_z(direction_.get_z() + x_offset * sensitivity);
+    
     // Clamp the vertical rotation to be between -90 and 90 degrees
     if (direction_.get_y() - y_offset * sensitivity >= 90.0f)
         direction_.set_y(90.0f);
