@@ -321,7 +321,7 @@ void renderer::draw_skybox(const cube& skybox)
     }
 }
 
-void renderer::draw(float seconds, const scene& current_scene)
+void renderer::draw(float seconds, const scene& current_scene, float game_velocity)
 {
     if (settings::get_instance()->wireframe_enabled) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -330,7 +330,7 @@ void renderer::draw(float seconds, const scene& current_scene)
     if (settings::get_instance()->facetado_enabled) glShadeModel(GL_FLAT);
     else glShadeModel(GL_SMOOTH);
 
-    current_scene.render_scene(seconds);
+    current_scene.render_scene(seconds, game_velocity);
 }
 
 void renderer::draw(particle* particle)
@@ -353,9 +353,9 @@ void renderer::draw(particle* particle)
 }
 
 
-void renderer::draw(float seconds, particles_handler* particles_handler)
+void renderer::draw(float seconds, particles_handler* particles_handler, float game_velocity)
 {
-    particles_handler->get_instance()->update(seconds);
+    particles_handler->get_instance()->update(seconds, game_velocity);
     for (particle* particle : particles_handler->get_instance()->get_particles())
     {
         draw(particle);

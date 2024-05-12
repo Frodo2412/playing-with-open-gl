@@ -21,7 +21,7 @@
 void handle_events(settings_screen* settings_screen, scene& current_scene, vector3& displacement, bool& fin,
                    float delta_time, sound& bomb_planted);
 void update_game_state(scene& current_scene, vector3& displacement, float delta_time, sound& explosion);
-void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds);
+void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds, float game_velocity);
 
 int main(int argc, char* argv[])
 {
@@ -127,7 +127,8 @@ int main(int argc, char* argv[])
             handle_events(settings_screen, *current_scene, displacement, fin, elapsed_time * game_velocity,
                           bomb_planted);
             update_game_state(*current_scene, displacement, elapsed_time * game_velocity, explosion);
-            render_everything(settings_screen, *current_scene, clock::get_total_time() * game_velocity / 1000);
+
+            render_everything(settings_screen, *current_scene, clock::get_total_time() / 1000, game_velocity);
             //DIVIDIDO 100 PORQUE ES EN SEGUNDOS
             SDL_GL_SwapWindow(win);
         }
@@ -258,7 +259,7 @@ void update_game_state(scene& current_scene, vector3& displacement, const float 
     current_scene.update_scene(delta_time, explosion);
 }
 
-void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds)
+void render_everything(settings_screen* settings_screen, const scene& current_scene, float seconds, float game_velocity)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -271,7 +272,7 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
         if (clock::get_instance()->get_is_paused()) renderer::draw(settings_screen);
         else
         {
-            renderer::draw(seconds, current_scene);
+            renderer::draw(seconds, current_scene, game_velocity);
             renderer::draw_gamehud();
         }
 

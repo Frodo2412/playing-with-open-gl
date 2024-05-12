@@ -15,13 +15,13 @@ particles_handler* particles_handler::get_instance()
     return instance;
 }
 
-void particles_handler::update(float seconds)
+void particles_handler::update(float seconds, float game_velocity)
 {
     auto it = particles_.begin();
     while (it != particles_.end())
     {
         particle* particle_pointer = *it;
-        particle_pointer->update(seconds);
+        particle_pointer->update(seconds, game_velocity);
         if (seconds >= particle_pointer->get_life_time_())
         {
             delete particle_pointer;

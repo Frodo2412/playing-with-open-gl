@@ -11,7 +11,7 @@ private:
     std::vector<particle*> particles_;
 public:
     static particles_handler* get_instance();
-    void update(float seconds);
+    void update(float seconds, float game_velocity);
     void add(float seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, float size, float life_time);
     std::vector<particle*> get_particles();//USAR DESPUES DE UPDATE!!!
     void create_explotion(float seconds, vector3 position, int number_of_particles);
