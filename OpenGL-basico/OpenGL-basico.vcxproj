@@ -89,6 +89,7 @@
         <ClCompile Include="entities\enemy.cpp" />
         <ClCompile Include="entities\game_object.cpp" />
         <ClCompile Include="entities\metal_block.cpp"/>
+        <ClCompile Include="entities\pedestal.cpp" />
         <ClCompile Include="entities\wall_block.cpp" />
         <ClCompile Include="entities\particle.cpp" />
         <ClCompile Include="geometry\vector4.cpp" />
@@ -120,6 +121,7 @@
         <ClInclude Include="entities\enemy.h" />
         <ClInclude Include="entities\game_object.h" />
         <ClInclude Include="entities\metal_block.h"/>
+        <ClInclude Include="entities\pedestal.h" />
         <ClInclude Include="entities\wall_block.h" />
         <ClInclude Include="entities\particle.h" />
         <ClInclude Include="geometry\vector4.h" />
@@ -158,12 +160,14 @@
     <ItemGroup>
         <Content Include="..\assets\models\Bomb.obj" />
         <Content Include="..\assets\models\bomberman.obj" />
+        <Content Include="..\assets\models\Postament.obj" />
         <Content Include="..\assets\models\spider.obj" />
         <Content Include="..\assets\music\Bomberman Theme (Area 1).wav" />
         <Content Include="..\assets\music\Bomb_Planted.wav" />
         <Content Include="..\assets\music\Explosion.wav" />
         <Content Include="..\assets\textures\bricks_2.jpg" />
         <Content Include="..\assets\textures\metal_2.png" />
+        <Content Include="..\assets\textures\Postament.jpg" />
         <Content Include="..\assets\textures\wall_1.png" />
         <Content Include="..\assets\textures\bomberman.png" />
         <Content Include="..\assets\textures\bricks_1.jpg"/>

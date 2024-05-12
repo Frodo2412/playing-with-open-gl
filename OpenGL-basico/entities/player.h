@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "pedestal.h"
 #include "../textures/texture_manager.h"
 
 class player final : public entity

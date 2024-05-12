@@ -259,14 +259,15 @@ void scene::set_off_bomb(bomb* bomb) const
 }
 
 scene::scene(const int number, const int grid_width, const int grid_height, std::vector<coordinate>& brick_blocks,
-             std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies): floor_(grid(
-        grid_height + 1, grid_width, block::block_size,
-        vector3(0, 1, 0))),
-    // Esto es re magico pero es para que aparezca en la esquina de la pantalla como en el juego
-    player_(std::make_unique<player>(
-        vector3(floor_.get_left() + 0.5, -1, floor_.get_top() + 2))),
-    camera_(new camera(player_.get())),
-    level_number(number)
+             std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies,
+             vector3 pedestal_position): floor_(grid(
+                                             grid_height + 1, grid_width - 1, block::block_size,
+                                             vector3(0, 1, 0))),
+                                         // Esto es re magico pero es para que aparezca en la esquina de la pantalla como en el juego
+                                         player_(std::make_unique<player>(
+                                             vector3(floor_.get_left() + 0.5, -1, floor_.get_top() + 2))),
+                                         camera_(new camera(player_.get())),
+                                         level_number(number), pedestal_position_(pedestal_position)
 {
     // Initialize the grid with the specified dimensions
     const int rows = grid_height + 2;
@@ -275,6 +276,8 @@ scene::scene(const int number, const int grid_width, const int grid_height, std:
     // Calculate starting positions to center the grid around (0, 0)
     const auto left = floor_.get_left() - 1;
     const auto top = floor_.get_top();
+
+    pedestal_ = new pedestal(pedestal_position);
 
     // Adding walls along the borders
     for (int row = 0; row < rows; ++row)
@@ -349,6 +352,14 @@ void scene::update_scene(const float elapsed_time, sound& explosion)
 {
     player_->move();
 
+    if (enemies_.empty() && !pedestal_->get_is_level_completed())
+    {
+        if (player_->check_collision(pedestal_))
+        {
+            player_->handle_collision(pedestal_);
+        }
+    }
+
     for (const auto& block : blocks_)
         if (player_->check_collision(block.get()))
             player_->handle_collision(block.get());
@@ -401,8 +412,11 @@ void scene::update_scene(const float elapsed_time, sound& explosion)
 
     if (enemies_.empty())
     {
-        std::cout << "Next level!" << std::endl;
-        throw next_level_exception();
+        if (pedestal_->get_is_level_completed())
+        {
+            std::cout << "Next level!" << std::endl;
+            throw next_level_exception();
+        }
     }
 }
 
@@ -523,6 +537,11 @@ void scene::render_scene(float seconds, float game_velocity) const
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
 
+    if (enemies_.empty())
+    {
+        renderer::draw(*pedestal_);
+    }
+
     renderer::draw(floor_, texture_manager::grass_texture());
     if (settings::get_instance()->textures_enabled)
         renderer::draw_skybox(skybox_);
@@ -580,7 +599,8 @@ scene* scene::level1()
         {11, 14}
     };
 
-    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
+    return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies,
+                     vector3(brick_blocks.front().width + 0.5, -1, brick_blocks.front().height + 1.5));
 }
 
 scene* scene::level2(camera_mode mode)
@@ -609,7 +629,8 @@ scene* scene::level2(camera_mode mode)
         {4, 13},
         {9, 11}
     };
-    auto new_scene = new scene(2, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(2, 17, 11, brick_blocks, metal_blocks, enemies,
+                               vector3(brick_blocks.at(3).width + 0.5, -1, brick_blocks.at(3).height + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -643,7 +664,8 @@ scene* scene::level3(camera_mode mode)
         {6, 5},
         {11, 14}
     };
-    auto new_scene = new scene(3, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(3, 17, 11, brick_blocks, metal_blocks, enemies,
+                               vector3(0 + 0.5, -1, 0 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -666,7 +688,7 @@ scene* scene::level4(camera_mode mode)
         {6, 5},
         {11, 14}
     };
-    auto new_scene =  new scene(4, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(4, 17, 11, brick_blocks, metal_blocks, enemies, vector3(4 + 0.5, -1, -3 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -690,7 +712,8 @@ scene* scene::level5(camera_mode mode)
         {11, 14}
     };
 
-    auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
+                               vector3(-2 + 0.5, -1, 2 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
