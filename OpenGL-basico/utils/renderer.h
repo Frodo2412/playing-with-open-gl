@@ -8,6 +8,7 @@
 #include "../scene/scene.h"
 #include "../textures/texture.h"
 #include "particles_handler.h"
+#include "../interfaces/menu.h"
 
 class settings_screen;
 
@@ -27,7 +28,7 @@ public:
     static void draw(float seconds, const scene& current_scene);
     static void draw(particle* particle);
     static void draw(float seconds, particles_handler* particles_handler);
-
+    static void draw(menu* menu);
     static void draw_bounding_box(const vector3& min, const vector3& max)
     {
         GLfloat vertices[] = {
