@@ -118,7 +118,7 @@ void renderer::draw(entity& entity)
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-    draw_bounding_box(entity.get_bounding_box().min, entity.get_bounding_box().max);
+    //draw_bounding_box(entity.get_bounding_box().min, entity.get_bounding_box().max);
 }
 
 void renderer::draw(const grid& grid, const texture& texture)
