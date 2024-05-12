@@ -143,7 +143,7 @@ int main(int argc, char* argv[])
         }
         catch (next_level_exception& e)
         {
-            if (current_scene->level_number < 1)
+            if (current_scene->level_number < 5)
             {
                 current_scene = scene::get_level(current_scene->level_number + 1);
                 displacement.reset();
