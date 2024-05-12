@@ -77,9 +77,13 @@ void scene::update_camera() const
     }
 }
 
-void scene::set_off_bomb(bomb* bomb) const
+void scene::set_off_bomb(bomb* bomb)
 {
     bomb->explotar();
+
+    auto fire = std::make_unique<::fire>(bomb->get_position(), bomb::radius);
+    fires_.emplace_back(std::move(fire));
+
     bool continuar = true;
 
     int i_max = bomb::radius;
@@ -514,6 +518,8 @@ void scene::render_scene(float seconds, float game_velocity) const
         renderer::draw(block->get_block(), block->get_texture());
     for (auto& bomb : bombs_)
         renderer::draw(*bomb.get());
+    for (auto& fire : fires_)
+        renderer::draw(*fire.get());
 
     renderer::draw(floor_, texture_manager::grass_texture());
     if (settings::get_instance()->textures_enabled)

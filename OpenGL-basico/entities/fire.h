@@ -1,15 +1,17 @@
 #pragma once
 #include "entity.h"
+#include "../geometry/cube.h"
 #include "../textures/texture_manager.h"
 
 class fire final : public entity
 {
-    bool is_active_ = true;
+    bool is_active_;
+    int range_;
 
 public:
-    explicit fire(vector3 position): entity("../assets/models/fire.obj",
-                                            texture_manager::fire_texture(), 1,
-                                            position)
+    explicit fire(const vector3& position, const int range): entity("../assets/models/fire.obj",
+                                                                    texture_manager::fire_texture(), 1,
+                                                                    position), is_active_(true), range_(range)
     {
     }
 

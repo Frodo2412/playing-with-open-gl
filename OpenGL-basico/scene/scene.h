@@ -40,7 +40,7 @@ class scene final
     std::vector<std::unique_ptr<bomb>> bombs_;
 
     void update_camera() const;
-    void set_off_bomb(bomb* bomb) const;
+    void set_off_bomb(bomb* bomb);
 
     explicit scene(int number, int grid_width, int grid_height, std::vector<coordinate>& brick_blocks,
                    std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies);
