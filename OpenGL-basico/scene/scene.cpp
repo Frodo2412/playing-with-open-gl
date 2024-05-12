@@ -665,7 +665,7 @@ scene* scene::level3(camera_mode mode)
         {11, 14}
     };
     auto new_scene = new scene(3, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(brick_blocks.at(3).width + 0.5, -1, brick_blocks.at(3).height + 1.5));
+                               vector3(0 + 0.5, -1, 0 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
