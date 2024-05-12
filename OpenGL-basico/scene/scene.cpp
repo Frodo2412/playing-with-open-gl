@@ -705,6 +705,17 @@ scene* scene::level4(camera_mode mode)
 scene* scene::level5(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
+        {1, 5}, {1, 6}, {1, 7}, {1, 10}, {1, 14},
+        {2, 9}, {2, 11},
+        {3, 3}, {3, 4}, {3, 7},
+        {4, 7}, {4, 15},
+        {5, 6}, {5, 7},
+        {6, 7},
+        {7, 4}, {7, 7}, {7, 9}, {7, 11}, {7, 14},
+        {8, 9}, {8, 13},
+        {9, 8}, {9, 10}, {9, 12}, {9, 13}, {9, 14}, {9, 15},
+        {10, 1}, {10, 11},
+        {11, 2}, {11, 5}, {11, 7}, {11, 10}
     };
 
     std::vector<coordinate> metal_blocks = {
@@ -716,9 +727,8 @@ scene* scene::level5(camera_mode mode)
     };
 
     std::vector<coordinate> enemies = {
-        {1, 6},
-        {6, 5},
-        {11, 14}
+        {7, 10},
+        {11, 9}, {11, 11}
     };
 
     auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
