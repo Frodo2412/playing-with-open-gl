@@ -33,6 +33,11 @@ texture texture_manager::wall_block_texture()
     return instance_->wall_block_texture_;
 }
 
+texture texture_manager::postament_texture()
+{
+    return instance_->postament_texture_;
+}
+
 texture texture_manager::bomb_texture()
 {
     return instance_->bomb_texture_;

@@ -3,6 +3,7 @@
 #include "../entities/bomb.h"
 #include  "../entities/block.h"
 #include "../entities/enemy.h"
+#include "../entities/pedestal.h"
 #include "../entities/metal_block.h"
 #include "../scene/camera.h"
 #include "../entities/player.h"
@@ -33,7 +34,9 @@ class scene final
     std::unique_ptr<player> player_;
     std::vector<std::unique_ptr<enemy>> enemies_;
     std::vector<std::unique_ptr<block>> blocks_;
-
+    
+    vector3 pedestal_position_;
+    pedestal* pedestal_;
     camera* camera_;
     std::vector<std::unique_ptr<bomb>> bombs_;
 
@@ -41,7 +44,7 @@ class scene final
     void set_off_bomb(bomb* bomb) const;
 
     explicit scene(int number, int grid_width, int grid_height, std::vector<coordinate>& brick_blocks,
-                   std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies);
+                   std::vector<coordinate>& metal_blocks, std::vector<coordinate>& enemies, vector3 pedestal_position);
 
 public:
     const int level_number;
