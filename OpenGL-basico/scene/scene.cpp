@@ -493,7 +493,7 @@ void scene::move_player(const vector3& displacement) const
     }
 }
 
-void scene::render_scene(float seconds) const
+void scene::render_scene(float seconds, float game_velocity) const
 {
     lights_handler::set_light(camera_mode_, settings::get_instance()->light_color, player_->get_speed());
 
@@ -519,7 +519,7 @@ void scene::render_scene(float seconds) const
     if (settings::get_instance()->textures_enabled)
         renderer::draw_skybox(skybox_);
 
-    renderer::draw(seconds, particles_handler_);
+    renderer::draw(seconds, particles_handler_, game_velocity);
     lights_handler::disable_light();
 }
 
