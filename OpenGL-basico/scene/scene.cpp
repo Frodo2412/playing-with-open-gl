@@ -66,7 +66,7 @@ void scene::update_camera() const
     {
     case first:
         camera_->move(player_.get());
-        camera_->set_position(vector3(camera_->get_position().get_x(), -0.2, camera_->get_position().get_z()));
+        camera_->set_position(vector3(camera_->get_position().get_x(), -0.1, camera_->get_position().get_z()));
         break;
     case perspective:
         camera_->move(player_->get_speed());
