@@ -44,16 +44,24 @@ void scene::toggle_camera()
     }
 }
 
+void scene::set_camera(camera_mode mode)
+{
+    while (camera_mode_ != mode)
+    {
+        toggle_camera();
+    }
+}
+
 void scene::rotate_camera(const float x, const float y) const
 {
     switch (camera_mode_)
     {
     case first:
-        camera_->rotate(x, y);
+        camera_->rotate(x, y, true);
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
-        camera_->rotate(-x * 0.3, y * 0.3);
+        camera_->rotate(-x * 0.3, y * 0.3, false);
         break;
     case top_down:
         break;
@@ -575,7 +583,7 @@ scene* scene::level1()
     return new scene(1, 17, 11, brick_blocks, metal_blocks, enemies);
 }
 
-scene* scene::level2()
+scene* scene::level2(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
         {1, 10}, {1, 13}, {1, 14},
@@ -601,11 +609,12 @@ scene* scene::level2()
         {4, 13},
         {9, 11}
     };
-
-    return new scene(2, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(2, 17, 11, brick_blocks, metal_blocks, enemies);
+    new_scene->set_camera(mode);
+    return new_scene;
 }
 
-scene* scene::level3()
+scene* scene::level3(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
         {1, 5}, {1, 12},
@@ -634,11 +643,35 @@ scene* scene::level3()
         {6, 5},
         {11, 14}
     };
-
-    return new scene(3, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(3, 17, 11, brick_blocks, metal_blocks, enemies);
+    new_scene->set_camera(mode);
+    return new_scene;
 }
 
-scene* scene::level4()
+scene* scene::level4(camera_mode mode)
+{
+    std::vector<coordinate> brick_blocks = {
+    };
+
+    std::vector<coordinate> metal_blocks = {
+        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
+        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
+        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
+        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
+        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
+    };
+
+    std::vector<coordinate> enemies = {
+        {1, 6},
+        {6, 5},
+        {11, 14}
+    };
+    auto new_scene =  new scene(4, 17, 11, brick_blocks, metal_blocks, enemies);
+    new_scene->set_camera(mode);
+    return new_scene;
+}
+
+scene* scene::level5(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
     };
@@ -657,40 +690,20 @@ scene* scene::level4()
         {11, 14}
     };
 
-    return new scene(4, 17, 11, brick_blocks, metal_blocks, enemies);
+    auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies);
+    new_scene->set_camera(mode);
+    return new_scene;
 }
 
-scene* scene::level5()
-{
-    std::vector<coordinate> brick_blocks = {
-    };
-
-    std::vector<coordinate> metal_blocks = {
-        {2, 2}, {2, 4}, {2, 6}, {2, 8}, {2, 10}, {2, 12}, {2, 14},
-        {4, 2}, {4, 4}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 14},
-        {6, 2}, {6, 4}, {6, 6}, {6, 8}, {6, 10}, {6, 12}, {6, 14},
-        {8, 2}, {8, 4}, {8, 6}, {8, 8}, {8, 10}, {8, 12}, {8, 14},
-        {10, 2}, {10, 4}, {10, 6}, {10, 8}, {10, 10}, {10, 12}, {10, 14},
-    };
-
-    std::vector<coordinate> enemies = {
-        {1, 6},
-        {6, 5},
-        {11, 14}
-    };
-
-    return new scene(5, 17, 11, brick_blocks, metal_blocks, enemies);
-}
-
-scene* scene::get_level(const int number)
+scene* scene::get_level(const int number, camera_mode mode)
 {
     switch (number)
     {
     case 1: return level1();
-    case 2: return level2();
-    case 3: return level3();
-    case 4: return level4();
-    case 5: return level5();
+    case 2: return level2(mode);
+    case 3: return level3(mode);
+    case 4: return level4(mode);
+    case 5: return level5(mode);
     default: throw std::runtime_error("Invalid Level!");
     }
 }

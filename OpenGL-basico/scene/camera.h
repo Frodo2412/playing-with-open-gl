@@ -22,5 +22,5 @@ public:
 
     void move(const vector3& displacement);
     void move(const player* player);
-    void rotate(float x_offset, float y_offset);
+    void rotate(float x_offset, float y_offset, bool first);
 };

@@ -58,6 +58,8 @@ int main(int argc, char* argv[])
     }
 
 
+    SDL_SetWindowGrab(win, SDL_TRUE);
+
     glMatrixMode(GL_PROJECTION);
 
     constexpr float color = 0;
@@ -75,7 +77,7 @@ int main(int argc, char* argv[])
     const auto settings_screen = new ::settings_screen(settings->window_width, settings->window_height);
     auto displacement = vector3(0, 0, 0);
 
-    scene* current_scene = scene::get_level(1);
+    scene* current_scene = scene::get_level(1, first);
 
     //VARIABLES QUE SE USAN PARA CONTROLAR LOS FRAMES
     Uint32 last_frame_time = clock::get_total_time();
@@ -84,6 +86,7 @@ int main(int argc, char* argv[])
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
+    
 
     do
     {
@@ -136,7 +139,7 @@ int main(int argc, char* argv[])
         {
             menu::get_instance()->set_started(false);
             menu::get_instance()->set_victory(false);
-            current_scene = scene::get_level(1);
+            current_scene = scene::get_level(1, first);
             gamehud::reset_score();
             displacement.reset();
             clock::reset();
@@ -145,7 +148,7 @@ int main(int argc, char* argv[])
         {
             if (current_scene->level_number < 5)
             {
-                current_scene = scene::get_level(current_scene->level_number + 1);
+                current_scene = scene::get_level(current_scene->level_number + 1, current_scene->get_camera_mode() );
                 displacement.reset();
                 clock::reset();
             }
@@ -164,6 +167,8 @@ int main(int argc, char* argv[])
     while (!fin);
     //FIN LOOP PRINCIPAL
     // LIMPIEZA
+    SDL_SetWindowGrab(win, SDL_FALSE);
+
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(win);
     SDL_Quit();
