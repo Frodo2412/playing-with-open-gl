@@ -66,23 +66,24 @@ void renderer::draw(entity& entity)
         switch (entity.get_new_rotation())
         {
         case up:
-            glTranslatef(position.get_x()+0.6, position.get_y(), position.get_z()+0.5);
+            glTranslatef(position.get_x() + 0.6, position.get_y(), position.get_z() + 0.5);
             break;
         case down:
-            glTranslatef(position.get_x()-0.6, position.get_y(), position.get_z()-0.5);
+            glTranslatef(position.get_x() - 0.6, position.get_y(), position.get_z() - 0.5);
             break;
         case right:
-            glTranslatef(position.get_x()-0.5, position.get_y(), position.get_z()+0.6);
+            glTranslatef(position.get_x() - 0.5, position.get_y(), position.get_z() + 0.6);
             break;
         case left:
-            glTranslatef(position.get_x()+0.5, position.get_y(), position.get_z()-0.6);
+            glTranslatef(position.get_x() + 0.5, position.get_y(), position.get_z() - 0.6);
             break;
-        } 
-    } else
+        }
+    }
+    else
     {
         glTranslatef(position.get_x(), position.get_y(), position.get_z());
     }
-   
+
 
     const auto scale_factor = entity.get_scale_factor();
     glScalef(scale_factor, scale_factor, scale_factor);
@@ -92,20 +93,20 @@ void renderer::draw(entity& entity)
     glPushMatrix();
     switch (entity.get_new_rotation())
     {
-        case up:
-            glRotatef(90, 0, 1, 0);
+    case up:
+        glRotatef(90, 0, 1, 0);
         break;
-        case down:
-            glRotatef(-90, 0, 1, 0);
+    case down:
+        glRotatef(-90, 0, 1, 0);
         break;
-        case right:
-            glRotatef(0, 0, 1, 0);
+    case right:
+        glRotatef(0, 0, 1, 0);
         break;
-        case left:
-            glRotatef(180, 0, 1, 0); 
+    case left:
+        glRotatef(180, 0, 1, 0);
         break;
     }
-    
+
     // Draw the model
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     glPopMatrix();
@@ -116,6 +117,8 @@ void renderer::draw(entity& entity)
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    draw_bounding_box(entity.get_bounding_box().min, entity.get_bounding_box().max);
 }
 
 void renderer::draw(const grid& grid, const texture& texture)
@@ -136,7 +139,7 @@ void renderer::draw(const grid& grid, const texture& texture)
         {
             if (column % 2 == row % 2) glColor3f(0.5f, 0.5f, 0.5f); // Set color to medium gray	
             else glColor3f(1.0f, 1.0f, 1.0f); // Reset color to white
-            
+
             glTexCoord2f(0.0, 0.0);
             glVertex3f(left + static_cast<float>(column) * size,
                        -1, top + static_cast<float>(row) * size);
@@ -341,10 +344,10 @@ void renderer::draw(particle* particle)
     float y = particle->get_position().get_y();
     float z = particle->get_position().get_z();
     float size = particle->get_size();
-    glPointSize(size);//TAMANIO DE LAS PARTICULAS(PUNTOS)
+    glPointSize(size); //TAMANIO DE LAS PARTICULAS(PUNTOS)
     glBegin(GL_POINTS);
-        glColor4f(r, g, b, alpha);
-        glVertex3f(x, y, z);
+    glColor4f(r, g, b, alpha);
+    glVertex3f(x, y, z);
     glEnd();
     glEnable(GL_LIGHTING);
 }
@@ -355,7 +358,7 @@ void renderer::draw(float seconds, particles_handler* particles_handler)
     particles_handler->get_instance()->update(seconds);
     for (particle* particle : particles_handler->get_instance()->get_particles())
     {
-       draw(particle);
+        draw(particle);
     }
 }
 
