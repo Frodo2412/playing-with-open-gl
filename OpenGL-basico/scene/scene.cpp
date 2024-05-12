@@ -49,11 +49,11 @@ void scene::rotate_camera(const float x, const float y) const
     switch (camera_mode_)
     {
     case first:
-        camera_->rotate(x, y);
+        camera_->rotate(x, y, true);
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
-        camera_->rotate(-x * 0.3, y * 0.3);
+        camera_->rotate(-x * 0.3, y * 0.3, false);
         break;
     case top_down:
         break;

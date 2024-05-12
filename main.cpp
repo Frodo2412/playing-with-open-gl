@@ -58,6 +58,8 @@ int main(int argc, char* argv[])
     }
 
 
+    SDL_SetWindowGrab(win, SDL_TRUE);
+
     glMatrixMode(GL_PROJECTION);
 
     constexpr float color = 0;
@@ -84,6 +86,7 @@ int main(int argc, char* argv[])
 
     //VARIABLE PARA CONTROLAR LA VELOCIDAD DEL JUEGO(ANIMACIONES, ETC.) ES INDEPENDIENTE DEL FRAMERATE
     float game_velocity = 1;
+    
 
     do
     {
@@ -164,6 +167,8 @@ int main(int argc, char* argv[])
     while (!fin);
     //FIN LOOP PRINCIPAL
     // LIMPIEZA
+    SDL_SetWindowGrab(win, SDL_FALSE);
+
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(win);
     SDL_Quit();
