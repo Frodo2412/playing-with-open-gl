@@ -376,7 +376,14 @@ void renderer::draw(menu* menu)
 
     // Draw the background image
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, menu->get_background_texture_id());
+    if (!menu->get_victory())
+    {
+        glBindTexture(GL_TEXTURE_2D, menu->get_background_texture_id());
+    }
+    else
+    {
+        glBindTexture(GL_TEXTURE_2D, menu->get_victory_texture_id());
+    }
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glVertex3f(-window_width / 2, -window_height / 2, 0);

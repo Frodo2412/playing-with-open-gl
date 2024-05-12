@@ -135,6 +135,7 @@ int main(int argc, char* argv[])
         catch (game_over_exception& e)
         {
             menu::get_instance()->set_started(false);
+            menu::get_instance()->set_victory(false);
             current_scene = scene::get_level(1);
             gamehud::reset_score();
             displacement.reset();
@@ -147,11 +148,11 @@ int main(int argc, char* argv[])
                 current_scene = scene::get_level(current_scene->level_number + 1);
                 displacement.reset();
                 clock::reset();
-                std::cout << "NIVEL " << current_scene->level_number << std::endl;
             }
             else
             {
                 menu::get_instance()->set_started(false);
+                menu::get_instance()->set_victory(true);
                 current_scene = scene::level1();
                 gamehud::reset_score();
                 displacement.reset();
@@ -192,7 +193,7 @@ void handle_events(settings_screen* settings_screen, scene& current_scene, vecto
                 settings_screen->handle_click(event.button.x, event.button.y);
                 std::cout << "click en: (" << event.button.x << ", " << event.button.y << ")" << std::endl;
             }
-            if (event.button.button == SDL_BUTTON_LEFT)
+            if (event.button.button == SDL_BUTTON_LEFT && !clock::get_instance()->get_is_paused())
             {
                 if (!menu::get_instance()->get_started())
                 {
@@ -265,7 +266,10 @@ void render_everything(settings_screen* settings_screen, const scene& current_sc
     glLoadIdentity();
     if (!menu::get_instance()->get_started())
     {
-        renderer::draw(menu::get_instance());
+        if (clock::get_instance()->get_is_paused())
+            renderer::draw(settings_screen);
+        else
+            renderer::draw(menu::get_instance());
         clock::get_instance()->reset();
     } else
     {

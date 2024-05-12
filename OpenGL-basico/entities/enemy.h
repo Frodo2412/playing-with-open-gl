@@ -11,8 +11,8 @@ class enemy final : public entity
     static int get_new_direction();
 
 public:
-    explicit enemy(const vector3& position): entity("../assets/models/spider.obj", texture_manager::enemy_texture(), 1,
-                                                    position + vector3(-0.1f, 0, 0.1f)), is_active_(true)
+    explicit enemy(const vector3& position): entity("../assets/models/spider.obj", texture_manager::enemy_texture(), 0.9,
+                                                    position + vector3(-0.1f, -0.3, 0.1f)), is_active_(true)
     {
         const auto new_direction = get_new_direction();
 

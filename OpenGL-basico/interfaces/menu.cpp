@@ -4,6 +4,7 @@ menu* menu::instance_ = nullptr;
 menu::menu()
 {
     started_ = false;
+    victory_ = false;
 }
 
 menu* menu::get_instance()
@@ -32,5 +33,25 @@ GLuint menu::get_background_texture_id() const
 
 void menu::handle_event(int x, int y)
 {
-    started_ = true;
+    if (victory_)
+    {
+        victory_ = false;
+        started_ = false;
+    } else  
+        started_ = true;
+}
+
+void menu::set_victory(bool victory)
+{
+    victory_ = victory;
+}
+
+bool menu::get_victory()
+{
+    return victory_;
+}
+
+GLuint menu::get_victory_texture_id() const
+{
+    return victory_image_.get_texture_id();
 }
