@@ -28,7 +28,6 @@ public:
     vector4 get_color();
     float get_life_time_();
     void update(float seconds, float game_velocity);
-    ~particle();
     float get_size();
     void set_size(float size);
 };

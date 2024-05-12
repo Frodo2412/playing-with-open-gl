@@ -87,7 +87,3 @@ void particle::update(float seconds, float game_velocity)
         
     }
 }
-
-particle::~particle()
-{
-}

@@ -336,17 +336,12 @@ void renderer::draw(float seconds, const scene& current_scene, float game_veloci
 void renderer::draw(particle* particle)
 {
     glDisable(GL_LIGHTING);
-    float r = particle->get_color().get_r();
-    float g = particle->get_color().get_g();
-    float b = particle->get_color().get_b();
-    float alpha = particle->get_color().get_alpha();
     float x = particle->get_position().get_x();
     float y = particle->get_position().get_y();
     float z = particle->get_position().get_z();
-    float size = particle->get_size();
-    glPointSize(size); //TAMANIO DE LAS PARTICULAS(PUNTOS)
+    glPointSize(5); //TAMANIO DE LAS PARTICULAS(PUNTOS)
     glBegin(GL_POINTS);
-    glColor4f(r, g, b, alpha);
+    glColor4f(1, 1, 1, 1);
     glVertex3f(x, y, z);
     glEnd();
     glEnable(GL_LIGHTING);
@@ -356,10 +351,14 @@ void renderer::draw(particle* particle)
 void renderer::draw(float seconds, particles_handler* particles_handler, float game_velocity)
 {
     particles_handler->get_instance()->update(seconds, game_velocity);
-    for (particle* particle : particles_handler->get_instance()->get_particles())
+    if(!particles_handler->get_is_empty())
     {
-        draw(particle);
+        for (particle* particle : particles_handler->get_instance()->get_particles())
+            {
+                draw(particle);
+            }
     }
+    
 }
 
 void renderer::draw(menu* menu)
