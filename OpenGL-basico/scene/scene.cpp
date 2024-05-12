@@ -665,7 +665,7 @@ scene* scene::level3(camera_mode mode)
         {11, 14}
     };
     auto new_scene = new scene(3, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(0 + 0.5, -1, 0 + 1.5));
+                               vector3(brick_blocks.at(3).width + 0.5, -1, brick_blocks.at(3).height + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -697,7 +697,8 @@ scene* scene::level4(camera_mode mode)
         {11, 9}
     };
 
-    auto new_scene = new scene(4, 17, 11, brick_blocks, metal_blocks, enemies, vector3(4 + 0.5, -1, -3 + 1.5));
+    auto new_scene = new scene(4, 17, 11, brick_blocks, metal_blocks, enemies,
+                               vector3(brick_blocks.at(3).width + 0.5, -1, brick_blocks.at(3).height + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -732,7 +733,7 @@ scene* scene::level5(camera_mode mode)
     };
 
     auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(-2 + 0.5, -1, 2 + 1.5));
+                               vector3(brick_blocks.at(3).width + 0.5, -1, brick_blocks.at(3).height + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
