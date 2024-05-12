@@ -33,6 +33,10 @@ void particles_handler::update(float seconds, float game_velocity)
             ++it;
         }
     }
+    if (particles_.size() == 0)
+    {
+        is_empty = true;
+    }
 }
 
 void particles_handler::add(float seconds, vector3 position, vector3 velocity, vector4 initial_color, vector4 final_color, float size, float life_time)
@@ -54,6 +58,7 @@ void particles_handler::create_explotion(float seconds, vector3 position, int nu
         vector4 final_color = vector4(1, 1, 0, 0);
         add(seconds, position, velocity, initial_color, final_color, rand() % 10, 2);
     }
+    is_empty = false;
 }
 
 void particles_handler::walk_particles(float seconds, vector3 position, vector3 speed, int number_of_particles)
@@ -71,6 +76,11 @@ void particles_handler::walk_particles(float seconds, vector3 position, vector3 
         }
         vector4 initial_color = vector4(1, 1, 1, 1);
         vector4 final_color = vector4(1, 1, 1, 1);
-        add(seconds, position, velocity, initial_color, final_color, rand() % 5, 1);
+        add(seconds, position, velocity, initial_color, final_color, rand() % 15, 1);
     }
+}
+
+bool particles_handler::get_is_empty()
+{
+    return is_empty;
 }
