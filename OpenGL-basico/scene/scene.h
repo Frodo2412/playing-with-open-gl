@@ -47,6 +47,7 @@ public:
     const int level_number;
 
     void toggle_camera();
+    void set_camera(camera_mode);
     void rotate_camera(float x, float y) const;
     void update_scene(float elapsed_time, sound& explosion);
     void move_player(const vector3& displacement) const;
@@ -58,10 +59,10 @@ public:
     grid get_floor() const;
 
     static scene* level1();
-    static scene* level2();
-    static scene* level3();
-    static scene* level4();
-    static scene* level5();
+    static scene* level2(camera_mode mode);
+    static scene* level3(camera_mode mode);
+    static scene* level4(camera_mode mode);
+    static scene* level5(camera_mode mode);
 
-    static scene* get_level(int number);
+    static scene* get_level(int number, camera_mode mode);
 };
