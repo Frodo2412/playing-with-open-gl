@@ -162,6 +162,9 @@
         <Content Include="..\assets\music\Bomberman Theme (Area 1).wav" />
         <Content Include="..\assets\music\Bomb_Planted.wav" />
         <Content Include="..\assets\music\Explosion.wav" />
+        <Content Include="..\assets\textures\bricks_2.jpg" />
+        <Content Include="..\assets\textures\metal_2.png" />
+        <Content Include="..\assets\textures\wall_1.png" />
         <Content Include="..\assets\textures\bomberman.png" />
         <Content Include="..\assets\textures\bricks_1.jpg"/>
         <Content Include="..\assets\textures\gamehud.jpg" />
