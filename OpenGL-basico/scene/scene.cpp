@@ -438,25 +438,6 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
-            //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
-            if (movement.get_x() > 0)
-            {
-                player_->set_new_rotation(right);
-            }
-            if (movement.get_x() < 0)
-            {
-                player_->set_new_rotation(left);
-            }
-            if (movement.get_z() > 0)
-            {
-                player_->set_new_rotation(down);
-            }
-            if (movement.get_z() < 0)
-            {
-                player_->set_new_rotation(rotation::up);
-            }
-
             player_->set_speed(movement);
 
             break;
