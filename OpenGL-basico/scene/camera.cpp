@@ -75,4 +75,10 @@ void camera::rotate(const float x_offset, const float y_offset, bool first)
     {
         direction_.set_x(direction_.get_x() - x_offset * sensitivity);
     }
+    if (direction_.get_y() - y_offset * sensitivity >= 90.0f)
+        direction_.set_y(90.0f);
+    else if (direction_.get_y() - y_offset * sensitivity <= -90.0f)
+        direction_.set_y(-90.0f);
+    else
+        direction_.set_y(direction_.get_y() + y_offset * sensitivity);
 }
