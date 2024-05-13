@@ -673,6 +673,14 @@ scene* scene::level3(camera_mode mode)
 scene* scene::level4(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
+        {1, 5}, {1, 6}, {1, 8}, {1, 9}, {1, 14}, {1, 15},
+        {3, 1}, {3, 4}, {3, 8}, {3, 12}, {3, 14}, {3, 15},
+        {5, 1}, {5, 4}, {5, 5}, {5, 7}, {5, 12}, {5, 13}, {5, 14},
+        {7, 7}, {7, 9}, {7, 11},
+        {8, 3}, {8, 13}, {8, 15},
+        {9, 9}, {9, 15},
+        {10, 1},
+        {11, 3}, {11, 7}, {11, 8}, {11, 15}
     };
 
     std::vector<coordinate> metal_blocks = {
@@ -684,11 +692,13 @@ scene* scene::level4(camera_mode mode)
     };
 
     std::vector<coordinate> enemies = {
-        {1, 6},
-        {6, 5},
-        {11, 14}
+        {3, 5},
+        {9, 12}, {9, 14},
+        {11, 9}
     };
-    auto new_scene = new scene(4, 17, 11, brick_blocks, metal_blocks, enemies, vector3(4 + 0.5, -1, -3 + 1.5));
+
+    auto new_scene = new scene(4, 17, 11, brick_blocks, metal_blocks, enemies,
+                               vector3(-2 + 0.5, -1, -2 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
@@ -696,6 +706,17 @@ scene* scene::level4(camera_mode mode)
 scene* scene::level5(camera_mode mode)
 {
     std::vector<coordinate> brick_blocks = {
+        {1, 5}, {1, 6}, {1, 7}, {1, 10}, {1, 14},
+        {2, 9}, {2, 11},
+        {3, 3}, {3, 4}, {3, 7},
+        {4, 7}, {4, 15},
+        {5, 6}, {5, 7},
+        {6, 7},
+        {7, 4}, {7, 7}, {7, 9}, {7, 11}, {7, 14},
+        {8, 9}, {8, 13},
+        {9, 8}, {9, 10}, {9, 12}, {9, 13}, {9, 14}, {9, 15},
+        {10, 1}, {10, 11},
+        {11, 2}, {11, 5}, {11, 7}, {11, 10}
     };
 
     std::vector<coordinate> metal_blocks = {
@@ -707,13 +728,12 @@ scene* scene::level5(camera_mode mode)
     };
 
     std::vector<coordinate> enemies = {
-        {1, 6},
-        {6, 5},
-        {11, 14}
+        {7, 10},
+        {11, 9}, {11, 11}
     };
 
     auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(-2 + 0.5, -1, 2 + 1.5));
+                               vector3(-3+ 0.5, -1, -2 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }
