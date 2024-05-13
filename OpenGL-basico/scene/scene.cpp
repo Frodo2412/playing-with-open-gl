@@ -58,7 +58,6 @@ void scene::rotate_camera(const float x, const float y) const
     {
     case first:
         camera_->rotate(x, y, player_->get_direction().get_z() < 0);
-        player_->set_direction(camera_->get_direction());
         break;
     case perspective:
         camera_->rotate(-x * 0.3, y * 0.3, false);
@@ -484,7 +483,6 @@ void scene::move_player(const vector3& displacement) const
                 player_->set_new_rotation(up);
             }
             player_->set_speed(movement);
-            player_->set_direction(movement);
             break;
         }
     case perspective:
@@ -509,7 +507,6 @@ void scene::move_player(const vector3& displacement) const
                 player_->set_new_rotation(up);
             }
             player_->set_speed(movement);
-            player_->set_direction(movement);
             break;
         }
     }

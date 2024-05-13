@@ -24,11 +24,6 @@ vector3 entity::get_up() const
     return up_;
 }
 
-void entity::set_direction(const vector3& direction)
-{
-    direction_ = direction;
-}
-
 void entity::set_position(const vector3& position)
 {
     position_ = position;
