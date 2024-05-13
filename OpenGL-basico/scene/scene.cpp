@@ -38,7 +38,7 @@ void scene::toggle_camera()
     case perspective:
         camera_mode_ = first;
         camera_->set_up(player_->get_up());
-        camera_->set_direction(player_->get_direction());
+        camera_->set_direction(player_->get_direction() + player_->get_position());
         camera_->set_position(player_->get_position());
         break;
     }
@@ -57,7 +57,7 @@ void scene::rotate_camera(const float x, const float y) const
     switch (camera_mode_)
     {
     case first:
-        camera_->rotate(x, y, true);
+        camera_->rotate(x, y, player_->get_direction().get_z() < 0);
         player_->set_direction(camera_->get_direction());
         break;
     case perspective:
@@ -733,7 +733,7 @@ scene* scene::level5(camera_mode mode)
     };
 
     auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(-3+ 0.5, -1, -2 + 1.5));
+                               vector3(-3 + 0.5, -1, -2 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }

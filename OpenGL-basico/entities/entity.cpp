@@ -9,7 +9,14 @@ std::vector<vertex> entity::get_vertices() const
 
 vector3 entity::get_direction() const
 {
-    return direction_;
+    switch (new_rotation_)
+    {
+    case up: return vector3(0, 0, -5);
+    case right: return vector3(5, 0, 0);
+    case down: return vector3(0, 0, 5);
+    case left: return vector3(-5, 0, 0);
+    }
+    return vector3::zero();
 }
 
 vector3 entity::get_up() const

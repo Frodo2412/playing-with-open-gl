@@ -59,22 +59,19 @@ void camera::move(const player* player)
     direction_ += player->get_speed();
 }
 
-void camera::rotate(const float x_offset, const float y_offset, bool first)
+void camera::rotate(const float x_offset, const float y_offset, const bool invert)
 {
-    constexpr float sensitivity = 0.005f; 
-    if(first)
+    constexpr float sensitivity = 0.005f;
+
+    if (invert)
     {
-        if(position_.get_z() <= 0.0f)
-        {
-            direction_.set_x(direction_.get_x() - x_offset * sensitivity);
-        }else
-        {
-            direction_.set_x(direction_.get_x() + x_offset * sensitivity);
-        }
-    }else
+        direction_.set_x(direction_.get_x() + x_offset * sensitivity);
+    }
+    else
     {
         direction_.set_x(direction_.get_x() - x_offset * sensitivity);
     }
+
     if (direction_.get_y() - y_offset * sensitivity >= 90.0f)
         direction_.set_y(90.0f);
     else if (direction_.get_y() - y_offset * sensitivity <= -90.0f)
