@@ -162,7 +162,6 @@
         <Content Include="..\assets\models\bomberman.obj" />
         <Content Include="..\assets\models\Postament.obj" />
         <Content Include="..\assets\models\spider.obj" />
-        <Content Include="..\assets\music\Bomberman Theme (Area 1).wav" />
         <Content Include="..\assets\music\Bomb_Planted.wav" />
         <Content Include="..\assets\music\Explosion.wav" />
         <Content Include="..\assets\textures\bricks_2.jpg" />
@@ -170,7 +169,6 @@
         <Content Include="..\assets\textures\Postament.jpg" />
         <Content Include="..\assets\textures\wall_1.png" />
         <Content Include="..\assets\textures\bomberman.png" />
-        <Content Include="..\assets\textures\bricks_1.jpg"/>
         <Content Include="..\assets\textures\gamehud.jpg" />
         <Content Include="..\assets\textures\grass_1.jpg"/>
         <Content Include="..\assets\textures\menu.jpg" />
@@ -178,13 +176,11 @@
         <Content Include="..\assets\textures\numbers\cinco.png"/>
         <Content Include="..\assets\textures\numbers\cuatro.png"/>
         <Content Include="..\assets\textures\numbers\dos.png"/>
-        <Content Include="..\assets\textures\numbers\time.jpg"/>
         <Content Include="..\assets\textures\numbers\nueve.png"/>
         <Content Include="..\assets\textures\numbers\ocho.png"/>
         <Content Include="..\assets\textures\numbers\seis.png"/>
         <Content Include="..\assets\textures\numbers\siete.png"/>
         <Content Include="..\assets\textures\numbers\tres.png"/>
-        <Content Include="..\assets\textures\numbers\two_dots.jpg"/>
         <Content Include="..\assets\textures\numbers\uno.png"/>
         <ClCompile Include="entities\entity.cpp"/>
         <ClCompile Include="entities\player.cpp"/>
