@@ -139,7 +139,7 @@ int main(int argc, char* argv[])
         {
             menu::get_instance()->set_started(false);
             menu::get_instance()->set_victory(false);
-            current_scene = scene::get_level(1, first);
+            current_scene = scene::get_level(current_scene->level_number, first);
             gamehud::reset_score();
             displacement.reset();
             clock::reset();
