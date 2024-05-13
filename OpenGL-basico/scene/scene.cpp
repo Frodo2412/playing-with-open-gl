@@ -38,7 +38,7 @@ void scene::toggle_camera()
     case perspective:
         camera_mode_ = first;
         camera_->set_up(player_->get_up());
-        camera_->set_direction(player_->get_direction());
+        camera_->set_direction(player_->get_direction() + player_->get_position());
         camera_->set_position(player_->get_position());
         break;
     }
@@ -57,8 +57,7 @@ void scene::rotate_camera(const float x, const float y) const
     switch (camera_mode_)
     {
     case first:
-        camera_->rotate(x, y, true);
-        player_->set_direction(camera_->get_direction());
+        camera_->rotate(x, y, player_->get_direction().get_z() < 0);
         break;
     case perspective:
         camera_->rotate(-x * 0.3, y * 0.3, false);
@@ -439,25 +438,6 @@ void scene::move_player(const vector3& displacement) const
 
             movement.set_y(0);
 
-            //if (player_->get_speed().get_x() != movement.get_x() || player_->get_speed().get_z() != movement.get_z())
-            //particles_handler_->walk_particles(clock::get_total_time()/1000, player_->get_position(), player_->get_speed(), rand()%3);
-            if (movement.get_x() > 0)
-            {
-                player_->set_new_rotation(right);
-            }
-            if (movement.get_x() < 0)
-            {
-                player_->set_new_rotation(left);
-            }
-            if (movement.get_z() > 0)
-            {
-                player_->set_new_rotation(down);
-            }
-            if (movement.get_z() < 0)
-            {
-                player_->set_new_rotation(rotation::up);
-            }
-
             player_->set_speed(movement);
 
             break;
@@ -484,7 +464,6 @@ void scene::move_player(const vector3& displacement) const
                 player_->set_new_rotation(up);
             }
             player_->set_speed(movement);
-            player_->set_direction(movement);
             break;
         }
     case perspective:
@@ -509,7 +488,6 @@ void scene::move_player(const vector3& displacement) const
                 player_->set_new_rotation(up);
             }
             player_->set_speed(movement);
-            player_->set_direction(movement);
             break;
         }
     }
@@ -733,7 +711,7 @@ scene* scene::level5(camera_mode mode)
     };
 
     auto new_scene = new scene(5, 17, 11, brick_blocks, metal_blocks, enemies,
-                               vector3(-3+ 0.5, -1, -2 + 1.5));
+                               vector3(-3 + 0.5, -1, -2 + 1.5));
     new_scene->set_camera(mode);
     return new_scene;
 }

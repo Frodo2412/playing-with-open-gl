@@ -8,13 +8,13 @@
 
 enum rotation
 {
-    up,right,down,left
+    up, right, down, left
 };
 
 class entity : public game_object
 {
     std::vector<vertex> vertices_;
-    vector3 direction_, up_;
+    vector3 up_;
     aabb bounding_box_;
     float scale_factor_ = 1.0f;
     rotation new_rotation_;
@@ -26,12 +26,11 @@ protected:
 
 public:
     bool is_player_ = false;
+
     explicit entity(const std::string& file_path, const texture texture, const float hitbox_size,
                     const vector3& position = vector3(0, -0.75, 0),
-                    const vector3& direction = vector3(0, 0, 5),
                     const vector3& up = vector3(0, 1, 0)): game_object(position, texture),
                                                            vertices_(model_loader::load_model(file_path)),
-                                                           direction_(direction),
                                                            up_(up), speed_(vector3(0, 0, 0))
     {
         float min_x = std::numeric_limits<float>::max();
@@ -69,7 +68,6 @@ public:
     vector3 get_direction() const;
     vector3 get_up() const;
 
-    void set_direction(const vector3& direction);
     void set_position(const vector3& position);
     void set_speed(const vector3& speed);
     void move();
